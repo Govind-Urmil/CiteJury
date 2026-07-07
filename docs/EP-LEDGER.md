@@ -11,4 +11,5 @@
 | EP-007 | Functional citation generator foundation | Complete |
 | EP-008 | Citation rules module and explainable output | Complete |
 | EP-009 | Production quality pass | Complete |
-| EP-010 | Static deployment readiness | Ready |
+| EP-010 | Static deployment readiness | Complete |
+| EP-011 | Citation accuracy expansion | Ready |

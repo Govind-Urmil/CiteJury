@@ -1,18 +1,243 @@
 (() => {
   "use strict";
-  const rules = {
-    judgment(data){const t=data.title||"Untitled case", y=data.year?`(${data.year})`:"", r=[data.volume,data.reporter,data.page].filter(Boolean).join(" ");return{citation:[t,[y,r].filter(Boolean).join(" ")].filter(Boolean).join(", ")+".",explanation:"Judgment citations generally begin with the case name, followed by the year, volume, reporter abbreviation, and first page where available."}},
-    legislation(data){const t=data.title||"Untitled legislation", y=data.year?`, ${data.year}`:"", s=data.page?`, s. ${data.page}`:"";return{citation:`${t}${y}${s}.`,explanation:"Legislation citations identify the Act or instrument, year, and relevant section or provision where supplied."}},
-    book(data){const t=data.title||"Untitled book", p=data.reporter?`, ${data.reporter}`:"", y=data.year?` (${data.year})`:"", page=data.page?`, ${data.page}`:"";return{citation:`${t}${p}${y}${page}.`,explanation:"Book citations usually include title, publisher, year, and pinpoint page where available."}},
-    journal(data){const t=data.title||"Untitled article", y=data.year?` (${data.year})`:"", j=data.reporter?` ${data.reporter}`:"", page=data.page?` ${data.page}`:"";return{citation:`${t}${y}${j}${page}.`,explanation:"Journal citations identify article title, year, journal name, and page reference where available."}},
-    website(data){const t=data.title||"Untitled web source", s=data.reporter?`, ${data.reporter}`:"", u=data.page?`, ${data.page}`:"", y=data.year?` (${data.year})`:"";return{citation:`${t}${s}${y}${u}.`,explanation:"Website citations identify page title, site or institution, year when available, and URL."}}
+
+  const citationRules = {
+    judgment: {
+      label: "Judgment",
+      required: ["title"],
+      format(data) {
+        const title = data.title || "Untitled case";
+        const year = data.year ? `(${data.year})` : "";
+        const reporter = [data.volume, data.reporter, data.page].filter(Boolean).join(" ");
+        return [title, [year, reporter].filter(Boolean).join(" ")].filter(Boolean).join(", ") + ".";
+      },
+      explain(data) {
+        return {
+          summary: "Judgment citations begin with the case name, then use year, volume, reporter abbreviation, and first page when available.",
+          parts: [
+            `Case/source title: ${data.title || "missing"}`,
+            data.year ? `Year: ${data.year}` : "Year: not supplied",
+            data.reporter ? `Reporter: ${data.reporter}` : "Reporter: not supplied",
+            data.page ? `Page/reference: ${data.page}` : "Page/reference: not supplied"
+          ]
+        };
+      }
+    },
+    legislation: {
+      label: "Legislation",
+      required: ["title"],
+      format(data) {
+        const year = data.year ? `, ${data.year}` : "";
+        const section = data.page ? `, s. ${data.page}` : "";
+        return `${data.title || "Untitled legislation"}${year}${section}.`;
+      },
+      explain(data) {
+        return {
+          summary: "Legislation citations identify the Act or instrument, year, and relevant section or provision where supplied.",
+          parts: [
+            `Instrument: ${data.title || "missing"}`,
+            data.year ? `Year: ${data.year}` : "Year: not supplied",
+            data.page ? `Provision/section: ${data.page}` : "Provision/section: not supplied"
+          ]
+        };
+      }
+    },
+    constitution: {
+      label: "Constitution",
+      required: ["title"],
+      format(data) {
+        const article = data.page ? `, art. ${data.page}` : "";
+        return `${data.title || "Constitution of India"}${article}.`;
+      },
+      explain(data) {
+        return {
+          summary: "Constitution citations identify the constitutional instrument and relevant article or provision.",
+          parts: [
+            `Instrument: ${data.title || "Constitution of India"}`,
+            data.page ? `Article/provision: ${data.page}` : "Article/provision: not supplied"
+          ]
+        };
+      }
+    },
+    book: {
+      label: "Book",
+      required: ["title"],
+      format(data) {
+        const publisher = data.reporter ? `, ${data.reporter}` : "";
+        const year = data.year ? ` (${data.year})` : "";
+        const page = data.page ? `, ${data.page}` : "";
+        return `${data.title || "Untitled book"}${publisher}${year}${page}.`;
+      },
+      explain(data) {
+        return {
+          summary: "Book citations use title, publisher, year, and pinpoint page where available.",
+          parts: [
+            `Title: ${data.title || "missing"}`,
+            data.reporter ? `Publisher: ${data.reporter}` : "Publisher: not supplied",
+            data.page ? `Pinpoint page: ${data.page}` : "Pinpoint page: not supplied"
+          ]
+        };
+      }
+    },
+    journal: {
+      label: "Journal article",
+      required: ["title"],
+      format(data) {
+        const year = data.year ? ` (${data.year})` : "";
+        const journal = data.reporter ? ` ${data.reporter}` : "";
+        const page = data.page ? ` ${data.page}` : "";
+        return `${data.title || "Untitled article"}${year}${journal}${page}.`;
+      },
+      explain(data) {
+        return {
+          summary: "Journal citations identify article title, year, journal name, and page reference where available.",
+          parts: [
+            `Article title: ${data.title || "missing"}`,
+            data.reporter ? `Journal: ${data.reporter}` : "Journal: not supplied",
+            data.page ? `Page: ${data.page}` : "Page: not supplied"
+          ]
+        };
+      }
+    },
+    website: {
+      label: "Website",
+      required: ["title"],
+      format(data) {
+        const site = data.reporter ? `, ${data.reporter}` : "";
+        const url = data.page ? `, ${data.page}` : "";
+        const year = data.year ? ` (${data.year})` : "";
+        return `${data.title || "Untitled web source"}${site}${year}${url}.`;
+      },
+      explain(data) {
+        return {
+          summary: "Website citations identify page title, site or institution, year when available, and URL.",
+          parts: [
+            `Page title: ${data.title || "missing"}`,
+            data.reporter ? `Website/institution: ${data.reporter}` : "Website/institution: not supplied",
+            data.page ? `URL/reference: ${data.page}` : "URL/reference: not supplied"
+          ]
+        };
+      }
+    }
   };
-  const clean = (v) => String(v || "").trim();
-  const toggle=document.querySelector(".nav-toggle"), nav=document.querySelector("#primary-nav");
-  if(toggle&&nav){toggle.addEventListener("click",()=>{const open=toggle.getAttribute("aria-expanded")==="true";toggle.setAttribute("aria-expanded",String(!open));nav.classList.toggle("open",!open)});nav.addEventListener("click",e=>{if(e.target.closest("a")){toggle.setAttribute("aria-expanded","false");nav.classList.remove("open")}})}
-  const form=document.querySelector("#citation-form"), output=document.querySelector("#citation-output"), explain=document.querySelector("#citation-explanation"), error=document.querySelector("#form-error"), copy=document.querySelector("#copy-citation");
-  const getData=(fd)=>({sourceType:clean(fd.get("sourceType")),title:clean(fd.get("title")),year:clean(fd.get("year")),reporter:clean(fd.get("reporter")),volume:clean(fd.get("volume")),page:clean(fd.get("page"))});
-  const validate=(d)=>!d.title?"Please enter a case or source title.":(d.year&&!/^\d{4}$/.test(d.year))?"Year should be a 4-digit value, for example 2017.":"";
-  if(form&&output&&explain&&error){form.addEventListener("submit",e=>{e.preventDefault();const data=getData(new FormData(form)),msg=validate(data);if(msg){error.hidden=false;error.textContent=msg;output.textContent="Your citation will appear here.";explain.textContent="Fix the highlighted issue and generate again.";return}error.hidden=true;error.textContent="";const result=(rules[data.sourceType]||rules.judgment)(data);output.textContent=result.citation.replace(/\s+/g," ");explain.textContent=result.explanation});form.addEventListener("reset",()=>setTimeout(()=>{error.hidden=true;error.textContent="";output.textContent="Your citation will appear here.";explain.textContent="Fill the form and generate a citation to see the explanation."},0))}
-  if(copy&&output){copy.addEventListener("click",async()=>{const text=output.textContent.trim();if(!text||text==="Your citation will appear here.")return;try{await navigator.clipboard.writeText(text);copy.textContent="Copied"}catch{copy.textContent="Copy failed"}setTimeout(()=>{copy.textContent="Copy citation"},1400)})}
+
+  const clean = (value) => String(value || "").trim();
+
+  const toggle = document.querySelector(".nav-toggle");
+  const nav = document.querySelector("#primary-nav");
+  if (toggle && nav) {
+    toggle.addEventListener("click", () => {
+      const open = toggle.getAttribute("aria-expanded") === "true";
+      toggle.setAttribute("aria-expanded", String(!open));
+      nav.classList.toggle("open", !open);
+    });
+    nav.addEventListener("click", (event) => {
+      if (event.target.closest("a")) {
+        toggle.setAttribute("aria-expanded", "false");
+        nav.classList.remove("open");
+      }
+    });
+  }
+
+  const form = document.querySelector("#citation-form");
+  const output = document.querySelector("#citation-output");
+  const explain = document.querySelector("#citation-explanation");
+  const parts = document.querySelector("#citation-parts");
+  const error = document.querySelector("#form-error");
+  const copy = document.querySelector("#copy-citation");
+  const download = document.querySelector("#download-citation");
+
+  const getData = (fd) => ({
+    citationStyle: clean(fd.get("citationStyle")),
+    sourceType: clean(fd.get("sourceType")),
+    title: clean(fd.get("title")),
+    year: clean(fd.get("year")),
+    reporter: clean(fd.get("reporter")),
+    volume: clean(fd.get("volume")),
+    page: clean(fd.get("page")),
+    court: clean(fd.get("court"))
+  });
+
+  const validate = (data) => {
+    if (!data.title) return "Please enter a case or source title.";
+    if (data.year && !/^\d{4}$/.test(data.year)) return "Year should be a 4-digit value, for example 2017.";
+    return "";
+  };
+
+  const renderParts = (items) => {
+    if (!parts) return;
+    parts.innerHTML = "";
+    items.forEach((item) => {
+      const li = document.createElement("li");
+      li.textContent = item;
+      parts.appendChild(li);
+    });
+  };
+
+  const resetPreview = () => {
+    if (error) {
+      error.hidden = true;
+      error.textContent = "";
+    }
+    if (output) output.textContent = "Your citation will appear here.";
+    if (explain) explain.textContent = "Fill the form and generate a citation to see the explanation.";
+    if (parts) parts.innerHTML = "";
+  };
+
+  if (form && output && explain && error) {
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+
+      const data = getData(new FormData(form));
+      const message = validate(data);
+
+      if (message) {
+        error.hidden = false;
+        error.textContent = message;
+        output.textContent = "Your citation will appear here.";
+        explain.textContent = "Fix the highlighted issue and generate again.";
+        renderParts([]);
+        return;
+      }
+
+      const rule = citationRules[data.sourceType] || citationRules.judgment;
+      const detail = rule.explain(data);
+
+      error.hidden = true;
+      error.textContent = "";
+      output.textContent = rule.format(data).replace(/\s+/g, " ");
+      explain.textContent = detail.summary;
+      renderParts(detail.parts);
+    });
+
+    form.addEventListener("reset", () => setTimeout(resetPreview, 0));
+  }
+
+  if (copy && output) {
+    copy.addEventListener("click", async () => {
+      const text = output.textContent.trim();
+      if (!text || text === "Your citation will appear here.") return;
+      try {
+        await navigator.clipboard.writeText(text);
+        copy.textContent = "Copied";
+      } catch {
+        copy.textContent = "Copy failed";
+      }
+      setTimeout(() => { copy.textContent = "Copy citation"; }, 1400);
+    });
+  }
+
+  if (download && output) {
+    download.addEventListener("click", () => {
+      const text = output.textContent.trim();
+      if (!text || text === "Your citation will appear here.") return;
+      const blob = new Blob([`${text}\n`], { type: "text/plain;charset=utf-8" });
+      const url = URL.createObjectURL(blob);
+      const anchor = document.createElement("a");
+      anchor.href = url;
+      anchor.download = "citejury-citation.txt";
+      anchor.click();
+      URL.revokeObjectURL(url);
+    });
+  }
 })();

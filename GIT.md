@@ -1,7 +1,7 @@
-# EP-010 Git Instructions
+# EP-011 Git Instructions
 
 ```bash
 git add .
-git commit -m "EP-010: Add static deployment readiness"
+git commit -m "EP-011: Expand citation accuracy and exports"
 git push
 ```

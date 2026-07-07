@@ -68,25 +68,49 @@
       <div class="container generator-grid">
         <form id="citation-form" class="generator-form" novalidate>
           <div class="form-error" id="form-error" role="alert" hidden></div>
-          <label for="source-type">Source type</label>
-          <select id="source-type" name="sourceType">
-            <option value="judgment">Judgment</option>
-            <option value="legislation">Legislation</option>
-            <option value="book">Book</option>
-            <option value="journal">Journal article</option>
-            <option value="website">Website</option>
-          </select>
+
+          <div class="field-row">
+            <label for="citation-style">Citation style</label>
+            <select id="citation-style" name="citationStyle">
+              <option value="indian-legal">Indian Legal</option>
+              <option value="scc">SCC-style</option>
+              <option value="air">AIR-style</option>
+              <option value="oscola">OSCOLA-like</option>
+            </select>
+          </div>
+
+          <div class="field-row">
+            <label for="source-type">Source type</label>
+            <select id="source-type" name="sourceType">
+              <option value="judgment">Judgment</option>
+              <option value="legislation">Legislation</option>
+              <option value="constitution">Constitution</option>
+              <option value="book">Book</option>
+              <option value="journal">Journal article</option>
+              <option value="website">Website</option>
+            </select>
+          </div>
+
           <label for="source-title">Case / source title <span aria-hidden="true">*</span></label>
           <input id="source-title" name="title" placeholder="Justice K.S. Puttaswamy (Retd.) v. Union of India" required autocomplete="off">
+
           <label for="source-year">Year</label>
           <input id="source-year" name="year" placeholder="2017" inputmode="numeric" pattern="[0-9]{4}" autocomplete="off">
+
           <label for="source-reporter">Reporter / publisher / website</label>
           <input id="source-reporter" name="reporter" placeholder="SCC" autocomplete="off">
+
           <label for="source-volume">Volume</label>
           <input id="source-volume" name="volume" placeholder="10" autocomplete="off">
-          <label for="source-page">Page / section / URL</label>
+
+          <label for="source-page">Page / section / article / URL</label>
           <input id="source-page" name="page" placeholder="1" autocomplete="off">
+
+          <label for="source-court">Court / institution</label>
+          <input id="source-court" name="court" placeholder="Supreme Court of India" autocomplete="off">
+
           <div class="privacy-inline" role="note">CiteJury processes this form in your browser. No server submission is used.</div>
+
           <div class="form-actions">
             <button class="btn primary" type="submit">Generate citation</button>
             <button class="btn secondary" type="reset">Reset</button>
@@ -97,11 +121,17 @@
           <p class="eyebrow">Preview</p>
           <h3>Generated citation</h3>
           <output id="citation-output">Your citation will appear here.</output>
-          <button id="copy-citation" class="btn secondary" type="button">Copy citation</button>
+          <div class="result-actions">
+            <button id="copy-citation" class="btn secondary" type="button">Copy citation</button>
+            <button id="download-citation" class="btn secondary" type="button">Download .txt</button>
+          </div>
+
           <div class="explain-box">
             <h3>Why this citation?</h3>
             <p id="citation-explanation">Fill the form and generate a citation to see the explanation.</p>
+            <ul id="citation-parts" class="citation-parts"></ul>
           </div>
+
           <div class="disclaimer-box">
             <strong>Educational use only.</strong>
             <p>CiteJury helps with citation formatting. Always verify important citations before submission or publication.</p>
