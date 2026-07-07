@@ -1,7 +1,7 @@
-# EP-016 Git Instructions
+# EP-017 Git Instructions
 
 ```bash
 git add .
-git commit -m "EP-016: Expand content and organic growth foundation"
+git commit -m "EP-017: Add static launch readiness"
 git push
 ```

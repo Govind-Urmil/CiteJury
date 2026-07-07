@@ -14,13 +14,22 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
       - name: Check required files
         run: |
           test -f index.html
           test -f assets/css/style.css
           test -f assets/js/app.js
+          test -f assets/js/citation-engine.js
           test -f manifest.webmanifest
           test -f robots.txt
-      - name: Check no obvious secrets
+          test -f sitemap.xml
+          test -f docs/PROJECT_CONTEXT.md
+
+      - name: Check static-only architecture
         run: |
-          ! grep -RniE "api[_-]?key|secret|password|token" . --exclude-dir=.git --exclude=GIT.md
+          ! grep -RniE "express\(|app\.listen|fetch\(['\"]https?://|axios|api[_-]?key|secret|password|token" . --exclude-dir=.git --exclude=GIT.md --exclude=static-check.yml
+
+      - name: Check no active third-party ad script
+        run: |
+          ! grep -RniE "googlesyndication|doubleclick|adsbygoogle|adservice" . --exclude-dir=.git --exclude=AD_MONETIZATION.md --exclude=ads-config.json
