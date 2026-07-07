@@ -1,19 +1,23 @@
 # Production Preflight
 
-EP-023 adds automated repository integrity checks before deployment.
+EP-024 removes Python tooling and keeps the project fully aligned with browser-only static architecture.
 
 ## Checks
-- Required production files exist.
-- Local HTML links resolve.
-- Citation engine public contract exists.
-- Existing static-only architecture checks continue.
-- Existing no-active-ad-script checks continue.
 
-## Run locally
+Use:
+- `tests/browser-only-checklist.html`
+- `tests/citation-engine-tests.html`
+- GitHub Actions static shell checks
 
-```bash
-python tests/preflight.py
-```
+## What is intentionally not used
+
+- No Python runtime
+- No Node runtime
+- No backend server
+- No database
+- No build step
+- No paid dependency
 
 ## Reliability principle
-Automate deterministic checks wherever possible. Bugs reported after launch should be reproduced, tested, and fixed in a new immutable EP.
+
+CiteJury should be simple enough to host and serve as static files. Any bug report should be fixed through a new immutable EP.

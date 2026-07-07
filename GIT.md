@@ -1,7 +1,7 @@
-# EP-023 Git Instructions
+# EP-024 Git Instructions
 
 ```bash
 git add .
-git commit -m "EP-023: Add production preflight and integrity hardening"
+git commit -m "EP-024: Remove Python tooling and enforce browser-only static checks"
 git push
 ```

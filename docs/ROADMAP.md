@@ -1,17 +1,15 @@
 # CiteJury Engineering Roadmap
 
 ## Completed
-EP-001 through EP-023.
+EP-001 through EP-024.
 
-## Remaining Planned EPs
-- EP-024 Citation authority and accuracy validation framework
+## Remaining Planned EP
 - EP-025 Final production audit and launch package
-
-## After Launch
-Only necessary bug fixes, accuracy updates, growth content, hosting/domain work, and approved monetization changes.
 
 ## Architecture Rules
 - No backend without explicit approval.
+- No database without explicit approval.
+- No Python/Node/runtime dependency for website operation.
 - No architecture changes without explicit approval.
 - Static, reusable, free-to-host-first codebase.
 - Monetization must remain responsible and non-intrusive.

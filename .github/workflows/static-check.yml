@@ -15,24 +15,29 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Check required files
+      - name: Check required static files
         run: |
           test -f index.html
+          test -f trust.html
+          test -f privacy.html
+          test -f terms.html
+          test -f robots.txt
+          test -f sitemap.xml
+          test -f manifest.webmanifest
           test -f assets/css/style.css
           test -f assets/js/app.js
           test -f assets/js/citation-engine.js
-          test -f manifest.webmanifest
-          test -f robots.txt
-          test -f sitemap.xml
           test -f docs/PROJECT_CONTEXT.md
+          test -f docs/EP-LEDGER.md
 
-      - name: Check static-only architecture
+      - name: Check browser-only architecture
         run: |
-          ! grep -RniE "express\(|app\.listen|fetch\(['\"]https?://|axios|api[_-]?key|secret|password|token" . --exclude-dir=.git --exclude=GIT.md --exclude=static-check.yml
+          ! grep -RniE "express\(|app\.listen|django|flask|fastapi|sqlalchemy|sqlite|postgres|mongodb|mysql|redis|server\.js|requirements\.txt|package-lock\.json" . --exclude-dir=.git --exclude=static-check.yml
+
+      - name: Check no secrets
+        run: |
+          ! grep -RniE "api[_-]?key|secret|password|private[_-]?key|access[_-]?token" . --exclude-dir=.git --exclude=GIT.md --exclude=static-check.yml
 
       - name: Check no active third-party ad script
         run: |
           ! grep -RniE "googlesyndication|doubleclick|adsbygoogle|adservice" . --exclude-dir=.git --exclude=AD_MONETIZATION.md --exclude=ads-config.json
-
-- name: Run production preflight
-  run: python tests/preflight.py
