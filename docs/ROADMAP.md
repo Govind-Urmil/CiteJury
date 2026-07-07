@@ -1,19 +1,24 @@
 # CiteJury Engineering Roadmap
 
 ## Completed
-EP-001 through EP-029.
+EP-001 through EP-030.
 
-## Remaining Planned EP
-- EP-030 Final Gold Release
+## Status
+Planned engineering roadmap complete.
 
-## After EP-030
-Only continue with:
-- Public hosting setup
-- Custom domain setup
-- Reported bug fixes
+## Next Phase
+- Deploy to approved static hosting
+- Configure custom domain if desired
+- Run public smoke tests
+- Enter maintenance mode
+
+## Future EP Criteria
+Only:
+- Reported bugs
 - Verified citation-rule improvements
-- Approved ad/analytics ADR
 - Useful content growth
+- Hosting/domain repository changes
+- Explicitly approved monetization or analytics work
 
 ## Architecture Rules
 - No backend or database without explicit approval.

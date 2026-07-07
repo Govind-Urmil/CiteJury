@@ -1,9 +1,9 @@
-# EP-029 Git Instructions
+# EP-030 Git Instructions
 
-No file deletion is required for EP-029.
+No file deletion is required for EP-030.
 
 ```bash
 git add .
-git commit -m "EP-029: Add monetization and deployment readiness"
+git commit -m "EP-030: Complete CiteJury Gold Release"
 git push
 ```

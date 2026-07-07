@@ -1,0 +1,13 @@
+{
+  "release": "EP-030",
+  "status": "gold-release-package",
+  "architecture": "static-browser-only",
+  "backend": false,
+  "database": false,
+  "runtime_dependencies": false,
+  "build_step": false,
+  "ads_active": false,
+  "analytics_active": false,
+  "maintenance_mode_after_launch": true,
+  "planned_ep_roadmap_complete": true
+}
