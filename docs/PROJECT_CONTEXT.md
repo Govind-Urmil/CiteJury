@@ -1,17 +1,17 @@
 # CiteJury Project Context
 
 ## Current Status
-Completed EP-001 through EP-009.
+Completed EP-001 through EP-010.
 
-## EP-009
-Production quality pass:
-- Accessibility and validation improvements
-- Better form errors
-- SEO metadata foundation
-- Educational disclaimer
-- Future ad slot reservation
-- Repository security policy
-- Static-hosting and zero-maintenance alignment
+## EP-010
+Static deployment readiness:
+- Manifest finalized
+- Favicon added
+- Robots maintained
+- GitHub Actions static checks
+- Deployment documentation
+- No backend introduced
+- Free/static hosting constraint preserved
 
 ## Next
-EP-010: Static deployment readiness.
+EP-011: Citation accuracy expansion.

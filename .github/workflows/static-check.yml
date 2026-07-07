@@ -1,0 +1,26 @@
+name: Static Site Check
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+permissions:
+  contents: read
+
+jobs:
+  static-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check required files
+        run: |
+          test -f index.html
+          test -f assets/css/style.css
+          test -f assets/js/app.js
+          test -f manifest.webmanifest
+          test -f robots.txt
+      - name: Check no obvious secrets
+        run: |
+          ! grep -RniE "api[_-]?key|secret|password|token" . --exclude-dir=.git --exclude=GIT.md

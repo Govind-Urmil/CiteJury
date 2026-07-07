@@ -1,7 +1,7 @@
-# EP-009 Git Instructions
+# EP-010 Git Instructions
 
 ```bash
 git add .
-git commit -m "EP-009: Add production quality pass"
+git commit -m "EP-010: Add static deployment readiness"
 git push
 ```

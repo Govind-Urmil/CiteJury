@@ -3,13 +3,13 @@
 Privacy-first legal citation tools built with Indian legal practice in mind.
 
 ## Current Release
-EP-009: Production quality pass.
+EP-010: Static deployment readiness.
 
 ## Architecture
 Static, browser-first, free-to-host first, no backend dependency.
 
-## Monetization Readiness
-The project reserves non-intrusive ad placement areas while keeping the citation workflow focused and user-friendly.
+## Deployment
+The site can run directly from static hosting without a build step.
 
 ## Workflow
 One EP equals one Git commit and one Git push.

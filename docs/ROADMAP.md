@@ -10,8 +10,10 @@
 - EP-007 Functional citation generator foundation
 - EP-008 Citation rules module and explainable output
 - EP-009 Production quality pass
+- EP-010 Static deployment readiness
 
 ## Upcoming
-- EP-010 Static deployment readiness
 - EP-011 Citation accuracy expansion
 - EP-012 SEO and content expansion
+- EP-013 Ad monetization readiness
+- EP-014 Accessibility and QA hardening
