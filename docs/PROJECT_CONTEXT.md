@@ -1,29 +1,24 @@
 # CiteJury Project Context
 
 ## Current Status
-Completed EP-001 through EP-006.
+Completed EP-001 through EP-007.
 
-## EP-006
-Navigation and hero polish expanded into a larger homepage experience package:
-- Responsive navigation
-- Mobile navigation behavior
-- Production hero content
-- Trust indicators
-- Citation preview demonstration
-- Source-type discovery
-- Benefits, styles, FAQ, and footer refinement
-- Responsive and reduced-motion support
+## EP-007
+Functional citation generator foundation:
+- Browser-side citation form
+- Basic citation formatter
+- Live output panel
+- Explanation panel
+- Copy-to-clipboard action
+- Source type selector
+- No backend dependency
 
-## Locked Rules
+## Core Rules
 - One EP = One commit = One push
-- Committed EPs are immutable
+- EPs are immutable after commit
 - Repository docs are source of truth
 - Free-to-host first
 - Browser-first wherever possible
-- Private repository during development
-
-## Roadmap Strategy
-EPs may now be larger when coherent, validated delivery packages improve development speed.
 
 ## Next
-EP-007: Functional citation generator foundation.
+EP-008: Citation rules module and stronger explainable output.

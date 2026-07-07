@@ -1,0 +1,5 @@
+{
+  "version": "EP-007",
+  "sourceTypes": ["judgment", "legislation", "book", "journal", "website"],
+  "defaultStyle": "Indian Legal"
+}

@@ -7,4 +7,5 @@
 | EP-003 | Project documentation memory system | Complete |
 | EP-004 | Homepage content refinement | Complete |
 | EP-005 | Design system foundation | Complete |
-| EP-006 | Production homepage experience | Ready |
+| EP-006 | Production homepage experience | Complete |
+| EP-007 | Functional citation generator foundation | Ready |
