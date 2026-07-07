@@ -1,3 +1,2 @@
 # CiteJury
-
-EP-001 Repository + Homepage Foundation.
+EP-002
