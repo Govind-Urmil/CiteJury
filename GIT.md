@@ -1,15 +1,7 @@
-# EP-025 Git Instructions
-
-Before committing, remove obsolete Python tooling if it exists:
-
-```bash
-git rm tests/preflight.py
-```
-
-Then commit:
+# EP-026 Git Instructions
 
 ```bash
 git add .
-git commit -m "EP-025: Add final production audit package"
+git commit -m "EP-026: Harden citation accuracy and authority framework"
 git push
 ```

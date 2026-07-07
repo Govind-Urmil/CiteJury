@@ -44,6 +44,11 @@
         name: "OSCOLA-like judgment uses bracketed year",
         input: { citationStyle: "oscola", sourceType: "judgment", title: "A v B", year: "2024", reporter: "SCC", page: "10" },
         expected: "A v B [2024] SCC 10."
+      },
+      {
+        name: "Verification contract is present",
+        input: { sourceType: "judgment", title: "A v B" },
+        expectedVerification: true
       }
     ];
 
@@ -51,7 +56,7 @@
 
     tests.forEach((test) => {
       const result = window.CiteJuryCitationEngine.generate(test.input);
-      const passed = test.expectedError ? !result.ok : result.citation === test.expected;
+      const passed = test.expectedError ? !result.ok : test.expectedVerification ? result.verification && result.verification.required === true : result.citation === test.expected;
       const div = document.createElement("div");
       div.className = passed ? "pass" : "fail";
       div.innerHTML = `<h2>${passed ? "PASS" : "FAIL"}: ${test.name}</h2><pre>${JSON.stringify(result, null, 2)}</pre>`;

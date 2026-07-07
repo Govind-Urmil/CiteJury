@@ -79,7 +79,7 @@
       error.hidden = true;
       error.textContent = "";
       output.textContent = result.citation;
-      explain.textContent = result.explanation;
+      explain.textContent = `${result.explanation} ${result.verification ? result.verification.message : ""}`;
       renderParts(result.parts);
     });
 

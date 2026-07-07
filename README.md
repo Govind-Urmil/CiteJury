@@ -3,25 +3,13 @@
 Privacy-first legal citation tools built with Indian legal practice in mind.
 
 ## Current Release
-EP-025: Final production audit package.
+EP-026: Citation accuracy and authority hardening.
 
 ## Architecture
-Static, browser-first, reusable, free-to-host first, and no backend/database/runtime dependency for website operation.
+Static, browser-first, reusable, free-to-host first, with no backend/database/runtime dependency.
 
-## Important cleanup
-Run:
-
-```bash
-git rm tests/preflight.py
-```
-
-if that file still exists in your repository.
-
-## Launch
-See:
-- `docs/FINAL_AUDIT.md`
-- `docs/CLEANUP_INSTRUCTIONS.md`
-- `docs/LAUNCH_DECISION.md`
+## Accuracy
+Generated citations include explicit verification guidance. See `docs/ACCURACY_FRAMEWORK.md`.
 
 ## Workflow
 One EP equals one Git commit and one Git push.

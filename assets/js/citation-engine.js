@@ -213,7 +213,11 @@
       citationStyle: data.citationStyle,
       citation,
       explanation: `${base.explanation} Style note: ${transformer.note}`,
-      parts: [`Style: ${helpers.styleLabel(data.citationStyle)}`, ...base.parts]
+      parts: [`Style: ${helpers.styleLabel(data.citationStyle)}`, ...base.parts],
+      verification: {
+        required: true,
+        message: "Verify this citation against the original source and the rules required for your formal use."
+      }
     };
   };
 

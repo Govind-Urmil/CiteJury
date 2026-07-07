@@ -1,0 +1,19 @@
+{
+  "version": "EP-026",
+  "principle": "Never imply official authority or guaranteed correctness.",
+  "statuses": {
+    "judgment": "assisted-formatting",
+    "legislation": "assisted-formatting",
+    "constitution": "assisted-formatting",
+    "book": "assisted-formatting",
+    "journal": "assisted-formatting",
+    "website": "assisted-formatting"
+  },
+  "verification_required": true,
+  "rules": [
+    "Verify source details against the original authority.",
+    "Verify final format against the required court, university, journal, publisher, competition, or citation manual.",
+    "Do not invent missing citation components.",
+    "Do not label generated output as officially validated."
+  ]
+}
