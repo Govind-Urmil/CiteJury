@@ -1,7 +1,7 @@
-# EP-012 Git Instructions
+# EP-013 Git Instructions
 
 ```bash
 git add .
-git commit -m "EP-012: Add SEO and content foundation"
+git commit -m "EP-013: Add responsible ad monetization readiness"
 git push
 ```

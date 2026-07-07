@@ -13,4 +13,5 @@
 | EP-009 | Production quality pass | Complete |
 | EP-010 | Static deployment readiness | Complete |
 | EP-011 | Citation accuracy expansion | Complete |
-| EP-012 | SEO and content expansion | Ready |
+| EP-012 | SEO and content expansion | Complete |
+| EP-013 | Responsible ad monetization readiness | Ready |

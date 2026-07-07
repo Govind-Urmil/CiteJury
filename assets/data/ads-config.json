@@ -1,0 +1,25 @@
+{
+  "version": "EP-013",
+  "status": "reserved-not-active",
+  "principles": [
+    "No intrusive ads inside active citation workflow",
+    "No backend dependency",
+    "No paid dependency",
+    "No ad network script until approved in a future EP",
+    "Ad slots are layout reservations only"
+  ],
+  "slots": [
+    {
+      "id": "ad-homepage-learning",
+      "location": "homepage after monetization-ready section",
+      "format": "responsive-banner",
+      "active": false
+    },
+    {
+      "id": "ad-guide-footer",
+      "location": "guide pages near footer",
+      "format": "responsive-banner",
+      "active": false
+    }
+  ]
+}

@@ -241,3 +241,9 @@
     });
   }
 })();
+
+
+// EP-013: Reserved ad-slot hook only. No third-party ad script is loaded.
+document.querySelectorAll("[data-ad-slot]").forEach((slot) => {
+  slot.setAttribute("data-ad-status", "reserved");
+});
