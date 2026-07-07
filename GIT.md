@@ -1,7 +1,7 @@
-# EP-017 Git Instructions
+# EP-018 Git Instructions
 
 ```bash
 git add .
-git commit -m "EP-017: Add static launch readiness"
+git commit -m "EP-018: Extract reusable static-site template"
 git push
 ```

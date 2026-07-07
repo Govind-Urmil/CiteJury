@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="{{SITE_DESCRIPTION}}">
+  <title>{{SITE_NAME}}</title>
+  <link rel="stylesheet" href="assets/css/template.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="container nav-shell">
+      <a class="brand" href="#hero">{{SITE_NAME}}</a>
+      <nav class="site-nav" aria-label="Primary">
+        <a href="#features">Features</a>
+        <a href="#guides">Guides</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+    </div>
+  </header>
+  <main id="main">
+    <section id="hero" class="hero">
+      <div class="container">
+        <p class="eyebrow">{{CATEGORY}}</p>
+        <h1>{{HERO_TITLE}}</h1>
+        <p class="hero-lead">{{HERO_DESCRIPTION}}</p>
+        <a class="btn primary" href="#features">{{PRIMARY_ACTION}}</a>
+      </div>
+    </section>
+    <section id="features" class="section">
+      <div class="container section-heading">
+        <p class="eyebrow">Features</p>
+        <h2>{{FEATURE_HEADING}}</h2>
+      </div>
+    </section>
+    <section id="guides" class="section muted">
+      <div class="container section-heading">
+        <p class="eyebrow">Guides</p>
+        <h2>{{GUIDE_HEADING}}</h2>
+      </div>
+    </section>
+    <section id="faq" class="section">
+      <div class="container section-heading">
+        <p class="eyebrow">FAQ</p>
+        <h2>Questions, answered clearly.</h2>
+      </div>
+    </section>
+  </main>
+  <footer>
+    <div class="container footer-shell">{{SITE_NAME}} • Static-first</div>
+  </footer>
+</body>
+</html>

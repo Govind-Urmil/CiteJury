@@ -18,4 +18,5 @@
 | EP-014 | Accessibility and QA hardening | Complete |
 | EP-015 | Citation engine modularization and test coverage | Complete |
 | EP-016 | Content and organic growth expansion | Complete |
-| EP-017 | Static launch readiness | Ready |
+| EP-017 | Static launch readiness | Complete |
+| EP-018 | Reusable static-site template extraction | Ready |

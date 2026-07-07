@@ -1,0 +1,11 @@
+{
+  "siteName": "YourSiteName",
+  "tagline": "A browser-first static website.",
+  "description": "Reusable static-site template based on CiteJury architecture.",
+  "primaryColor": "#2457d6",
+  "architecture": "static-browser-first",
+  "backend": false,
+  "buildStepRequired": false,
+  "monetizationReady": true,
+  "docsAsMemory": true
+}
