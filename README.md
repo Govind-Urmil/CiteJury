@@ -3,7 +3,7 @@
 Privacy-first legal citation tools built with Indian legal practice in mind.
 
 ## Current Release
-EP-007: Functional citation generator foundation.
+EP-008: Citation rules module and explainable output.
 
 ## Architecture
 Static, browser-first, free-to-host first, no backend dependency.

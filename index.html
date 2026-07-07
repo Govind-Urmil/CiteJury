@@ -1,33 +1,145 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="CiteJury — privacy-first legal citation tools for Indian and international legal research.">
-<title>CiteJury | Privacy-First Legal Citation Generator</title><link rel="stylesheet" href="assets/css/style.css"></head>
-<body><a class="skip-link" href="#main">Skip to content</a>
-<header class="site-header"><div class="container nav-shell"><a class="brand" href="#hero"><span class="brand-mark">CJ</span>CiteJury</a>
-<button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav">Menu</button>
-<nav id="primary-nav" class="site-nav" aria-label="Primary"><a href="#generator">Generator</a><a href="#benefits">Why CiteJury</a><a href="#styles">Styles</a><a href="#faq">FAQ</a><a class="nav-cta" href="#generator">Generate citation</a></nav></div></header>
-<main id="main">
-<section id="hero" class="hero"><div class="container hero-grid"><div><p class="eyebrow">Free • Private • Browser-first</p>
-<h1>Legal citations,<br><span>made clearer.</span></h1><p class="hero-lead">Create legal citations with an India-first workflow, international style support, and privacy by design. No account. No unnecessary data collection.</p>
-<div class="hero-actions"><a class="btn primary" href="#generator">Generate a citation</a><a class="btn secondary" href="#benefits">See how it works</a></div>
-<div class="trust-row" aria-label="Product principles"><span>✓ Runs in your browser</span><span>✓ No sign-up</span><span>✓ Free to use</span></div></div>
-<aside class="citation-demo" aria-label="Citation preview example"><div class="demo-top"><span>Live citation preview</span><span class="status">Private</span></div>
-<p class="demo-label">SUPREME COURT JUDGMENT</p><blockquote>Justice K.S. Puttaswamy (Retd.) v. Union of India, (2017) 10 SCC 1.</blockquote>
-<div class="demo-rule"></div><strong>Why this citation?</strong><p class="demo-note">Case name, year, volume, reporter abbreviation, and first page are formatted in the selected style.</p></aside></div></section>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="CiteJury — privacy-first legal citation tools for Indian and international legal research.">
+  <title>CiteJury | Privacy-First Legal Citation Generator</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
 
-<section id="generator" class="section generator-section"><div class="container section-heading"><p class="eyebrow">Citation workspace</p><h2>Generate a citation</h2><p>Start with a source type. CiteJury will format a basic citation in-browser and explain what it used.</p></div>
-<div class="container generator-grid"><form id="citation-form" class="generator-form">
-<label>Source type<select id="source-type" name="sourceType"><option value="judgment">Judgment</option><option value="legislation">Legislation</option><option value="book">Book</option><option value="journal">Journal article</option><option value="website">Website</option></select></label>
-<label>Case / source title<input id="source-title" name="title" placeholder="Justice K.S. Puttaswamy (Retd.) v. Union of India" required></label>
-<label>Year<input id="source-year" name="year" placeholder="2017"></label>
-<label>Reporter / publisher<input id="source-reporter" name="reporter" placeholder="SCC"></label>
-<label>Volume<input id="source-volume" name="volume" placeholder="10"></label>
-<label>Page / URL<input id="source-page" name="page" placeholder="1"></label>
-<div class="form-actions"><button class="btn primary" type="submit">Generate citation</button><button class="btn secondary" type="reset">Reset</button></div></form>
-<aside class="result-panel" aria-live="polite"><p class="eyebrow">Preview</p><h3>Generated citation</h3><output id="citation-output">Your citation will appear here.</output><button id="copy-citation" class="btn secondary" type="button">Copy citation</button>
-<div class="explain-box"><h3>Why this citation?</h3><p id="citation-explanation">Fill the form and generate a citation to see the explanation.</p></div></aside></div></section>
+  <header class="site-header">
+    <div class="container nav-shell">
+      <a class="brand" href="#hero"><span class="brand-mark">CJ</span>CiteJury</a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav">Menu</button>
+      <nav id="primary-nav" class="site-nav" aria-label="Primary">
+        <a href="#generator">Generator</a>
+        <a href="#benefits">Why CiteJury</a>
+        <a href="#styles">Styles</a>
+        <a href="#faq">FAQ</a>
+        <a class="nav-cta" href="#generator">Generate citation</a>
+      </nav>
+    </div>
+  </header>
 
-<section id="benefits" class="section muted"><div class="container section-heading"><p class="eyebrow">Built differently</p><h2>Legal citation without unnecessary complexity</h2></div><div class="container feature-grid"><article><h3>Privacy by design</h3><p>Browser-first processing keeps the architecture simple and minimises unnecessary data handling.</p></article><article><h3>India-first</h3><p>Designed around the needs of Indian students, advocates, researchers, and academics.</p></article><article><h3>Explainable output</h3><p>Citations are paired with concise explanations so users can understand the structure, not just copy it.</p></article></div></section>
-<section id="styles" class="section"><div class="container section-heading"><p class="eyebrow">Citation styles</p><h2>Start in India. Work globally.</h2></div><div class="container styles"><span>Indian Legal</span><span>SCC</span><span>AIR</span><span>OSCOLA</span><span>Bluebook</span><span>APA Legal</span></div></section>
-<section id="faq" class="section muted"><div class="container section-heading"><p class="eyebrow">FAQ</p><h2>Questions, answered clearly.</h2></div><div class="container faq"><details><summary>Is CiteJury free?</summary><p>The product is being engineered with a free-to-use and free-to-host-first architecture.</p></details><details><summary>Does CiteJury store my citation data?</summary><p>The architecture prioritises browser-side processing and avoiding unnecessary data collection.</p></details><details><summary>Is CiteJury legal advice?</summary><p>No. CiteJury is a citation and learning tool, not a legal advice service.</p></details></div></section>
-</main><footer><div class="container footer-shell"><div><strong>CiteJury</strong><p>Privacy-first legal citation tools.</p></div><p>Built for India. Useful worldwide.</p></div></footer><script src="assets/js/app.js"></script></body></html>
+  <main id="main">
+    <section id="hero" class="hero">
+      <div class="container hero-grid">
+        <div>
+          <p class="eyebrow">Free • Private • Browser-first</p>
+          <h1>Legal citations,<br><span>made clearer.</span></h1>
+          <p class="hero-lead">Create legal citations with an India-first workflow, international style support, and privacy by design. No account. No unnecessary data collection.</p>
+          <div class="hero-actions">
+            <a class="btn primary" href="#generator">Generate a citation</a>
+            <a class="btn secondary" href="#benefits">See how it works</a>
+          </div>
+          <div class="trust-row" aria-label="Product principles">
+            <span>✓ Runs in your browser</span><span>✓ No sign-up</span><span>✓ Free to use</span>
+          </div>
+        </div>
+        <aside class="citation-demo" aria-label="Citation preview example">
+          <div class="demo-top"><span>Live citation preview</span><span class="status">Private</span></div>
+          <p class="demo-label">SUPREME COURT JUDGMENT</p>
+          <blockquote>Justice K.S. Puttaswamy (Retd.) v. Union of India, (2017) 10 SCC 1.</blockquote>
+          <div class="demo-rule"></div>
+          <strong>Why this citation?</strong>
+          <p class="demo-note">Case name, year, volume, reporter abbreviation, and first page are formatted in the selected style.</p>
+        </aside>
+      </div>
+    </section>
+
+    <section id="generator" class="section generator-section">
+      <div class="container section-heading">
+        <p class="eyebrow">Citation workspace</p>
+        <h2>Generate a citation</h2>
+        <p>Choose a source type, fill the required fields, and CiteJury will generate a citation with a plain-language explanation.</p>
+      </div>
+
+      <div class="container generator-grid">
+        <form id="citation-form" class="generator-form">
+          <label>Source type
+            <select id="source-type" name="sourceType">
+              <option value="judgment">Judgment</option>
+              <option value="legislation">Legislation</option>
+              <option value="book">Book</option>
+              <option value="journal">Journal article</option>
+              <option value="website">Website</option>
+            </select>
+          </label>
+
+          <label>Case / source title
+            <input id="source-title" name="title" placeholder="Justice K.S. Puttaswamy (Retd.) v. Union of India" required>
+          </label>
+
+          <label>Year
+            <input id="source-year" name="year" placeholder="2017" inputmode="numeric">
+          </label>
+
+          <label>Reporter / publisher / website
+            <input id="source-reporter" name="reporter" placeholder="SCC">
+          </label>
+
+          <label>Volume
+            <input id="source-volume" name="volume" placeholder="10">
+          </label>
+
+          <label>Page / section / URL
+            <input id="source-page" name="page" placeholder="1">
+          </label>
+
+          <div class="form-actions">
+            <button class="btn primary" type="submit">Generate citation</button>
+            <button class="btn secondary" type="reset">Reset</button>
+          </div>
+        </form>
+
+        <aside class="result-panel" aria-live="polite">
+          <p class="eyebrow">Preview</p>
+          <h3>Generated citation</h3>
+          <output id="citation-output">Your citation will appear here.</output>
+          <button id="copy-citation" class="btn secondary" type="button">Copy citation</button>
+
+          <div class="explain-box">
+            <h3>Why this citation?</h3>
+            <p id="citation-explanation">Fill the form and generate a citation to see the explanation.</p>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section id="benefits" class="section muted">
+      <div class="container section-heading"><p class="eyebrow">Built differently</p><h2>Legal citation without unnecessary complexity</h2></div>
+      <div class="container feature-grid">
+        <article><h3>Privacy by design</h3><p>Browser-first processing keeps the architecture simple and minimises unnecessary data handling.</p></article>
+        <article><h3>India-first</h3><p>Designed around the needs of Indian students, advocates, researchers, and academics.</p></article>
+        <article><h3>Explainable output</h3><p>Citations are paired with concise explanations so users can understand the structure, not just copy it.</p></article>
+      </div>
+    </section>
+
+    <section id="styles" class="section">
+      <div class="container section-heading"><p class="eyebrow">Citation styles</p><h2>Start in India. Work globally.</h2></div>
+      <div class="container styles"><span>Indian Legal</span><span>SCC</span><span>AIR</span><span>OSCOLA</span><span>Bluebook</span><span>APA Legal</span></div>
+    </section>
+
+    <section id="faq" class="section muted">
+      <div class="container section-heading"><p class="eyebrow">FAQ</p><h2>Questions, answered clearly.</h2></div>
+      <div class="container faq">
+        <details><summary>Is CiteJury free?</summary><p>The product is engineered with a free-to-use and free-to-host-first architecture.</p></details>
+        <details><summary>Does CiteJury store my citation data?</summary><p>The architecture prioritises browser-side processing and avoiding unnecessary data collection.</p></details>
+        <details><summary>Is CiteJury legal advice?</summary><p>No. CiteJury is a citation and learning tool, not a legal advice service.</p></details>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-shell">
+      <div><strong>CiteJury</strong><p>Privacy-first legal citation tools.</p></div>
+      <p>Built for India. Useful worldwide.</p>
+    </div>
+  </footer>
+
+  <script src="assets/js/app.js"></script>
+</body>
+</html>

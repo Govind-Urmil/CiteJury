@@ -8,4 +8,5 @@
 | EP-004 | Homepage content refinement | Complete |
 | EP-005 | Design system foundation | Complete |
 | EP-006 | Production homepage experience | Complete |
-| EP-007 | Functional citation generator foundation | Ready |
+| EP-007 | Functional citation generator foundation | Complete |
+| EP-008 | Citation rules module and explainable output | Ready |

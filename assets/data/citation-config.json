@@ -1,5 +1,11 @@
 {
-  "version": "EP-007",
-  "sourceTypes": ["judgment", "legislation", "book", "journal", "website"],
-  "defaultStyle": "Indian Legal"
+  "version": "EP-008",
+  "styles": ["Indian Legal", "SCC", "AIR", "OSCOLA", "Bluebook", "APA Legal"],
+  "sourceTypes": {
+    "judgment": "Case law and court decisions",
+    "legislation": "Acts, rules, regulations, and constitutional provisions",
+    "book": "Books and treatises",
+    "journal": "Journal articles",
+    "website": "Web-based legal sources"
+  }
 }

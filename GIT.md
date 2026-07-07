@@ -1,7 +1,7 @@
-# EP-007 Git Instructions
+# EP-008 Git Instructions
 
 ```bash
 git add .
-git commit -m "EP-007: Add functional citation generator foundation"
+git commit -m "EP-008: Add citation rules and explainable output"
 git push
 ```

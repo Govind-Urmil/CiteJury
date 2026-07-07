@@ -8,8 +8,8 @@
 - EP-005 Design system foundation
 - EP-006 Production homepage experience
 - EP-007 Functional citation generator foundation
+- EP-008 Citation rules module and explainable output
 
 ## Upcoming
-- EP-008 Citation rules module and explainable output
 - EP-009 Validation, accessibility, testing, and repository hardening
 - EP-010 Static deployment readiness
