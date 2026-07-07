@@ -1,23 +1,17 @@
 # CiteJury Engineering Roadmap
 
 ## Completed
-EP-001 through EP-022.
+EP-001 through EP-023.
 
-## Current State
-CiteJury is static-hosting ready.
+## Remaining Planned EPs
+- EP-024 Citation authority and accuracy validation framework
+- EP-025 Final production audit and launch package
 
-## Possible Next Work
-- Hosting setup
-- Custom domain setup
-- Placeholder replacements in security.txt
-- Final smoke testing
-- Bug-fix EPs if reported
-- More citation rule depth
-- More content batches
+## After Launch
+Only necessary bug fixes, accuracy updates, growth content, hosting/domain work, and approved monetization changes.
 
 ## Architecture Rules
 - No backend without explicit approval.
 - No architecture changes without explicit approval.
 - Static, reusable, free-to-host-first codebase.
-- Future websites should reuse this foundation with minimal effort.
 - Monetization must remain responsible and non-intrusive.

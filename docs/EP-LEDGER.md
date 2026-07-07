@@ -23,4 +23,5 @@
 | EP-019 | Citation style depth expansion | Complete |
 | EP-020 | Organic content expansion batch 2 | Complete |
 | EP-021 | Launch polish and trust release candidate | Complete |
-| EP-022 | Free static hosting and policy readiness | Ready |
+| EP-022 | Free static hosting and policy readiness | Complete |
+| EP-023 | Production preflight and integrity hardening | Ready |

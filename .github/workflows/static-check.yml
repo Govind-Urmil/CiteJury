@@ -33,3 +33,6 @@ jobs:
       - name: Check no active third-party ad script
         run: |
           ! grep -RniE "googlesyndication|doubleclick|adsbygoogle|adservice" . --exclude-dir=.git --exclude=AD_MONETIZATION.md --exclude=ads-config.json
+
+- name: Run production preflight
+  run: python tests/preflight.py
