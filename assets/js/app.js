@@ -52,6 +52,8 @@
     }
   };
 
+  const clean = (value) => String(value || "").trim();
+
   const toggle = document.querySelector(".nav-toggle");
   const nav = document.querySelector("#primary-nav");
   if (toggle && nav) {
@@ -71,22 +73,43 @@
   const form = document.querySelector("#citation-form");
   const output = document.querySelector("#citation-output");
   const explain = document.querySelector("#citation-explanation");
+  const error = document.querySelector("#form-error");
   const copy = document.querySelector("#copy-citation");
 
-  const clean = (value) => String(value || "").trim();
+  function getData(formData) {
+    return {
+      sourceType: clean(formData.get("sourceType")),
+      title: clean(formData.get("title")),
+      year: clean(formData.get("year")),
+      reporter: clean(formData.get("reporter")),
+      volume: clean(formData.get("volume")),
+      page: clean(formData.get("page"))
+    };
+  }
 
-  if (form && output && explain) {
+  function validate(data) {
+    if (!data.title) return "Please enter a case or source title.";
+    if (data.year && !/^\d{4}$/.test(data.year)) return "Year should be a 4-digit value, for example 2017.";
+    return "";
+  }
+
+  if (form && output && explain && error) {
     form.addEventListener("submit", (event) => {
       event.preventDefault();
-      const formData = new FormData(form);
-      const data = {
-        sourceType: clean(formData.get("sourceType")),
-        title: clean(formData.get("title")),
-        year: clean(formData.get("year")),
-        reporter: clean(formData.get("reporter")),
-        volume: clean(formData.get("volume")),
-        page: clean(formData.get("page"))
-      };
+      const data = getData(new FormData(form));
+      const message = validate(data);
+
+      if (message) {
+        error.hidden = false;
+        error.textContent = message;
+        output.textContent = "Your citation will appear here.";
+        explain.textContent = "Fix the highlighted issue and generate again.";
+        return;
+      }
+
+      error.hidden = true;
+      error.textContent = "";
+
       const formatter = rules[data.sourceType] || rules.judgment;
       const result = formatter(data);
       output.textContent = result.citation.replace(/\s+/g, " ");
@@ -95,6 +118,8 @@
 
     form.addEventListener("reset", () => {
       setTimeout(() => {
+        error.hidden = true;
+        error.textContent = "";
         output.textContent = "Your citation will appear here.";
         explain.textContent = "Fill the form and generate a citation to see the explanation.";
       }, 0);

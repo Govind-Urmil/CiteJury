@@ -3,7 +3,12 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="CiteJury — privacy-first legal citation tools for Indian and international legal research.">
+  <meta name="description" content="CiteJury is a privacy-first legal citation generator for Indian and international legal research, built as a free static website.">
+  <meta name="theme-color" content="#0b1220">
+  <meta property="og:title" content="CiteJury | Privacy-First Legal Citation Generator">
+  <meta property="og:description" content="India-first legal citation generation with browser-first privacy and explainable output.">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
   <title>CiteJury | Privacy-First Legal Citation Generator</title>
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
@@ -12,7 +17,7 @@
 
   <header class="site-header">
     <div class="container nav-shell">
-      <a class="brand" href="#hero"><span class="brand-mark">CJ</span>CiteJury</a>
+      <a class="brand" href="#hero" aria-label="CiteJury home"><span class="brand-mark">CJ</span>CiteJury</a>
       <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav">Menu</button>
       <nav id="primary-nav" class="site-nav" aria-label="Primary">
         <a href="#generator">Generator</a>
@@ -36,7 +41,7 @@
             <a class="btn secondary" href="#benefits">See how it works</a>
           </div>
           <div class="trust-row" aria-label="Product principles">
-            <span>✓ Runs in your browser</span><span>✓ No sign-up</span><span>✓ Free to use</span>
+            <span>✓ Runs in your browser</span><span>✓ No sign-up</span><span>✓ Free to use</span><span>✓ Static-hosting ready</span>
           </div>
         </div>
         <aside class="citation-demo" aria-label="Citation preview example">
@@ -58,36 +63,34 @@
       </div>
 
       <div class="container generator-grid">
-        <form id="citation-form" class="generator-form">
-          <label>Source type
-            <select id="source-type" name="sourceType">
-              <option value="judgment">Judgment</option>
-              <option value="legislation">Legislation</option>
-              <option value="book">Book</option>
-              <option value="journal">Journal article</option>
-              <option value="website">Website</option>
-            </select>
-          </label>
+        <form id="citation-form" class="generator-form" novalidate>
+          <div class="form-error" id="form-error" role="alert" hidden></div>
 
-          <label>Case / source title
-            <input id="source-title" name="title" placeholder="Justice K.S. Puttaswamy (Retd.) v. Union of India" required>
-          </label>
+          <label for="source-type">Source type</label>
+          <select id="source-type" name="sourceType">
+            <option value="judgment">Judgment</option>
+            <option value="legislation">Legislation</option>
+            <option value="book">Book</option>
+            <option value="journal">Journal article</option>
+            <option value="website">Website</option>
+          </select>
 
-          <label>Year
-            <input id="source-year" name="year" placeholder="2017" inputmode="numeric">
-          </label>
+          <label for="source-title">Case / source title <span aria-hidden="true">*</span></label>
+          <input id="source-title" name="title" placeholder="Justice K.S. Puttaswamy (Retd.) v. Union of India" required autocomplete="off">
 
-          <label>Reporter / publisher / website
-            <input id="source-reporter" name="reporter" placeholder="SCC">
-          </label>
+          <label for="source-year">Year</label>
+          <input id="source-year" name="year" placeholder="2017" inputmode="numeric" pattern="[0-9]{4}" autocomplete="off">
 
-          <label>Volume
-            <input id="source-volume" name="volume" placeholder="10">
-          </label>
+          <label for="source-reporter">Reporter / publisher / website</label>
+          <input id="source-reporter" name="reporter" placeholder="SCC" autocomplete="off">
 
-          <label>Page / section / URL
-            <input id="source-page" name="page" placeholder="1">
-          </label>
+          <label for="source-volume">Volume</label>
+          <input id="source-volume" name="volume" placeholder="10" autocomplete="off">
+
+          <label for="source-page">Page / section / URL</label>
+          <input id="source-page" name="page" placeholder="1" autocomplete="off">
+
+          <div class="privacy-inline" role="note">CiteJury processes this form in your browser. No server submission is used.</div>
 
           <div class="form-actions">
             <button class="btn primary" type="submit">Generate citation</button>
@@ -105,6 +108,11 @@
             <h3>Why this citation?</h3>
             <p id="citation-explanation">Fill the form and generate a citation to see the explanation.</p>
           </div>
+
+          <div class="disclaimer-box">
+            <strong>Educational use only.</strong>
+            <p>CiteJury helps with citation formatting. Always verify important citations before submission or publication.</p>
+          </div>
         </aside>
       </div>
     </section>
@@ -118,12 +126,23 @@
       </div>
     </section>
 
-    <section id="styles" class="section">
+    <section id="monetization-ready" class="section">
+      <div class="container section-heading">
+        <p class="eyebrow">Sustainable and free</p>
+        <h2>Built to stay free for users</h2>
+        <p>CiteJury is structured for static hosting and future responsible advertising placements without disrupting citation workflows.</p>
+      </div>
+      <div class="container ad-slot" aria-label="Reserved future advertisement area">
+        <span>Future non-intrusive ad placement reserved</span>
+      </div>
+    </section>
+
+    <section id="styles" class="section muted">
       <div class="container section-heading"><p class="eyebrow">Citation styles</p><h2>Start in India. Work globally.</h2></div>
       <div class="container styles"><span>Indian Legal</span><span>SCC</span><span>AIR</span><span>OSCOLA</span><span>Bluebook</span><span>APA Legal</span></div>
     </section>
 
-    <section id="faq" class="section muted">
+    <section id="faq" class="section">
       <div class="container section-heading"><p class="eyebrow">FAQ</p><h2>Questions, answered clearly.</h2></div>
       <div class="container faq">
         <details><summary>Is CiteJury free?</summary><p>The product is engineered with a free-to-use and free-to-host-first architecture.</p></details>

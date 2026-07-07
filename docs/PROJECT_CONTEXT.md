@@ -1,15 +1,17 @@
 # CiteJury Project Context
 
 ## Current Status
-Completed EP-001 through EP-008.
+Completed EP-001 through EP-009.
 
-## EP-008
-Citation rules module and explainable output:
-- Source-specific formatter functions
-- Judgment, legislation, book, journal, and website citation paths
-- Explanation output based on selected source type
-- Browser-only implementation
-- No backend dependency
+## EP-009
+Production quality pass:
+- Accessibility and validation improvements
+- Better form errors
+- SEO metadata foundation
+- Educational disclaimer
+- Future ad slot reservation
+- Repository security policy
+- Static-hosting and zero-maintenance alignment
 
 ## Next
-EP-009: Validation, accessibility, testing, and repository hardening.
+EP-010: Static deployment readiness.
