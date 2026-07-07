@@ -3,13 +3,13 @@
 Privacy-first legal citation tools built with Indian legal practice in mind.
 
 ## Current Release
-EP-020: Organic content expansion batch 2.
+EP-021: Launch polish and release candidate.
 
 ## Architecture
 Static, browser-first, reusable, free-to-host first, and no backend dependency.
 
-## Growth
-CiteJury includes practical static educational guides connected to the citation generator.
+## Trust
+See `trust.html`, `docs/RELEASE_CANDIDATE.md`, and `docs/ACCURACY_REFERENCES.md`.
 
 ## Workflow
 One EP equals one Git commit and one Git push.

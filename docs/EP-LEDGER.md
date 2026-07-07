@@ -21,4 +21,5 @@
 | EP-017 | Static launch readiness | Complete |
 | EP-018 | Reusable static-site template extraction | Complete |
 | EP-019 | Citation style depth expansion | Complete |
-| EP-020 | Organic content expansion batch 2 | Ready |
+| EP-020 | Organic content expansion batch 2 | Complete |
+| EP-021 | Launch polish and release candidate | Ready |

@@ -54,3 +54,8 @@ summary:focus-visible{
     border:1px solid CanvasText;
   }
 }
+
+
+/* EP-021 Trust and release candidate polish */
+.content-page .hero-lead{margin-bottom:28px}
+.trust-note{padding:14px 16px;border:1px solid var(--line);border-radius:14px;background:var(--soft);color:var(--muted)}
