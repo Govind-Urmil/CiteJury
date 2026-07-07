@@ -1,11 +1,17 @@
 {
-  "version": "EP-016",
-  "cluster": "Indian legal citation education",
+  "version": "EP-020",
+  "cluster": "Indian legal citation education and advanced citation workflows",
   "pages": [
-    "how-to-cite-supreme-court-judgment.html",
-    "how-to-cite-high-court-judgment.html",
-    "how-to-cite-constitution-of-india.html",
+    "bluebook-citation-basics-india.html",
     "how-to-cite-bare-act.html",
-    "legal-citation-for-law-students.html"
+    "how-to-cite-constitution-of-india.html",
+    "how-to-cite-high-court-judgment.html",
+    "how-to-cite-law-journal-article.html",
+    "how-to-cite-legal-website.html",
+    "how-to-cite-online-judgment.html",
+    "how-to-cite-supreme-court-judgment.html",
+    "legal-citation-for-law-students.html",
+    "moot-court-memorial-citation-guide.html",
+    "oscola-citation-guide-india.html"
   ]
 }

@@ -1,33 +1,25 @@
 # Content and Organic Growth Strategy
 
-CiteJury should grow through useful legal citation guides, not generic filler content.
+## Current Coverage
+CiteJury now contains two organic content batches focused on useful legal citation education.
 
-## Target Audience
+## Primary Audiences
 - Indian law students
 - Moot court participants
-- Advocates
-- Researchers
 - Legal interns
-- Judiciary aspirants
+- Researchers
+- Advocates
+- Academic legal writers
 
-## Content Principles
-- India-first
-- Beginner-friendly
-- Educational, not legal advice
-- Static pages only
-- No backend dependency
-- Built for organic search and long-term discoverability
-
-## Current Guide Clusters
-- Supreme Court judgment citation
-- High Court judgment citation
-- Constitution of India citation
-- Bare Act / statute citation
-- Legal citation basics for law students
-
-## Future Clusters
-- OSCOLA for Indian students
+## Content Clusters
+- Indian judgments and courts
+- Constitution and statutes
+- Citation basics
+- OSCOLA
 - Bluebook basics
-- Legal research tools
-- Moot memorial citation guides
-- Law journal citation guides
+- Moot memorial citation
+- Journal articles
+- Online judgments and legal websites
+
+## Rules
+Content must be useful, educational, original, static, maintainable, and connected to the citation generator. Avoid low-value mass-generated pages.

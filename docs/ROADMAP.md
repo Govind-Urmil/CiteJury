@@ -1,10 +1,9 @@
 # CiteJury Engineering Roadmap
 
 ## Completed
-EP-001 through EP-019.
+EP-001 through EP-020.
 
 ## Upcoming
-- EP-020 Organic content expansion batch 2
 - EP-021 Launch polish and release candidate
 
 ## Architecture Rules
