@@ -1,7 +1,8 @@
 # EP Ledger
 
-| EP | Title | Status | Commit Notes |
-|---|---|---|---|
-| EP-001 | Repository bootstrap and homepage foundation | Complete | Initial clean repository |
-| EP-002 | Production homepage skeleton | Complete | Semantic homepage skeleton |
-| EP-003 | Project documentation memory system | Ready | Adds docs and recovery context |
+| EP | Title | Status |
+|---|---|---|
+| EP-001 | Repository bootstrap and homepage foundation | Complete |
+| EP-002 | Production homepage skeleton | Complete |
+| EP-003 | Project documentation memory system | Complete |
+| EP-004 | Homepage content refinement | Ready |
