@@ -1,22 +1,32 @@
 # CiteJury Project Context
 
 ## Current Status
-Completed EP-001 through EP-024.
+Completed EP-001 through EP-025.
+
+## Final State
+CiteJury is at final production audit package stage.
 
 ## Locked Architecture
 Static, browser-first, free-to-host-first. No backend, database, Python runtime, Node runtime, build step, or architecture change without explicit approval.
 
-## EP-024
-Browser-only compliance and Python tooling removal:
-- Removes `tests/preflight.py`
-- Replaces Python preflight with browser-only checklist
-- Keeps GitHub Actions shell-only static checks
-- Updates production preflight documentation
-- Reinforces no backend, no DB, no runtime dependency
-- No architecture change
+## EP-025
+Final production audit package:
+- Adds FINAL_AUDIT.md
+- Adds CLEANUP_INSTRUCTIONS.md
+- Adds LAUNCH_DECISION.md
+- Adds browser-only final release checklist
+- Updates release metadata
+- Explicitly identifies obsolete Python file cleanup
+- No backend or architecture change
 
-## Remaining Planned EP
-- EP-025: Final production audit and launch package
+## Required Manual Cleanup
+Because EP packages are copied over existing repo contents, run:
 
-## Bug Workflow
-If a bug is reported, Govind will bring it back and it should be fixed in a new EP/patch EP without rewriting committed history.
+```bash
+git rm tests/preflight.py
+```
+
+Then commit EP-025.
+
+## Future Workflow
+If bugs are reported, fix them in new immutable EP/patch EP commits.

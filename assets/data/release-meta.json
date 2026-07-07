@@ -1,18 +1,15 @@
 {
-  "version": "EP-022",
-  "stage": "static-hosting-prep",
+  "version": "EP-025",
+  "stage": "final-production-audit",
   "backend": false,
   "database": false,
-  "build_step": false,
+  "python_runtime_required": false,
+  "node_runtime_required": false,
+  "build_step_required": false,
   "ads_active": false,
-  "policy_pages": [
-    "privacy.html",
-    "terms.html",
-    "trust.html"
-  ],
-  "deployment_files": [
-    "_headers",
-    "_redirects",
-    ".well-known/security.txt"
+  "analytics_active": false,
+  "hosting_model": "static-free-host-first",
+  "manual_cleanup_required": [
+    "git rm tests/preflight.py"
   ]
 }

@@ -1,10 +1,19 @@
 # CiteJury Engineering Roadmap
 
 ## Completed
-EP-001 through EP-024.
+EP-001 through EP-025.
 
-## Remaining Planned EP
-- EP-025 Final production audit and launch package
+## Current State
+Final production audit package generated.
+
+## Next Possible Work
+- Hosting setup
+- Custom domain setup
+- Smoke testing on deployed site
+- Bug-fix EPs if reported
+- Citation accuracy expansion
+- Content expansion
+- Approved ad/analytics ADR if needed
 
 ## Architecture Rules
 - No backend without explicit approval.
