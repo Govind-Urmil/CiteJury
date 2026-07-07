@@ -1,0 +1,15 @@
+{
+  "version": "EP-029",
+  "ads_active": false,
+  "analytics_active": false,
+  "backend": false,
+  "database": false,
+  "recommended_hosts": [
+    "Cloudflare Pages",
+    "Netlify",
+    "Vercel"
+  ],
+  "github_pages_note": "Use only if public repository is acceptable.",
+  "monetization_status": "reserved-not-active",
+  "requires_future_adr_for_ads": true
+}

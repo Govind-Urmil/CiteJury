@@ -1,15 +1,22 @@
 # CiteJury Engineering Roadmap
 
 ## Completed
-EP-001 through EP-028.
+EP-001 through EP-029.
 
-## Remaining Planned EPs
-- EP-029 Monetization and production deployment readiness
+## Remaining Planned EP
 - EP-030 Final Gold Release
+
+## After EP-030
+Only continue with:
+- Public hosting setup
+- Custom domain setup
+- Reported bug fixes
+- Verified citation-rule improvements
+- Approved ad/analytics ADR
+- Useful content growth
 
 ## Architecture Rules
 - No backend or database without explicit approval.
-- No runtime dependency for website operation.
-- No architecture changes without explicit approval.
+- No paid infrastructure without explicit approval.
+- No active ads or analytics without explicit approval.
 - Static, reusable, free-to-host-first codebase.
-- File removals must include explicit git rm commands.

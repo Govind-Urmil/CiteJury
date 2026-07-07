@@ -29,4 +29,5 @@
 | EP-025 | Final production audit package | Complete |
 | EP-026 | Citation accuracy and authority hardening | Complete |
 | EP-027 | Full repository cleanup and dead-code audit | Complete |
-| EP-028 | Performance, SEO and accessibility final audit | Ready |
+| EP-028 | Performance, SEO and accessibility final audit | Complete |
+| EP-029 | Monetization and production deployment readiness | Ready |
