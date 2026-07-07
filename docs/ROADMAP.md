@@ -1,19 +1,12 @@
 # CiteJury Engineering Roadmap
 
 ## Completed
-- EP-001 Repository bootstrap
-- EP-002 Production homepage skeleton
-- EP-003 Documentation memory system
-- EP-004 Homepage content refinement
-- EP-005 Design system foundation
-- EP-006 Production homepage experience
-- EP-007 Functional citation generator foundation
-- EP-008 Citation rules module and explainable output
-- EP-009 Production quality pass
-- EP-010 Static deployment readiness
-- EP-011 Citation accuracy expansion
+EP-001 through EP-012.
 
 ## Upcoming
-- EP-012 SEO and content expansion
-- EP-013 Ad monetization readiness
+- EP-013 Responsible ad monetization readiness
 - EP-014 Accessibility and QA hardening
+- EP-015 Citation engine modularization and test coverage
+- EP-016 Content and organic growth expansion
+
+The EP model is immutable after commit. Delivery size may evolve. No backend or architecture changes without explicit approval.

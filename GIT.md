@@ -1,7 +1,7 @@
-# EP-011 Git Instructions
+# EP-012 Git Instructions
 
 ```bash
 git add .
-git commit -m "EP-011: Expand citation accuracy and exports"
+git commit -m "EP-012: Add SEO and content foundation"
 git push
 ```
