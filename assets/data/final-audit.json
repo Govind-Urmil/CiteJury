@@ -1,0 +1,22 @@
+{
+  "version": "EP-028",
+  "architecture": "static-browser-only",
+  "performance": {
+    "framework_runtime": false,
+    "backend_requests_required": false,
+    "database_requests_required": false,
+    "build_step_required": false
+  },
+  "seo": {
+    "robots": true,
+    "sitemap": true,
+    "structured_data_homepage": true,
+    "guide_content": true
+  },
+  "accessibility": {
+    "skip_links": true,
+    "focus_visible": true,
+    "reduced_motion": true,
+    "semantic_landmarks": true
+  }
+}

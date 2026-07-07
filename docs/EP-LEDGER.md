@@ -28,4 +28,5 @@
 | EP-024 | Browser-only compliance and Python tooling removal | Complete |
 | EP-025 | Final production audit package | Complete |
 | EP-026 | Citation accuracy and authority hardening | Complete |
-| EP-027 | Full repository cleanup and dead-code audit | Ready |
+| EP-027 | Full repository cleanup and dead-code audit | Complete |
+| EP-028 | Performance, SEO and accessibility final audit | Ready |

@@ -59,3 +59,18 @@ summary:focus-visible{
 /* EP-021 Trust and release candidate polish */
 .content-page .hero-lead{margin-bottom:28px}
 .trust-note{padding:14px 16px;border:1px solid var(--line);border-radius:14px;background:var(--soft);color:var(--muted)}
+
+/* EP-028 accessibility and performance hardening */
+:focus-visible{
+  outline:3px solid currentColor;
+  outline-offset:3px;
+}
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{
+    scroll-behavior:auto !important;
+    animation-duration:.01ms !important;
+    animation-iteration-count:1 !important;
+    transition-duration:.01ms !important;
+  }
+}
+img,svg{max-width:100%;height:auto}

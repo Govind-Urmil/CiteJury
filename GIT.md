@@ -1,15 +1,9 @@
-# EP-027 Git Instructions
+# EP-028 Git Instructions
 
-If this file still exists, remove it:
-
-```bash
-git rm tests/preflight.py
-```
-
-Then commit EP-027:
+No file deletion is required for EP-028.
 
 ```bash
 git add .
-git commit -m "EP-027: Add repository cleanup and dead-code audit"
+git commit -m "EP-028: Add performance SEO and accessibility final audit"
 git push
 ```
