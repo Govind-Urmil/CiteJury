@@ -1,7 +1,7 @@
-# EP-015 Git Instructions
+# EP-016 Git Instructions
 
 ```bash
 git add .
-git commit -m "EP-015: Modularize citation engine and add tests"
+git commit -m "EP-016: Expand content and organic growth foundation"
 git push
 ```

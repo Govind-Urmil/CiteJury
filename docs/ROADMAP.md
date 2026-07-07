@@ -1,13 +1,13 @@
 # CiteJury Engineering Roadmap
 
 ## Completed
-EP-001 through EP-015.
+EP-001 through EP-016.
 
 ## Upcoming
-- EP-016 Content and organic growth expansion
 - EP-017 Static launch readiness
 - EP-018 Reusable static-site template extraction
 - EP-019 Citation style depth expansion
+- EP-020 Organic content expansion batch 2
 
 ## Architecture Rules
 - No backend without explicit approval.

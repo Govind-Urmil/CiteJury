@@ -16,4 +16,5 @@
 | EP-012 | SEO and content expansion | Complete |
 | EP-013 | Responsible ad monetization readiness | Complete |
 | EP-014 | Accessibility and QA hardening | Complete |
-| EP-015 | Citation engine modularization and test coverage | Ready |
+| EP-015 | Citation engine modularization and test coverage | Complete |
+| EP-016 | Content and organic growth expansion | Ready |
