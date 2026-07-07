@@ -19,4 +19,5 @@
 | EP-015 | Citation engine modularization and test coverage | Complete |
 | EP-016 | Content and organic growth expansion | Complete |
 | EP-017 | Static launch readiness | Complete |
-| EP-018 | Reusable static-site template extraction | Ready |
+| EP-018 | Reusable static-site template extraction | Complete |
+| EP-019 | Citation style depth expansion | Ready |

@@ -1,25 +1,13 @@
 # Citation Engine
 
-EP-015 separates citation rules from UI orchestration.
+EP-019 expands the citation engine with style-aware output.
 
 ## Files
-
 - `assets/js/citation-engine.js`
 - `assets/js/app.js`
 - `tests/citation-engine-tests.html`
 
-## Architecture
-
-The citation engine exposes one browser global:
-
-```js
-window.CiteJuryCitationEngine.generate(input)
-```
-
-This keeps the site static and browser-first while making future citation rules easier to expand.
-
-## Current Source Types
-
+## Supported source types
 - Judgment
 - Legislation
 - Constitution
@@ -27,6 +15,18 @@ This keeps the site static and browser-first while making future citation rules 
 - Journal article
 - Website
 
-## No Backend
+## Supported citation styles
+- Indian Legal
+- SCC-style
+- AIR-style
+- OSCOLA-like
 
-The engine runs entirely in the browser.
+## Important note
+These rules are practical browser-side citation helpers, not a substitute for court, journal, university, or publisher citation rules.
+
+## Architecture
+- Static
+- Browser-first
+- No backend
+- No database
+- No external dependency

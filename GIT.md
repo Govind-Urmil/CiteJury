@@ -1,7 +1,7 @@
-# EP-018 Git Instructions
+# EP-019 Git Instructions
 
 ```bash
 git add .
-git commit -m "EP-018: Extract reusable static-site template"
+git commit -m "EP-019: Expand citation style depth"
 git push
 ```

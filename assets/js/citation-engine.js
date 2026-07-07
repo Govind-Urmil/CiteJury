@@ -1,6 +1,6 @@
 /*
   CiteJury Citation Engine
-  EP-015
+  EP-019
   Browser-first, static-site compatible, no backend dependency.
 */
 
@@ -28,6 +28,47 @@
       const value = String(text || "").replace(/\s+/g, " ").trim();
       if (!value) return "";
       return /[.!?]$/.test(value) ? value : `${value}.`;
+    },
+    styleLabel(style) {
+      return {
+        "indian-legal": "Indian Legal",
+        "scc": "SCC-style",
+        "air": "AIR-style",
+        "oscola": "OSCOLA-like"
+      }[style] || "Indian Legal";
+    }
+  };
+
+  const styleTransforms = {
+    "indian-legal": {
+      apply(base) { return base; },
+      note: "Indian Legal keeps citation components readable and practical for Indian legal writing."
+    },
+    "scc": {
+      apply(base, data) {
+        if (data.sourceType !== "judgment") return base;
+        const year = data.year ? `(${data.year})` : "";
+        const reporter = data.reporter || "SCC";
+        return helpers.finish(helpers.join([data.title || "Untitled case", helpers.join([year, data.volume, reporter, data.page])], ", "));
+      },
+      note: "SCC-style prioritises year, volume, SCC reporter abbreviation, and first page for judgments."
+    },
+    "air": {
+      apply(base, data) {
+        if (data.sourceType !== "judgment") return base;
+        const court = data.court || "SC";
+        return helpers.finish(helpers.join([data.title || "Untitled case", helpers.join(["AIR", data.year, court, data.page])], ", "));
+      },
+      note: "AIR-style commonly uses AIR, year, court abbreviation, and page for judgments."
+    },
+    "oscola": {
+      apply(base, data) {
+        if (data.sourceType === "judgment") {
+          return helpers.finish(helpers.join([data.title || "Untitled case", data.year ? `[${data.year}]` : "", data.reporter, data.page]));
+        }
+        return base;
+      },
+      note: "OSCOLA-like output uses a bracketed year style for judgments where supplied."
     }
   };
 
@@ -38,7 +79,7 @@
       const court = data.court ? `, ${data.court}` : "";
       const citation = helpers.finish(helpers.join([
         data.title || "Untitled case",
-        helpers.join([year, reporter]),
+        helpers.join([year, reporter])
       ], ", ") + court);
 
       return {
@@ -58,7 +99,7 @@
     legislation(data) {
       const citation = helpers.finish(helpers.join([
         data.title || "Untitled legislation",
-        data.year ? data.year : "",
+        data.year,
         data.page ? `s. ${data.page}` : ""
       ], ", "));
 
@@ -156,18 +197,31 @@
   const generate = (input) => {
     const data = normalize(input);
     const error = validate(data);
+
     if (error) {
       return { ok: false, error, citation: "", explanation: "", parts: [] };
     }
 
     const rule = rules[data.sourceType] || rules.judgment;
-    return { ok: true, sourceType: data.sourceType, ...rule(data) };
+    const base = rule(data);
+    const transformer = styleTransforms[data.citationStyle] || styleTransforms["indian-legal"];
+    const citation = transformer.apply(base.citation, data);
+
+    return {
+      ok: true,
+      sourceType: data.sourceType,
+      citationStyle: data.citationStyle,
+      citation,
+      explanation: `${base.explanation} Style note: ${transformer.note}`,
+      parts: [`Style: ${helpers.styleLabel(data.citationStyle)}`, ...base.parts]
+    };
   };
 
   window.CiteJuryCitationEngine = Object.freeze({
     generate,
     validate,
     normalize,
-    sourceTypes: Object.freeze(Object.keys(rules))
+    sourceTypes: Object.freeze(Object.keys(rules)),
+    citationStyles: Object.freeze(Object.keys(styleTransforms))
   });
 })();

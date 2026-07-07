@@ -1,5 +1,5 @@
 {
-  "version": "EP-011",
+  "version": "EP-019",
   "sourceTypes": [
     "judgment",
     "legislation",
@@ -8,12 +8,12 @@
     "journal",
     "website"
   ],
-  "styles": [
-    "indian-legal",
-    "scc",
-    "air",
-    "oscola"
-  ],
-  "privacy": "browser-only",
-  "backend": false
+  "citationStyles": {
+    "indian-legal": "Practical India-first citation format",
+    "scc": "Judgment-focused SCC-style output",
+    "air": "Judgment-focused AIR-style output",
+    "oscola": "OSCOLA-like judgment output"
+  },
+  "backend": false,
+  "architecture": "static-browser-first"
 }

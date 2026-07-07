@@ -34,6 +34,16 @@
         name: "Website requires full URL when URL supplied",
         input: { sourceType: "website", title: "Example", page: "example.com" },
         expectedError: true
+      },
+      {
+        name: "AIR style judgment uses AIR pattern",
+        input: { citationStyle: "air", sourceType: "judgment", title: "A v B", year: "2024", court: "SC", page: "10" },
+        expected: "A v B, AIR 2024 SC 10."
+      },
+      {
+        name: "OSCOLA-like judgment uses bracketed year",
+        input: { citationStyle: "oscola", sourceType: "judgment", title: "A v B", year: "2024", reporter: "SCC", page: "10" },
+        expected: "A v B [2024] SCC 10."
       }
     ];
 
