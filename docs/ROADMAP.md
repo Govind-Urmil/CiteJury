@@ -1,19 +1,19 @@
 # CiteJury Engineering Roadmap
 
 ## Completed
-EP-001 through EP-021.
+EP-001 through EP-022.
 
 ## Current State
-CiteJury is at launch-candidate stage.
+CiteJury is static-hosting ready.
 
 ## Possible Next Work
-- Public hosting setup
+- Hosting setup
 - Custom domain setup
-- Analytics decision
-- Ad network ADR if monetization is activated
+- Placeholder replacements in security.txt
+- Final smoke testing
 - Bug-fix EPs if reported
-- Citation depth expansion
-- More organic content batches
+- More citation rule depth
+- More content batches
 
 ## Architecture Rules
 - No backend without explicit approval.

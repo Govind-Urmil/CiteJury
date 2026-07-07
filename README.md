@@ -3,13 +3,13 @@
 Privacy-first legal citation tools built with Indian legal practice in mind.
 
 ## Current Release
-EP-021: Launch polish and release candidate.
+EP-022: Free static hosting and policy readiness.
 
 ## Architecture
 Static, browser-first, reusable, free-to-host first, and no backend dependency.
 
-## Trust
-See `trust.html`, `docs/RELEASE_CANDIDATE.md`, and `docs/ACCURACY_REFERENCES.md`.
+## Hosting
+See `docs/FREE_STATIC_HOSTING.md`.
 
 ## Workflow
 One EP equals one Git commit and one Git push.

@@ -22,4 +22,5 @@
 | EP-018 | Reusable static-site template extraction | Complete |
 | EP-019 | Citation style depth expansion | Complete |
 | EP-020 | Organic content expansion batch 2 | Complete |
-| EP-021 | Launch polish and release candidate | Ready |
+| EP-021 | Launch polish and trust release candidate | Complete |
+| EP-022 | Free static hosting and policy readiness | Ready |

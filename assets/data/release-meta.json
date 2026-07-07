@@ -1,0 +1,18 @@
+{
+  "version": "EP-022",
+  "stage": "static-hosting-prep",
+  "backend": false,
+  "database": false,
+  "build_step": false,
+  "ads_active": false,
+  "policy_pages": [
+    "privacy.html",
+    "terms.html",
+    "trust.html"
+  ],
+  "deployment_files": [
+    "_headers",
+    "_redirects",
+    ".well-known/security.txt"
+  ]
+}

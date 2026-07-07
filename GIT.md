@@ -1,7 +1,7 @@
-# EP-021 Git Instructions
+# EP-022 Git Instructions
 
 ```bash
 git add .
-git commit -m "EP-021: Add launch polish and trust release candidate"
+git commit -m "EP-022: Add free static hosting and policy readiness"
 git push
 ```
