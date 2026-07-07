@@ -15,4 +15,5 @@
 | EP-011 | Citation accuracy expansion | Complete |
 | EP-012 | SEO and content expansion | Complete |
 | EP-013 | Responsible ad monetization readiness | Complete |
-| EP-014 | Accessibility and QA hardening | Ready |
+| EP-014 | Accessibility and QA hardening | Complete |
+| EP-015 | Citation engine modularization and test coverage | Ready |

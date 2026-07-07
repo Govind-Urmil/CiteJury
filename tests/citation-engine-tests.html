@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>CiteJury Citation Engine Tests</title>
+  <style>
+    body{font-family:system-ui,sans-serif;max-width:860px;margin:40px auto;padding:0 20px;line-height:1.5}
+    .pass{color:#047857}.fail{color:#b42318}pre{background:#f8fafc;padding:12px;border:1px solid #e2e8f0;border-radius:10px}
+  </style>
+</head>
+<body>
+  <h1>CiteJury Citation Engine Tests</h1>
+  <p>Open this file locally after extracting the EP to verify core citation-engine behaviour.</p>
+  <div id="results"></div>
+  <script src="../assets/js/citation-engine.js"></script>
+  <script>
+    const tests = [
+      {
+        name: "Judgment citation includes title and reporter details",
+        input: { sourceType: "judgment", title: "A v B", year: "2024", volume: "1", reporter: "SCC", page: "10" },
+        expected: "A v B, (2024) 1 SCC 10."
+      },
+      {
+        name: "Legislation citation includes section",
+        input: { sourceType: "legislation", title: "Evidence Act", year: "1872", page: "3" },
+        expected: "Evidence Act, 1872, s. 3."
+      },
+      {
+        name: "Invalid year fails validation",
+        input: { sourceType: "judgment", title: "A v B", year: "20AA" },
+        expectedError: true
+      },
+      {
+        name: "Website requires full URL when URL supplied",
+        input: { sourceType: "website", title: "Example", page: "example.com" },
+        expectedError: true
+      }
+    ];
+
+    const root = document.querySelector("#results");
+
+    tests.forEach((test) => {
+      const result = window.CiteJuryCitationEngine.generate(test.input);
+      const passed = test.expectedError ? !result.ok : result.citation === test.expected;
+      const div = document.createElement("div");
+      div.className = passed ? "pass" : "fail";
+      div.innerHTML = `<h2>${passed ? "PASS" : "FAIL"}: ${test.name}</h2><pre>${JSON.stringify(result, null, 2)}</pre>`;
+      root.appendChild(div);
+    });
+  </script>
+</body>
+</html>

@@ -1,7 +1,7 @@
-# EP-014 Git Instructions
+# EP-015 Git Instructions
 
 ```bash
 git add .
-git commit -m "EP-014: Add accessibility and QA hardening"
+git commit -m "EP-015: Modularize citation engine and add tests"
 git push
 ```
