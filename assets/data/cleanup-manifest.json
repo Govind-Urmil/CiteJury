@@ -1,0 +1,29 @@
+{
+  "version": "EP-027",
+  "purpose": "Repository cleanup and dead-code audit",
+  "obsolete_files_to_remove_if_present": [
+    "tests/preflight.py"
+  ],
+  "confirmed_browser_runtime_files": [
+    "index.html",
+    "assets/css/style.css",
+    "assets/js/app.js",
+    "assets/js/citation-engine.js",
+    "manifest.webmanifest",
+    "robots.txt",
+    "sitemap.xml"
+  ],
+  "non_runtime_project_files": [
+    "docs/",
+    "tests/",
+    "template/",
+    ".github/"
+  ],
+  "architecture": {
+    "backend": false,
+    "database": false,
+    "python_runtime_required": false,
+    "node_runtime_required": false,
+    "build_step_required": false
+  }
+}

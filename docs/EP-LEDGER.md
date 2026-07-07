@@ -27,4 +27,5 @@
 | EP-023 | Production preflight and integrity hardening | Complete |
 | EP-024 | Browser-only compliance and Python tooling removal | Complete |
 | EP-025 | Final production audit package | Complete |
-| EP-026 | Citation accuracy and authority hardening | Ready |
+| EP-026 | Citation accuracy and authority hardening | Complete |
+| EP-027 | Full repository cleanup and dead-code audit | Ready |
