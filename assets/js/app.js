@@ -219,11 +219,11 @@
       if (!text || text === "Your citation will appear here.") return;
       try {
         await navigator.clipboard.writeText(text);
-        copy.textContent = "Copied";
+        copy.textContent = "Copied"; copy.setAttribute("aria-label", "Citation copied to clipboard");
       } catch {
-        copy.textContent = "Copy failed";
+        copy.textContent = "Copy failed"; copy.setAttribute("aria-label", "Copy citation failed");
       }
-      setTimeout(() => { copy.textContent = "Copy citation"; }, 1400);
+      setTimeout(() => { copy.textContent = "Copy citation"; copy.removeAttribute("aria-label"); }, 1400);
     });
   }
 

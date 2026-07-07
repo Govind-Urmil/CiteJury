@@ -14,4 +14,5 @@
 | EP-010 | Static deployment readiness | Complete |
 | EP-011 | Citation accuracy expansion | Complete |
 | EP-012 | SEO and content expansion | Complete |
-| EP-013 | Responsible ad monetization readiness | Ready |
+| EP-013 | Responsible ad monetization readiness | Complete |
+| EP-014 | Accessibility and QA hardening | Ready |

@@ -1,0 +1,14 @@
+{
+  "version": "EP-014",
+  "checks": [
+    "index.html exists",
+    "assets/css/style.css exists",
+    "assets/js/app.js exists",
+    "manifest.webmanifest exists",
+    "robots.txt exists",
+    "docs/PROJECT_CONTEXT.md exists",
+    "docs/QA-CHECKLIST.md exists",
+    "no backend required",
+    "no third-party ad script active"
+  ]
+}

@@ -1,7 +1,7 @@
-# EP-013 Git Instructions
+# EP-014 Git Instructions
 
 ```bash
 git add .
-git commit -m "EP-013: Add responsible ad monetization readiness"
+git commit -m "EP-014: Add accessibility and QA hardening"
 git push
 ```

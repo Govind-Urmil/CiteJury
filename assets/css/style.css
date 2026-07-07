@@ -19,3 +19,38 @@
   margin:48px auto 0;
   width:min(100%,820px);
 }
+
+
+/* EP-014 Accessibility and QA hardening */
+.form-help,
+.field-help{
+  color:var(--muted);
+  font-size:.88rem;
+  line-height:1.45;
+}
+.field-help{
+  margin-top:-4px;
+  margin-bottom:8px;
+}
+.generator-form input:focus,
+.generator-form select:focus,
+button:focus-visible,
+a:focus-visible,
+summary:focus-visible{
+  outline:3px solid rgba(36,87,214,.35);
+  outline-offset:3px;
+}
+.footer-mini{
+  margin-top:6px;
+  font-size:.85rem;
+}
+.footer-mini a{
+  color:#e2e8f0;
+}
+@media (forced-colors: active){
+  .btn,
+  .brand-mark,
+  .status{
+    border:1px solid CanvasText;
+  }
+}
