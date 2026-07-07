@@ -1,16 +1,16 @@
 # CiteJury
 
-Privacy-first legal citation generator built with Indian legal practice in mind while remaining useful internationally.
+Privacy-first legal citation tools built with Indian legal practice in mind.
 
-## Completed EPs
+## Current Release
+EP-006: Production homepage experience.
 
-- EP-001: Repository bootstrap and homepage foundation
-- EP-002: Production homepage skeleton
-- EP-003: Project documentation memory system
-- EP-004: Homepage content refinement
-- EP-005: Design system foundation
+## Architecture
+- Static
+- Browser-first
+- Free-to-host first
+- No framework dependency
+- No backend dependency
 
-## Development Workflow
-
+## Workflow
 One EP equals one Git commit and one Git push.
-Committed EPs are immutable.

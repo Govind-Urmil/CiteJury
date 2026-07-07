@@ -1,20 +1,29 @@
 # CiteJury Project Context
 
 ## Current Status
-Completed:
-- EP-001: Repository bootstrap and homepage foundation
-- EP-002: Production homepage skeleton
-- EP-003: Project documentation memory system
-- EP-004: Homepage content refinement
-- EP-005: Design system foundation
+Completed EP-001 through EP-006.
 
-## Core Rules
+## EP-006
+Navigation and hero polish expanded into a larger homepage experience package:
+- Responsive navigation
+- Mobile navigation behavior
+- Production hero content
+- Trust indicators
+- Citation preview demonstration
+- Source-type discovery
+- Benefits, styles, FAQ, and footer refinement
+- Responsive and reduced-motion support
+
+## Locked Rules
 - One EP = One commit = One push
-- EPs are immutable after commit
-- Repository docs are the source of truth
+- Committed EPs are immutable
+- Repository docs are source of truth
 - Free-to-host first
 - Browser-first wherever possible
 - Private repository during development
 
+## Roadmap Strategy
+EPs may now be larger when coherent, validated delivery packages improve development speed.
+
 ## Next
-EP-006: Navigation and hero polish
+EP-007: Functional citation generator foundation.
