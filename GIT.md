@@ -53,3 +53,14 @@ git push
 ```
 
 No file deletion is required for EP-035.
+
+
+## EP-036
+
+```bash
+git add .
+git commit -m "EP-036: Add citation accuracy browser test corpus"
+git push
+```
+
+No file deletion is required for EP-036.

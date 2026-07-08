@@ -1,10 +1,9 @@
 # CiteJury Engineering Roadmap
 
 ## Completed
-EP-001 through EP-034.
+EP-001 through EP-035.
 
 ## Next Planned EPs
-- EP-035 Citation Validation and Explainability System
 - EP-036 Citation Accuracy Browser Test Corpus
 - EP-037 Content Quality and Authority Rewrite
 - EP-038 Security, Privacy and Production Hardening
@@ -51,3 +50,15 @@ Next: EP-035 — Citation Validation and Explainability System.
 - Preserved static/browser-only architecture with no backend, database, runtime dependency, active ads, or analytics.
 
 Next: EP-036 — Citation Accuracy Browser Test Corpus.
+
+
+## EP-036 deliverables
+
+- Added a large deterministic browser-only citation accuracy corpus with 142 test cases.
+- Added manual runner `tests/EP-036-citation-accuracy-corpus.html`.
+- Added corpus data file `tests/citation-accuracy-corpus.js`.
+- Covered SCI neutral, SCC-style, AIR-style, scoped OSCOLA, website, and generic Indian judgment regression cases.
+- Kept the corpus test-only and not referenced by public pages, preserving normal visitor performance and page weight.
+- Preserved static/browser-only architecture with no backend, database, runtime dependency, active ads, or analytics.
+
+Next: EP-037 — Content Quality and Authority Rewrite.

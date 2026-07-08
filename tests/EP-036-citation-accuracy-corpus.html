@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>EP-036 Citation Accuracy Browser Test Corpus</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body { font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; margin: 2rem; max-width: 1100px; line-height: 1.5; }
+    pre { white-space: pre-wrap; background: #f6f7f8; border: 1px solid #d7dde4; padding: 1rem; border-radius: .5rem; }
+    .pass { color: #146c2e; font-weight: 700; }
+    .fail { color: #9f1239; font-weight: 700; }
+    .meta { color: #46515f; }
+  </style>
+</head>
+<body>
+  <h1>EP-036 Citation Accuracy Browser Test Corpus</h1>
+  <p class="meta">Manual/browser-only deterministic test runner. This page and its corpus are not referenced by the public website and must not be loaded by normal visitors.</p>
+  <p id="summary">Running…</p>
+  <pre id="log"></pre>
+
+  <script src="../assets/js/citation-engine.js"></script>
+  <script src="citation-accuracy-corpus.js"></script>
+  <script>
+    (() => {
+      const engine = window.CiteJuryCitationEngine;
+      const corpus = window.CiteJuryAccuracyCorpus || [];
+      const log = [];
+      let passed = 0;
+      const stats = { okCases: 0, errorCases: 0, citationChecks: 0, ruleChecks: 0, severityChecks: 0 };
+
+      const includes = (value, needle) => String(value || "").includes(String(needle || ""));
+
+      corpus.forEach((test, index) => {
+        let result;
+        let ok = true;
+        const failures = [];
+        try {
+          result = engine.generate(test.input);
+        } catch (error) {
+          ok = false;
+          failures.push(`threw ${error.message}`);
+        }
+
+        const expect = test.expect || {};
+        if (result) {
+          if (result.ok !== expect.ok) {
+            ok = false;
+            failures.push(`ok expected ${expect.ok} got ${result.ok}`);
+          }
+          if (expect.ok) stats.okCases += 1; else stats.errorCases += 1;
+
+          if (expect.citation) {
+            stats.citationChecks += 1;
+            if (result.citation !== expect.citation) {
+              ok = false;
+              failures.push(`citation expected "${expect.citation}" got "${result.citation}"`);
+            }
+          }
+          if (expect.ruleId) {
+            stats.ruleChecks += 1;
+            const ruleId = result.rule && result.rule.id;
+            if (ruleId !== expect.ruleId) {
+              ok = false;
+              failures.push(`ruleId expected ${expect.ruleId} got ${ruleId}`);
+            }
+          }
+          if (expect.severity) {
+            stats.severityChecks += 1;
+            const severity = result.validation && result.validation.severity;
+            if (severity !== expect.severity) {
+              ok = false;
+              failures.push(`severity expected ${expect.severity} got ${severity}`);
+            }
+          }
+          if (expect.errorIncludes && !includes(result.error, expect.errorIncludes)) {
+            ok = false;
+            failures.push(`error did not include "${expect.errorIncludes}"`);
+          }
+        }
+
+        if (ok) passed += 1;
+        log.push(`${String(index + 1).padStart(3, "0")}. ${ok ? "PASS" : "FAIL"}: ${test.name}`);
+        if (!ok) log.push(`     ${failures.join("; ")}\n     result=${JSON.stringify(result)}`);
+      });
+
+      const summary = document.getElementById("summary");
+      summary.className = passed === corpus.length ? "pass" : "fail";
+      summary.textContent = `EP-036 corpus: ${passed}/${corpus.length} tests passed. ` +
+        `Positive cases: ${stats.okCases}. Error cases: ${stats.errorCases}. ` +
+        `Citation checks: ${stats.citationChecks}. Rule checks: ${stats.ruleChecks}. Severity checks: ${stats.severityChecks}.`;
+      document.getElementById("log").textContent = log.join("\n");
+      document.body.dataset.testStatus = passed === corpus.length ? "passed" : "failed";
+      document.body.dataset.testCount = String(corpus.length);
+    })();
+  </script>
+</body>
+</html>

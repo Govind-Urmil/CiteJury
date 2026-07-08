@@ -3,7 +3,7 @@
 Privacy-first legal citation tools built with Indian legal practice in mind.
 
 ## Current Release
-EP-035: Citation Validation and Explainability System.
+EP-036: Citation Accuracy Browser Test Corpus.
 
 ## Architecture
 Static, browser-first, reusable, free-to-host first, with no backend/database/runtime dependency.
@@ -30,3 +30,8 @@ CiteJury now provides scoped OSCOLA support for UK cases and basic legislation/b
 ## EP-035 Citation Validation and Explainability System
 
 EP-035 adds structured browser-only validation reports to the citation engine and homepage. Generated citations now expose rule id, authority family, confidence, severity, missing recommended fields, limitations, and verification checklist guidance. The package adds no backend, database, Python runtime, Node runtime, active analytics, or active advertising.
+
+
+## EP-036 Citation Accuracy Browser Test Corpus
+
+EP-036 adds a large deterministic browser-only citation accuracy corpus for manual testing. The corpus is not referenced by public pages and does not affect normal visitor page weight, browser performance, ads, analytics, or static hosting simplicity.

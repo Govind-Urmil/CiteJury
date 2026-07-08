@@ -36,4 +36,5 @@
 | EP-032 | Citation Authority Foundation | Complete |
 | EP-033 | Indian Legal Citation Engine Overhaul | Complete |
 | EP-034 | International Citation Engine Overhaul | Complete |
-| EP-035 | Citation Validation and Explainability System | Ready |
+| EP-035 | Citation Validation and Explainability System | Complete |
+| EP-036 | Citation Accuracy Browser Test Corpus | Ready |

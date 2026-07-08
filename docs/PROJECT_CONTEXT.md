@@ -1,7 +1,7 @@
 # CiteJury Project Context
 
 ## Current Status
-Completed EP-001 through EP-032.
+Completed EP-001 through EP-035.
 
 ## Locked Architecture
 Static, browser-first, free-to-host-first. No backend, database, Python runtime, Node runtime, build step, paid infrastructure, active ads, analytics, or architecture change without explicit approval.
@@ -52,3 +52,12 @@ EP-035 was generated after Govind confirmed EP-034 was committed. The package ad
 Long-term unattended operation remains a product constraint: CiteJury should continue running as a static browser site for months or years without backend maintenance. Ads remain inactive until explicitly approved, but the site continues to reserve non-intrusive ad placement areas for future passive monetization.
 
 No files are removed in EP-035.
+
+
+## EP-036 status
+
+EP-036 was generated after Govind confirmed EP-035 was committed. The package adds a large deterministic browser-only citation accuracy corpus with 142 cases and a manual HTML runner. The corpus is intentionally not loaded by public pages, so normal visitors do not download it and citation-generation performance remains unaffected.
+
+Long-term unattended operation remains mandatory: CiteJury must continue working as a static browser site for months or years without backend maintenance. Ads remain inactive until Govind explicitly approves activation, but the site continues to be designed for responsible future passive monetization.
+
+No files are removed in EP-036.
