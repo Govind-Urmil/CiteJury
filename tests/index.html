@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="robots" content="noindex,nofollow">
   <title>Website Factory Verification Suite | CiteJury</title>
-  <link rel="stylesheet" href="../assets/css/style.css?v=066">
+  <link rel="stylesheet" href="../assets/css/style.css?v=067">
   <style>
     .wfvs-shell{max-width:1100px;margin:0 auto;padding:2rem 1rem}
     .wfvs-hero,.wfvs-card{border:1px solid rgba(17,24,39,.12);border-radius:1rem;background:#fff;padding:1rem;margin:1rem 0}
@@ -43,9 +43,15 @@
       <h2>Developer diagnostics</h2>
       <pre id="dev-output"></pre>
     </section>
-  </main>
+  
+    <section class="test-card">
+      <h2>EP-067 Launch Stability & SEO Hardening</h2>
+      <p>Checks unknown fragment normalization, mobile navigation scroll safety, PNG social preview fallback, asset versioning, and supported-browser documentation.</p>
+      <p><a href="EP-067-launch-stability-seo-hardening.html">Open EP-067 verification</a></p>
+    </section>
+</main>
 
-  <script src="../assets/js/citation-engine.js?v=066"></script>
+  <script src="../assets/js/citation-engine.js?v=067"></script>
   <script>
     const tests = [];
     const add = (group, name, ok, detail = "") => tests.push({ group, name, ok: Boolean(ok), detail });
@@ -61,7 +67,7 @@
     add("Technical", "robots.txt expected", true);
     add("Technical", "sitemap.xml expected", true);
     add("Technical", "404.html expected", true);
-    add("Technical", "Asset version 066", Array.from(document.scripts).some((script) => script.getAttribute("src") === "../assets/js/citation-engine.js?v=066"));
+    add("Technical", "Asset version 066", Array.from(document.scripts).some((script) => script.getAttribute("src") === "../assets/js/citation-engine.js?v=067"));
 
     const engine = window.CiteJuryCitationEngine;
     const genSci = engine.generate({citationStyle:"indian-legal",sourceType:"sc-neutral-judgment",title:"Example v Union of India",year:"2023",page:"154"});

@@ -289,3 +289,14 @@ Next: manual Google Search Console/Bing setup, then future ad approval/activatio
 - Documented that future ad activation requires a coordinated CSP update and fresh smoke testing.
 - Bumped asset version to 066.
 - Preserved static/browser-only, zero-backend, zero-database, zero-API architecture.
+
+
+## EP-067 — Launch Stability & SEO Hardening
+- Normalized unknown homepage URL fragments back to the Generator workspace to prevent stale or unrelated hashes.
+- Made mobile navigation safer on short screens by adding internal scrolling below the responsive breakpoint.
+- Added a PNG social preview fallback and updated Open Graph/Twitter image metadata for broader crawler compatibility.
+- Expanded CI asset checks to require expected CSS and JavaScript references on public pages, not only validate versions when references exist.
+- Added a dedicated EP-067 manual verification page.
+- Added supported-browser baseline documentation for modern browser APIs used by the static runtime.
+- Bumped asset version to 067.
+- Preserved static/browser-only, zero-backend, zero-database, zero-API architecture.

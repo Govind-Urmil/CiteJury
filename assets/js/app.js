@@ -43,7 +43,8 @@
 
     document.addEventListener("click", (event) => {
       if (toggle.getAttribute("aria-expanded") !== "true") return;
-      if (event.target.closest(".nav-shell")) return;
+      const navShell = toggle.closest(".nav-shell");
+      if (navShell && navShell.contains(event.target)) return;
       setNavigationOpen(false);
     });
 
@@ -983,10 +984,14 @@
 
 
   const applyWorkspaceFromHash = () => {
+    if (!workspacePanels.length) return;
     if (window.location.hash === "#checker") {
       switchWorkspaceMode("check", { updateHash: false, scroll: false, focus: false });
     } else if (window.location.hash === "#generator" || !window.location.hash) {
       switchWorkspaceMode("generate", { updateHash: false, scroll: false, focus: false });
+    } else {
+      switchWorkspaceMode("generate", { updateHash: false, scroll: false, focus: false });
+      window.history.replaceState({ workspace: "generate" }, "", "#generator");
     }
   };
 

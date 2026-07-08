@@ -56,7 +56,7 @@ jobs:
           ! grep -RniE "https?://[^\"']*(googlesyndication|doubleclick|adsbygoogle|adservice)" index.html trust.html privacy.html terms.html guides
           ! grep -RniE "data-revenue-enabled=[\"']true[\"']" index.html trust.html privacy.html terms.html guides
 
-      - name: Check asset version consistency
+      - name: Check asset version consistency and required scripts
         run: |
           python - <<'PY'
           import json
@@ -65,8 +65,10 @@ jobs:
           version = json.loads(Path('assets/asset-version.json').read_text())['assetVersion']
           bad = []
           checked = []
-          paths = [Path('index.html'), Path('privacy.html'), Path('terms.html'), Path('trust.html'), Path('404.html'), *Path('guides').glob('*.html'), *Path('tests').glob('*.html')]
-          pattern = re.compile(r'(?:\.\./)?assets/(?:css/style\.css|js/(?:app|citation-engine|revenue-readiness)\.js)\?v=([^"\']+)')
+          public_pages = [Path('index.html'), Path('privacy.html'), Path('terms.html'), Path('trust.html'), Path('404.html'), *Path('guides').glob('*.html')]
+          test_pages = list(Path('tests').glob('*.html'))
+          paths = public_pages + test_pages
+          pattern = re.compile(r"(?:\.\./)?assets/(?:css/style\.css|js/(?:app|citation-engine|revenue-readiness)\.js)\?v=([^\"\']+)")
           for path in paths:
               text = path.read_text()
               for match in pattern.finditer(text):
@@ -77,4 +79,20 @@ jobs:
               raise SystemExit('No versioned asset references found')
           if bad:
               raise SystemExit('Asset version mismatch: ' + '; '.join(sorted(bad)))
+          for path in public_pages:
+              text = path.read_text()
+              prefix = '../' if str(path).startswith('guides/') else ''
+              required = [f'{prefix}assets/css/style.css?v={version}', f'{prefix}assets/js/app.js?v={version}']
+              if path.name == 'index.html':
+                  required.append(f'{prefix}assets/js/citation-engine.js?v={version}')
+                  required.append(f'{prefix}assets/js/revenue-readiness.js?v={version}')
+              for ref in required:
+                  if ref not in text:
+                      raise SystemExit(f'Missing required asset reference in {path}: {ref}')
           PY
+
+      - name: Check social preview fallback
+        run: |
+          test -f assets/og/citejury-social-preview.png
+          grep -q "citejury-social-preview.png" index.html
+          grep -q 'og:image:type" content="image/png"' index.html
