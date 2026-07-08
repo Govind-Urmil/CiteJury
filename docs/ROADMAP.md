@@ -212,3 +212,7 @@ Required/Optional citation field status rendering fixed.
 
 ## EP-057 — Completed
 Generator UX now changes field labels/helper text based on selected citation style and source type. Alternative display variants added for APA/Chicago drafts only.
+
+
+## EP-058 — Completed
+Citation Anatomy™ added. Next authority-building priorities remain guide expansion, comparison pages, and Citation Decision Tree.

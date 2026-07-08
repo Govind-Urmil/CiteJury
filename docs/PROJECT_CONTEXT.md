@@ -174,3 +174,7 @@ Fixed dynamic Required/Optional field labels by exposing rule specifications to 
 
 ## EP-057
 Dynamic citation field labels and helper text were added. APA/Chicago appear only as post-generation display drafts with clear verification warnings, not as authority-backed generator styles.
+
+
+## EP-058
+Citation Anatomy™ launched as CiteJury's first flagship educational feature. It remains fully static/browser-only and explains generated citations with anatomy components, verification checklists, common mistakes, and relevant guide links.

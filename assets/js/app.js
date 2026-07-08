@@ -43,6 +43,8 @@
   const download = document.querySelector("#download-citation");
   const styleAlternatives = document.querySelector("#style-alternatives");
   const styleAlternativeList = document.querySelector("#style-alternative-list");
+  const citationAnatomy = document.querySelector("#citation-anatomy");
+  const citationAnatomyContent = document.querySelector("#citation-anatomy-content");
   let currentResult = null;
 
   const fieldSelectors = {
@@ -290,6 +292,194 @@
     });
   };
 
+
+  const anatomyGuideLinks = {
+    "indian-legal:sc-neutral-judgment": [["Supreme Court judgment guide", "guides/how-to-cite-supreme-court-judgment.html"], ["Indian legal citation guide", "guides/indian-legal-citation.html"]],
+    "scc:judgment": [["SCC citation guide", "guides/scc-citation.html"], ["Supreme Court judgment guide", "guides/how-to-cite-supreme-court-judgment.html"]],
+    "air:judgment": [["AIR citation guide", "guides/air-citation.html"], ["Indian legal citation guide", "guides/indian-legal-citation.html"]],
+    "oscola:judgment": [["OSCOLA guide for Indian law students", "guides/oscola-citation-guide-india.html"], ["Legal citation basics", "guides/legal-citation-basics.html"]],
+    "indian-legal:legislation": [["Bare Act citation guide", "guides/how-to-cite-bare-act.html"], ["Legal citation basics", "guides/legal-citation-basics.html"]],
+    "indian-legal:constitution": [["Constitution citation guide", "guides/how-to-cite-constitution-of-india.html"], ["Legal citation basics", "guides/legal-citation-basics.html"]]
+  };
+
+  const anatomyMistakes = {
+    "indian-legal:sc-neutral-judgment": [
+      ["INSC 154", "Missing the decision year before INSC."],
+      ["2023 SCC 154", "SCC citations require a reporter volume; this also mixes reporter and neutral-citation patterns."],
+      ["2023 INSC", "Missing the neutral sequence number."]
+    ],
+    "scc:judgment": [
+      ["2023 SCC 154", "SCC citations normally require a volume before SCC."],
+      ["(2023) SCC 154", "The reporter volume is missing."],
+      ["(2023) 7 SCC", "The opening page is missing."]
+    ],
+    "air:judgment": [
+      ["AIR SC 154", "The AIR year is missing."],
+      ["AIR 2023 154", "The court abbreviation is missing."],
+      ["2023 AIR SC", "The AIR opening page is missing."]
+    ],
+    default: [
+      ["Citation copied from memory", "Do not guess citation components; verify them against the source."],
+      ["Missing required field", "A citation may look plausible but still be incomplete."],
+      ["Wrong source type", "Choose the source type before formatting the citation."]
+    ]
+  };
+
+  const component = (value, label, detail) => ({ value: value || "—", label, detail });
+
+  const buildAnatomyComponents = (data, result) => {
+    const key = `${data.citationStyle}:${data.sourceType}`;
+    if (key === "indian-legal:sc-neutral-judgment") {
+      return [
+        component(data.year, "Decision year", "The year in the Supreme Court neutral citation token."),
+        component("INSC", "Supreme Court neutral identifier", "Identifies the citation as a Supreme Court of India neutral citation."),
+        component(data.page, "Decision sequence number", "The serial number used in the neutral citation."),
+        component(data.title, "Case title", "The official case name should match the source record.")
+      ];
+    }
+    if (data.citationStyle === "scc" && data.sourceType === "judgment") {
+      return [
+        component(data.year, "Report year", "The year used in the SCC reporter citation."),
+        component(data.volume, "SCC volume", "The volume number of Supreme Court Cases."),
+        component("SCC", "Reporter", "The Supreme Court Cases reporter abbreviation."),
+        component(data.page, "Opening page", "The first page of the reported case."),
+        component(data.title, "Case title", "The official case name as reported.")
+      ];
+    }
+    if (data.citationStyle === "air" && data.sourceType === "judgment") {
+      return [
+        component("AIR", "Reporter", "All India Reporter abbreviation."),
+        component(data.year, "Report year", "The AIR reporter year."),
+        component(data.court, "Court abbreviation", "The court identifier, for example SC for Supreme Court."),
+        component(data.page, "Opening page", "The first page in the AIR report."),
+        component(data.title, "Case title", "The official case name as reported.")
+      ];
+    }
+    if (data.sourceType === "legislation") {
+      return [
+        component(data.title, "Legislation title", "The official Act or legislation title."),
+        component(data.year, "Year", "The enactment or publication year where relevant."),
+        component(data.page, "Section / provision", "The cited section, rule, schedule, or provision.")
+      ];
+    }
+    if (data.sourceType === "constitution") {
+      return [
+        component(data.title, "Constitution title", "Usually Constitution of India."),
+        component(data.page, "Article / provision", "The cited article, clause, schedule, or provision."),
+        component(data.court, "Jurisdiction", "Usually India or the relevant institution if required.")
+      ];
+    }
+    if (data.sourceType === "website") {
+      return [
+        component(data.title, "Webpage title", "The title of the cited webpage."),
+        component(data.reporter, "Website / publisher", "The website or publisher name."),
+        component(data.page, "URL", "The full source URL."),
+        component(data.year, "Publication year", "Publication or last-updated year if available.")
+      ];
+    }
+    return [
+      component(data.title, "Source title", "The main title or case/source name."),
+      component(data.year, "Year", "The year used by the selected citation rule."),
+      component(data.reporter, "Reporter / publisher", "The reporter, publisher, journal, or website."),
+      component(data.page, "Page / provision / URL", "The locator required by the selected source type.")
+    ];
+  };
+
+  const whyFormatText = (data, result) => {
+    const key = `${data.citationStyle}:${data.sourceType}`;
+    if (key === "indian-legal:sc-neutral-judgment") return "This format identifies a Supreme Court judgment without depending on a commercial report series. Verify the neutral citation against the official judgment record.";
+    if (data.citationStyle === "scc" && data.sourceType === "judgment") return "SCC-style citations identify the case through the Supreme Court Cases reporter. The year, volume, reporter abbreviation and opening page all have distinct roles.";
+    if (data.citationStyle === "air" && data.sourceType === "judgment") return "AIR citations use the All India Reporter pattern with year, court abbreviation and opening page. Court abbreviations should be verified.";
+    if (data.citationStyle === "oscola") return "OSCOLA formatting is used for legal writing, but local institutions may adapt it for Indian legal sources. Treat the output as a draft and verify your required style.";
+    return result.explanation || "This citation follows the currently selected rule scope and should be verified against the source.";
+  };
+
+  const checklistItems = (data, result) => {
+    const items = ["Official title matches the source record."];
+    if (data.year) items.push("Year checked against the source.");
+    if (data.citationStyle === "scc") items.push("SCC volume and opening page verified.");
+    if (data.citationStyle === "air") items.push("AIR year, court abbreviation and opening page verified.");
+    if (data.sourceType === "sc-neutral-judgment") items.push("Neutral sequence number verified.");
+    if (data.page && data.sourceType !== "sc-neutral-judgment") items.push("Page, provision, URL or locator checked.");
+    items.push("Institution or court-specific citation requirement reviewed.");
+    return items;
+  };
+
+  const renderCitationAnatomy = (result) => {
+    if (!citationAnatomy || !citationAnatomyContent || !result || !result.ok) return;
+    const data = getData(new FormData(form));
+    const key = `${data.citationStyle}:${data.sourceType}`;
+    const components = buildAnatomyComponents(data, result);
+    citationAnatomyContent.innerHTML = "";
+
+    const componentList = document.createElement("div");
+    componentList.className = "anatomy-components";
+    components.forEach((item) => {
+      const card = document.createElement("article");
+      card.className = "anatomy-component";
+      const value = document.createElement("strong");
+      value.textContent = item.value;
+      const label = document.createElement("span");
+      label.textContent = item.label;
+      const detail = document.createElement("p");
+      detail.textContent = item.detail;
+      card.append(value, label, detail);
+      componentList.appendChild(card);
+    });
+
+    const why = document.createElement("div");
+    why.className = "anatomy-explain";
+    why.innerHTML = `<h4>Why this format?</h4><p>${whyFormatText(data, result)}</p>`;
+
+    const checklist = document.createElement("div");
+    checklist.className = "anatomy-checklist";
+    const checklistTitle = document.createElement("h4");
+    checklistTitle.textContent = "Verification checklist";
+    const checklistUl = document.createElement("ul");
+    checklistItems(data, result).forEach((item) => {
+      const li = document.createElement("li");
+      li.textContent = item;
+      checklistUl.appendChild(li);
+    });
+    checklist.append(checklistTitle, checklistUl);
+
+    const mistakes = document.createElement("div");
+    mistakes.className = "anatomy-mistakes";
+    const mistakeTitle = document.createElement("h4");
+    mistakeTitle.textContent = "Common mistakes";
+    mistakes.appendChild(mistakeTitle);
+    (anatomyMistakes[key] || anatomyMistakes.default).forEach(([wrong, reason]) => {
+      const item = document.createElement("p");
+      item.innerHTML = `<strong>❌ ${wrong}</strong><br>${reason}`;
+      mistakes.appendChild(item);
+    });
+
+    const learn = document.createElement("div");
+    learn.className = "anatomy-learn";
+    const learnTitle = document.createElement("h4");
+    learnTitle.textContent = "Learn more";
+    const learnList = document.createElement("ul");
+    (anatomyGuideLinks[key] || [["Legal citation basics", "guides/legal-citation-basics.html"]]).forEach(([text, href]) => {
+      const li = document.createElement("li");
+      const a = document.createElement("a");
+      a.href = href;
+      a.textContent = text;
+      li.appendChild(a);
+      learnList.appendChild(li);
+    });
+    learn.append(learnTitle, learnList);
+
+    citationAnatomyContent.append(componentList, why, checklist, mistakes, learn);
+    citationAnatomy.hidden = false;
+  };
+
+  const clearCitationAnatomy = () => {
+    if (!citationAnatomy || !citationAnatomyContent) return;
+    citationAnatomyContent.innerHTML = "";
+    citationAnatomy.hidden = true;
+  };
+
+
   const applyResult = (result) => {
     if (!result || !result.ok) return;
     currentResult = result;
@@ -300,6 +490,7 @@
     explain.textContent = `${result.explanation} ${result.verification ? result.verification.message : ""}${limitationText}`;
     renderParts(result.parts);
     renderValidation(result.validation);
+    renderCitationAnatomy(result);
   };
 
   const renderValidation = (validation) => {
@@ -420,6 +611,7 @@
     renderParts([]);
     renderValidation(null);
     renderStyleAlternatives([]);
+    clearCitationAnatomy();
     currentResult = null;
   };
 
@@ -441,6 +633,7 @@
         explain.textContent = "Fix the highlighted issue and generate again.";
         renderParts([]);
         renderValidation(result.validation);
+        clearCitationAnatomy();
         renderInlineErrors(result);
         focusInvalidField(result);
         return;

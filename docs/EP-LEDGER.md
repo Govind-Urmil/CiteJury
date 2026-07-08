@@ -199,3 +199,9 @@ Next: manual Google Search Console/Bing setup, then future ad approval/activatio
 - Inline validation errors now use current field labels.
 - Added APA-style and Chicago-style post-generation display drafts with verification warnings, without claiming full APA/Chicago generator support.
 - Bumped asset version to 057.
+
+
+## EP-058 — Citation Anatomy™
+- Added Citation Anatomy™ after successful generation.
+- Added rule-aware component explanations, why-this-format text, verification checklist, common mistakes, and learn-more links.
+- Bumped asset version to 058.

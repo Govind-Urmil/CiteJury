@@ -133,3 +133,7 @@ Required/Optional field markers now render from the active citation rule specifi
 
 ### EP-057
 Citation form labels and helper text now update dynamically by style/source type. APA/Chicago are display-only draft variants after generation, not full supported citation engines.
+
+
+### EP-058
+Citation Anatomy™ explains generated citations component-by-component with verification checklist, common mistakes, and related learning links.
