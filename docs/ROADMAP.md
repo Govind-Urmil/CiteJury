@@ -208,3 +208,7 @@ Citation form clarity and first evidence-based content upgrade batch completed.
 
 ## EP-056 — Completed
 Required/Optional citation field status rendering fixed.
+
+
+## EP-057 — Completed
+Generator UX now changes field labels/helper text based on selected citation style and source type. Alternative display variants added for APA/Chicago drafts only.

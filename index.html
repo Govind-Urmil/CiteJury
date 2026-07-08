@@ -14,7 +14,7 @@
   <link rel="canonical" href="https://citejury.citejury.workers.dev/">
   <meta property="og:url" content="https://citejury.citejury.workers.dev/">
   <link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="assets/css/style.css?v=056">
+  <link rel="stylesheet" href="assets/css/style.css?v=057">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"WebApplication","name":"CiteJury","applicationCategory":"EducationalApplication","operatingSystem":"Any","description":"Privacy-first browser-based legal citation formatting and learning tool.","isAccessibleForFree":true}
 </script>
@@ -71,7 +71,7 @@
 
       <div class="container generator-grid">
         <form id="citation-form" class="generator-form" novalidate aria-describedby="generator-help">
-          <p id="generator-help" class="form-help">Required field: case / source title. All citation work stays in your browser. Compare available citation styles after generation and choose the format your submission requires.</p>
+          <p id="generator-help" class="form-help">Required field: case / source title. All citation work stays in your browser. Field labels and Required/Optional markers change when you select a style or source type. Compare available display styles after generation and verify before submission.</p>
           <div class="form-error" id="form-error" role="alert" hidden></div>
 
           <div class="field-row">
@@ -97,25 +97,29 @@
             </select>
           </div>
 
-          <label for="source-title">Case / source title <span class="field-status" data-field-status="title"></span></label>
+          <label for="source-title"><span data-field-label="title">Case / source title</span> <span class="field-status" data-field-status="title"></span></label>
           <input id="source-title" name="title" placeholder="Justice K.S. Puttaswamy (Retd.) v. Union of India" required autocomplete="off" aria-describedby="title-help">
           <small id="title-help" class="field-help">Use the official case, Act, article, book, journal, or webpage title. For OSCOLA books/journals, include author + title in the title field until dedicated author fields are added.</small>
 
-          <label for="source-year">Year <span class="field-status" data-field-status="year"></span></label>
+          <label for="source-year"><span data-field-label="year">Year</span> <span class="field-status" data-field-status="year"></span></label>
           <input id="source-year" name="year" placeholder="2017" inputmode="numeric" pattern="[0-9]{4}" autocomplete="off" aria-describedby="year-help">
           <small id="year-help" class="field-help">Use a 4-digit year only, for example 2017. For Supreme Court neutral citations, this is the year in the neutral citation token.</small>
 
-          <label for="source-reporter">Reporter / publisher / website <span class="field-status" data-field-status="reporter"></span></label>
-          <input id="source-reporter" name="reporter" placeholder="SCC / AC / publisher / journal" autocomplete="off">
+          <label for="source-reporter"><span data-field-label="reporter">Reporter / publisher / website</span> <span class="field-status" data-field-status="reporter"></span></label>
+          <input id="source-reporter" name="reporter" placeholder="SCC / AC / publisher / journal" autocomplete="off" aria-describedby="reporter-help">
+          <small id="reporter-help" class="field-help">Enter the reporter, publisher, journal, or website label when required by the selected citation rule.</small>
 
-          <label for="source-volume">Volume <span class="field-status" data-field-status="volume"></span></label>
-          <input id="source-volume" name="volume" placeholder="10" autocomplete="off">
+          <label for="source-volume"><span data-field-label="volume">Volume</span> <span class="field-status" data-field-status="volume"></span></label>
+          <input id="source-volume" name="volume" placeholder="10" autocomplete="off" aria-describedby="volume-help">
+          <small id="volume-help" class="field-help">Enter the reporter volume when the selected citation rule requires it.</small>
 
-          <label for="source-page">Page / section / article / URL / neutral sequence <span class="field-status" data-field-status="page"></span></label>
-          <input id="source-page" name="page" placeholder="1" autocomplete="off">
+          <label for="source-page"><span data-field-label="page">Page / section / article / URL / neutral sequence</span> <span class="field-status" data-field-status="page"></span></label>
+          <input id="source-page" name="page" placeholder="1" autocomplete="off" aria-describedby="page-help">
+          <small id="page-help" class="field-help">Enter the page, section, article, URL, or neutral sequence required by the selected citation rule.</small>
 
-          <label for="source-court">Court / institution <span class="field-status" data-field-status="court"></span></label>
-          <input id="source-court" name="court" placeholder="Supreme Court of India" autocomplete="off">
+          <label for="source-court"><span data-field-label="court">Court / institution</span> <span class="field-status" data-field-status="court"></span></label>
+          <input id="source-court" name="court" placeholder="Supreme Court of India" autocomplete="off" aria-describedby="court-help">
+          <small id="court-help" class="field-help">Enter the court, institution, or jurisdiction abbreviation when required.</small>
 
           <div class="privacy-inline" role="note">CiteJury processes this form in your browser. No server submission is used.</div>
 
@@ -193,8 +197,8 @@
     </div>
   </footer>
 
-  <script src="assets/js/citation-engine.js?v=056"></script>
-  <script src="assets/js/app.js?v=056"></script>
-  <script src="assets/js/revenue-readiness.js?v=056"></script>
+  <script src="assets/js/citation-engine.js?v=057"></script>
+  <script src="assets/js/app.js?v=057"></script>
+  <script src="assets/js/revenue-readiness.js?v=057"></script>
 </body>
 </html>

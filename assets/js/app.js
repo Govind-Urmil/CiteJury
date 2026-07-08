@@ -54,6 +54,111 @@
     court: "#source-court"
   };
 
+
+  const baseFieldLabels = {
+    title: "Case / source title",
+    year: "Year",
+    reporter: "Reporter / publisher / website",
+    volume: "Volume",
+    page: "Page / section / article / URL / neutral sequence",
+    court: "Court / institution"
+  };
+
+  const fieldLabelProfiles = {
+    "indian-legal:sc-neutral-judgment": {
+      title: ["Case title", "Use the official case title from the Supreme Court record."],
+      year: ["Neutral citation year", "Enter the four-digit year in the Supreme Court neutral citation token."],
+      reporter: ["Reporter / parallel citation", "Optional: add SCC, AIR, SCR, or another report reference only if you have verified it."],
+      volume: ["Reporter volume", "Optional unless you are also adding a verified reporter citation."],
+      page: ["Neutral sequence number", "Required: enter the serial number after INSC in the neutral citation."],
+      court: ["Court", "Use Supreme Court of India if relevant to your citation requirement."]
+    },
+    "scc:judgment": {
+      title: ["Case title", "Use the official case title exactly as reported."],
+      year: ["SCC report year", "Use the year attached to the SCC citation."],
+      reporter: ["Reporter", "Use SCC for Supreme Court Cases citations."],
+      volume: ["SCC volume", "Required for SCC-style citations."],
+      page: ["Opening page", "Use the first page of the report, not a PDF page number."],
+      court: ["Court", "Optional unless your institution requires the court name."]
+    },
+    "air:judgment": {
+      title: ["Case title", "Use the official case title exactly as reported."],
+      year: ["AIR year", "Use the AIR reporter year."],
+      reporter: ["Reporter", "Use AIR for All India Reporter citations."],
+      volume: ["Volume", "Usually optional for AIR citations unless your source requires it."],
+      page: ["AIR page number", "Use the AIR opening page."],
+      court: ["Court abbreviation", "Use the verified AIR court abbreviation, for example SC or Bom."]
+    },
+    "indian-legal:legislation": {
+      title: ["Act / legislation title", "Use the official short title of the Act or legislation."],
+      year: ["Year", "Use the enactment year when available."],
+      reporter: ["Source / publisher", "Optional: add the source where you found the legislation."],
+      volume: ["Volume", "Usually optional for legislation."],
+      page: ["Section number", "Enter the section, rule, or schedule if you are citing a specific provision."],
+      court: ["Jurisdiction / institution", "Optional: add jurisdiction or institution if needed."]
+    },
+    "indian-legal:constitution": {
+      title: ["Constitution title", "Usually Constitution of India."],
+      year: ["Year", "Usually optional unless your institution asks for it."],
+      reporter: ["Source / publisher", "Optional: add the source used."],
+      volume: ["Volume", "Usually optional for constitutional provisions."],
+      page: ["Article number", "Enter the article, clause, or schedule being cited."],
+      court: ["Jurisdiction", "Optional: add India or institution if needed."]
+    },
+    "indian-legal:website": {
+      title: ["Webpage title", "Use the page title visible on the legal website."],
+      year: ["Publication year", "Enter the publication or last-updated year if available."],
+      reporter: ["Website name", "Enter the website or publisher name."],
+      volume: ["Volume", "Usually optional for websites."],
+      page: ["URL", "Enter the full webpage URL."],
+      court: ["Institution", "Optional: add the publishing institution if relevant."]
+    },
+    "oscola:book": {
+      title: ["Author and book title", "Enter author and title until dedicated author fields are added."],
+      year: ["Publication year", "Use the book publication year."],
+      reporter: ["Publisher", "Enter the publisher name."],
+      volume: ["Edition / volume", "Optional: include edition or volume where relevant."],
+      page: ["Page / pinpoint", "Optional: add a page or pinpoint reference."],
+      court: ["Jurisdiction", "Usually optional for books."]
+    },
+    "oscola:journal": {
+      title: ["Author and article title", "Enter author and article title until dedicated author fields are added."],
+      year: ["Publication year", "Use the journal publication year."],
+      reporter: ["Journal name", "Enter the journal name."],
+      volume: ["Journal volume", "Enter the journal volume where available."],
+      page: ["First page / pinpoint", "Enter the article first page or pinpoint."],
+      court: ["Institution", "Usually optional for journal articles."]
+    },
+    "oscola:website": {
+      title: ["Webpage title", "Use the page title."],
+      year: ["Publication year", "Use publication or last-updated year if available."],
+      reporter: ["Website / publisher", "Enter the website or publisher name."],
+      volume: ["Volume", "Usually optional for websites."],
+      page: ["URL", "Enter the full webpage URL."],
+      court: ["Institution", "Optional: add institution if relevant."]
+    }
+  };
+
+  const getFieldProfile = (data) => {
+    const key = `${data.citationStyle}:${data.sourceType}`;
+    const profile = fieldLabelProfiles[key] || {};
+    if (data.sourceType === "book") {
+      return { ...profile, title: profile.title || ["Author and title", "Enter author and title details."], reporter: profile.reporter || ["Publisher", "Enter the publisher if available."] };
+    }
+    if (data.sourceType === "journal") {
+      return { ...profile, title: profile.title || ["Article title", "Enter the journal article title."], reporter: profile.reporter || ["Journal name", "Enter the journal name."] };
+    }
+    if (data.sourceType === "website") {
+      return { ...profile, title: profile.title || ["Webpage title", "Enter the webpage title."], reporter: profile.reporter || ["Website name", "Enter the website name."], page: profile.page || ["URL", "Enter the full URL."] };
+    }
+    return profile;
+  };
+
+  const fieldDisplayLabel = (name) => {
+    const marker = document.querySelector(`[data-field-label="${name}"]`);
+    return marker ? marker.textContent.trim() : baseFieldLabels[name] || name;
+  };
+
   const clearInvalidFields = () => {
     Object.values(fieldSelectors).forEach((selector) => {
       const field = document.querySelector(selector);
@@ -142,10 +247,17 @@
     if (!form || !window.CiteJuryCitationEngine.getRuleSpec) return;
     const data = getData(new FormData(form));
     const spec = window.CiteJuryCitationEngine.getRuleSpec(data);
+    const profile = getFieldProfile(data);
     fieldNames.forEach((name) => {
       const marker = document.querySelector(`[data-field-status="${name}"]`);
-      if (!marker) return;
+      const label = document.querySelector(`[data-field-label="${name}"]`);
+      const field = document.querySelector(fieldSelectors[name]);
+      const help = field ? document.querySelector(`#${field.id.replace("source-", "")}-help`) : null;
       const required = (spec.required || []).includes(name);
+      const display = profile[name] || [baseFieldLabels[name], ""];
+      if (label) label.textContent = display[0];
+      if (help && display[1]) help.textContent = display[1];
+      if (!marker) return;
       marker.textContent = required ? "Required *" : "Optional";
       marker.setAttribute("aria-label", required ? "Required field" : "Optional field");
       marker.classList.toggle("required", required);
@@ -162,7 +274,7 @@
       message.className = "field-error";
       message.id = `${field.id}-error`;
       message.setAttribute("role", "alert");
-      message.textContent = `${name === "page" ? "Page / section / article / URL / neutral sequence" : name.charAt(0).toUpperCase()+name.slice(1)} is required for this citation type.`;
+      message.textContent = `${fieldDisplayLabel(name)} is required for this citation type.`;
       field.parentNode.insertBefore(message, field);
       field.setAttribute("aria-describedby", [field.getAttribute("aria-describedby"), message.id].filter(Boolean).join(" "));
     });
@@ -216,44 +328,82 @@
     validationBox.append(heading, summary, list);
   };
 
-  const renderStyleAlternatives = (alternatives = []) => {
+  const buildDisplayVariants = (result) => {
+    if (!result || !result.ok) return [];
+    const data = getData(new FormData(form));
+    const title = data.title || "Untitled source";
+    const year = data.year || "n.d.";
+    const publisher = data.reporter || data.court || "source";
+    const legalVariants = window.CiteJuryCitationEngine.generateStyleAlternatives(data)
+      .filter((item) => item.ok)
+      .map((item) => ({
+        label: item.styleLabel,
+        text: item.citation,
+        note: "Authority-scoped legal citation draft."
+      }));
+
+    const displayOnly = [
+      {
+        label: "APA-style display draft",
+        text: `${title}. (${year}). ${publisher}.`,
+        note: "Convenience display only, not full APA legal citation support. Verify before academic submission."
+      },
+      {
+        label: "Chicago-style display draft",
+        text: `${title}. ${publisher}, ${year}.`,
+        note: "Convenience display only, not full Chicago legal citation support. Verify before academic submission."
+      }
+    ];
+
+    return [...legalVariants, ...displayOnly];
+  };
+
+  const renderStyleAlternatives = (variants = []) => {
     if (!styleAlternatives || !styleAlternativeList) return;
 
     styleAlternativeList.innerHTML = "";
-    if (!alternatives.length) {
+    if (!variants.length) {
       styleAlternatives.hidden = true;
       return;
     }
 
     styleAlternatives.hidden = false;
 
-    alternatives.forEach((alternative) => {
+    const warning = document.createElement("p");
+    warning.className = "style-warning";
+    warning.textContent = "Alternative display styles are drafts. Verify requirements before academic or legal submission.";
+    styleAlternativeList.appendChild(warning);
+
+    variants.forEach((variant) => {
       const card = document.createElement("article");
-      card.className = `style-alternative${alternative.ok ? "" : " unavailable"}`;
+      card.className = "style-alternative";
 
       const heading = document.createElement("h4");
-      heading.textContent = alternative.styleLabel;
+      heading.textContent = variant.label;
 
       const preview = document.createElement("p");
-      preview.textContent = alternative.ok ? alternative.citation : alternative.unavailableReason;
+      preview.textContent = variant.text;
 
-      card.append(heading, preview);
+      const note = document.createElement("small");
+      note.textContent = variant.note || "Draft citation display.";
 
-      if (alternative.ok) {
-        const button = document.createElement("button");
-        button.type = "button";
-        button.className = "btn secondary compact";
-        button.textContent = "Use this style";
-        button.addEventListener("click", () => {
-          const selected = window.CiteJuryCitationEngine.generate({
-            ...window.CiteJuryCitationEngine.normalize(getData(new FormData(form))),
-            citationStyle: alternative.citationStyle
-          });
-          if (selected.ok) applyResult(selected);
-        });
-        card.appendChild(button);
-      }
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = "btn secondary compact";
+      button.textContent = "Copy this style";
+      button.addEventListener("click", async () => {
+        try {
+          await navigator.clipboard.writeText(variant.text);
+          button.textContent = "Copied";
+        } catch {
+          button.textContent = "Copy failed";
+        }
+        setTimeout(() => {
+          button.textContent = "Copy this style";
+        }, 1400);
+      });
 
+      card.append(heading, preview, note, button);
       styleAlternativeList.appendChild(card);
     });
   };
@@ -300,7 +450,7 @@
       error.textContent = "";
       clearInlineErrors();
       applyResult(result);
-      renderStyleAlternatives(window.CiteJuryCitationEngine.generateStyleAlternatives(getData(new FormData(form))));
+      renderStyleAlternatives(buildDisplayVariants(result));
     });
 
     form.addEventListener("reset", () => setTimeout(resetPreview, 0));

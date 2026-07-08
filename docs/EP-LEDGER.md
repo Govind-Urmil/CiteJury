@@ -192,3 +192,10 @@ Next: manual Google Search Console/Bing setup, then future ad approval/activatio
 ## EP-056 — Fix Required/Optional Field Status Rendering
 - Exposed citation rule specs to the browser UI so dynamic Required/Optional labels render correctly.
 - Bumped asset version to 056 so browsers fetch the fixed JavaScript.
+
+
+## EP-057 — Dynamic Citation Field Labels & Display Variants
+- Added dynamic field labels and helper text based on citation style/source type.
+- Inline validation errors now use current field labels.
+- Added APA-style and Chicago-style post-generation display drafts with verification warnings, without claiming full APA/Chicago generator support.
+- Bumped asset version to 057.

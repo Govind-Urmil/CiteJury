@@ -129,3 +129,7 @@ Generator fields dynamically show Required/Optional status and validation errors
 
 ### EP-056
 Required/Optional field markers now render from the active citation rule specification.
+
+
+### EP-057
+Citation form labels and helper text now update dynamically by style/source type. APA/Chicago are display-only draft variants after generation, not full supported citation engines.

@@ -162,3 +162,5 @@ img,svg{max-width:100%;height:auto}
 }
 
 .field-status{font-size:.78rem;font-weight:600;margin-left:.35rem;opacity:.72}.field-status.required{opacity:1}.field-error{margin:.35rem 0 .25rem;color:#b42318;font-size:.88rem;font-weight:600}[aria-invalid="true"]{outline:2px solid #b42318;outline-offset:2px}
+
+.style-warning{margin:.25rem 0 1rem;color:#5f4b00;font-size:.92rem}.style-alternative small{display:block;margin:.25rem 0 .75rem;opacity:.78}.field-status{white-space:nowrap}

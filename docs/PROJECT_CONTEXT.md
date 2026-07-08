@@ -170,3 +170,7 @@ Dynamic field requirements, inline validation, and Batch A authority-content imp
 
 ## EP-056
 Fixed dynamic Required/Optional field labels by exposing rule specifications to the UI and bumping the public asset version.
+
+
+## EP-057
+Dynamic citation field labels and helper text were added. APA/Chicago appear only as post-generation display drafts with clear verification warnings, not as authority-backed generator styles.
