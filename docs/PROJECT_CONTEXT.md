@@ -113,3 +113,8 @@ Next: deploy/audit the live Cloudflare URL, then enable ads only after explicit 
 ## EP-045 status
 
 EP-045 finalizes the temporary production URL `https://citejury.citejury.workers.dev`, absolute sitemap/canonical metadata, robots sitemap reference, and disables Cloudflare preview URLs while keeping ads/analytics inactive and preserving host portability.
+
+## EP-046 Current State
+
+EP-046 is the live production audit and verified-fix package after the temporary Cloudflare production URL went live. It uses `https://citejury.citejury.workers.dev` as the current production URL. It removes visible inactive-ad placeholder copy from guide pages, adds live-production audit metadata/docs, and preserves the locked static/browser-only architecture. Ads and analytics remain inactive.
+

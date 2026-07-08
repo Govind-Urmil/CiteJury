@@ -82,3 +82,7 @@ CiteJury now includes passive-revenue readiness containers that remain hidden wh
 ## EP-045 Production URL
 
 Initial live URL: `https://citejury.citejury.workers.dev`. Ads and analytics remain inactive. The site remains static/browser-only and portable to custom domain or AWS S3/static hosting later.
+
+## Current production state
+
+EP-046 completed a live production audit against `https://citejury.citejury.workers.dev` and removed visible inactive-ad placeholder copy from public guide pages. Ads and analytics remain inactive.

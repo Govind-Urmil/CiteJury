@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>EP-046 Live Production Audit Test</title></head>
+<body>
+<main>
+  <h1>EP-046 Live Production Audit Test</h1>
+  <pre id="out">Running...</pre>
+</main>
+<script>
+(async () => {
+  const out = document.getElementById('out');
+  const checks = [];
+  const expect = (name, ok) => checks.push({ name, ok: Boolean(ok) });
+  const text = async (url) => (await fetch(url)).text();
+  const home = await text('../index.html');
+  const audit = await (await fetch('../assets/data/live-production-audit.json')).json();
+  const sitemap = await text('../sitemap.xml');
+  const guideNames = [
+    'legal-citation-basics.html','indian-legal-citation.html','scc-citation.html','air-citation.html',
+    'how-to-cite-supreme-court-judgment.html','how-to-cite-high-court-judgment.html','how-to-cite-constitution-of-india.html',
+    'how-to-cite-bare-act.html','legal-citation-for-law-students.html','how-to-cite-online-judgment.html',
+    'how-to-cite-law-journal-article.html','oscola-citation-guide-india.html','bluebook-citation-basics-india.html',
+    'moot-court-memorial-citation-guide.html','how-to-cite-legal-website.html'
+  ];
+  const guideTexts = await Promise.all(guideNames.map((g) => text('../guides/' + g)));
+
+  expect('production URL metadata', audit.productionBaseUrl === 'https://citejury.citejury.workers.dev');
+  expect('homepage no EP helper copy', !home.includes('EP-034 adds scoped OSCOLA support'));
+  expect('homepage has style switching copy', home.includes('Choose another style'));
+  expect('sitemap production URL', sitemap.includes('https://citejury.citejury.workers.dev/'));
+  expect('no visible inactive guide ad copy', guideTexts.every((t) => !t.includes('Future non-intrusive ad placement reserved') && !t.includes('Ads are not active.')));
+  expect('guide hidden revenue slots only', guideTexts.every((t) => t.includes('data-revenue-slot="ad-guide-footer"') && t.includes('hidden aria-label="Advertisement area"')));
+  expect('ads inactive', !home.includes('googlesyndication.com') && !home.includes('adsbygoogle'));
+  expect('analytics inactive', !home.includes('googletagmanager.com') && !home.includes('google-analytics.com'));
+  const failed = checks.filter((c) => !c.ok);
+  out.textContent = failed.length ? 'FAILED\n' + failed.map((f) => f.name).join('\n') : 'PASSED ' + checks.length + '/' + checks.length + ' EP-046 checks';
+  if (failed.length) throw new Error(failed.map((f) => f.name).join('; '));
+})();
+</script>
+</body>
+</html>

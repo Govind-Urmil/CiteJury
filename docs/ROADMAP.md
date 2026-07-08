@@ -141,3 +141,13 @@ Next: deploy/audit the live Cloudflare URL, then enable ads only after explicit 
 ## Post EP-045
 
 Next recommended work: live production audit after deployment, search-console/indexing setup, and only later explicit ad activation after policy and privacy readiness checks.
+
+## EP-046 Live Production Audit and Verified Fixes
+
+- Audited the live Cloudflare deployment at `https://citejury.citejury.workers.dev`.
+- Fixed verified user-facing cleanup issue: inactive ad placeholders are no longer visible on guide pages.
+- Added live audit metadata and documentation.
+- Added browser-only EP-046 validation.
+- Preserved unattended static operation with no active ads or analytics.
+
+Next: EP-047 — Search Engine Launch.

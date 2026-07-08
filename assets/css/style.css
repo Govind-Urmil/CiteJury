@@ -145,3 +145,9 @@ img,svg{max-width:100%;height:auto}
   font-weight:800;
 }
 .revenue-slot[hidden]{display:none!important}
+
+
+/* EP-046 live production cleanup */
+.ad-slot[hidden],
+.guide-revenue-slot[hidden]{display:none!important}
+.guide-revenue-slot{width:min(100%,820px);margin:48px auto 0}

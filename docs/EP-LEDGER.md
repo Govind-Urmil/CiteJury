@@ -99,3 +99,15 @@ Next: deploy/audit the live Cloudflare URL. Real ads require future explicit app
 - Removed remaining public internal EP/owner workflow wording.
 - No backend, database, build step, ads, or analytics added.
 - File deletion required: none.
+
+## EP-046 — Live Production Audit and Verified Fixes
+
+- Base: committed EP-045 repository ZIP.
+- Production URL audited: `https://citejury.citejury.workers.dev`.
+- Removed visible inactive-ad placeholder text from public guide pages while preserving inactive ad-readiness architecture.
+- Added `assets/data/live-production-audit.json`.
+- Added `docs/LIVE_PRODUCTION_AUDIT.md`.
+- Added browser-only `tests/EP-046-live-production-audit.html`.
+- Preserved static/browser-only architecture, no backend, no database, inactive ads, inactive analytics, and host portability.
+
+Next: EP-047 — Search Engine Launch.

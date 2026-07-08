@@ -1,0 +1,27 @@
+{
+  "version": "EP-046",
+  "title": "Live production audit and verified fixes",
+  "productionBaseUrl": "https://citejury.citejury.workers.dev",
+  "liveChecks": {
+    "homepageReachable": true,
+    "httpsWorking": true,
+    "homepageRendered": true,
+    "navigationPresent": true,
+    "generatorUiPresent": true,
+    "styleSwitchingUiPresent": true,
+    "privacyTermsTrustReachable": true,
+    "sampleGuideReachable": true
+  },
+  "verifiedIssuesFixed": [
+    "Removed visible inactive guide advertisement placeholder text from public guide pages.",
+    "Confirmed homepage generator helper copy does not expose internal EP release wording in the committed source.",
+    "Added EP-046 browser validation for public-copy cleanup and production URL metadata."
+  ],
+  "unchanged": [
+    "Ads remain inactive.",
+    "Analytics remain inactive.",
+    "No backend, database, build step, or runtime dependency was added.",
+    "Cloudflare Workers Static Assets remains the current host; static portability remains preserved."
+  ],
+  "nextRecommendedStep": "Search engine launch preparation after EP-046 is committed and auto-deployed."
+}
