@@ -42,3 +42,14 @@ git push
 ```
 
 No file deletion is required for EP-034.
+
+
+## EP-035
+
+```bash
+git add .
+git commit -m "EP-035: Add citation validation and explainability"
+git push
+```
+
+No file deletion is required for EP-035.

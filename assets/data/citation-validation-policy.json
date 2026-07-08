@@ -1,0 +1,24 @@
+{
+  "ep": "EP-035",
+  "purpose": "Browser-only citation validation and explainability policy for CiteJury.",
+  "principles": [
+    "Blocking errors prevent generation when required fields or scoped rule constraints fail.",
+    "Generated citations include rule id, authority family, confidence, missing recommended fields, limitations, and verification checklist.",
+    "Medium or low confidence outputs must remain transparent and require manual verification for formal use.",
+    "No citation output claims source verification unless CiteJury actually verifies the source, which the static browser-only engine does not do."
+  ],
+  "severityLevels": {
+    "strong": "Rule is within a narrow documented scope, but original-source verification is still recommended.",
+    "needs-review": "Citation was generated from a scoped helper and should be reviewed before formal use.",
+    "manual-verification-required": "Output is only formatting assistance and must be checked manually.",
+    "blocking-error": "Generation is stopped because required data or validation rules failed."
+  },
+  "unattendedOperation": {
+    "siteRuntime": "static-browser-only",
+    "backendRequired": false,
+    "databaseRequired": false,
+    "adsActive": false,
+    "analyticsActive": false,
+    "maintenanceNote": "Validation metadata is bundled with the static site and does not require a service, API key, database, scheduled job, or monitoring loop."
+  }
+}

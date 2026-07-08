@@ -1,10 +1,9 @@
 # CiteJury Engineering Roadmap
 
 ## Completed
-EP-001 through EP-033.
+EP-001 through EP-034.
 
 ## Next Planned EPs
-- EP-034 International Citation Engine Overhaul
 - EP-035 Citation Validation and Explainability System
 - EP-036 Citation Accuracy Browser Test Corpus
 - EP-037 Content Quality and Authority Rewrite
@@ -40,3 +39,15 @@ Next: EP-034 — International Citation Engine Overhaul.
 - Added browser-only EP-034 deterministic test page.
 
 Next: EP-035 — Citation Validation and Explainability System.
+
+
+## EP-035 deliverables
+
+- Added structured `validateDetailed()` reports to the browser citation engine.
+- Added validation severity, rule status, authority family, confidence, missing-field, limitation, and manual-verification output.
+- Added homepage validation panel for generated results and blocking errors.
+- Added `assets/data/citation-validation-policy.json`.
+- Added browser-only EP-035 validation/explainability test page.
+- Preserved static/browser-only architecture with no backend, database, runtime dependency, active ads, or analytics.
+
+Next: EP-036 — Citation Accuracy Browser Test Corpus.

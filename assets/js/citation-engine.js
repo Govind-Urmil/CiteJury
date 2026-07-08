@@ -1,6 +1,6 @@
 /*
   CiteJury Citation Engine
-  EP-034
+  EP-035
   Browser-first, static-site compatible, no backend dependency.
 */
 
@@ -159,9 +159,50 @@
     }
   };
 
+  const ruleLabels = {
+    title: "case/source title",
+    year: "year",
+    reporter: "reporter / publisher / website",
+    volume: "volume",
+    page: "page / section / article / URL / neutral sequence",
+    court: "court / institution"
+  };
+
   const getRuleSpec = (data) => ruleSpecs[`${data.citationStyle}:${data.sourceType}`] || ruleSpecs.default;
   const getMissingRequired = (data, spec) => (spec.required || []).filter((field) => !data[field]);
   const getMissingRecommended = (data, spec) => (spec.recommended || []).filter((field) => !data[field]);
+  const labelFields = (fields = []) => fields.map((field) => ruleLabels[field] || field);
+
+  const confidenceSeverity = (confidence = "") => {
+    if (/^high/i.test(confidence)) return "strong";
+    if (/^medium/i.test(confidence)) return "needs-review";
+    return "manual-verification-required";
+  };
+
+  const buildValidationReport = (data, spec, missingRequired, missingRecommended, hardError = "") => {
+    const severity = hardError ? "blocking-error" : confidenceSeverity(spec.confidence);
+    return {
+      ok: !hardError,
+      severity,
+      summary: hardError || (missingRecommended.length
+        ? `Citation generated, but recommended fields are missing: ${labelFields(missingRecommended).join(", ")}.`
+        : "Citation generated within the documented rule scope."),
+      ruleId: spec.id,
+      ruleStatus: spec.status,
+      authorityFamily: spec.authorityFamily,
+      confidence: spec.confidence,
+      missingRequired: labelFields(missingRequired),
+      missingRecommended: labelFields(missingRecommended),
+      manualVerification: severity !== "strong" || missingRecommended.length > 0,
+      checklist: [
+        "Verify party/source name spelling against the original source.",
+        "Verify year, reporter, volume, page, court, and neutral sequence against the source.",
+        "Confirm the required style guide or institution accepts this citation form.",
+        "Check whether pinpoint references, parallel citations, or local court rules are required."
+      ],
+      limitations: spec.limitations || []
+    };
+  };
 
   const helpers = {
     join(values, separator = " ") {
@@ -378,63 +419,68 @@
     }
   };
 
-  const validate = (rawData) => {
+  const validateDetailed = (rawData) => {
     const data = normalize(rawData);
     const spec = getRuleSpec(data);
     const missingRequired = getMissingRequired(data, spec);
 
     if (missingRequired.length) {
-      const labels = missingRequired.map((field) => field === "page" && data.sourceType === "sc-neutral-judgment" ? "sequence number" : field);
-      return `Required field missing for this citation rule: ${labels.join(", ")}.`;
+      const labels = missingRequired.map((field) => field === "page" && data.sourceType === "sc-neutral-judgment" ? "sequence number" : (ruleLabels[field] || field));
+      return buildValidationReport(data, spec, missingRequired, getMissingRecommended(data, spec), `Required field missing for this citation rule: ${labels.join(", ")}.`);
     }
 
-    if (!data.title) return "Please enter a case or source title.";
-    if (data.year && !/^\d{4}$/.test(data.year)) return "Year should be a 4-digit value, for example 2017.";
+    if (!data.title) return buildValidationReport(data, spec, missingRequired, getMissingRecommended(data, spec), "Please enter a case or source title.");
+    if (data.year && !/^\d{4}$/.test(data.year)) return buildValidationReport(data, spec, missingRequired, getMissingRecommended(data, spec), "Year should be a 4-digit value, for example 2017.");
 
     if (data.sourceType === "sc-neutral-judgment") {
-      if (!digitsOnly(data.page)) return "Supreme Court neutral citation sequence number should contain digits only, for example 1 or 785.";
+      if (!digitsOnly(data.page)) return buildValidationReport(data, spec, missingRequired, getMissingRecommended(data, spec), "Supreme Court neutral citation sequence number should contain digits only, for example 1 or 785.");
       if (data.court && !/^(supreme court of india|sc|sci)$/i.test(data.court)) {
-        return "Supreme Court neutral citation support is currently scoped only to the Supreme Court of India.";
+        return buildValidationReport(data, spec, missingRequired, getMissingRecommended(data, spec), "Supreme Court neutral citation support is currently scoped only to the Supreme Court of India.");
       }
     }
 
     if (data.citationStyle === "scc" && data.sourceType === "judgment") {
-      if (!digitsOnly(data.volume)) return "SCC-style judgment citations require a numeric volume, for example 10.";
-      if (!digitsOnly(data.page)) return "SCC-style judgment citations require a numeric first page, for example 1.";
+      if (!digitsOnly(data.volume)) return buildValidationReport(data, spec, missingRequired, getMissingRecommended(data, spec), "SCC-style judgment citations require a numeric volume, for example 10.");
+      if (!digitsOnly(data.page)) return buildValidationReport(data, spec, missingRequired, getMissingRecommended(data, spec), "SCC-style judgment citations require a numeric first page, for example 1.");
     }
 
     if (data.citationStyle === "air" && data.sourceType === "judgment") {
-      if (!digitsOnly(data.page)) return "AIR-style judgment citations require a numeric first page, for example 27.";
-      if (!/^[A-Za-z]{2,12}$/.test(data.court)) return "AIR-style judgment citations require a court abbreviation, for example SC, Bom, Del, Cal, Mad, All, Ker, or Kant.";
+      if (!digitsOnly(data.page)) return buildValidationReport(data, spec, missingRequired, getMissingRecommended(data, spec), "AIR-style judgment citations require a numeric first page, for example 27.");
+      if (!/^[A-Za-z]{2,12}$/.test(data.court)) return buildValidationReport(data, spec, missingRequired, getMissingRecommended(data, spec), "AIR-style judgment citations require a court abbreviation, for example SC, Bom, Del, Cal, Mad, All, Ker, or Kant.");
     }
 
     if (data.citationStyle === "oscola" && data.sourceType === "judgment") {
       if (data.court && /^\d{4}\s+(UKSC|UKHL|EWCA|EWHC|UKPC)/i.test(data.court)) {
-        return "For OSCOLA neutral citations, include square brackets around the neutral citation year, for example [2008] UKHL 13.";
+        return buildValidationReport(data, spec, missingRequired, getMissingRecommended(data, spec), "For OSCOLA neutral citations, include square brackets around the neutral citation year, for example [2008] UKHL 13.");
       }
-      if (data.reporter && !data.page) return "OSCOLA case citations with a law report should include the first page.";
+      if (data.reporter && !data.page) return buildValidationReport(data, spec, missingRequired, getMissingRecommended(data, spec), "OSCOLA case citations with a law report should include the first page.");
     }
 
     if (data.citationStyle === "oscola" && data.sourceType === "legislation" && !data.year) {
-      return "OSCOLA legislation citations require the legislation year.";
+      return buildValidationReport(data, spec, missingRequired, getMissingRecommended(data, spec), "OSCOLA legislation citations require the legislation year.");
     }
 
     if (data.citationStyle === "oscola" && ["book", "journal"].includes(data.sourceType) && !data.reporter) {
-      return "OSCOLA book and journal helpers require publisher or journal details in the Reporter / publisher / website field.";
+      return buildValidationReport(data, spec, missingRequired, getMissingRecommended(data, spec), "OSCOLA book and journal helpers require publisher or journal details in the Reporter / publisher / website field.");
     }
 
     if (data.sourceType === "website" && data.page && !/^https?:\/\//i.test(data.page)) {
-      return "For website citations, enter a full URL starting with http:// or https://.";
+      return buildValidationReport(data, spec, missingRequired, getMissingRecommended(data, spec), "For website citations, enter a full URL starting with http:// or https://.");
     }
-    return "";
+    return buildValidationReport(data, spec, missingRequired, getMissingRecommended(data, spec));
+  };
+
+  const validate = (rawData) => {
+    const report = validateDetailed(rawData);
+    return report.ok ? "" : report.summary;
   };
 
   const generate = (input) => {
     const data = normalize(input);
-    const error = validate(data);
+    const validation = validateDetailed(data);
 
-    if (error) {
-      return { ok: false, error, citation: "", explanation: "", parts: [] };
+    if (!validation.ok) {
+      return { ok: false, error: validation.summary, citation: "", explanation: "", parts: [], validation };
     }
 
     const rule = rules[data.sourceType] || rules.judgment;
@@ -458,6 +504,7 @@
         missingRecommended,
         limitations: spec.limitations
       },
+      validation,
       citation,
       explanation: `${base.explanation} Style note: ${transformer.note}`,
       parts: [
@@ -466,7 +513,9 @@
         `Rule status: ${spec.status}`,
         `Authority family: ${spec.authorityFamily}`,
         `Confidence: ${spec.confidence}`,
-        missingRecommended.length ? `Recommended fields missing: ${missingRecommended.join(", ")}` : "Recommended fields supplied: yes",
+        `Validation severity: ${validation.severity}`,
+        missingRecommended.length ? `Recommended fields missing: ${labelFields(missingRecommended).join(", ")}` : "Recommended fields supplied: yes",
+        validation.manualVerification ? "Manual verification: recommended before formal use" : "Manual verification: standard source check still recommended",
         ...base.parts
       ],
       verification: {
@@ -480,6 +529,7 @@
   window.CiteJuryCitationEngine = Object.freeze({
     generate,
     validate,
+    validateDetailed,
     normalize,
     sourceTypes: Object.freeze(Object.keys(rules)),
     citationStyles: Object.freeze(Object.keys(styleTransforms)),

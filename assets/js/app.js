@@ -25,6 +25,7 @@
   const output = document.querySelector("#citation-output");
   const explain = document.querySelector("#citation-explanation");
   const parts = document.querySelector("#citation-parts");
+  const validationBox = document.querySelector("#citation-validation");
   const error = document.querySelector("#form-error");
   const copy = document.querySelector("#copy-citation");
   const download = document.querySelector("#download-citation");
@@ -50,6 +51,32 @@
     });
   };
 
+  const renderValidation = (validation) => {
+    if (!validationBox) return;
+    if (!validation) {
+      validationBox.hidden = true;
+      validationBox.textContent = "";
+      return;
+    }
+
+    validationBox.hidden = false;
+    validationBox.innerHTML = "";
+
+    const heading = document.createElement("strong");
+    heading.textContent = `Validation: ${validation.severity}`;
+    const summary = document.createElement("p");
+    summary.textContent = validation.summary;
+
+    const list = document.createElement("ul");
+    (validation.checklist || []).forEach((item) => {
+      const li = document.createElement("li");
+      li.textContent = item;
+      list.appendChild(li);
+    });
+
+    validationBox.append(heading, summary, list);
+  };
+
   const resetPreview = () => {
     if (error) {
       error.hidden = true;
@@ -59,6 +86,7 @@
     if (output) output.textContent = "Your citation will appear here.";
     if (explain) explain.textContent = "Fill the form and generate a citation to see the explanation.";
     renderParts([]);
+    renderValidation(null);
   };
 
   if (form && output && explain && error && window.CiteJuryCitationEngine) {
@@ -73,6 +101,7 @@
         output.textContent = "Your citation will appear here.";
         explain.textContent = "Fix the highlighted issue and generate again.";
         renderParts([]);
+        renderValidation(result.validation);
         return;
       }
 
@@ -84,6 +113,7 @@
         : "";
       explain.textContent = `${result.explanation} ${result.verification ? result.verification.message : ""}${limitationText}`;
       renderParts(result.parts);
+      renderValidation(result.validation);
     });
 
     form.addEventListener("reset", () => setTimeout(resetPreview, 0));

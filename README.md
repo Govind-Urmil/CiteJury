@@ -3,7 +3,7 @@
 Privacy-first legal citation tools built with Indian legal practice in mind.
 
 ## Current Release
-EP-034: International Citation Engine Overhaul.
+EP-035: Citation Validation and Explainability System.
 
 ## Architecture
 Static, browser-first, reusable, free-to-host first, with no backend/database/runtime dependency.
@@ -25,3 +25,8 @@ CiteJury added scoped Supreme Court of India neutral citation support and narrow
 
 ## EP-034 International Citation Engine Overhaul
 CiteJury now provides scoped OSCOLA support for UK cases and basic legislation/book/journal citations using authority-backed rules. Bluebook, AGLC4, and McGill authority families are registered but not publicly claimed as supported generator styles until dedicated field models and tests exist.
+
+
+## EP-035 Citation Validation and Explainability System
+
+EP-035 adds structured browser-only validation reports to the citation engine and homepage. Generated citations now expose rule id, authority family, confidence, severity, missing recommended fields, limitations, and verification checklist guidance. The package adds no backend, database, Python runtime, Node runtime, active analytics, or active advertising.

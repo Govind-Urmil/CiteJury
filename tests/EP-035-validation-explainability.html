@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>EP-035 Validation Tests</title></head>
+<body>
+<h1>EP-035 Validation & Explainability Tests</h1>
+<pre id="results">Running...</pre>
+<script src="../assets/js/citation-engine.js"></script>
+<script>
+(() => {
+  const E = window.CiteJuryCitationEngine;
+  const tests = [
+    {
+      name: "SCI neutral success returns structured validation",
+      run: () => {
+        const r = E.generate({ sourceType: "sc-neutral-judgment", title: "A v B", year: "2024", page: "12" });
+        return r.ok && r.validation && r.validation.severity === "strong" && r.parts.some(x => x.includes("Validation severity"));
+      }
+    },
+    {
+      name: "SCI neutral non-digit sequence blocks generation with validation",
+      run: () => {
+        const r = E.generate({ sourceType: "sc-neutral-judgment", title: "A v B", year: "2024", page: "AB" });
+        return !r.ok && r.validation && r.validation.severity === "blocking-error";
+      }
+    },
+    {
+      name: "SCC missing required volume is labelled",
+      run: () => {
+        const r = E.generate({ citationStyle: "scc", sourceType: "judgment", title: "A v B", year: "2024", page: "1" });
+        return !r.ok && /volume/i.test(r.error) && r.validation.missingRequired.includes("volume");
+      }
+    },
+    {
+      name: "OSCOLA reporter without page blocks generation",
+      run: () => {
+        const r = E.generate({ citationStyle: "oscola", sourceType: "judgment", title: "R v Example", reporter: "AC" });
+        return !r.ok && /first page/i.test(r.error);
+      }
+    },
+    {
+      name: "Generic website helper requires full URL when URL supplied",
+      run: () => {
+        const r = E.generate({ sourceType: "website", title: "Example", page: "example.com" });
+        return !r.ok && /http/.test(r.error);
+      }
+    },
+    {
+      name: "validateDetailed exposes policy fields",
+      run: () => {
+        const v = E.validateDetailed({ sourceType: "judgment", title: "A v B" });
+        return v.ok && v.ruleId && v.authorityFamily && Array.isArray(v.checklist) && v.checklist.length >= 4;
+      }
+    },
+    {
+      name: "Generated result includes manual verification flag",
+      run: () => {
+        const r = E.generate({ sourceType: "judgment", title: "A v B" });
+        return r.ok && r.validation && typeof r.validation.manualVerification === "boolean";
+      }
+    }
+  ];
+
+  const lines = [];
+  let passed = 0;
+  tests.forEach((test, index) => {
+    let ok = false;
+    try { ok = Boolean(test.run()); } catch (error) { lines.push(`${index + 1}. FAIL ${test.name}: ${error.message}`); return; }
+    if (ok) { passed += 1; lines.push(`${index + 1}. PASS ${test.name}`); }
+    else lines.push(`${index + 1}. FAIL ${test.name}`);
+  });
+  lines.unshift(`EP-035 tests: ${passed}/${tests.length} passed`);
+  document.getElementById("results").textContent = lines.join("\n");
+  document.body.dataset.testStatus = passed === tests.length ? "passed" : "failed";
+})();
+</script>
+</body>
+</html>
