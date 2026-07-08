@@ -33,3 +33,13 @@ Use a free/static host first:
 - Keep ads and analytics inactive until explicitly approved.
 - Run `tests/EP-039-deployment-release-candidate.html` manually in a browser.
 - Keep latest 3 EP ZIPs locally plus GitHub repository history for normal recovery.
+
+
+## EP-040 final gold additions
+
+- Run `tests/EP-040-final-production-gold.html` manually in a browser.
+- Confirm `assets/data/final-production-gold-release.json` reports EP-040.
+- Confirm ads and analytics remain inactive.
+- Confirm public pages do not load `tests/citation-accuracy-corpus.js`.
+- Replace sitemap placeholder URLs with the production domain before public launch.
+- Verify `_headers` on the selected static host after deployment.

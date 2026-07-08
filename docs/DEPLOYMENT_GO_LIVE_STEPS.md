@@ -1,6 +1,6 @@
 # Deployment Go-Live Steps
 
-Use this checklist after EP-039 is committed and before EP-040 final gold release.
+Use this checklist after EP-040 is committed and before public production launch.
 
 ## 1. Domain
 
@@ -34,4 +34,4 @@ Confirm the deployed site applies the intended security headers from `_headers`.
 
 ## 5. Ads and analytics
 
-Do not activate ads or analytics during EP-039. Future monetization requires a separate approval EP.
+Do not activate ads or analytics during EP-040. Future monetization requires a separate approval EP/ADR.

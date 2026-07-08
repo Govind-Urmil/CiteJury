@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>EP-040 Final Production Gold Test</title>
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+<main class="container section">
+  <h1>EP-040 Final Production Gold Test</h1>
+  <pre id="out">Running...</pre>
+</main>
+<script>
+(async()=>{
+  const results=[];
+  async function text(path){const r=await fetch(path); return r.ok ? r.text() : ''}
+  async function json(path){const r=await fetch(path); return r.ok ? r.json() : null}
+  const gold=await json('../assets/data/final-production-gold-release.json');
+  const release=await json('../assets/data/release-meta.json');
+  const readiness=await json('../assets/data/deployment-readiness.json');
+  const goldLegacy=await json('../assets/data/gold-release.json');
+  const audit=await json('../assets/data/final-audit.json');
+  const site=await json('../assets/data/site-meta.json');
+  const ads=await json('../assets/data/ads-config.json');
+  const headers=await text('../_headers');
+  const sitemap=await text('../sitemap.xml');
+  const template=await text('../sitemap.production-template.xml');
+  const index=await text('../index.html');
+  const trust=await text('../trust.html');
+  const privacy=await text('../privacy.html');
+  const finalDoc=await text('../docs/FINAL_PRODUCTION_GOLD_RELEASE.md');
+  const handoff=await text('../docs/FINAL_LAUNCH_HANDOFF.md');
+  const unattended=await text('../docs/POST_LAUNCH_UNATTENDED_OPERATIONS.md');
+  const roadmap=await text('../docs/ROADMAP.md');
+  const ledger=await text('../docs/EP-LEDGER.md');
+
+  results.push(['EP-040 gold metadata exists', gold && gold.version === 'EP-040' && gold.status === 'final-production-gold-release']);
+  results.push(['Static/browser-only architecture preserved', gold && gold.architecture === 'static-browser-only' && gold.backend === false && gold.database === false]);
+  results.push(['No website runtimes/build required', gold && gold.python_runtime_required === false && gold.node_runtime_required === false && gold.build_step_required === false]);
+  results.push(['Ads and analytics inactive', gold && gold.ads_active === false && gold.analytics_active === false && ads && ads.ads_active === false && ads.analytics_active === false]);
+  results.push(['Release metadata final', release && release.version === 'EP-040' && release.stage === 'final-production-gold-release']);
+  results.push(['Readiness metadata final', readiness && readiness.version === 'EP-040' && readiness.gold_release === true]);
+  results.push(['Legacy gold metadata updated', goldLegacy && goldLegacy.release === 'EP-040' && goldLegacy.planned_ep_roadmap_complete === true]);
+  results.push(['Final audit updated', audit && audit.version === 'EP-040' && audit.architecture === 'static-browser-only']);
+  results.push(['Site meta updated', site && site.version === 'EP-040' && site.goldRelease === true]);
+  results.push(['Security headers still present', headers.includes('Content-Security-Policy') && headers.includes('Strict-Transport-Security') && headers.includes('X-Content-Type-Options')]);
+  results.push(['Public corpus not loaded', !index.includes('citation-accuracy-corpus.js') && !trust.includes('citation-accuracy-corpus.js') && !privacy.includes('citation-accuracy-corpus.js')]);
+  results.push(['No active ad/analytics scripts', !/pagead2\.googlesyndication|googletagmanager|analytics\.js|gtag\(/i.test(index + trust + privacy)]);
+  results.push(['Sitemap files present', sitemap.includes('<urlset') && /https:\/\/[^/]+\//.test(template)]);
+  results.push(['Final docs present', finalDoc.includes('Final Production Gold Release') && handoff.includes('EP-040') && unattended.includes('months or even a year')]);
+  results.push(['Roadmap and ledger complete', roadmap.includes('EP-040 deliverables') && ledger.includes('EP-040')]);
+  const failed=results.filter(([,ok])=>!ok).map(([name])=>name);
+  document.getElementById('out').textContent = failed.length ? 'FAILED\n'+failed.join('\n') : 'PASSED '+results.length+'/'+results.length+' EP-040 checks';
+  if (failed.length) throw new Error(failed.join('; '));
+})();
+</script>
+</body>
+</html>

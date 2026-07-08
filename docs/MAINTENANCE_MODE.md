@@ -1,17 +1,26 @@
 # Maintenance Mode
 
-CiteJury enters maintenance mode after EP-030.
+CiteJury enters maintenance mode after EP-040 Final Production Gold Release.
 
-## Create a new EP only when
-- A reproducible bug is reported.
-- A citation rule correction is verified.
-- A useful content opportunity is approved.
-- Hosting/domain configuration requires repository changes.
-- Monetization or analytics is explicitly approved.
+## Allowed maintenance
 
-## Avoid
-- Arbitrary refactors.
-- Unnecessary dependencies.
-- Framework migrations.
-- Backend additions without approval.
-- Cosmetic churn that increases risk without user value.
+- Verified citation-rule corrections
+- Authority/provenance updates backed by reliable sources
+- Content improvements that increase user trust
+- Static hosting/domain updates
+- Security/privacy fixes
+- Explicitly approved ad or analytics activation work
+
+## Avoid by default
+
+- Backend services
+- Databases
+- Build pipelines
+- Runtime dependencies
+- User accounts
+- Unverified citation formats
+- Third-party scripts without privacy/CSP review
+
+## Long-term operation
+
+The site should continue running as static files in the browser for months or years without routine monitoring, assuming the selected static host and domain remain active.

@@ -1,6 +1,6 @@
 {
-  "release": "EP-030",
-  "status": "gold-release-package",
+  "release": "EP-040",
+  "status": "final-production-gold-release",
   "architecture": "static-browser-only",
   "backend": false,
   "database": false,
@@ -9,5 +9,10 @@
   "ads_active": false,
   "analytics_active": false,
   "maintenance_mode_after_launch": true,
-  "planned_ep_roadmap_complete": true
+  "planned_ep_roadmap_complete": true,
+  "python_runtime_required": false,
+  "node_runtime_required": false,
+  "public_corpus_loaded": false,
+  "unattended_operation_target": "months-to-years-static-browser-operation",
+  "monetization_position": "reserved-not-active-until-explicit-approval"
 }

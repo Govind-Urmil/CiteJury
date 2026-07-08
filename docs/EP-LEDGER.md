@@ -42,3 +42,4 @@
 | EP-037 | Content Quality and Authority Rewrite | Complete |
 | EP-038 | Security, Privacy and Production Hardening | Complete |
 | EP-039 | Deployment Release Candidate | Complete |
+| EP-040 | Final Production Gold Release | Complete |

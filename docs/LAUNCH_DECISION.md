@@ -1,18 +1,30 @@
 # Launch Decision
 
 ## Recommended State
-CiteJury is ready for static-hosting setup after EP-025 is committed and the obsolete Python preflight file is removed.
+
+After EP-040 is committed, CiteJury is ready for final static-host deployment once Govind selects the production domain and verifies host-level headers.
 
 ## Recommended hosting path
+
 Use a private Git repository with a free static host that supports private repo deployment, such as:
+
 - Cloudflare Pages
 - Netlify
-- Vercel
+- Vercel static deployment
 
 Avoid GitHub Pages if keeping the source repository private is required.
 
+## Required before public go-live
+
+- Replace placeholder sitemap URLs with the approved production domain.
+- Deploy to HTTPS static hosting.
+- Verify `_headers` behavior on the selected platform.
+- Keep `security.txt` inactive unless a real contact/domain is approved.
+
 ## Not approved yet
+
 Do not enable without explicit approval:
+
 - Backend
 - Database
 - Paid infrastructure

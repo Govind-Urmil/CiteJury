@@ -1,7 +1,7 @@
 {
-  "version": "EP-039",
-  "stage": "deployment-release-candidate",
-  "release_candidate": true,
+  "version": "EP-040",
+  "stage": "final-production-gold-release",
+  "release_candidate": false,
   "architecture": "static-browser-only",
   "backend": false,
   "database": false,
@@ -24,5 +24,6 @@
     "Verify security.txt contact/domain before activating a real contact channel"
   ],
   "unattended_operation_position": "ready-after-domain-and-host-verification",
-  "monetization_position": "reserved-but-inactive"
+  "monetization_position": "reserved-but-inactive-until-explicit-approval",
+  "gold_release": true
 }

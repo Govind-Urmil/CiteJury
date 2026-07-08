@@ -1,5 +1,5 @@
 {
-  "version": "EP-028",
+  "version": "EP-040",
   "architecture": "static-browser-only",
   "performance": {
     "framework_runtime": false,
@@ -18,5 +18,10 @@
     "focus_visible": true,
     "reduced_motion": true,
     "semantic_landmarks": true
-  }
+  },
+  "ads_active": false,
+  "analytics_active": false,
+  "public_corpus_loaded": false,
+  "planned_roadmap_complete": true,
+  "unattended_operation_ready_after_host_verification": true
 }

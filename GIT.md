@@ -95,3 +95,13 @@ git push
 ```
 
 No file deletion is required for EP-039.
+
+## EP-040 Commit
+
+```bash
+git add .
+git commit -m "EP-040: Final production gold release"
+git push
+```
+
+No file deletion is required for EP-040.

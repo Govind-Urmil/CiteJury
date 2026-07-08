@@ -1,5 +1,5 @@
 {
-  "version": "EP-039",
+  "version": "EP-040",
   "ads_active": false,
   "analytics_active": false,
   "backend": false,
@@ -10,9 +10,9 @@
     "Vercel"
   ],
   "github_pages_note": "Use only if public repository is acceptable.",
-  "monetization_status": "reserved-not-active",
+  "monetization_status": "reserved-not-active-until-explicit-approval",
   "requires_future_adr_for_ads": true,
-  "production_hardening_status": "deployment-release-candidate",
+  "production_hardening_status": "final-production-gold-release",
   "unattended_operation_status": "ready-after-domain-and-host-verification",
   "required_before_launch": [
     "Set production domain in sitemap.xml from sitemap.production-template.xml",
@@ -20,5 +20,6 @@
     "Confirm security.txt contact/domain before activation",
     "Keep ads/analytics inactive until a separate approval EP updates privacy, CSP, and ad configuration"
   ],
-  "release_candidate": true
+  "release_candidate": false,
+  "gold_release": true
 }

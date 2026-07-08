@@ -1,6 +1,6 @@
 {
-  "version": "EP-038",
-  "status": "reserved-not-active",
+  "version": "EP-040",
+  "status": "reserved-not-active-until-explicit-approval",
   "ads_active": false,
   "analytics_active": false,
   "requires_future_adr_for_ads": true,

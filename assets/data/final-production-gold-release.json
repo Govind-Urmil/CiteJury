@@ -1,0 +1,21 @@
+{
+  "version": "EP-040",
+  "status": "final-production-gold-release",
+  "architecture": "static-browser-only",
+  "backend": false,
+  "database": false,
+  "python_runtime_required": false,
+  "node_runtime_required": false,
+  "build_step_required": false,
+  "ads_active": false,
+  "analytics_active": false,
+  "public_corpus_loaded": false,
+  "normal_visitor_test_corpus_download": false,
+  "unattended_operation_target": "months-to-years-on-static-hosting-after-domain-and-host-verification",
+  "monetization_position": "ad-ready-reserved-but-inactive-until-explicit-approval",
+  "repository_can_remain_private": true,
+  "manual_cleanup_required": [],
+  "launch_status": "gold-release-ready-for-static-host-deployment-after-production-domain-replacement-and-host-header-verification",
+  "final_ep_in_planned_roadmap": true,
+  "future_changes_policy": "maintenance-only-unless-Govind-approves-new-EPs"
+}

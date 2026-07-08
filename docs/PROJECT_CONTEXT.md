@@ -1,7 +1,7 @@
 # CiteJury Project Context
 
 ## Current Status
-Completed EP-001 through EP-035.
+Completed EP-001 through EP-040.
 
 ## Locked Architecture
 Static, browser-first, free-to-host-first. No backend, database, Python runtime, Node runtime, build step, paid infrastructure, active ads, analytics, or architecture change without explicit approval.
@@ -76,3 +76,14 @@ EP-038 was completed after EP-037 commit. It hardens production headers, privacy
 ## EP-039 Deployment Release Candidate
 
 EP-039 is complete. CiteJury remains static/browser-only with no backend, database, Python runtime requirement, Node runtime requirement, build step requirement, active ads, or active analytics. The package adds deployment release-candidate metadata, go-live documentation, and a browser-only EP-039 validation page. Final launch still requires the production domain, sitemap absolute URL update, deployed header verification, and security.txt contact/domain approval.
+
+
+## EP-040 Final Production Gold Release
+
+EP-040 was generated after Govind confirmed EP-039 was committed. It completes the planned EP-031 through EP-040 post-audit roadmap. CiteJury remains static/browser-only with no backend, database, Python runtime requirement, Node runtime requirement, build step requirement, active ads, or active analytics. The package adds final gold-release metadata, final launch handoff documentation, post-launch unattended-operation documentation, and a browser-only EP-040 validation page.
+
+Long-term unattended operation remains a core product requirement: after launch, CiteJury should continue running for months or years as static browser files with no routine backend maintenance. Passive ad revenue is still a future goal, but ads remain inactive until Govind explicitly approves a separate monetization EP/ADR.
+
+No files are removed in EP-040.
+
+Next state after EP-040 commit: maintenance mode unless Govind approves a new EP series.

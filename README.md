@@ -3,7 +3,7 @@
 Privacy-first legal citation tools built with Indian legal practice in mind.
 
 ## Current Release
-EP-039: Deployment Release Candidate.
+EP-040: Final Production Gold Release.
 
 ## Architecture
 Static, browser-first, reusable, free-to-host first, with no backend/database/runtime dependency.
@@ -50,3 +50,10 @@ EP-038 adds strict production security headers, privacy-policy hardening, inacti
 ## EP-039 Deployment Release Candidate
 
 EP-039 prepares CiteJury for deployment review with explicit go-live steps, release-candidate metadata, static-host verification guidance, and unattended-operation guardrails. Ads and analytics remain inactive; future monetization still requires explicit approval and a separate EP.
+
+
+## EP-040 Final Production Gold Release
+
+EP-040 completes the planned post-audit roadmap. CiteJury remains static/browser-only with no backend, database, Python runtime, Node runtime, build step, active ads, or active analytics. The release adds final gold-release metadata, long-term unattended-operation handoff documentation, and a browser-only final production validation page.
+
+Before public go-live, replace placeholder sitemap URLs with the approved production domain and verify security headers on the selected static host.

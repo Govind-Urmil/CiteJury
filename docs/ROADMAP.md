@@ -1,7 +1,7 @@
 # CiteJury Engineering Roadmap
 
 ## Completed
-EP-001 through EP-039.
+EP-001 through EP-040. Planned roadmap complete.
 
 ## Next Planned EPs
 - EP-040 Final Production Gold Release
@@ -92,4 +92,15 @@ Next: EP-039 — Deployment Release Candidate.
 - Added browser-only EP-039 release-candidate test page.
 - Preserved static/browser-only architecture with no backend, database, build step, runtime dependency, active ads, or active analytics.
 
-Next: EP-040 — Final Production Gold Release.
+Next: Maintenance mode unless Govind approves a new EP series.
+
+
+## EP-040 deliverables
+
+- Added final production gold-release metadata in `assets/data/final-production-gold-release.json`.
+- Updated release, readiness, final audit, site, ad-readiness, and gold-release metadata to EP-040.
+- Added final production gold-release, launch handoff, and post-launch unattended-operation documentation.
+- Added browser-only EP-040 final production validation page.
+- Preserved static/browser-only architecture with no backend, database, build step, runtime dependency, active ads, or active analytics.
+
+Next: Maintenance mode unless Govind approves a new EP series.
