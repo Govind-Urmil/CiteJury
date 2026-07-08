@@ -139,7 +139,7 @@
     clearInvalidFields();
   };
   const updateFieldStatuses = () => {
-    if (!form) return;
+    if (!form || !window.CiteJuryCitationEngine.getRuleSpec) return;
     const data = getData(new FormData(form));
     const spec = window.CiteJuryCitationEngine.getRuleSpec(data);
     fieldNames.forEach((name) => {
@@ -147,6 +147,7 @@
       if (!marker) return;
       const required = (spec.required || []).includes(name);
       marker.textContent = required ? "Required *" : "Optional";
+      marker.setAttribute("aria-label", required ? "Required field" : "Optional field");
       marker.classList.toggle("required", required);
     });
   };

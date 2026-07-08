@@ -125,3 +125,7 @@ Public CSS and JavaScript URLs use an explicit asset version query string, for e
 
 ### EP-055
 Generator fields dynamically show Required/Optional status and validation errors appear beside invalid fields. Five priority guides were expanded.
+
+
+### EP-056
+Required/Optional field markers now render from the active citation rule specification.

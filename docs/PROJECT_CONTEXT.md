@@ -166,3 +166,7 @@ Asset cache-busting and update freshness: public CSS/JS references now include `
 
 ## EP-055
 Dynamic field requirements, inline validation, and Batch A authority-content improvements completed.
+
+
+## EP-056
+Fixed dynamic Required/Optional field labels by exposing rule specifications to the UI and bumping the public asset version.

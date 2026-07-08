@@ -568,6 +568,7 @@
     validate,
     validateDetailed,
     normalize,
+    getRuleSpec,
     sourceTypes: Object.freeze(Object.keys(rules)),
     citationStyles: Object.freeze(Object.keys(styleTransforms)),
     styleChoices: Object.freeze(styleChoices),

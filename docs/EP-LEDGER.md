@@ -187,3 +187,8 @@ Next: manual Google Search Console/Bing setup, then future ad approval/activatio
 - Dynamic Required/Optional field labels.
 - Inline field errors with invalid-field navigation.
 - Expanded five priority citation guides.
+
+
+## EP-056 — Fix Required/Optional Field Status Rendering
+- Exposed citation rule specs to the browser UI so dynamic Required/Optional labels render correctly.
+- Bumped asset version to 056 so browsers fetch the fixed JavaScript.

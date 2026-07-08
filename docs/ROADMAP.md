@@ -204,3 +204,7 @@ Browser cache-busting added for CSS/JS update freshness. Future EPs that change 
 
 ## EP-055 — Completed
 Citation form clarity and first evidence-based content upgrade batch completed.
+
+
+## EP-056 — Completed
+Required/Optional citation field status rendering fixed.
