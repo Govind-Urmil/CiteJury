@@ -173,6 +173,16 @@
         explain.textContent = "Fix the highlighted issue and generate again.";
         renderParts([]);
         renderValidation(result.validation);
+
+        // Bring the validation error into view so users can immediately fix it.
+        // Focus without a second scroll for keyboard and assistive-technology users.
+        error.setAttribute("tabindex", "-1");
+        error.scrollIntoView({ behavior: "smooth", block: "center" });
+        try {
+          error.focus({ preventScroll: true });
+        } catch {
+          error.focus();
+        }
         return;
       }
 

@@ -151,3 +151,9 @@ Next: get AdSense account/site approval and then use the documented config-only 
 - Real ads remain inactive until Govind has account approval, publisher/slot IDs, ads.txt, privacy review, and explicit activation approval.
 
 Next: manual Google Search Console/Bing setup, then future ad approval/activation only when ready. No routine EPs needed.
+
+
+## EP-050 — Public Polish & Validation Error Navigation
+- Added automatic smooth scroll and focus to generator validation errors.
+- Re-audited public pages for internal/ad-placeholder messaging.
+- Preserved static, browser-only, host-portable architecture.

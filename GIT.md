@@ -175,3 +175,7 @@ git push
 ```
 
 No file deletion is required for EP-049.
+
+
+## EP-050
+Apply the package over the repository, then commit once. No file deletions are required.

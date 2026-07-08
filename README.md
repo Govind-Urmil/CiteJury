@@ -101,3 +101,7 @@ Real ads remain inactive until a valid publisher ID, ads.txt, slot IDs, privacy 
 ## EP-049 Final unattended operation release
 
 EP-049 records the final low-maintenance handoff for the live Cloudflare Workers deployment at `https://citejury.citejury.workers.dev`. CiteJury remains static/browser-only, ads and analytics remain inactive, and future work should be limited to real production issues, citation-authority improvements, search/ad account requirements, or hosting/domain migration. See `docs/FINAL_UNATTENDED_OPERATION_RELEASE.md`.
+
+
+### EP-050
+Generator validation failures automatically bring the error message into view and focus it for faster correction.

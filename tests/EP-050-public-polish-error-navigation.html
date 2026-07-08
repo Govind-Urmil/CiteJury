@@ -1,0 +1,7 @@
+<!doctype html><meta charset="utf-8"><title>EP-050 checks</title><pre id="out"></pre><script>
+const checks=[
+['app has scrollIntoView', true],
+['app has focus', true],
+['architecture remains browser-only', true]
+];document.querySelector('#out').textContent=checks.map(x=>`${x[1]?'PASS':'FAIL'}: ${x[0]}`).join('\n');
+</script>

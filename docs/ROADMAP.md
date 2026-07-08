@@ -180,3 +180,7 @@ Next: get AdSense account/site approval and then use the documented config-only 
 ## EP-049 Final Unattended Operation Release
 
 EP-049 finalizes the live Cloudflare Workers Static Assets handoff for `https://citejury.citejury.workers.dev`. The site remains static/browser-only, host-portable, and designed for long unattended operation. Ads and analytics remain inactive. Search-engine and ad activation tasks are now manual account-level steps documented in the repository.
+
+
+## EP-050 — Completed
+Public polish and validation error navigation completed. Future work is traffic/indexing/content growth and approved monetization activation rather than arbitrary EP expansion.
