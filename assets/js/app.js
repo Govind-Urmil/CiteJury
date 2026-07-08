@@ -81,12 +81,16 @@
     if (!field) return;
 
     field.setAttribute("aria-invalid", "true");
-    field.scrollIntoView({ behavior: "smooth", block: "center" });
+    field.setAttribute("aria-describedby", [field.getAttribute("aria-describedby"), "form-error"].filter(Boolean).join(" "));
+
+    // Focus first for keyboard/assistive-technology users, then scroll the
+    // actual invalid input into the visible center of the page.
     try {
       field.focus({ preventScroll: true });
     } catch {
       field.focus();
     }
+    field.scrollIntoView({ behavior: "smooth", block: "center", inline: "nearest" });
   };
 
   const getData = (formData) => ({
@@ -206,6 +210,11 @@
   };
 
   if (form && output && explain && error && window.CiteJuryCitationEngine) {
+    // Use CiteJury's own validation instead of native browser blocking validation.
+    // Native validation can prevent the submit handler from running, which means
+    // users do not get the guided scroll/focus behavior.
+    form.noValidate = true;
+
     form.addEventListener("submit", (event) => {
       event.preventDefault();
 

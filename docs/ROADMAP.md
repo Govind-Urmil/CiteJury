@@ -188,3 +188,7 @@ Public polish and validation error navigation completed. Future work is traffic/
 
 ## EP-051 — Completed
 Corrected validation navigation so users are taken directly to the field that needs correction.
+
+
+## EP-052 — Completed
+Validation navigation corrected so users are taken directly to the invalid field after a failed generation attempt.

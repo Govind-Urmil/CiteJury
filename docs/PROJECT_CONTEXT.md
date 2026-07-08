@@ -150,3 +150,7 @@ Public polish and validation-error navigation: failed generation now scrolls to 
 
 ## EP-051
 Validation navigation correction: failed generation now scrolls to and focuses the specific invalid input field instead of the generic error message. Live EP-050 feedback showed the previous behavior did not meet the desired UX.
+
+
+## EP-052
+Fixed validation navigation by disabling native browser blocking validation on the citation form and routing invalid submissions through CiteJury field-level validation/focus logic.

@@ -163,3 +163,9 @@ Next: manual Google Search Console/Bing setup, then future ad approval/activatio
 - Corrected generator validation UX to scroll/focus the invalid input field.
 - Added raw validation field metadata for deterministic UI targeting.
 - Preserved browser-only/static architecture and ad-inactive state.
+
+
+## EP-052 — Fix Invalid Field Scroll/Focusing
+- Disabled native browser blocking validation for the citation generator form.
+- Ensured failed generation focuses and scrolls to the actual invalid input field.
+- Preserved browser-only static architecture and public ad inactivity.

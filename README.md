@@ -109,3 +109,7 @@ Generator validation failures automatically bring the error message into view an
 
 ### EP-051
 Validation errors now focus the relevant form field so users can correct input faster on desktop and mobile.
+
+
+### EP-052
+The generator now bypasses native blocking validation and uses CiteJury validation to focus and scroll to the invalid input field.

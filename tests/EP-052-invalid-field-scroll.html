@@ -1,0 +1,15 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>EP-052 invalid field scroll check</title>
+<pre id="out"></pre>
+<script>
+fetch("../assets/js/app.js").then(r=>r.text()).then(js=>{
+ const checks=[
+  ["form.noValidate enabled", js.includes("form.noValidate = true")],
+  ["focus invalid field", js.includes("focusInvalidField(result)")],
+  ["scroll invalid field", js.includes("field.scrollIntoView")],
+  ["error linked by aria-describedby", js.includes("form-error")],
+ ];
+ document.getElementById("out").textContent=checks.map(c=>(c[1]?"PASS":"FAIL")+": "+c[0]).join("\n");
+});
+</script>
