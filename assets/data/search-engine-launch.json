@@ -1,0 +1,21 @@
+{
+  "version": "EP-047",
+  "productionBaseUrl": "https://citejury.citejury.workers.dev",
+  "stage": "search-engine-launch-ready",
+  "searchConsoleReady": true,
+  "bingWebmasterReady": true,
+  "sitemapUrl": "https://citejury.citejury.workers.dev/sitemap.xml",
+  "robotsUrl": "https://citejury.citejury.workers.dev/robots.txt",
+  "indexedPublicUrlCount": 19,
+  "publicIndexingAllowed": true,
+  "nonPublicSurfaces": "Repository docs and templates are excluded from Cloudflare static assets; test pages are noindex if accidentally deployed elsewhere.",
+  "verificationFilesIncluded": false,
+  "verificationReason": "Google/Bing verification tokens must be generated in Govind's webmaster accounts and added only after he provides the exact token/file.",
+  "adsActive": false,
+  "analyticsActive": false,
+  "notes": [
+    "Submit the sitemap only after EP-047 is deployed live.",
+    "Use URL-prefix property for the temporary workers.dev URL unless a custom domain is purchased later.",
+    "When moving to a custom domain, replace productionBaseUrl, canonical URLs, og:url values, robots sitemap URL, and sitemap loc values."
+  ]
+}

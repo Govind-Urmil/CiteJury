@@ -1,6 +1,6 @@
 {
   "site": "CiteJury",
-  "version": "EP-046",
+  "version": "EP-047",
   "architecture": "static-browser-first",
   "backend": false,
   "buildStepRequired": false,
@@ -18,5 +18,9 @@
   "customDomainRequiredNow": false,
   "futureCustomDomainMigration": "replace productionBaseUrl/canonical/sitemap/manifest id with custom domain and update hosting DNS/headers as needed",
   "futureS3Migration": "upload the same static files to an S3-compatible static host and update only hosting metadata/docs/URLs, not citation engine code",
-  "productionAuditStatus": "live-production-audited"
+  "productionAuditStatus": "live-production-audited",
+  "searchEngineLaunchReady": true,
+  "sitemapUrl": "https://citejury.citejury.workers.dev/sitemap.xml",
+  "ads_active": false,
+  "analytics_active": false
 }

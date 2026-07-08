@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>EP-047 Search Engine Launch Test</title></head>
+<body><main><h1>EP-047 Search Engine Launch Test</h1><pre id="out">Running...</pre></main>
+<script>
+(async()=>{
+  const out=document.getElementById('out');
+  const checks=[];
+  const expect=(name,ok)=>checks.push({name,ok:Boolean(ok)});
+  const text=async(u)=>(await fetch(u)).text();
+  const json=async(u)=>(await fetch(u)).json();
+  const base='https://citejury.citejury.workers.dev';
+  const home=await text('../index.html');
+  const robots=await text('../robots.txt');
+  const sitemap=await text('../sitemap.xml');
+  const meta=await json('../assets/data/search-engine-launch.json');
+  expect('metadata EP-047', meta.version==='EP-047');
+  expect('production base URL set', meta.productionBaseUrl===base);
+  expect('robots allows crawling', /User-agent:\s*\*/.test(robots) && /Allow:\s*\//.test(robots));
+  expect('robots sitemap absolute', robots.includes('Sitemap: '+base+'/sitemap.xml'));
+  const locs=[...sitemap.matchAll(/<loc>(.*?)<\/loc>/g)].map(m=>m[1]);
+  expect('sitemap has 19 public URLs', locs.length===19);
+  expect('sitemap uses production base', locs.every(u=>u.startsWith(base+'/') || u===base+'/'));
+  expect('homepage avoids unsupported style badge claims', !home.includes('<span>Bluebook</span>') && !home.includes('<span>APA Legal</span>'));
+  expect('homepage has supported OSCOLA badge', home.includes('<span>OSCOLA</span>'));
+  expect('no active ads', !home.includes('googlesyndication.com') && !home.includes('adsbygoogle'));
+  expect('no active analytics', !home.includes('googletagmanager.com') && !home.includes('google-analytics.com'));
+  const failed=checks.filter(c=>!c.ok);
+  out.textContent=failed.length?'FAILED\n'+failed.map(f=>f.name).join('\n'):'PASSED '+checks.length+'/'+checks.length+' EP-047 checks';
+  if(failed.length) throw new Error(failed.map(f=>f.name).join('; '));
+})();
+</script></body></html>

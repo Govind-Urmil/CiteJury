@@ -86,3 +86,8 @@ Initial live URL: `https://citejury.citejury.workers.dev`. Ads and analytics rem
 ## Current production state
 
 EP-046 completed a live production audit against `https://citejury.citejury.workers.dev` and removed visible inactive-ad placeholder copy from public guide pages. Ads and analytics remain inactive.
+
+
+## EP-047 Search Engine Launch
+
+CiteJury is prepared for initial search-engine discovery at `https://citejury.citejury.workers.dev`. Ads and analytics remain inactive. Submit the sitemap only after the EP-047 deployment is live and webmaster verification is completed with real account-generated tokens.

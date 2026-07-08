@@ -118,3 +118,8 @@ EP-045 finalizes the temporary production URL `https://citejury.citejury.workers
 
 EP-046 is the live production audit and verified-fix package after the temporary Cloudflare production URL went live. It uses `https://citejury.citejury.workers.dev` as the current production URL. It removes visible inactive-ad placeholder copy from guide pages, adds live-production audit metadata/docs, and preserves the locked static/browser-only architecture. Ads and analytics remain inactive.
 
+
+
+## EP-047 Search Engine Launch
+
+EP-047 was generated after EP-046 was committed and live. It prepares the temporary Cloudflare Workers URL `https://citejury.citejury.workers.dev` for search-engine launch, adds search-engine launch metadata/docs, removes unsupported public generator-style claims, and tightens deployment/indexing hygiene for internal repository surfaces. Ads and analytics remain inactive.

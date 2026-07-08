@@ -1,5 +1,5 @@
 {
-  "version": "EP-046",
+  "version": "EP-047",
   "stage": "github-pages-homepage-cleanup",
   "backend": false,
   "database": false,
@@ -13,5 +13,8 @@
   "final_planned_ep": false,
   "github_pages_initial_launch": true,
   "manifest_loaded_on_http_only": true,
-  "custom_domain_required_now": false
+  "custom_domain_required_now": false,
+  "searchEngineLaunchReady": true,
+  "productionBaseUrl": "https://citejury.citejury.workers.dev",
+  "sitemapUrl": "https://citejury.citejury.workers.dev/sitemap.xml"
 }

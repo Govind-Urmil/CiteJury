@@ -151,3 +151,13 @@ Next recommended work: live production audit after deployment, search-console/in
 - Preserved unattended static operation with no active ads or analytics.
 
 Next: EP-047 — Search Engine Launch.
+
+
+## EP-047 Search Engine Launch
+
+- Prepared CiteJury for initial Google/Bing discovery on `https://citejury.citejury.workers.dev`.
+- Added search-engine launch metadata and documentation.
+- Tightened deployed asset/indexing hygiene for internal docs/tests/templates.
+- Kept ads and analytics inactive.
+
+Next: complete webmaster verification and sitemap submission, then prepare ad activation only after explicit approval.

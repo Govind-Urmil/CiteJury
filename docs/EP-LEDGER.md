@@ -111,3 +111,16 @@ Next: deploy/audit the live Cloudflare URL. Real ads require future explicit app
 - Preserved static/browser-only architecture, no backend, no database, inactive ads, inactive analytics, and host portability.
 
 Next: EP-047 — Search Engine Launch.
+
+
+## EP-047 — Search Engine Launch
+
+- Base: committed EP-046 repository ZIP.
+- Production URL: `https://citejury.citejury.workers.dev`.
+- Added search-engine launch metadata and documentation.
+- Confirmed sitemap/robots production URL strategy for the current Workers URL.
+- Removed unsupported public generator-style claims from homepage badges.
+- Reduced Cloudflare deployed asset surface for docs/templates/markdown and added noindex headers for internal QA surfaces if accidentally served.
+- Preserved static/browser-only architecture, no backend, no database, inactive ads, inactive analytics, and host portability.
+
+Next: Google Search Console/Bing verification and sitemap submission, then EP-048 advertisement activation only after explicit approval.

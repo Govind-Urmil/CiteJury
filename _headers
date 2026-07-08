@@ -22,3 +22,15 @@
 
 /robots.txt
   Cache-Control: public, max-age=3600
+
+/docs/*
+  X-Robots-Tag: noindex, nofollow
+  Cache-Control: no-store
+
+/tests/*
+  X-Robots-Tag: noindex, nofollow
+  Cache-Control: no-store
+
+/template/*
+  X-Robots-Tag: noindex, nofollow
+  Cache-Control: no-store
