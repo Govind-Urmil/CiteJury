@@ -84,3 +84,14 @@ git push
 ```
 
 No file deletion is required for EP-038.
+
+
+## EP-039 Commit
+
+```bash
+git add .
+git commit -m "EP-039: Prepare deployment release candidate"
+git push
+```
+
+No file deletion is required for EP-039.

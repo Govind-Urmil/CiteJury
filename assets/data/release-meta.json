@@ -1,6 +1,6 @@
 {
-  "version": "EP-025",
-  "stage": "final-production-audit",
+  "version": "EP-039",
+  "stage": "deployment-release-candidate",
   "backend": false,
   "database": false,
   "python_runtime_required": false,
@@ -9,7 +9,5 @@
   "ads_active": false,
   "analytics_active": false,
   "hosting_model": "static-free-host-first",
-  "manual_cleanup_required": [
-    "git rm tests/preflight.py"
-  ]
+  "manual_cleanup_required": []
 }

@@ -71,3 +71,8 @@ EP-037 is complete. The public guide pages were rewritten to reduce template-lik
 ## EP-038 status
 
 EP-038 was completed after EP-037 commit. It hardens production headers, privacy documentation, inactive ad-readiness guardrails, and unattended-operation posture while preserving the locked static/browser-only architecture. Ads and analytics remain inactive and require future explicit approval before activation.
+
+
+## EP-039 Deployment Release Candidate
+
+EP-039 is complete. CiteJury remains static/browser-only with no backend, database, Python runtime requirement, Node runtime requirement, build step requirement, active ads, or active analytics. The package adds deployment release-candidate metadata, go-live documentation, and a browser-only EP-039 validation page. Final launch still requires the production domain, sitemap absolute URL update, deployed header verification, and security.txt contact/domain approval.

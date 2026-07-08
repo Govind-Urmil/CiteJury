@@ -3,7 +3,7 @@
 Privacy-first legal citation tools built with Indian legal practice in mind.
 
 ## Current Release
-EP-038: Security, Privacy and Production Hardening.
+EP-039: Deployment Release Candidate.
 
 ## Architecture
 Static, browser-first, reusable, free-to-host first, with no backend/database/runtime dependency.
@@ -45,3 +45,8 @@ Public guide content has been rewritten for authority-aware citation education, 
 ## EP-038 Security, Privacy and Production Hardening
 
 EP-038 adds strict production security headers, privacy-policy hardening, inactive ad-readiness guardrails, and long-term unattended-operation documentation. Ads and analytics remain inactive; future monetization requires an approved ADR/EP, privacy update, and CSP update.
+
+
+## EP-039 Deployment Release Candidate
+
+EP-039 prepares CiteJury for deployment review with explicit go-live steps, release-candidate metadata, static-host verification guidance, and unattended-operation guardrails. Ads and analytics remain inactive; future monetization still requires explicit approval and a separate EP.

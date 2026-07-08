@@ -25,3 +25,11 @@ Use a free/static host first:
 - Test mobile performance.
 - Verify all guide links.
 - Review analytics/ad approach only after approval.
+
+## EP-039 release-candidate additions
+
+- Confirm production domain before changing `sitemap.xml`.
+- Verify static host header behavior after deployment.
+- Keep ads and analytics inactive until explicitly approved.
+- Run `tests/EP-039-deployment-release-candidate.html` manually in a browser.
+- Keep latest 3 EP ZIPs locally plus GitHub repository history for normal recovery.

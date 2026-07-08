@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>EP-039 Deployment Release Candidate Test</title>
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+<main class="container section">
+  <h1>EP-039 Deployment Release Candidate Test</h1>
+  <pre id="out">Running...</pre>
+</main>
+<script>
+(async()=>{
+  const results=[];
+  async function text(path){const r=await fetch(path); return r.ok ? r.text() : ''}
+  async function json(path){const r=await fetch(path); return r.ok ? r.json() : null}
+  const rc=await json('../assets/data/deployment-release-candidate.json');
+  const readiness=await json('../assets/data/deployment-readiness.json');
+  const release=await json('../assets/data/release-meta.json');
+  const ads=await json('../assets/data/ads-config.json');
+  const headers=await text('../_headers');
+  const sitemapTemplate=await text('../sitemap.production-template.xml');
+  const docs=await text('../docs/DEPLOYMENT_RELEASE_CANDIDATE.md');
+  const goLive=await text('../docs/DEPLOYMENT_GO_LIVE_STEPS.md');
+  const index=await text('../index.html');
+
+  results.push(['RC metadata exists', rc && rc.version === 'EP-039' && rc.release_candidate === true]);
+  results.push(['Static browser only', rc && rc.architecture === 'static-browser-only' && rc.backend === false && rc.database === false]);
+  results.push(['No runtimes required', rc && rc.python_runtime_required === false && rc.node_runtime_required === false && rc.build_step_required === false]);
+  results.push(['Ads analytics inactive in RC', rc && rc.ads_active === false && rc.analytics_active === false]);
+  results.push(['Readiness updated', readiness && readiness.version === 'EP-039' && readiness.release_candidate === true]);
+  results.push(['Release metadata updated', release && release.version === 'EP-039' && release.stage === 'deployment-release-candidate']);
+  results.push(['Ads config inactive', ads && ads.ads_active === false && ads.analytics_active === false]);
+  results.push(['Headers include CSP and HSTS', headers.includes('Content-Security-Policy') && headers.includes('Strict-Transport-Security')]);
+  results.push(['Sitemap template present', sitemapTemplate.includes('https://example.com/') && sitemapTemplate.includes('<urlset')]);
+  results.push(['RC docs present', docs.includes('Required before public go-live') && docs.includes('Ads inactive'));
+  results.push(['Go-live docs present', goLive.includes('Domain') && goLive.includes('Static host') && goLive.includes('Final manual checks'));
+  results.push(['Public homepage does not load corpus', !index.includes('citation-accuracy-corpus.js'));
+  results.push(['No active ad script on homepage', !/pagead2\.googlesyndication|googletagmanager|analytics\.js|gtag\(/i.test(index)]);
+  const failed=results.filter(([,ok])=>!ok).map(([name])=>name);
+  document.getElementById('out').textContent = failed.length ? 'FAILED\n'+failed.join('\n') : 'PASSED '+results.length+'/'+results.length+' EP-039 checks';
+  if (failed.length) throw new Error(failed.join('; '));
+})();
+</script>
+</body>
+</html>

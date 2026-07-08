@@ -1,5 +1,5 @@
 {
-  "version": "EP-038",
+  "version": "EP-039",
   "ads_active": false,
   "analytics_active": false,
   "backend": false,
@@ -12,11 +12,13 @@
   "github_pages_note": "Use only if public repository is acceptable.",
   "monetization_status": "reserved-not-active",
   "requires_future_adr_for_ads": true,
-  "production_hardening_status": "headers-and-privacy-ready",
-  "unattended_operation_status": "static-hosting-ready",
+  "production_hardening_status": "deployment-release-candidate",
+  "unattended_operation_status": "ready-after-domain-and-host-verification",
   "required_before_launch": [
     "Set production domain in sitemap.xml from sitemap.production-template.xml",
-    "Verify HTTPS headers on deployed host",
-    "Confirm security.txt contact/domain before activation"
-  ]
+    "Deploy to HTTPS static host and verify _headers behavior on selected platform",
+    "Confirm security.txt contact/domain before activation",
+    "Keep ads/analytics inactive until a separate approval EP updates privacy, CSP, and ad configuration"
+  ],
+  "release_candidate": true
 }

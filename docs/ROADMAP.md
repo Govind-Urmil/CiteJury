@@ -1,10 +1,9 @@
 # CiteJury Engineering Roadmap
 
 ## Completed
-EP-001 through EP-038.
+EP-001 through EP-039.
 
 ## Next Planned EPs
-- EP-039 Deployment Release Candidate
 - EP-040 Final Production Gold Release
 
 ## Architecture Rules
@@ -83,3 +82,14 @@ Next: EP-038 — Security, Privacy and Production Hardening.
 - Preserved long-term unattended static operation: no backend, database, build step, runtime dependency, active ads, or active analytics.
 
 Next: EP-039 — Deployment Release Candidate.
+
+
+## EP-039 deliverables
+
+- Added deployment release-candidate metadata in `assets/data/deployment-release-candidate.json`.
+- Updated deployment readiness and release metadata to EP-039.
+- Added deployment go-live and release-candidate documentation.
+- Added browser-only EP-039 release-candidate test page.
+- Preserved static/browser-only architecture with no backend, database, build step, runtime dependency, active ads, or active analytics.
+
+Next: EP-040 — Final Production Gold Release.
