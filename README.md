@@ -35,3 +35,8 @@ EP-035 adds structured browser-only validation reports to the citation engine an
 ## EP-036 Citation Accuracy Browser Test Corpus
 
 EP-036 adds a large deterministic browser-only citation accuracy corpus for manual testing. The corpus is not referenced by public pages and does not affect normal visitor page weight, browser performance, ads, analytics, or static hosting simplicity.
+
+
+## EP-037 update
+
+Public guide content has been rewritten for authority-aware citation education, clearer limitations, and long-term static operation. Ads and analytics remain inactive.

@@ -13,5 +13,10 @@
     "legal-citation-for-law-students.html",
     "moot-court-memorial-citation-guide.html",
     "oscola-citation-guide-india.html"
-  ]
+  ],
+  "ep037": {
+    "rewrittenGuides": 15,
+    "contentQualityData": "assets/data/content-quality.json",
+    "test": "tests/EP-037-content-quality.html"
+  }
 }

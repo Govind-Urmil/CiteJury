@@ -1,0 +1,20 @@
+{
+  "ep": "EP-037",
+  "title": "Content Quality and Authority Rewrite",
+  "status": "complete",
+  "publicGuidesRewritten": 15,
+  "principles": [
+    "Prefer source verification over plausible-looking citations",
+    "Clearly distinguish supported generator scope from educational or future styles",
+    "Keep guide pages useful without loading test corpus or external scripts",
+    "Keep ads inactive but preserve responsible static ad placement reservations"
+  ],
+  "authorityFamiliesReferenced": [
+    "Supreme Court of India neutral citation",
+    "OSCOLA",
+    "Bluebook",
+    "AGLC4",
+    "Indian reporter and statute citation practices"
+  ],
+  "normalVisitorPerformance": "No corpus loaded; no external scripts added; static HTML/CSS only."
+}

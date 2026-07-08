@@ -1,11 +1,9 @@
 # CiteJury Engineering Roadmap
 
 ## Completed
-EP-001 through EP-035.
+EP-001 through EP-037.
 
 ## Next Planned EPs
-- EP-036 Citation Accuracy Browser Test Corpus
-- EP-037 Content Quality and Authority Rewrite
 - EP-038 Security, Privacy and Production Hardening
 - EP-039 Deployment Release Candidate
 - EP-040 Final Production Gold Release
@@ -62,3 +60,14 @@ Next: EP-036 — Citation Accuracy Browser Test Corpus.
 - Preserved static/browser-only architecture with no backend, database, runtime dependency, active ads, or analytics.
 
 Next: EP-037 — Content Quality and Authority Rewrite.
+
+
+## EP-037 deliverables
+
+- Rewrote 15 public citation guide pages from generic template content into authority-aware practical guidance.
+- Added guide-level trust notes, examples, limitation language, and verification habits.
+- Added `assets/data/content-quality.json`.
+- Added browser-only EP-037 content quality test page.
+- Preserved public performance: no corpus load, no external script, no active ads, no analytics, no backend.
+
+Next: EP-038 — Security, Privacy and Production Hardening.

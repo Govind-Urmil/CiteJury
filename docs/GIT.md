@@ -64,3 +64,12 @@ git push
 ```
 
 No file deletion is required for EP-036.
+
+
+## EP-037 commit
+
+```bash
+git add .
+git commit -m "EP-037: Rewrite content quality and authority guides"
+git push
+```

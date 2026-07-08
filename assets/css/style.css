@@ -74,3 +74,11 @@ summary:focus-visible{
   }
 }
 img,svg{max-width:100%;height:auto}
+
+
+/* EP-037 content authority rewrite */
+.citation-example-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin:16px 0 28px}
+.example-card{border:1px solid var(--line);border-radius:16px;background:#fff;padding:16px}
+.example-card p{margin:8px 0 0;color:var(--muted)}
+.content-page .trust-note{margin:20px 0 28px}
+@media(max-width:700px){.citation-example-grid{grid-template-columns:1fr}}

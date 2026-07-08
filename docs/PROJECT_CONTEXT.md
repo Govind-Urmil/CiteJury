@@ -61,3 +61,8 @@ EP-036 was generated after Govind confirmed EP-035 was committed. The package ad
 Long-term unattended operation remains mandatory: CiteJury must continue working as a static browser site for months or years without backend maintenance. Ads remain inactive until Govind explicitly approves activation, but the site continues to be designed for responsible future passive monetization.
 
 No files are removed in EP-036.
+
+
+## EP-037 Content Quality and Authority Rewrite
+
+EP-037 is complete. The public guide pages were rewritten to reduce template-like content and improve trust, authority, verification habits, and transparent limitations. No backend, database, runtime dependency, active ads, analytics, or external scripts were added. Ads remain inactive but reserved for future responsible monetization after explicit approval.
