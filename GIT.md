@@ -191,3 +191,7 @@ Apply the package over the repository and commit once. No file deletion is requi
 
 ## EP-053
 Apply this package over the repository and commit once. No file deletions are required.
+
+
+## Asset version rule
+When an EP changes public CSS or JavaScript, update the asset query version in HTML references and `assets/asset-version.json` before commit.

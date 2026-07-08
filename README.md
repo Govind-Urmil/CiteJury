@@ -117,3 +117,7 @@ The generator now bypasses native blocking validation and uses CiteJury validati
 
 ### EP-053
 Validation errors now navigate more reliably to the invalid field on mobile Chrome and desktop browsers.
+
+
+### Asset cache-busting
+Public CSS and JavaScript URLs use an explicit asset version query string, for example `?v=054`. Increment the version when CSS/JS behavior changes so users receive updates without clearing browser cache.

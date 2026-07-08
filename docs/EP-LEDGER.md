@@ -175,3 +175,9 @@ Next: manual Google Search Console/Bing setup, then future ad approval/activatio
 - Replaced direct scrollIntoView validation navigation with calculated window.scrollTo positioning.
 - Added delayed post-focus scroll correction for mobile Chrome visual viewport changes.
 - Preserved reduced-motion behavior, accessibility focus, and no-backend/no-build architecture.
+
+
+## EP-054 — Asset Cache Busting & Update Freshness
+- Added versioned CSS/JS asset URLs across public pages and browser test pages.
+- Added `assets/asset-version.json` documenting the current asset version.
+- Preserves static/browser-only/host-portable architecture and Cloudflare/S3 portability.

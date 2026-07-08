@@ -158,3 +158,7 @@ Fixed validation navigation by disabling native browser blocking validation on t
 
 ## EP-053
 Cross-browser validation navigation fix: invalid citation fields now use mobile-safe calculated scrolling with delayed post-focus correction for Chrome on mobile virtual-keyboard behavior. Static/browser-only architecture remains unchanged.
+
+
+## EP-054
+Asset cache-busting and update freshness: public CSS/JS references now include `?v=054` query versions so browsers fetch updated assets after deployments without users clearing cache. Increment asset version when public CSS/JS changes.

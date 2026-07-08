@@ -196,3 +196,7 @@ Validation navigation corrected so users are taken directly to the invalid field
 
 ## EP-053 — Completed
 Resolved mobile Chrome validation navigation reliability. Next roadmap priority remains search engine setup, content growth, and later approved ad activation.
+
+
+## EP-054 — Completed
+Browser cache-busting added for CSS/JS update freshness. Future EPs that change public CSS/JS should increment the asset version.
