@@ -1,0 +1,26 @@
+{
+  "version": "EP-045",
+  "title": "Production URL and live launch finalization",
+  "productionBaseUrl": "https://citejury.citejury.workers.dev",
+  "temporaryProductionUrl": true,
+  "customDomainPlannedLater": true,
+  "previewUrls": false,
+  "adsActive": false,
+  "analyticsActive": false,
+  "architecture": "static browser-only website; Cloudflare Workers Static Assets hosting now; portable to AWS S3/static hosting later",
+  "publicCopyCleanup": [
+    "removed EP release wording from homepage generator help",
+    "removed owner/internal workflow wording from trust and terms pages",
+    "removed public QA checklist footer link from homepage"
+  ],
+  "seoLaunchReadiness": [
+    "absolute sitemap URLs for current Workers URL",
+    "canonical URLs on public HTML pages",
+    "robots.txt includes sitemap reference",
+    "manifest id/start/scope aligned with current root deployment"
+  ],
+  "migrationNotes": {
+    "customDomain": "Replace BASE URL values in sitemap.xml, canonical/og:url tags, manifest id, docs, and Cloudflare route. Add real security.txt contact only if controlled.",
+    "awsS3": "Upload static files to S3/CloudFront or S3-compatible static hosting, configure index.html/404.html, HTTPS, security headers, and update production URLs. Citation engine code should not change."
+  }
+}

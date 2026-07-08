@@ -125,3 +125,12 @@ git add .
 git commit -m "EP-043: Add portable static hosting and style switching"
 git push
 ```
+
+
+## EP-045 commit
+
+```bash
+git add .
+git commit -m "EP-045: Finalize production URL launch settings"
+git push
+```

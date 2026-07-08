@@ -88,3 +88,14 @@ Next: Deploy through Cloudflare Workers Static Assets, then audit the live URL.
 - Preserved static/browser-only architecture, inactive ads, inactive analytics, no backend, no database, no runtime dependency, and hosting portability.
 
 Next: deploy/audit the live Cloudflare URL. Real ads require future explicit approval and a monetization activation EP/ADR.
+
+
+## EP-045 — Production URL and Live Launch Finalization
+
+- Base: committed EP-044 repository ZIP.
+- Production URL: `https://citejury.citejury.workers.dev`.
+- Added absolute sitemap/canonical/og:url metadata for public pages.
+- Disabled Wrangler preview URLs explicitly.
+- Removed remaining public internal EP/owner workflow wording.
+- No backend, database, build step, ads, or analytics added.
+- File deletion required: none.

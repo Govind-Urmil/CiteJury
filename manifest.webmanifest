@@ -2,10 +2,11 @@
   "name": "CiteJury",
   "short_name": "CiteJury",
   "description": "Privacy-first legal citation generator.",
-  "start_url": "./",
-  "scope": "./",
+  "start_url": "/",
+  "scope": "/",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#0b1220",
-  "icons": []
+  "icons": [],
+  "id": "https://citejury.citejury.workers.dev/"
 }

@@ -77,3 +77,8 @@ CiteJury can be deployed to Cloudflare Workers Static Assets using the checked-i
 ## EP-044 revenue note
 
 CiteJury now includes passive-revenue readiness containers that remain hidden while ads are inactive. The site is still static/browser-only with no backend, database, analytics, or third-party ad script. Future ad activation requires an approved monetization EP/ADR and production privacy/CSP updates.
+
+
+## EP-045 Production URL
+
+Initial live URL: `https://citejury.citejury.workers.dev`. Ads and analytics remain inactive. The site remains static/browser-only and portable to custom domain or AWS S3/static hosting later.

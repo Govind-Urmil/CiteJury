@@ -1,2 +1,3 @@
 User-agent: *
 Allow: /
+Sitemap: https://citejury.citejury.workers.dev/sitemap.xml

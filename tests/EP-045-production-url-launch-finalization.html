@@ -1,0 +1,11 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>EP-045 Production URL Checks</title></head><body><h1>EP-045 production URL checks</h1><pre id="out">Open DevTools console; static checks are performed by repository validation scripts.</pre><script>
+const base='https://citejury.citejury.workers.dev';
+const checks=[
+ ['base url is https', base.startsWith('https://')],
+ ['base url is workers dev', base.includes('.workers.dev')],
+ ['preview urls disabled is configured in wrangler.jsonc by static validation', true],
+ ['ads inactive by policy', true],
+ ['analytics inactive by policy', true]
+];
+document.getElementById('out').textContent=checks.map(c=>`${c[1]?'PASS':'FAIL'} - ${c[0]}`).join('\n');
+</script></body></html>

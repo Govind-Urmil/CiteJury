@@ -1,6 +1,6 @@
 {
   "site": "CiteJury",
-  "version": "EP-042",
+  "version": "EP-045",
   "architecture": "static-browser-first",
   "backend": false,
   "buildStepRequired": false,
@@ -11,5 +11,11 @@
   "homepageCleanup": "internal-public-copy-removed",
   "github_pages_initial_launch": true,
   "manifest_loaded_on_http_only": true,
-  "custom_domain_required_now": false
+  "custom_domain_required_now": false,
+  "productionBaseUrl": "https://citejury.citejury.workers.dev",
+  "cloudflareWorkersStaticAssets": true,
+  "previewUrlsExplicitlyDisabled": true,
+  "customDomainRequiredNow": false,
+  "futureCustomDomainMigration": "replace productionBaseUrl/canonical/sitemap/manifest id with custom domain and update hosting DNS/headers as needed",
+  "futureS3Migration": "upload the same static files to an S3-compatible static host and update only hosting metadata/docs/URLs, not citation engine code"
 }
