@@ -225,3 +225,10 @@ Next: manual Google Search Console/Bing setup, then future ad approval/activatio
 - Added confidence labels, component detection, issues, explanations, and safe structure suggestions.
 - No AI, backend, database, URL fetching, or guessing introduced.
 - Bumped asset version to 061.
+
+
+## EP-062 — Website Factory Verification Suite
+- Added `/tests/index.html` WFVS dashboard.
+- Added ADR, technical, functional, release metadata, developer diagnostics, and verification history panels.
+- Added reusable WFVS, Verification Checklist, and Release Checklist documentation.
+- Bumped asset version to 062.

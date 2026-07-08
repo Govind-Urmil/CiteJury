@@ -190,3 +190,7 @@ Visual Citation Learning added static, lightweight visual explanation components
 
 ## EP-061
 Citation Checker™ launched as CiteJury's second flagship tool. It checks pasted citations with static browser-side rules and explains detected components, missing pieces, confidence, and safe next steps.
+
+
+## EP-062
+Website Factory Verification Suite launched as reusable quality infrastructure for CiteJury and future static websites. Future EPs should pass WFVS before release.

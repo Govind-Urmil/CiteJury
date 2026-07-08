@@ -149,3 +149,7 @@ Priority citation guides now include visual anatomy blocks, structure cards, mis
 
 ### EP-061
 Citation Checker™ lets users paste existing citations and receive rule-based structural checks, confidence, issues, and safe suggestions without AI or backend services.
+
+
+### EP-062
+Website Factory Verification Suite is available at `tests/index.html`. Use it as the release verification dashboard before future EP deployment.

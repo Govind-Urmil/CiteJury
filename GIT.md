@@ -223,3 +223,7 @@ Apply over the repository and commit once. No file deletions required.
 
 ## EP-061
 Apply over the repository and commit once. No file deletions required.
+
+
+## EP-062
+Apply over the repository and commit once. No file deletions required. Open `tests/index.html` before pushing future EPs.
