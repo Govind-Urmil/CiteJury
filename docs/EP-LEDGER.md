@@ -32,4 +32,5 @@
 | EP-028 | Performance, SEO and accessibility final audit | Complete |
 | EP-029 | Monetization and production deployment readiness | Complete |
 | EP-030 | Final Gold Release | Complete |
-| EP-031 | Repo and launch safety fixes | Ready |
+| EP-031 | Repo and launch safety fixes | Complete |
+| EP-032 | Citation Authority Foundation | Ready |

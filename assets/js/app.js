@@ -79,7 +79,10 @@
       error.hidden = true;
       error.textContent = "";
       output.textContent = result.citation;
-      explain.textContent = `${result.explanation} ${result.verification ? result.verification.message : ""}`;
+      const limitationText = result.verification && result.verification.limitations
+        ? ` Limitations: ${result.verification.limitations.join(" ")}`
+        : "";
+      explain.textContent = `${result.explanation} ${result.verification ? result.verification.message : ""}${limitationText}`;
       renderParts(result.parts);
     });
 

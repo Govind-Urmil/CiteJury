@@ -1,6 +1,6 @@
 /*
   CiteJury Citation Engine
-  EP-019
+  EP-032
   Browser-first, static-site compatible, no backend dependency.
 */
 
@@ -19,6 +19,70 @@
     page: clean(data.page),
     court: clean(data.court)
   });
+
+  const ruleSpecs = {
+    "indian-legal:judgment": {
+      id: "generic-indian-judgment-readable-v1",
+      status: "provisional-helper",
+      authorityFamily: "India-first citation practice; verify against court/reporter requirements",
+      confidence: "medium-low",
+      required: ["title"],
+      recommended: ["year", "reporter", "page", "court"],
+      limitations: [
+        "Readable helper, not a complete Indian citation standard.",
+        "Reporter-specific rules are scheduled for EP-033."
+      ]
+    },
+    "scc:judgment": {
+      id: "scc-style-judgment-provisional-v1",
+      status: "provisional-helper",
+      authorityFamily: "Indian law report citation practice; reporter-specific verification required",
+      confidence: "low",
+      required: ["title"],
+      recommended: ["year", "volume", "reporter", "page"],
+      limitations: [
+        "SCC-style output is provisional until EP-033 verifies reporter-specific examples and edge cases."
+      ]
+    },
+    "air:judgment": {
+      id: "air-style-judgment-provisional-v1",
+      status: "provisional-helper",
+      authorityFamily: "Indian AIR-style law report practice; reporter-specific verification required",
+      confidence: "low",
+      required: ["title"],
+      recommended: ["year", "court", "page"],
+      limitations: [
+        "AIR-style output is provisional until EP-033 verifies reporter-specific examples and edge cases."
+      ]
+    },
+    "oscola:judgment": {
+      id: "oscola-judgment-provisional-v1",
+      status: "provisional-helper",
+      authorityFamily: "Oxford Law Faculty OSCOLA sources",
+      confidence: "medium-low",
+      required: ["title"],
+      recommended: ["year", "reporter", "page"],
+      limitations: [
+        "Current output is OSCOLA-like, not a complete OSCOLA implementation.",
+        "EP-034 should implement full scoped OSCOLA rules and tests."
+      ]
+    },
+    "default": {
+      id: "generic-source-readable-v1",
+      status: "provisional-helper",
+      authorityFamily: "General citation practice; source-specific verification required",
+      confidence: "low",
+      required: ["title"],
+      recommended: ["year"],
+      limitations: [
+        "Generic source output is formatting assistance only and requires manual verification."
+      ]
+    }
+  };
+
+  const getRuleSpec = (data) => ruleSpecs[`${data.citationStyle}:${data.sourceType}`] || ruleSpecs.default;
+
+  const getMissingRecommended = (data, spec) => (spec.recommended || []).filter((field) => !data[field]);
 
   const helpers = {
     join(values, separator = " ") {
@@ -206,17 +270,36 @@
     const base = rule(data);
     const transformer = styleTransforms[data.citationStyle] || styleTransforms["indian-legal"];
     const citation = transformer.apply(base.citation, data);
+    const spec = getRuleSpec(data);
+    const missingRecommended = getMissingRecommended(data, spec);
 
     return {
       ok: true,
       sourceType: data.sourceType,
       citationStyle: data.citationStyle,
+      rule: {
+        id: spec.id,
+        status: spec.status,
+        authorityFamily: spec.authorityFamily,
+        confidence: spec.confidence,
+        missingRecommended,
+        limitations: spec.limitations
+      },
       citation,
       explanation: `${base.explanation} Style note: ${transformer.note}`,
-      parts: [`Style: ${helpers.styleLabel(data.citationStyle)}`, ...base.parts],
+      parts: [
+        `Style: ${helpers.styleLabel(data.citationStyle)}`,
+        `Rule: ${spec.id}`,
+        `Rule status: ${spec.status}`,
+        `Authority family: ${spec.authorityFamily}`,
+        `Confidence: ${spec.confidence}`,
+        missingRecommended.length ? `Recommended fields missing: ${missingRecommended.join(", ")}` : "Recommended fields supplied: yes",
+        ...base.parts
+      ],
       verification: {
         required: true,
-        message: "Verify this citation against the original source and the rules required for your formal use."
+        message: "Verify this citation against the original source and the rules required for your formal use.",
+        limitations: spec.limitations
       }
     };
   };
@@ -226,6 +309,7 @@
     validate,
     normalize,
     sourceTypes: Object.freeze(Object.keys(rules)),
-    citationStyles: Object.freeze(Object.keys(styleTransforms))
+    citationStyles: Object.freeze(Object.keys(styleTransforms)),
+    ruleSpecs: Object.freeze(ruleSpecs)
   });
 })();

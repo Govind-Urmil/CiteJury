@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>EP-032 Citation Authority Foundation Test</title>
+  <style>body{font-family:system-ui,sans-serif;max-width:900px;margin:2rem auto;padding:0 1rem;line-height:1.5}.pass{color:#176b2c}.fail{color:#9f1d1d}code{background:#f4f4f4;padding:.15rem .3rem}</style>
+</head>
+<body>
+  <h1>EP-032 Citation Authority Foundation Test</h1>
+  <p>This browser-only test verifies that citation outputs expose authority/provenance metadata without requiring a backend.</p>
+  <ol id="results"></ol>
+  <script src="../assets/js/citation-engine.js"></script>
+  <script>
+    const results = document.querySelector('#results');
+    const tests = [];
+    const add = (name, fn) => tests.push({ name, fn });
+    const assert = (condition, message) => { if (!condition) throw new Error(message); };
+
+    add('engine exposes rule specs', () => {
+      assert(window.CiteJuryCitationEngine, 'engine missing');
+      assert(window.CiteJuryCitationEngine.ruleSpecs, 'rule specs missing');
+      assert(window.CiteJuryCitationEngine.ruleSpecs['scc:judgment'], 'SCC judgment spec missing');
+    });
+
+    add('SCC-style judgment returns provisional rule metadata', () => {
+      const result = window.CiteJuryCitationEngine.generate({ citationStyle: 'scc', sourceType: 'judgment', title: 'Example v Union of India', year: '2024', reporter: 'SCC', page: '1' });
+      assert(result.ok, 'citation failed');
+      assert(result.rule.id === 'scc-style-judgment-provisional-v1', 'wrong rule id');
+      assert(result.rule.status === 'provisional-helper', 'wrong rule status');
+      assert(result.parts.some((part) => part.includes('Authority family:')), 'authority family missing from parts');
+    });
+
+    add('missing recommended fields are reported', () => {
+      const result = window.CiteJuryCitationEngine.generate({ citationStyle: 'air', sourceType: 'judgment', title: 'Example v State' });
+      assert(result.ok, 'citation failed');
+      assert(result.rule.missingRecommended.includes('year'), 'missing year not reported');
+      assert(result.rule.missingRecommended.includes('court'), 'missing court not reported');
+      assert(result.rule.missingRecommended.includes('page'), 'missing page not reported');
+    });
+
+    add('OSCOLA-like output is explicitly limited', () => {
+      const result = window.CiteJuryCitationEngine.generate({ citationStyle: 'oscola', sourceType: 'judgment', title: 'Example v Example', year: '2024', reporter: 'AC', page: '1' });
+      assert(result.ok, 'citation failed');
+      assert(result.rule.limitations.join(' ').includes('OSCOLA-like'), 'OSCOLA limitation missing');
+      assert(result.verification.required === true, 'verification flag missing');
+    });
+
+    let passed = 0;
+    tests.forEach((test) => {
+      const li = document.createElement('li');
+      try {
+        test.fn();
+        passed += 1;
+        li.className = 'pass';
+        li.textContent = `PASS: ${test.name}`;
+      } catch (error) {
+        li.className = 'fail';
+        li.textContent = `FAIL: ${test.name} — ${error.message}`;
+      }
+      results.appendChild(li);
+    });
+
+    const summary = document.createElement('p');
+    summary.innerHTML = `<strong>${passed}/${tests.length} tests passed.</strong>`;
+    document.body.appendChild(summary);
+  </script>
+</body>
+</html>

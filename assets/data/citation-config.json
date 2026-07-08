@@ -1,5 +1,5 @@
 {
-  "version": "EP-019",
+  "version": "EP-032",
   "sourceTypes": [
     "judgment",
     "legislation",
@@ -13,6 +13,20 @@
     "scc": "Judgment-focused SCC-style output",
     "air": "Judgment-focused AIR-style output",
     "oscola": "OSCOLA-like judgment output"
+  },
+  "authorityFoundation": {
+    "enabled": true,
+    "authorityRegistry": "assets/data/citation-authorities.json",
+    "ruleSpecRegistry": "assets/data/citation-rule-specs.json",
+    "defaultRuleStatus": "provisional-helper",
+    "publicUiMetadata": [
+      "rule id",
+      "rule status",
+      "authority family",
+      "confidence",
+      "missing recommended fields",
+      "limitations"
+    ]
   },
   "backend": false,
   "architecture": "static-browser-first"

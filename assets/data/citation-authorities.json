@@ -1,0 +1,89 @@
+{
+  "version": "EP-032",
+  "purpose": "Authoritative/provenance registry for CiteJury citation rules. This file is static data only and is not loaded by the public website unless a future EP explicitly wires it into the UI.",
+  "lastReviewed": "2026-07-08",
+  "architecture": "static-browser-first",
+  "authorities": [
+    {
+      "id": "sci-neutral-citation",
+      "name": "Supreme Court of India neutral citation system",
+      "jurisdiction": "India",
+      "authorityType": "official-court-source",
+      "sourceUrl": "https://www.sci.gov.in/neutral-citation/",
+      "supportLevel": "official-source-observed",
+      "notes": "Official Supreme Court neutral citation lookup exists. Formatting details should be implemented only after rule-specific verification against official notices and sample outputs."
+    },
+    {
+      "id": "scr-official-reports",
+      "name": "Supreme Court Reports / e-SCR",
+      "jurisdiction": "India",
+      "authorityType": "official-court-source",
+      "sourceUrl": "https://scr.sci.gov.in/",
+      "supportLevel": "official-source-observed",
+      "notes": "Official SCR/e-SCR portal is a primary verification source for Supreme Court judgments and neutral citation data."
+    },
+    {
+      "id": "sci-neutral-press-note-2023",
+      "name": "Supreme Court of India neutral citation press note, 23 February 2023",
+      "jurisdiction": "India",
+      "authorityType": "official-notice-copy",
+      "sourceUrl": "https://images.assettype.com/barandbench/2023-02/5621c99f-0540-432a-94ea-4a975b6405a8/PRESS_NOTE_23_Feb_2023.pdf",
+      "supportLevel": "secondary-hosted-copy-needs-official-cross-check",
+      "notes": "Useful for provenance but should be cross-checked against Supreme Court-hosted notices before final rule implementation."
+    },
+    {
+      "id": "sci-neutral-format-notice-2023",
+      "name": "Supreme Court neutral citation format notice, July 2023",
+      "jurisdiction": "India",
+      "authorityType": "official-court-notice",
+      "sourceUrl": "https://cdnbbsr.s3waas.gov.in/s3ec0490f1f4972d133619a60c30f3559e/documents/notices-circulars/06072023_105659.pdf",
+      "supportLevel": "official-source-observed",
+      "notes": "Observed format description uses year + INSC + sequence. EP-033 should convert this into a strict Supreme Court neutral citation rule with tests."
+    },
+    {
+      "id": "oscola-oxford-official",
+      "name": "Oxford University Standard for Citation of Legal Authorities (OSCOLA)",
+      "jurisdiction": "United Kingdom / international academic use",
+      "authorityType": "official-style-guide",
+      "sourceUrl": "https://www.law.ox.ac.uk/oscola",
+      "supportLevel": "authoritative-style-guide",
+      "notes": "Oxford Law Faculty is the primary source for OSCOLA. EP-034 should replace OSCOLA-like output with scoped, tested OSCOLA rules."
+    },
+    {
+      "id": "oscola-4th-edition-pdf",
+      "name": "OSCOLA 4th edition PDF",
+      "jurisdiction": "United Kingdom / international academic use",
+      "authorityType": "official-style-guide-pdf",
+      "sourceUrl": "https://www.law.ox.ac.uk/sites/default/files/migrated/oscola_4th_edn_hart_2012.pdf",
+      "supportLevel": "authoritative-style-guide",
+      "notes": "Detailed rule source for 4th edition examples and edge cases."
+    },
+    {
+      "id": "oscola-quick-reference",
+      "name": "OSCOLA quick reference guide",
+      "jurisdiction": "United Kingdom / international academic use",
+      "authorityType": "official-style-guide-pdf",
+      "sourceUrl": "https://www.law.ox.ac.uk/sites/default/files/migrated/oscola_4th_edn_hart_2012quickreferenceguide.pdf",
+      "supportLevel": "authoritative-style-guide",
+      "notes": "Concise source for primary-source order and common examples."
+    },
+    {
+      "id": "silc-working-draft",
+      "name": "Standard Indian Legal Citation working draft",
+      "jurisdiction": "India",
+      "authorityType": "citation-manual-working-draft",
+      "sourceUrl": "https://thelawbrigade.com/wp-content/uploads/2019/03/SILC-Working-Draft.pdf",
+      "supportLevel": "working-draft-needs-scope-label",
+      "notes": "Potential Indian citation framework. Because the available source is a working draft, CiteJury must label any SILC-derived rules carefully."
+    },
+    {
+      "id": "ili-citation-style",
+      "name": "Indian Law Institute citation style PDF",
+      "jurisdiction": "India",
+      "authorityType": "institutional-style-guide",
+      "sourceUrl": "https://www.ili.ac.in/cstyle.pdf",
+      "supportLevel": "institutional-style-guide",
+      "notes": "Institutional legal citation guidance; useful for comparing Indian academic citation practice, not a universal court authority."
+    }
+  ]
+}

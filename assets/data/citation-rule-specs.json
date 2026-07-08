@@ -1,0 +1,87 @@
+{
+  "version": "EP-032",
+  "purpose": "Machine-readable rule-specification foundation for CiteJury. Rules here describe support status and provenance; they do not automatically mean full production accuracy.",
+  "rules": [
+    {
+      "id": "generic-indian-judgment-readable-v1",
+      "label": "Readable Indian judgment citation helper",
+      "status": "provisional-helper",
+      "jurisdiction": "India",
+      "sourceType": "judgment",
+      "style": "indian-legal",
+      "authorityIds": ["scr-official-reports", "sci-neutral-citation", "ili-citation-style"],
+      "requiredFields": ["title"],
+      "optionalFields": ["year", "volume", "reporter", "page", "court"],
+      "validation": ["title is required", "year must be four digits when supplied"],
+      "limitations": [
+        "Current output is a practical readable helper, not a fully verified Indian court citation standard.",
+        "Reporter-specific Indian rules require EP-033 overhaul before high-confidence claims."
+      ],
+      "nextEp": "EP-033"
+    },
+    {
+      "id": "scc-style-judgment-provisional-v1",
+      "label": "SCC-style judgment helper",
+      "status": "provisional-helper",
+      "jurisdiction": "India",
+      "sourceType": "judgment",
+      "style": "scc",
+      "authorityIds": ["scr-official-reports"],
+      "requiredFields": ["title", "year", "reporter", "page"],
+      "optionalFields": ["volume", "court"],
+      "validation": ["title is required", "year must be four digits when supplied", "missing reporter/page reduces confidence"],
+      "limitations": [
+        "SCC is a reporter-style helper only in this EP.",
+        "Do not treat generated output as verified SCC editorial style until EP-033 adds rule-level authority and tests."
+      ],
+      "nextEp": "EP-033"
+    },
+    {
+      "id": "air-style-judgment-provisional-v1",
+      "label": "AIR-style judgment helper",
+      "status": "provisional-helper",
+      "jurisdiction": "India",
+      "sourceType": "judgment",
+      "style": "air",
+      "authorityIds": ["ili-citation-style"],
+      "requiredFields": ["title", "year", "court", "page"],
+      "optionalFields": ["reporter", "volume"],
+      "validation": ["title is required", "year must be four digits when supplied", "missing court/page reduces confidence"],
+      "limitations": [
+        "AIR output remains provisional until reporter-specific examples and edge cases are verified in EP-033."
+      ],
+      "nextEp": "EP-033"
+    },
+    {
+      "id": "oscola-judgment-provisional-v1",
+      "label": "OSCOLA-like judgment helper",
+      "status": "provisional-helper",
+      "jurisdiction": "United Kingdom / international academic use",
+      "sourceType": "judgment",
+      "style": "oscola",
+      "authorityIds": ["oscola-oxford-official", "oscola-4th-edition-pdf", "oscola-quick-reference"],
+      "requiredFields": ["title", "year", "reporter", "page"],
+      "optionalFields": ["court", "volume"],
+      "validation": ["title is required", "year must be four digits when supplied"],
+      "limitations": [
+        "Existing output is OSCOLA-like, not a complete OSCOLA implementation.",
+        "EP-034 should implement neutral citation, law report priority, legislation, secondary sources, and bibliography behavior with tests."
+      ],
+      "nextEp": "EP-034"
+    },
+    {
+      "id": "generic-legislation-readable-v1",
+      "label": "Readable legislation citation helper",
+      "status": "provisional-helper",
+      "jurisdiction": "General / India-first",
+      "sourceType": "legislation",
+      "style": "any-current-style",
+      "authorityIds": ["ili-citation-style", "silc-working-draft", "oscola-oxford-official"],
+      "requiredFields": ["title"],
+      "optionalFields": ["year", "page"],
+      "validation": ["title is required", "year must be four digits when supplied"],
+      "limitations": ["Provision labels, chapter numbers, enactment numbers, jurisdiction, and amendments require future rule expansion."],
+      "nextEp": "EP-035"
+    }
+  ]
+}

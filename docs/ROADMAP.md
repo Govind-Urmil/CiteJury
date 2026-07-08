@@ -1,10 +1,9 @@
 # CiteJury Engineering Roadmap
 
 ## Completed
-EP-001 through EP-031.
+EP-001 through EP-032.
 
 ## Next Planned EPs
-- EP-032 Citation Authority Foundation
 - EP-033 Indian Legal Citation Engine Overhaul
 - EP-034 International Citation Engine Overhaul
 - EP-035 Citation Validation and Explainability System
