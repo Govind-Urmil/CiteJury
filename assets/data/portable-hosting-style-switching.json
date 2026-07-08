@@ -1,0 +1,24 @@
+{
+  "ep": "EP-043",
+  "title": "Portable static hosting and citation style switching",
+  "status": "complete",
+  "architecture": "static browser-only website; hosting adapters only; no backend/database/runtime dependency for website operation",
+  "hosting": {
+    "currentTarget": "Cloudflare Workers Static Assets",
+    "portableTargets": [
+      "AWS S3 static website hosting",
+      "Cloudflare static assets",
+      "generic static hosting"
+    ],
+    "cloudflareConfig": "wrangler.jsonc",
+    "cloudflareDeployCommand": "npx wrangler deploy",
+    "s3CodeChangeRequiredLater": false,
+    "s3HostSettingsLater": {
+      "indexDocument": "index.html",
+      "errorDocument": "404.html"
+    }
+  },
+  "generatorUpdate": "After generating a citation, users can compare available style outputs and select another supported style without re-entering data.",
+  "adsActive": false,
+  "analyticsActive": false
+}

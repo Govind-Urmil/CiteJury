@@ -65,3 +65,15 @@ Next: Maintenance mode unless Govind approves another focused change.
 - Preserved static/browser-only architecture, inactive ads, inactive analytics, and no runtime dependencies.
 
 Next: GitHub Pages deployment preparation or another focused maintenance change approved by Govind.
+
+
+## EP-043 deliverables
+
+- Added Cloudflare Workers Static Assets deployment config through `wrangler.jsonc`.
+- Added `.assetsignore` to keep repository/deployment-control files out of uploaded static assets.
+- Added `404.html` for Cloudflare and future AWS S3 static website hosting.
+- Added portable hosting documentation for Cloudflare now and AWS S3 later.
+- Added post-generation citation style alternatives so users can compare and choose supported style outputs without re-entering data.
+- Preserved static/browser-only operation, inactive ads, inactive analytics, and no backend/database requirement.
+
+Next: Deploy through Cloudflare Workers Static Assets, then audit the live URL.

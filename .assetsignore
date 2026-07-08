@@ -1,0 +1,10 @@
+.git
+.github
+node_modules
+.wrangler
+.DS_Store
+Thumbs.db
+*.zip
+*.log
+.env
+.env.*

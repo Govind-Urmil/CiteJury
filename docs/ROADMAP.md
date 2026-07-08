@@ -122,3 +122,10 @@ Status: Complete.
 EP-042 removes remaining homepage internal static-hosting badge copy, prevents local `file://` manifest CORS console noise by loading the web manifest only over HTTP(S), and documents the temporary GitHub Pages launch path plus later custom-domain migration tasks.
 
 Next: GitHub Pages deployment preparation or another focused maintenance change approved by Govind.
+
+
+## EP-043 Portable Static Hosting and Style Switching
+
+Status: Complete. EP-043 prepares Cloudflare Workers Static Assets deployment while keeping the site portable for AWS S3/static hosts later, and adds post-generation style switching in the citation generator.
+
+Next: live Cloudflare deployment audit.

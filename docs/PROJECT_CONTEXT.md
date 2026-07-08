@@ -96,3 +96,8 @@ EP-041 was generated after Govind confirmed EP-040 was committed and requested r
 No files are removed in EP-041.
 
 Next state after EP-041 commit: maintenance mode unless Govind approves another focused change.
+
+
+## EP-043 Portable Static Hosting and Style Switching
+
+EP-043 was generated after EP-042 was committed and Govind chose Cloudflare hosting first while requiring future AWS S3 portability. It adds `wrangler.jsonc`, `.assetsignore`, `404.html`, portable hosting documentation, and post-generation style alternatives in the citation generator. The public site remains static/browser-only with no backend, no database, no active ads, no active analytics, and no runtime dependency for visitors.

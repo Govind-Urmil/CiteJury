@@ -116,3 +116,12 @@ git push
 ```
 
 No file deletion is required for EP-041.
+
+
+## EP-043 commit
+
+```bash
+git add .
+git commit -m "EP-043: Add portable static hosting and style switching"
+git push
+```

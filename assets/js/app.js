@@ -41,6 +41,9 @@
   const error = document.querySelector("#form-error");
   const copy = document.querySelector("#copy-citation");
   const download = document.querySelector("#download-citation");
+  const styleAlternatives = document.querySelector("#style-alternatives");
+  const styleAlternativeList = document.querySelector("#style-alternative-list");
+  let currentResult = null;
 
   const getData = (formData) => ({
     citationStyle: clean(formData.get("citationStyle")),
@@ -61,6 +64,18 @@
       li.textContent = item;
       parts.appendChild(li);
     });
+  };
+
+  const applyResult = (result) => {
+    if (!result || !result.ok) return;
+    currentResult = result;
+    output.textContent = result.citation;
+    const limitationText = result.verification && result.verification.limitations
+      ? ` Limitations: ${result.verification.limitations.join(" ")}`
+      : "";
+    explain.textContent = `${result.explanation} ${result.verification ? result.verification.message : ""}${limitationText}`;
+    renderParts(result.parts);
+    renderValidation(result.validation);
   };
 
   const renderValidation = (validation) => {
@@ -89,6 +104,48 @@
     validationBox.append(heading, summary, list);
   };
 
+  const renderStyleAlternatives = (alternatives = []) => {
+    if (!styleAlternatives || !styleAlternativeList) return;
+
+    styleAlternativeList.innerHTML = "";
+    if (!alternatives.length) {
+      styleAlternatives.hidden = true;
+      return;
+    }
+
+    styleAlternatives.hidden = false;
+
+    alternatives.forEach((alternative) => {
+      const card = document.createElement("article");
+      card.className = `style-alternative${alternative.ok ? "" : " unavailable"}`;
+
+      const heading = document.createElement("h4");
+      heading.textContent = alternative.styleLabel;
+
+      const preview = document.createElement("p");
+      preview.textContent = alternative.ok ? alternative.citation : alternative.unavailableReason;
+
+      card.append(heading, preview);
+
+      if (alternative.ok) {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "btn secondary compact";
+        button.textContent = "Use this style";
+        button.addEventListener("click", () => {
+          const selected = window.CiteJuryCitationEngine.generate({
+            ...window.CiteJuryCitationEngine.normalize(getData(new FormData(form))),
+            citationStyle: alternative.citationStyle
+          });
+          if (selected.ok) applyResult(selected);
+        });
+        card.appendChild(button);
+      }
+
+      styleAlternativeList.appendChild(card);
+    });
+  };
+
   const resetPreview = () => {
     if (error) {
       error.hidden = true;
@@ -99,6 +156,8 @@
     if (explain) explain.textContent = "Fill the form and generate a citation to see the explanation.";
     renderParts([]);
     renderValidation(null);
+    renderStyleAlternatives([]);
+    currentResult = null;
   };
 
   if (form && output && explain && error && window.CiteJuryCitationEngine) {
@@ -119,13 +178,8 @@
 
       error.hidden = true;
       error.textContent = "";
-      output.textContent = result.citation;
-      const limitationText = result.verification && result.verification.limitations
-        ? ` Limitations: ${result.verification.limitations.join(" ")}`
-        : "";
-      explain.textContent = `${result.explanation} ${result.verification ? result.verification.message : ""}${limitationText}`;
-      renderParts(result.parts);
-      renderValidation(result.validation);
+      applyResult(result);
+      renderStyleAlternatives(window.CiteJuryCitationEngine.generateStyleAlternatives(getData(new FormData(form))));
     });
 
     form.addEventListener("reset", () => setTimeout(resetPreview, 0));

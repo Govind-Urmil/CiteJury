@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>EP-043 Portable Hosting and Style Switching Test</title>
+</head>
+<body>
+  <h1>EP-043 Portable Hosting and Style Switching Test</h1>
+  <pre id="results">Running...</pre>
+  <script src="../assets/js/citation-engine.js"></script>
+  <script>
+    const tests = [];
+    const add = (name, fn) => tests.push({ name, fn });
+
+    add("judgment exposes Indian, SCC, AIR and OSCOLA style alternatives", () => {
+      const alternatives = window.CiteJuryCitationEngine.generateStyleAlternatives({
+        citationStyle: "indian-legal",
+        sourceType: "judgment",
+        title: "A v B",
+        year: "2020",
+        volume: "1",
+        reporter: "SCC",
+        page: "2",
+        court: "SC"
+      });
+      const styles = alternatives.map((item) => item.citationStyle).join(",");
+      if (styles !== "indian-legal,scc,air,oscola") throw new Error(styles);
+    });
+
+    add("stricter unavailable alternatives report validation reasons", () => {
+      const alternatives = window.CiteJuryCitationEngine.generateStyleAlternatives({
+        citationStyle: "indian-legal",
+        sourceType: "judgment",
+        title: "A v B"
+      });
+      const scc = alternatives.find((item) => item.citationStyle === "scc");
+      if (!scc || scc.ok || !scc.unavailableReason) throw new Error("SCC unavailable reason missing");
+    });
+
+    add("Supreme Court neutral citation remains locked to Indian neutral output", () => {
+      const alternatives = window.CiteJuryCitationEngine.generateStyleAlternatives({
+        citationStyle: "scc",
+        sourceType: "sc-neutral-judgment",
+        title: "A v B",
+        year: "2023",
+        page: "1",
+        court: "SC"
+      });
+      if (alternatives.length !== 1 || alternatives[0].citationStyle !== "indian-legal") throw new Error("neutral style not locked");
+    });
+
+    add("OSCOLA legislation alternative is generated when fields permit", () => {
+      const alternatives = window.CiteJuryCitationEngine.generateStyleAlternatives({
+        citationStyle: "indian-legal",
+        sourceType: "legislation",
+        title: "Companies Act",
+        year: "2013",
+        page: "12"
+      });
+      const oscola = alternatives.find((item) => item.citationStyle === "oscola");
+      if (!oscola || !oscola.ok || !/s 12/.test(oscola.citation)) throw new Error("OSCOLA legislation alternative failed");
+    });
+
+    const lines = [];
+    let passed = 0;
+    tests.forEach((test) => {
+      try {
+        test.fn();
+        passed += 1;
+        lines.push(`PASS: ${test.name}`);
+      } catch (error) {
+        lines.push(`FAIL: ${test.name}: ${error.message}`);
+      }
+    });
+    document.querySelector("#results").textContent = `${passed}/${tests.length} passed\n` + lines.join("\n");
+  </script>
+</body>
+</html>

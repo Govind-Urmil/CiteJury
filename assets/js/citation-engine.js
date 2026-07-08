@@ -290,6 +290,20 @@
     }
   };
 
+
+  const styleChoices = {
+    "sc-neutral-judgment": ["indian-legal"],
+    judgment: ["indian-legal", "scc", "air", "oscola"],
+    legislation: ["indian-legal", "oscola"],
+    constitution: ["indian-legal"],
+    book: ["indian-legal", "oscola"],
+    journal: ["indian-legal", "oscola"],
+    website: ["indian-legal"]
+  };
+
+  const getStyleChoices = (sourceType) => styleChoices[sourceType] || ["indian-legal"];
+
+
   const rules = {
     "sc-neutral-judgment"(data) {
       const token = helpers.neutralToken(data);
@@ -485,7 +499,8 @@
 
     const rule = rules[data.sourceType] || rules.judgment;
     const base = rule(data);
-    const transformer = data.sourceType === "sc-neutral-judgment" ? styleTransforms["indian-legal"] : (styleTransforms[data.citationStyle] || styleTransforms["indian-legal"]);
+    const effectiveStyle = data.sourceType === "sc-neutral-judgment" ? "indian-legal" : data.citationStyle;
+    const transformer = styleTransforms[effectiveStyle] || styleTransforms["indian-legal"];
     const citation = transformer.apply(base.citation, data);
     const spec = getRuleSpec(data);
     const missingRequired = getMissingRequired(data, spec);
@@ -494,7 +509,8 @@
     return {
       ok: true,
       sourceType: data.sourceType,
-      citationStyle: data.sourceType === "sc-neutral-judgment" ? "indian-legal" : data.citationStyle,
+      citationStyle: effectiveStyle,
+      styleLabel: helpers.styleLabel(effectiveStyle),
       rule: {
         id: spec.id,
         status: spec.status,
@@ -508,7 +524,7 @@
       citation,
       explanation: `${base.explanation} Style note: ${transformer.note}`,
       parts: [
-        `Style: ${helpers.styleLabel(data.sourceType === "sc-neutral-judgment" ? "indian-legal" : data.citationStyle)}`,
+        `Style: ${helpers.styleLabel(effectiveStyle)}`,
         `Rule: ${spec.id}`,
         `Rule status: ${spec.status}`,
         `Authority family: ${spec.authorityFamily}`,
@@ -526,13 +542,33 @@
     };
   };
 
+  const generateStyleAlternatives = (input) => {
+    const data = normalize(input);
+    return getStyleChoices(data.sourceType).map((style) => {
+      const attempt = generate({ ...data, citationStyle: style });
+      return {
+        citationStyle: style,
+        styleLabel: helpers.styleLabel(style),
+        ok: attempt.ok,
+        citation: attempt.citation || "",
+        explanation: attempt.explanation || "",
+        parts: attempt.parts || [],
+        validation: attempt.validation || null,
+        rule: attempt.rule || null,
+        unavailableReason: attempt.ok ? "" : attempt.error
+      };
+    });
+  };
+
   window.CiteJuryCitationEngine = Object.freeze({
     generate,
+    generateStyleAlternatives,
     validate,
     validateDetailed,
     normalize,
     sourceTypes: Object.freeze(Object.keys(rules)),
     citationStyles: Object.freeze(Object.keys(styleTransforms)),
+    styleChoices: Object.freeze(styleChoices),
     ruleSpecs: Object.freeze(ruleSpecs)
   });
 })();

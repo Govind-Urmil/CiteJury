@@ -67,3 +67,8 @@ EP-041 removes internal launch, hosting, backend-maintenance, repository, and re
 ## EP-042 GitHub Pages launch note
 
 EP-042 prepares the public homepage and manifest behavior for initial GitHub Pages hosting without a purchased custom domain. The direct manifest link is intentionally loaded only over HTTP(S) to avoid local `file://` CORS warnings during manual review. See `docs/GITHUB_PAGES_LAUNCH.md`.
+
+
+## EP-043 deployment note
+
+CiteJury can be deployed to Cloudflare Workers Static Assets using the checked-in `wrangler.jsonc` configuration. The same static site remains portable to AWS S3 later with `index.html` as the index document and `404.html` as the error document.
