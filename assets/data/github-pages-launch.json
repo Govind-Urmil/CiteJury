@@ -1,0 +1,17 @@
+{
+  "version": "EP-042",
+  "purpose": "GitHub Pages initial launch readiness",
+  "custom_domain_required_now": false,
+  "repository_pages_supported": true,
+  "homepage_internal_static_badge_removed": true,
+  "manifest_link_strategy": "loaded by JavaScript only on http/https so local file review does not trigger browser manifest CORS errors",
+  "ads_active": false,
+  "analytics_active": false,
+  "later_custom_domain_changes": [
+    "Add/confirm CNAME",
+    "Update sitemap.xml absolute URLs",
+    "Update canonical/OG URL metadata if added",
+    "Update security.txt Canonical and contact after email is real",
+    "Update GitHub Pages custom domain setting and DNS records"
+  ]
+}

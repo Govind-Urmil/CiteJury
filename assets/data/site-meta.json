@@ -1,6 +1,6 @@
 {
   "site": "CiteJury",
-  "version": "EP-041",
+  "version": "EP-042",
   "architecture": "static-browser-first",
   "backend": false,
   "buildStepRequired": false,
@@ -8,5 +8,8 @@
   "monetization": "reserved-not-active-until-explicit-approval",
   "futureReuse": true,
   "goldRelease": true,
-  "homepageCleanup": "internal-public-copy-removed"
+  "homepageCleanup": "internal-public-copy-removed",
+  "github_pages_initial_launch": true,
+  "manifest_loaded_on_http_only": true,
+  "custom_domain_required_now": false
 }

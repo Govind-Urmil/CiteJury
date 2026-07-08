@@ -3,6 +3,18 @@
 
   const clean = (value) => String(value || "").trim();
 
+  const enableWebManifest = () => {
+    if (!document.head || document.querySelector('link[rel="manifest"]')) return;
+    if (!/^https?:$/.test(window.location.protocol)) return;
+
+    const manifest = document.createElement("link");
+    manifest.rel = "manifest";
+    manifest.href = "manifest.webmanifest";
+    document.head.appendChild(manifest);
+  };
+
+  enableWebManifest();
+
   const toggle = document.querySelector(".nav-toggle");
   const nav = document.querySelector("#primary-nav");
 

@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>EP-042 GitHub Pages Homepage Cleanup Test</title>
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+<main class="container section">
+  <h1>EP-042 GitHub Pages Homepage Cleanup Test</h1>
+  <pre id="out">Running...</pre>
+</main>
+<script>
+(async()=>{
+  const results=[];
+  async function text(path){const r=await fetch(path); return r.ok ? r.text() : ''}
+  async function json(path){const r=await fetch(path); return r.ok ? r.json() : null}
+  const index=await text('../index.html');
+  const app=await text('../assets/js/app.js');
+  const meta=await json('../assets/data/github-pages-launch.json');
+  const site=await json('../assets/data/site-meta.json');
+  const release=await json('../assets/data/release-meta.json');
+  const docs=await text('../docs/GITHUB_PAGES_LAUNCH.md');
+  const template=await text('../sitemap.github-pages-template.xml');
+  results.push(['Homepage static-hosting badge removed', !index.includes('Static-hosting ready')]);
+  results.push(['Homepage direct manifest link removed', !/rel=["']manifest["']/i.test(index)]);
+  results.push(['Manifest guarded to HTTP(S)', app.includes('enableWebManifest') && app.includes('window.location.protocol') && app.includes('https?:')]);
+  results.push(['GitHub Pages metadata present', meta && meta.version === 'EP-042' && meta.custom_domain_required_now === false]);
+  results.push(['Release metadata updated', release && release.version === 'EP-042' && release.github_pages_initial_launch === true]);
+  results.push(['Site metadata updated', site && site.version === 'EP-042' && site.github_pages_initial_launch === true]);
+  results.push(['GitHub Pages docs present', docs.includes('GitHub Pages Initial Launch') && docs.includes('custom domain')]);
+  results.push(['GitHub Pages sitemap template present', template.includes('https://OWNER.github.io/REPOSITORY/')]);
+  results.push(['No active ad analytics scripts on homepage', !/pagead2\.googlesyndication|googletagmanager|analytics\.js|gtag\(/i.test(index)]);
+  const failed=results.filter(([,ok])=>!ok).map(([name])=>name);
+  document.getElementById('out').textContent = failed.length ? 'FAILED\n'+failed.join('\n') : 'PASSED '+results.length+'/'+results.length+' EP-042 checks';
+  if (failed.length) throw new Error(failed.join('; '));
+})();
+</script>
+</body>
+</html>

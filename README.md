@@ -62,3 +62,8 @@ Before public go-live, replace placeholder sitemap URLs with the approved produc
 ## EP-041 Homepage User-Facing Cleanup
 
 EP-041 removes internal launch, hosting, backend-maintenance, repository, and reserved monetization-readiness language from the public homepage. The underlying static/browser-first architecture and inactive ads/analytics posture remain unchanged.
+
+
+## EP-042 GitHub Pages launch note
+
+EP-042 prepares the public homepage and manifest behavior for initial GitHub Pages hosting without a purchased custom domain. The direct manifest link is intentionally loaded only over HTTP(S) to avoid local `file://` CORS warnings during manual review. See `docs/GITHUB_PAGES_LAUNCH.md`.

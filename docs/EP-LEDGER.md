@@ -54,3 +54,14 @@
 - Preserved architecture, citation behaviour, inactive ads, and inactive analytics.
 
 Next: Maintenance mode unless Govind approves another focused change.
+
+
+## EP-042 deliverables
+
+- Removed the homepage `Static-hosting ready` trust badge.
+- Removed the direct manifest link from HTML and added safe manifest loading only on `http:`/`https:` to avoid local `file://` CORS console errors during manual review.
+- Added GitHub Pages initial launch metadata and `sitemap.github-pages-template.xml`.
+- Added `docs/GITHUB_PAGES_LAUNCH.md` explaining later custom-domain changes.
+- Preserved static/browser-only architecture, inactive ads, inactive analytics, and no runtime dependencies.
+
+Next: GitHub Pages deployment preparation or another focused maintenance change approved by Govind.

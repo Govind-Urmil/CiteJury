@@ -113,3 +113,12 @@ Status: Complete.
 EP-041 is a focused maintenance change after the final production gold release. It removes internal launch/hosting/backend/monetization-readiness copy from the public homepage while preserving the underlying static/browser-first architecture and inactive ad/analytics posture.
 
 Next: Maintenance mode unless Govind approves another focused change.
+
+
+## EP-042 GitHub Pages Homepage and Manifest Cleanup
+
+Status: Complete.
+
+EP-042 removes remaining homepage internal static-hosting badge copy, prevents local `file://` manifest CORS console noise by loading the web manifest only over HTTP(S), and documents the temporary GitHub Pages launch path plus later custom-domain migration tasks.
+
+Next: GitHub Pages deployment preparation or another focused maintenance change approved by Govind.
