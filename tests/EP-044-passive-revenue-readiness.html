@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>EP-044 Passive Revenue Readiness Test</title></head>
+<body>
+<h1>EP-044 Passive Revenue Readiness Test</h1>
+<pre id="results">Running...</pre>
+<script>
+(async () => {
+  const out = document.getElementById('results');
+  const checks = [];
+  const pass = (name, ok) => checks.push({ name, ok });
+  try {
+    const cfg = await fetch('../assets/data/ads-config.json').then(r => r.json());
+    pass('ads inactive', cfg.ads_active === false);
+    pass('analytics inactive', cfg.analytics_active === false);
+    pass('future ADR required', cfg.requires_future_adr_for_ads === true);
+    pass('slots configured', Array.isArray(cfg.slots) && cfg.slots.length >= 3);
+    pass('all slots inactive', cfg.slots.every(slot => slot.active === false));
+    pass('provider not approved', cfg.provider_policy && cfg.provider_policy.approved_provider === null);
+    pass('failure behaviour documented', Array.isArray(cfg.failure_behavior) && cfg.failure_behavior.length >= 4);
+    const meta = await fetch('../assets/data/passive-revenue-readiness.json').then(r => r.json());
+    pass('metadata EP-044', meta.ep === 'EP-044');
+    pass('no analytics in metadata', meta.analytics_active === false);
+  } catch (err) {
+    pass('test runner error: ' + err.message, false);
+  }
+  const passed = checks.filter(c => c.ok).length;
+  out.textContent = `${passed}/${checks.length} passed\n` + checks.map(c => `${c.ok ? 'PASS' : 'FAIL'} - ${c.name}`).join('\n');
+})();
+</script>
+</body>
+</html>

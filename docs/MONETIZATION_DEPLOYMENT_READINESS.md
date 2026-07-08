@@ -37,3 +37,8 @@ Avoid GitHub Pages if keeping the source repository private is required.
 - No paid infrastructure enabled by default.
 - Domain settings documented.
 - Sitemap submitted after public launch.
+
+
+## EP-044 update
+
+EP-044 adds hidden, first-party passive-revenue containers and fail-closed ad-readiness behaviour. Ads remain inactive and no third-party ad or analytics scripts are loaded. Future activation still requires Govind's explicit approval, provider/domain review, privacy update, CSP/header update, and live production validation.

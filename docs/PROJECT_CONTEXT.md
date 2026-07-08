@@ -101,3 +101,10 @@ Next state after EP-041 commit: maintenance mode unless Govind approves another 
 ## EP-043 Portable Static Hosting and Style Switching
 
 EP-043 was generated after EP-042 was committed and Govind chose Cloudflare hosting first while requiring future AWS S3 portability. It adds `wrangler.jsonc`, `.assetsignore`, `404.html`, portable hosting documentation, and post-generation style alternatives in the citation generator. The public site remains static/browser-only with no backend, no database, no active ads, no active analytics, and no runtime dependency for visitors.
+
+
+## EP-044 Long-Term Passive Revenue Readiness
+
+EP-044 was generated after EP-043 was committed. It prepares CiteJury for long-term unattended passive-revenue readiness without activating ads or analytics. It adds hidden first-party revenue slots, fail-closed ad readiness behaviour, metadata, and documentation. No backend, database, runtime dependency, build step, active ad script, active analytics, or hosting lock-in was added. Cloudflare remains the initial host path and AWS S3/static hosting remains possible later without website code changes.
+
+Next: deploy/audit the live Cloudflare URL, then enable ads only after explicit approval and a future monetization activation EP/ADR.

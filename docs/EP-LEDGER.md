@@ -77,3 +77,14 @@ Next: GitHub Pages deployment preparation or another focused maintenance change 
 - Preserved static/browser-only operation, inactive ads, inactive analytics, and no backend/database requirement.
 
 Next: Deploy through Cloudflare Workers Static Assets, then audit the live URL.
+
+
+## EP-044 deliverables
+
+- Added hidden, first-party passive-revenue containers on the homepage and guide pages.
+- Added fail-closed revenue-readiness controller that keeps slots hidden unless future config and approvals explicitly enable them.
+- Updated ad-readiness config and passive-revenue metadata.
+- Added long-term passive-revenue readiness documentation.
+- Preserved static/browser-only architecture, inactive ads, inactive analytics, no backend, no database, no runtime dependency, and hosting portability.
+
+Next: deploy/audit the live Cloudflare URL. Real ads require future explicit approval and a monetization activation EP/ADR.

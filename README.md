@@ -72,3 +72,8 @@ EP-042 prepares the public homepage and manifest behavior for initial GitHub Pag
 ## EP-043 deployment note
 
 CiteJury can be deployed to Cloudflare Workers Static Assets using the checked-in `wrangler.jsonc` configuration. The same static site remains portable to AWS S3 later with `index.html` as the index document and `404.html` as the error document.
+
+
+## EP-044 revenue note
+
+CiteJury now includes passive-revenue readiness containers that remain hidden while ads are inactive. The site is still static/browser-only with no backend, database, analytics, or third-party ad script. Future ad activation requires an approved monetization EP/ADR and production privacy/CSP updates.

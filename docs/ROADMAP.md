@@ -129,3 +129,10 @@ Next: GitHub Pages deployment preparation or another focused maintenance change 
 Status: Complete. EP-043 prepares Cloudflare Workers Static Assets deployment while keeping the site portable for AWS S3/static hosts later, and adds post-generation style switching in the citation generator.
 
 Next: live Cloudflare deployment audit.
+
+
+## EP-044 Long-Term Passive Revenue Readiness
+
+EP-044 was generated after EP-043 was committed. It prepares CiteJury for long-term unattended passive-revenue readiness without activating ads or analytics. It adds hidden first-party revenue slots, fail-closed ad readiness behaviour, metadata, and documentation. No backend, database, runtime dependency, build step, active ad script, active analytics, or hosting lock-in was added. Cloudflare remains the initial host path and AWS S3/static hosting remains possible later without website code changes.
+
+Next: deploy/audit the live Cloudflare URL, then enable ads only after explicit approval and a future monetization activation EP/ADR.

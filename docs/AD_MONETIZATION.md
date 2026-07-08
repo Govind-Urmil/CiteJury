@@ -30,3 +30,8 @@ Before enabling real ads, create a future ADR covering:
 - Performance impact
 - Legal/compliance review
 - User experience boundaries
+
+
+## EP-044 update
+
+EP-044 adds hidden, first-party passive-revenue containers and fail-closed ad-readiness behaviour. Ads remain inactive and no third-party ad or analytics scripts are loaded. Future activation still requires Govind's explicit approval, provider/domain review, privacy update, CSP/header update, and live production validation.

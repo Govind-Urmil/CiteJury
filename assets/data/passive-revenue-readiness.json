@@ -1,0 +1,24 @@
+{
+  "ep": "EP-044",
+  "title": "Long-Term Passive Revenue Readiness",
+  "status": "complete-inactive",
+  "ads_active": false,
+  "analytics_active": false,
+  "site_operation": "Static browser files continue to work without a backend, database, scheduled jobs, server maintenance, or routine monitoring.",
+  "hosting_portability": [
+    "Cloudflare Workers Static Assets now",
+    "AWS S3/static website hosting later without website code changes"
+  ],
+  "revenue_readiness": [
+    "First-party ad containers are present but hidden while ads are inactive.",
+    "Revenue controller fails closed and keeps slots hidden when config is inactive or unavailable.",
+    "Ad placement avoids active citation workflow controls and citation explanations.",
+    "Future ad activation requires explicit approval, provider identifiers, privacy update, CSP/header update, and live-domain review."
+  ],
+  "no_maintenance_guardrails": [
+    "Citation generation does not depend on ad scripts.",
+    "Guide content does not depend on ad scripts.",
+    "Ad blockers or ad network outages must not break site navigation or citation generation.",
+    "No external analytics or advertising requests are made in this EP."
+  ]
+}

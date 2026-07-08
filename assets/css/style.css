@@ -125,3 +125,23 @@ img,svg{max-width:100%;height:auto}
   min-height: auto;
   padding: 0.55rem 0.8rem;
 }
+
+
+/* EP-044 passive revenue readiness */
+.revenue-slot{
+  width:min(calc(100% - 32px),var(--max));
+  margin:24px auto;
+  min-height:0;
+  border:0;
+}
+.revenue-slot:not([hidden]){
+  display:grid;
+  place-items:center;
+  min-height:96px;
+  border:1px dashed #aab6c4;
+  border-radius:var(--radius);
+  background:#fff;
+  color:var(--muted);
+  font-weight:800;
+}
+.revenue-slot[hidden]{display:none!important}
