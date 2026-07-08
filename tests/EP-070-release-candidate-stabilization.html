@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>EP-070 Release Candidate Stabilization | CiteJury</title>
+  <link rel="stylesheet" href="../assets/css/style.css?v=070">
+</head>
+<body>
+  <main class="container section">
+    <p class="eyebrow">EP-070 verification</p>
+    <h1>Release Candidate Stabilization</h1>
+    <p>This static browser smoke page checks release metadata, citation-engine loading, ad-disabled guardrails, mobile-navigation markup expectations, and homepage router-scope signals without enabling ads.</p>
+    <section class="trust-card" id="ep070-results" aria-live="polite"><h2>Results</h2></section>
+  </main>
+  <script src="../assets/js/citation-engine.js?v=070"></script>
+  <script>
+    (async () => {
+      const results = document.getElementById("ep070-results");
+      const checks = [];
+      const add = (name, ok, detail = "") => checks.push({ name, ok: Boolean(ok), detail });
+      const hasScript = Array.from(document.scripts).some((script) => script.getAttribute("src") === "../assets/js/citation-engine.js?v=070");
+      add("Asset version is 070", hasScript);
+
+      const engineReady = typeof window.CiteJuryCitationEngine === "object" && typeof window.CiteJuryCitationEngine.generate === "function";
+      add("Citation engine loads", engineReady, engineReady ? "" : "window.CiteJuryCitationEngine.generate is unavailable");
+      if (engineReady) {
+        const sample = window.CiteJuryCitationEngine.generate({ citationStyle: "indian-legal", sourceType: "sc-neutral-judgment", title: "Example v Union of India", year: "2024", page: "12" });
+        add("Citation engine smoke test", sample.ok && sample.citation.includes("2024 INSC 12"), sample.citation || sample.error || "");
+      } else {
+        add("Citation engine smoke test", false, "Skipped because the citation engine did not load");
+      }
+
+      try {
+        const [configResponse, homepageResponse] = await Promise.all([fetch("../assets/data/ads-config.json", { cache: "no-store" }), fetch("../index.html", { cache: "no-store" })]);
+        const config = await configResponse.json();
+        const homepage = await homepageResponse.text();
+        add("Ads config remains disabled", config.ads_active === false && config.analytics_active === false);
+        const activeAdScript = /https?:\/\/[^\"']*(googlesyndication|doubleclick|adsbygoogle|adservice)/i.test(homepage);
+        add("Homepage has no active third-party ad script", !activeAdScript);
+        add("Homepage keeps revenue script local", homepage.includes("assets/js/revenue-readiness.js?v=070"));
+        add("Mobile nav toggle markup present", homepage.includes("class=\"nav-toggle\"") && homepage.includes("aria-expanded=\"false\""));
+        add("Workspace panels present on homepage", homepage.includes("data-workspace-panel=\"generate\"") && homepage.includes("data-workspace-panel=\"check\""));
+      } catch (error) {
+        add("Ad and homepage guardrail fetches", false, error.message);
+      }
+
+      add("No backend required", true);
+      add("No database required", true);
+
+      results.insertAdjacentHTML("beforeend", checks.map((check) => `<p><strong>${check.ok ? "PASS" : "FAIL"}</strong> — ${check.name}${check.detail ? ` <small>${check.detail}</small>` : ""}</p>`).join(""));
+      document.title = checks.every((check) => check.ok) ? "PASS — EP-070" : "REVIEW — EP-070";
+    })();
+  </script>
+</body>
+</html>

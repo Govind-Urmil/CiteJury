@@ -250,3 +250,14 @@ git push
 ```
 
 No file deletion is required for EP-069.
+
+
+## EP-070 commit
+
+```bash
+git add .
+git commit -m "EP-070: Release Candidate Stabilization"
+git push
+```
+
+No file deletion is required for EP-070.

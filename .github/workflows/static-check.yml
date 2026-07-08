@@ -97,23 +97,45 @@ jobs:
           grep -q "citejury-social-preview.png" index.html
           grep -q 'og:image:type" content="image/png"' index.html
 
-      - name: Check EP-069 release metadata, SEO, and ad readiness
+      - name: Check EP-070 release metadata, SEO, ad readiness, and router scope
         run: |
-          grep -q "EP-069" tests/index.html
-          grep -q "assetVersion: \"069\"" tests/index.html
-          grep -q "EP-069-adsense-readiness-launch-seo.html" tests/index.html
-          grep -q "hasWorkspaceRouter" assets/js/app.js
+          grep -q "EP-070" tests/index.html
+          grep -q "assetVersion: \"070\"" tests/index.html
+          grep -q "EP-070-release-candidate-stabilization.html" tests/index.html
           grep -q "AdSense activation remains approval-gated" docs/ADVERTISEMENT_ACTIVATION.md
-          grep -q "EP-069" docs/EP-LEDGER.md
+          grep -q "EP-070" docs/EP-LEDGER.md
+          grep -q "2026-07-09" sitemap.xml
           python - <<'PY'
           from pathlib import Path
+          app = Path('assets/js/app.js').read_text()
+          guard = app.find('if (hasWorkspaceRouter)')
+          hash_listener = app.find('window.addEventListener("hashchange", applyWorkspaceFromHash)')
+          pop_listener = app.find('window.addEventListener("popstate", applyWorkspaceFromHash)')
+          apply = app.find('applyWorkspaceFromHash();', guard)
+          if guard == -1 or hash_listener == -1 or pop_listener == -1 or apply == -1:
+              raise SystemExit('Workspace hash router gate is incomplete')
+          if not (guard < hash_listener < apply and guard < pop_listener < apply):
+              raise SystemExit('Workspace hash listeners must remain inside hasWorkspaceRouter guard')
+
           guides = sorted(Path('guides').glob('*.html'))
           missing=[]
+          generic=[]
           for path in guides:
               text=path.read_text()
               for needle in ['property="og:title"', 'property="og:description"', 'property="og:image"', 'name="twitter:card"', 'name="twitter:image"']:
                   if needle not in text:
                       missing.append(f'{path}:{needle}')
+              if 'CiteJury guide for' in text:
+                  generic.append(str(path))
           if missing:
               raise SystemExit('Missing guide social metadata: '+'; '.join(missing))
+          if generic:
+              raise SystemExit('Generic guide metadata remains: '+'; '.join(generic))
+
+          ads_config = Path('assets/data/ads-config.json').read_text()
+          if '"ads_active": false' not in ads_config:
+              raise SystemExit('Ads must remain disabled in EP-070')
+          homepage = Path('index.html').read_text()
+          if 'googlesyndication' in homepage or 'adsbygoogle' in homepage or 'doubleclick' in homepage:
+              raise SystemExit('Homepage must not include active third-party ad scripts before explicit activation')
           PY

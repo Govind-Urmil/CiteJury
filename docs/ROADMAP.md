@@ -4,7 +4,7 @@
 EP-001 through EP-049. Live launch and final unattended-operation release complete.
 
 ## Next Planned EPs
-EP-069 should focus on AdSense and production-readiness only after EP-069 live verification and Codex review. Keep the release freeze active: no new product features unless they directly support launch, accessibility, SEO, security, or regression prevention. Deferred items remain citation rules single-source cleanup, WFVS hard-coded pass cleanup, sitemap per-page lastmod hygiene, header deduplication, and guide-page script splitting.
+EP-070 is the release-candidate stabilization release. After EP-070 live verification and Codex review, the next and intended final CiteJury launch release should be EP-071: Production & AdSense, focused on AdSense activation readiness, final CSP/privacy checks, Search Console readiness, and public v1.0 handoff. Keep the release freeze active: no new product features unless they directly support launch, monetization readiness, accessibility, SEO, security, or regression prevention.
 
 ## Architecture Rules
 - No backend or database without explicit approval.

@@ -51,3 +51,7 @@ EP-065/EP-066 keep the production Content Security Policy restricted to same-ori
 ## EP-069 launch-readiness update
 
 AdSense activation remains approval-gated. EP-069 improves documentation and launch SEO metadata but does not enable ads, does not add active third-party ad scripts, and does not loosen the production CSP. Real ad activation still requires owner approval, a real AdSense publisher ID, matching ads.txt, privacy review, CSP update, and live smoke testing.
+
+## EP-070 release-candidate update
+
+EP-070 keeps ads disabled while strengthening release checks for the homepage revenue path and `assets/data/ads-config.json`. AdSense remains approval-gated. EP-071 may activate production ads only after owner approval, a valid publisher ID, matching `ads.txt`, privacy review, CSP update, and live smoke testing.

@@ -19,6 +19,9 @@
   "sitemapUrl": "https://citejury.citejury.workers.dev/sitemap.xml",
   "latest_ep": "EP-067",
   "latest_title": "Launch Stability & SEO Hardening",
-  "updated": "2026-07-08",
-  "unattended_operation_release": true
+  "updated": "2026-07-09",
+  "unattended_operation_release": true,
+  "currentEp": "EP-070",
+  "assetVersion": "070",
+  "releaseName": "Release Candidate Stabilization"
 }

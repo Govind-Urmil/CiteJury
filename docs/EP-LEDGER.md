@@ -319,3 +319,14 @@ Next: manual Google Search Console/Bing setup, then future ad approval/activatio
 - Updated CI/static checks for EP-069 release metadata, guide social metadata, and ad-readiness documentation.
 - Bumped asset version to 069.
 - Preserved static/browser-only, zero-backend, zero-database, zero-API architecture.
+
+
+## EP-070 — Release Candidate Stabilization
+- Restored the stronger workspace hash-router CI guard so homepage hash listeners must remain inside the `hasWorkspaceRouter` gate.
+- Added a dedicated EP-070 release-candidate verification page that fails cleanly if the citation engine is missing.
+- Strengthened ad-disabled verification against `ads-config.json` and the homepage revenue path without enabling third-party ad scripts.
+- Updated sitemap lastmod values to 2026-07-09 for the RC stabilization release.
+- Replaced remaining generic guide meta descriptions with page-specific descriptions.
+- Updated WFVS release metadata to EP-070 / asset version 070 and preserved false-failure protections for homepage-only checks.
+- Bumped asset version to 070.
+- Preserved static/browser-only, zero-backend, zero-database, zero-API architecture.

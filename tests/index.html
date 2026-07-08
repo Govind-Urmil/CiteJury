@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="robots" content="noindex,nofollow">
   <title>Website Factory Verification Suite | CiteJury</title>
-  <link rel="stylesheet" href="../assets/css/style.css?v=069">
+  <link rel="stylesheet" href="../assets/css/style.css?v=070">
   <style>
     .wfvs-shell{max-width:1100px;margin:0 auto;padding:2rem 1rem}
     .wfvs-hero,.wfvs-card{border:1px solid rgba(17,24,39,.12);border-radius:1rem;background:#fff;padding:1rem;margin:1rem 0}
@@ -28,7 +28,7 @@
     </section>
 
     <section class="wfvs-grid">
-      <article class="wfvs-card"><h2>Release</h2><p><strong>Project:</strong> CiteJury</p><p><strong>EP:</strong> EP-069</p><p><strong>Asset:</strong> <span id="asset-version">069</span></p></article>
+      <article class="wfvs-card"><h2>Release</h2><p><strong>Project:</strong> CiteJury</p><p><strong>EP:</strong> EP-070</p><p><strong>Asset:</strong> <span id="asset-version">070</span></p></article>
       <article class="wfvs-card"><h2>ADR</h2><div id="adr-tests"></div></article>
       <article class="wfvs-card"><h2>Technical</h2><div id="technical-tests"></div></article>
       <article class="wfvs-card"><h2>Functional</h2><div id="functional-tests"></div></article>
@@ -45,13 +45,13 @@
     </section>
   
     <section class="test-card">
-      <h2>EP-069 AdSense Readiness & Launch SEO</h2>
-      <p>Checks release metadata, asset versioning, social metadata, ad readiness, and launch SEO guardrails.</p>
-      <p><a href="EP-069-adsense-readiness-launch-seo.html">Open EP-069 verification</a></p>
+      <h2>EP-070 Release Candidate Stabilization</h2>
+      <p>Checks release metadata, asset versioning, ad-disabled guardrails, mobile navigation readiness, and RC stabilization gates.</p>
+      <p><a href="EP-070-release-candidate-stabilization.html">Open EP-070 verification</a></p>
     </section>
 </main>
 
-  <script src="../assets/js/citation-engine.js?v=069"></script>
+  <script src="../assets/js/citation-engine.js?v=070"></script>
   <script>
     const tests = [];
     const add = (group, name, ok, detail = "") => tests.push({ group, name, ok: Boolean(ok), detail });
@@ -67,22 +67,30 @@
     add("Technical", "robots.txt expected", true);
     add("Technical", "sitemap.xml expected", true);
     add("Technical", "404.html expected", true);
-    add("Technical", "Asset version 069", Array.from(document.scripts).some((script) => script.getAttribute("src") === "../assets/js/citation-engine.js?v=069"));
+    add("Technical", "Asset version 070", Array.from(document.scripts).some((script) => script.getAttribute("src") === "../assets/js/citation-engine.js?v=070"));
 
     const engine = window.CiteJuryCitationEngine;
-    const genSci = engine.generate({citationStyle:"indian-legal",sourceType:"sc-neutral-judgment",title:"Example v Union of India",year:"2023",page:"154"});
-    const genScc = engine.generate({citationStyle:"scc",sourceType:"judgment",title:"Example v Union of India",year:"2023",volume:"7",page:"154"});
-    const genAir = engine.generate({citationStyle:"air",sourceType:"judgment",title:"Example v Union of India",year:"2023",court:"SC",page:"154"});
-    add("Functional", "Generator: SCI neutral", genSci.ok && genSci.citation.includes("INSC"));
-    add("Functional", "Generator: canonical SCI neutral spacing", genSci.ok && genSci.citation.includes("2023 INSC 154"));
-    add("Functional", "Generator: SCC", genScc.ok && genScc.citation.includes("SCC"));
-    add("Functional", "Generator: AIR", genAir.ok && genAir.citation.includes("AIR"));
-    add("Functional", "Rule specs available", typeof engine.getRuleSpec === "function");
+    if (engine && typeof engine.generate === "function") {
+      const genSci = engine.generate({citationStyle:"indian-legal",sourceType:"sc-neutral-judgment",title:"Example v Union of India",year:"2023",page:"154"});
+      const genScc = engine.generate({citationStyle:"scc",sourceType:"judgment",title:"Example v Union of India",year:"2023",volume:"7",page:"154"});
+      const genAir = engine.generate({citationStyle:"air",sourceType:"judgment",title:"Example v Union of India",year:"2023",court:"SC",page:"154"});
+      add("Functional", "Generator: SCI neutral", genSci.ok && genSci.citation.includes("INSC"));
+      add("Functional", "Generator: canonical SCI neutral spacing", genSci.ok && genSci.citation.includes("2023 INSC 154"));
+      add("Functional", "Generator: SCC", genScc.ok && genScc.citation.includes("SCC"));
+      add("Functional", "Generator: AIR", genAir.ok && genAir.citation.includes("AIR"));
+      add("Functional", "Rule specs available", typeof engine.getRuleSpec === "function");
+    } else {
+      add("Functional", "Generator: SCI neutral", false, "Citation engine unavailable");
+      add("Functional", "Generator: canonical SCI neutral spacing", false, "Citation engine unavailable");
+      add("Functional", "Generator: SCC", false, "Citation engine unavailable");
+      add("Functional", "Generator: AIR", false, "Citation engine unavailable");
+      add("Functional", "Rule specs available", false, "Citation engine unavailable");
+    }
     add("Functional", "Citation Anatomy container expected on homepage", true, "Verified on index.html during live/browser smoke checks.");
     add("Functional", "Citation Checker expected on homepage", true, "Not asserted on the WFVS test page to avoid false failures.");
     add("Functional", "Mode switch expected on homepage", true, "Not asserted on the WFVS test page to avoid false failures.");
 
-    ["EP-058 Citation Anatomy", "EP-059 Authority Guides", "EP-060 Visual Learning", "EP-061 Citation Checker", "EP-064A WFVS", "EP-066 Navigation Accessibility", "EP-067 Launch Stability", "EP-069 AdSense Readiness & Launch SEO"].forEach((name) => add("History", name, true));
+    ["EP-058 Citation Anatomy", "EP-059 Authority Guides", "EP-060 Visual Learning", "EP-061 Citation Checker", "EP-064A WFVS", "EP-066 Navigation Accessibility", "EP-067 Launch Stability", "EP-070 Release Candidate Stabilization"].forEach((name) => add("History", name, true));
 
     const groups = ["ADR", "Technical", "Functional", "History"];
     groups.forEach((group) => {
@@ -98,7 +106,7 @@
       document.getElementById("dev-panel").hidden = false;
       document.getElementById("dev-output").textContent = JSON.stringify({
         userAgent: navigator.userAgent,
-        assetVersion: "069",
+        assetVersion: "070",
         url: location.href,
         testsRun: tests.length,
         passed
