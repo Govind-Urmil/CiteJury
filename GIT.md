@@ -235,3 +235,7 @@ Apply over the repository and commit once. Run `tests/index.html` before pushing
 
 ## EP-064
 Apply over the repository and commit once. Run `tests/index.html` and `tests/EP-064-stability-trust-foundation.html` before pushing. No file deletions required.
+
+
+## EP-064A
+Apply over EP-064 and commit once. Clear cache or use `?v=064a` after deployment.

@@ -240,3 +240,7 @@ Public UX Polish completed. Next planned direction: authority-building/compariso
 
 ## EP-064 — Completed
 Stability and foundation fixes completed. Next direction should return to growth and authority work unless release review finds a blocker.
+
+
+## EP-064A — Completed
+Immediate regression hotfix for mobile nav and checker workspace behavior.

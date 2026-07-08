@@ -959,18 +959,6 @@
   };
 
   modeButtons.forEach((button) => {
-      const active = button.dataset.modeTarget === mode;
-      button.classList.toggle("active", active);
-      button.setAttribute("aria-pressed", String(active));
-    });
-    workspacePanels.forEach((panel) => {
-      panel.hidden = panel.dataset.workspacePanel !== mode;
-    });
-    const target = document.querySelector(`[data-workspace-panel="${mode}"]`);
-    if (target) target.scrollIntoView({ behavior: prefersReducedMotion() ? "auto" : "smooth", block: "start" });
-  };
-
-  modeButtons.forEach((button) => {
     button.addEventListener("click", () => switchWorkspaceMode(button.dataset.modeTarget, { updateHash: true, focus: true }));
   });
 

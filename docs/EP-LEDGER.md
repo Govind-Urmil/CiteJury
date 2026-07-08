@@ -255,3 +255,10 @@ Next: manual Google Search Console/Bing setup, then future ad approval/activatio
 - Added guide meta descriptions, sitemap lastmod metadata, and stronger WFVS checks.
 - Added Website Factory Coding Standard and Technical Debt Register.
 - Bumped asset version to 064.
+
+
+## EP-064A — Mobile Menu and Checker Hotfix
+- Fixed mobile menu being open by default after EP-064.
+- Restored closed-by-default mobile navigation with `.site-nav.open` toggle behavior.
+- Removed leftover malformed workspace-switch block that crashed homepage JavaScript and broke Check/`#checker` behavior.
+- Bumped asset version to 064a.

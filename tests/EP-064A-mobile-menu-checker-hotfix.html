@@ -1,0 +1,14 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>EP-064A Hotfix Checks</title></head>
+<body><pre id="results"></pre>
+<script src="../assets/js/citation-engine.js?v=064a"></script>
+<script>
+const engine = window.CiteJuryCitationEngine;
+const sci = engine.generate({citationStyle:"indian-legal",sourceType:"sc-neutral-judgment",title:"Example v Union of India",year:"2023",page:"154"});
+const checks = [
+  ["JS engine loaded", typeof engine.generate === "function"],
+  ["SCI neutral spaced", sci.ok && sci.citation.includes("2023 INSC 154")],
+  ["Hotfix asset version loaded", document.querySelector('script[src*="v=064a"]') !== null]
+];
+document.getElementById("results").textContent = checks.map(([n,o])=>`${o?"PASS":"FAIL"}: ${n}`).join("\n");
+</script></body></html>

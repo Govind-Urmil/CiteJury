@@ -161,3 +161,7 @@ Public UX polish adds a Generate/Check mode switch, curated examples, disabled a
 
 ### EP-064
 Stability release addressing checker deep links, safe rendering, mobile navigation, accessibility, clipboard fallback, SCI neutral consistency, meaningful WFVS checks, and Website Factory coding standards.
+
+
+### EP-064A
+Hotfix restoring closed-by-default mobile navigation and repairing checker workspace JavaScript after EP-064.

@@ -215,7 +215,8 @@ button:disabled{opacity:.52;cursor:not-allowed}
 .sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 .checker-form textarea{border:1px solid rgba(17,24,39,.2);border-radius:.85rem;padding:.8rem;font:inherit;background:#fff}
 @media (max-width: 760px){
-  .site-nav{display:flex!important;flex-wrap:wrap;gap:.45rem;justify-content:flex-start}
+  .site-nav{display:none;flex-direction:column;gap:.45rem;width:100%;padding-top:.75rem}
+  .site-nav.open{display:flex}
   .nav-shell{align-items:flex-start}
-  .site-nav a{padding:.35rem .5rem;border-radius:.6rem;background:rgba(15,118,110,.08)}
+  .site-nav a{padding:.5rem .6rem;border-radius:.6rem;background:rgba(15,118,110,.08)}
 }

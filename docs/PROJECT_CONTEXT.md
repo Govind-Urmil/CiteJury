@@ -202,3 +202,7 @@ Public UX polish completed using EP-062 as the source of truth and Codex's ZIP a
 
 ## EP-064
 Stability, Trust & Foundation release completed. This release addresses Codex review findings around deep links, mobile navigation, user-input rendering safety, accessibility, neutral citation consistency, meaningful WFVS checks, and Website Factory coding standards.
+
+
+## EP-064A
+Hotfix for EP-064 regression: mobile nav no longer opens by default and the checker mode/deep-link no longer crashes due to malformed JavaScript.
