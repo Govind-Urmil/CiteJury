@@ -1,4 +1,9 @@
-Contact: mailto:security@example.com
-Preferred-Languages: en
-Canonical: https://example.com/.well-known/security.txt
-Policy: https://example.com/trust.html
+# CiteJury security contact placeholder
+# This file is intentionally not a valid public security.txt yet.
+# Replace with real contact and canonical URL only after domain/contact approval.
+#
+# Example future format:
+# Contact: mailto:security@citejury.com
+# Preferred-Languages: en
+# Canonical: https://citejury.com/.well-known/security.txt
+# Policy: https://citejury.com/trust.html

@@ -31,4 +31,5 @@
 | EP-027 | Full repository cleanup and dead-code audit | Complete |
 | EP-028 | Performance, SEO and accessibility final audit | Complete |
 | EP-029 | Monetization and production deployment readiness | Complete |
-| EP-030 | Final Gold Release | Ready |
+| EP-030 | Final Gold Release | Complete |
+| EP-031 | Repo and launch safety fixes | Ready |

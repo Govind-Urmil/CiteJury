@@ -2,3 +2,21 @@ node_modules/
 dist/
 .vscode/
 .DS_Store
+
+# EP-031 safety ignores
+.git/
+.env
+.env.*
+*.pem
+*.key
+*.p12
+*.pfx
+id_rsa
+id_ed25519
+aws-credentials
+.aws/
+service-account*.json
+*secret*
+*token*
+build/
+Thumbs.db

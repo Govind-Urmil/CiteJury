@@ -1,27 +1,23 @@
 # CiteJury Project Context
 
 ## Current Status
-Completed EP-001 through EP-030.
-
-## Release State
-Gold Release package generated. Planned engineering roadmap complete.
+Completed EP-001 through EP-031.
 
 ## Locked Architecture
-Static, browser-first, free-to-host-first. No backend, database, Python runtime, Node runtime, build step, paid infrastructure, ads, analytics, or architecture change without explicit approval.
+Static, browser-first, free-to-host-first. No backend, database, Python runtime, Node runtime, build step, paid infrastructure, active ads, analytics, or architecture change without explicit approval.
 
-## EP-030
-Final Gold Release:
-- Adds GOLD_RELEASE.md
-- Adds DEPLOYMENT_HANDOFF.md
-- Adds MAINTENANCE_MODE.md
-- Adds browser-readable Gold Release checklist
-- Adds gold-release.json
-- Completes planned roadmap
+## EP-031
+Repo and launch safety fixes:
+- Fixes GitHub Actions false-positive risk
+- Makes security.txt placeholder intentionally inactive
+- Adds production sitemap template with absolute URLs
+- Strengthens .gitignore for secrets and generated files
+- Adds launch safety documentation
 - No backend or architecture change
 - No file deletion required
 
-## Next
-Deploy CiteJury to an approved static host. After launch, create new EPs only for bugs, verified accuracy corrections, useful content, hosting/domain work, or explicitly approved monetization changes.
+## Citation Authority Priority
+Citation authority and reliability are now the main product priority. Starting EP-032, citation rules should be moved toward a stronger specification, provenance, validation, and test framework.
 
-## Workflow Rule
-Govind applies EPs by copying package contents over the existing Git repository. Any future file deletion must include explicit git rm commands.
+## Next
+EP-032: Citation Authority Foundation.
