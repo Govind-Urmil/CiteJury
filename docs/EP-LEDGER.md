@@ -169,3 +169,9 @@ Next: manual Google Search Console/Bing setup, then future ad approval/activatio
 - Disabled native browser blocking validation for the citation generator form.
 - Ensured failed generation focuses and scrolls to the actual invalid input field.
 - Preserved browser-only static architecture and public ad inactivity.
+
+
+## EP-053 — Cross-Browser Validation Navigation Fix
+- Replaced direct scrollIntoView validation navigation with calculated window.scrollTo positioning.
+- Added delayed post-focus scroll correction for mobile Chrome visual viewport changes.
+- Preserved reduced-motion behavior, accessibility focus, and no-backend/no-build architecture.

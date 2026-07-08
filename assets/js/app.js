@@ -75,6 +75,25 @@
     return "title";
   };
 
+  const prefersReducedMotion = () =>
+    window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  const getHeaderOffset = () => {
+    const header = document.querySelector(".site-header");
+    const headerHeight = header ? header.getBoundingClientRect().height : 0;
+    return Math.max(16, Math.ceil(headerHeight + 18));
+  };
+
+  const scrollFieldIntoView = (field) => {
+    const rect = field.getBoundingClientRect();
+    const viewportHeight = window.visualViewport ? window.visualViewport.height : window.innerHeight;
+    const targetY = window.pageYOffset + rect.top - Math.max(getHeaderOffset(), Math.round(viewportHeight * 0.22));
+    window.scrollTo({
+      top: Math.max(0, targetY),
+      behavior: prefersReducedMotion() ? "auto" : "smooth"
+    });
+  };
+
   const focusInvalidField = (result) => {
     const fieldName = inferInvalidField(result);
     const field = document.querySelector(fieldSelectors[fieldName] || fieldSelectors.title);
@@ -83,14 +102,20 @@
     field.setAttribute("aria-invalid", "true");
     field.setAttribute("aria-describedby", [field.getAttribute("aria-describedby"), "form-error"].filter(Boolean).join(" "));
 
-    // Focus first for keyboard/assistive-technology users, then scroll the
-    // actual invalid input into the visible center of the page.
-    try {
-      field.focus({ preventScroll: true });
-    } catch {
-      field.focus();
-    }
-    field.scrollIntoView({ behavior: "smooth", block: "center", inline: "nearest" });
+    // Mobile Chrome can ignore a scroll that happens immediately before/after
+    // focusing an input because the virtual keyboard changes the visual viewport.
+    // Use an explicit page-position calculation, then repeat after focus/layout
+    // stabilization so the invalid field remains visible above the keyboard.
+    scrollFieldIntoView(field);
+    window.setTimeout(() => {
+      try {
+        field.focus({ preventScroll: true });
+      } catch {
+        field.focus();
+      }
+      scrollFieldIntoView(field);
+      window.setTimeout(() => scrollFieldIntoView(field), 260);
+    }, 80);
   };
 
   const getData = (formData) => ({

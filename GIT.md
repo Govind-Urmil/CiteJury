@@ -187,3 +187,7 @@ Apply over the existing repository, then commit once. No file deletions are requ
 
 ## EP-052
 Apply the package over the repository and commit once. No file deletion is required.
+
+
+## EP-053
+Apply this package over the repository and commit once. No file deletions are required.

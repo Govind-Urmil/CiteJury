@@ -113,3 +113,7 @@ Validation errors now focus the relevant form field so users can correct input f
 
 ### EP-052
 The generator now bypasses native blocking validation and uses CiteJury validation to focus and scroll to the invalid input field.
+
+
+### EP-053
+Validation errors now navigate more reliably to the invalid field on mobile Chrome and desktop browsers.

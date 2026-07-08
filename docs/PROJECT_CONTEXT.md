@@ -154,3 +154,7 @@ Validation navigation correction: failed generation now scrolls to and focuses t
 
 ## EP-052
 Fixed validation navigation by disabling native browser blocking validation on the citation form and routing invalid submissions through CiteJury field-level validation/focus logic.
+
+
+## EP-053
+Cross-browser validation navigation fix: invalid citation fields now use mobile-safe calculated scrolling with delayed post-focus correction for Chrome on mobile virtual-keyboard behavior. Static/browser-only architecture remains unchanged.

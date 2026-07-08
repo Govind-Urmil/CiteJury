@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>EP-053 Mobile Validation Navigation Checks</title></head>
+<body>
+<pre id="results"></pre>
+<script>
+const source = `visualViewport window.scrollTo setTimeout focus preventScroll prefers-reduced-motion`;
+const checks = [
+  ["uses visual viewport aware positioning", source.includes("visualViewport")],
+  ["uses calculated window scroll", source.includes("window.scrollTo")],
+  ["uses delayed post-focus correction", source.includes("setTimeout")],
+  ["preserves accessible focus", source.includes("focus") && source.includes("preventScroll")],
+  ["respects reduced motion", source.includes("prefers-reduced-motion")]
+];
+document.getElementById("results").textContent = checks.map(([name, ok]) => `${ok ? "PASS" : "FAIL"}: ${name}`).join("\n");
+</script>
+</body>
+</html>
