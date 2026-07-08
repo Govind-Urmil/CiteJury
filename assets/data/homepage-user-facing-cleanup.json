@@ -1,0 +1,22 @@
+{
+  "ep": "EP-041",
+  "title": "Homepage user-facing cleanup",
+  "status": "complete",
+  "purpose": "Remove internal project, hosting, backend-maintenance, and reserved monetization messaging from the public homepage.",
+  "public_homepage_removed_sections": [
+    "monetization-ready",
+    "launch-readiness"
+  ],
+  "homepage_internal_terms_removed": [
+    "static hosting",
+    "backend",
+    "repository",
+    "free-to-host",
+    "monetization-ready",
+    "static launch ready"
+  ],
+  "architecture_changed": false,
+  "ads_active": false,
+  "analytics_active": false,
+  "manual_cleanup_required": []
+}

@@ -1,11 +1,12 @@
 {
   "site": "CiteJury",
-  "version": "EP-040",
+  "version": "EP-041",
   "architecture": "static-browser-first",
   "backend": false,
   "buildStepRequired": false,
   "hostingPreference": "free-static-first",
   "monetization": "reserved-not-active-until-explicit-approval",
   "futureReuse": true,
-  "goldRelease": true
+  "goldRelease": true,
+  "homepageCleanup": "internal-public-copy-removed"
 }

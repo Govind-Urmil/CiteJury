@@ -1,6 +1,6 @@
 {
-  "version": "EP-040",
-  "stage": "final-production-gold-release",
+  "version": "EP-041",
+  "stage": "maintenance-homepage-user-facing-cleanup",
   "backend": false,
   "database": false,
   "python_runtime_required": false,
@@ -10,5 +10,5 @@
   "analytics_active": false,
   "hosting_model": "static-free-host-first",
   "manual_cleanup_required": [],
-  "final_planned_ep": true
+  "final_planned_ep": false
 }

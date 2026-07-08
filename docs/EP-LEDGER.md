@@ -43,3 +43,14 @@
 | EP-038 | Security, Privacy and Production Hardening | Complete |
 | EP-039 | Deployment Release Candidate | Complete |
 | EP-040 | Final Production Gold Release | Complete |
+
+## EP-041 deliverables
+
+- Removed public homepage `launch-readiness` and `monetization-ready` sections.
+- Removed homepage references to static hosting, backend, repository visibility, free-hosting, and internal monetization-readiness positioning.
+- Reworded homepage privacy and FAQ copy to be user-facing.
+- Added `assets/data/homepage-user-facing-cleanup.json`.
+- Added `docs/HOMEPAGE_USER_FACING_CLEANUP.md`.
+- Preserved architecture, citation behaviour, inactive ads, and inactive analytics.
+
+Next: Maintenance mode unless Govind approves another focused change.

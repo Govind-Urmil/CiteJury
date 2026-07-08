@@ -104,3 +104,12 @@ Next: Maintenance mode unless Govind approves a new EP series.
 - Preserved static/browser-only architecture with no backend, database, build step, runtime dependency, active ads, or active analytics.
 
 Next: Maintenance mode unless Govind approves a new EP series.
+
+
+## EP-041 Homepage User-Facing Cleanup
+
+Status: Complete.
+
+EP-041 is a focused maintenance change after the final production gold release. It removes internal launch/hosting/backend/monetization-readiness copy from the public homepage while preserving the underlying static/browser-first architecture and inactive ad/analytics posture.
+
+Next: Maintenance mode unless Govind approves another focused change.

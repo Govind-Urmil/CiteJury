@@ -105,3 +105,14 @@ git push
 ```
 
 No file deletion is required for EP-040.
+
+
+## EP-041 Commit
+
+```bash
+git add .
+git commit -m "EP-041: Clean up public homepage messaging"
+git push
+```
+
+No file deletion is required for EP-041.

@@ -57,3 +57,8 @@ EP-039 prepares CiteJury for deployment review with explicit go-live steps, rele
 EP-040 completes the planned post-audit roadmap. CiteJury remains static/browser-only with no backend, database, Python runtime, Node runtime, build step, active ads, or active analytics. The release adds final gold-release metadata, long-term unattended-operation handoff documentation, and a browser-only final production validation page.
 
 Before public go-live, replace placeholder sitemap URLs with the approved production domain and verify security headers on the selected static host.
+
+
+## EP-041 Homepage User-Facing Cleanup
+
+EP-041 removes internal launch, hosting, backend-maintenance, repository, and reserved monetization-readiness language from the public homepage. The underlying static/browser-first architecture and inactive ads/analytics posture remain unchanged.

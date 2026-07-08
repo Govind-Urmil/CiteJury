@@ -87,3 +87,12 @@ Long-term unattended operation remains a core product requirement: after launch,
 No files are removed in EP-040.
 
 Next state after EP-040 commit: maintenance mode unless Govind approves a new EP series.
+
+
+## EP-041 Homepage User-Facing Cleanup
+
+EP-041 was generated after Govind confirmed EP-040 was committed and requested removal of internal homepage content. The package removes the public homepage block about static launch readiness/backend maintenance and removes homepage static-hosting/internal monetization-readiness wording. This is a user-facing copy cleanup only. The architecture, docs, tests, inactive ads, inactive analytics, and long-term unattended-operation strategy remain unchanged.
+
+No files are removed in EP-041.
+
+Next state after EP-041 commit: maintenance mode unless Govind approves another focused change.
