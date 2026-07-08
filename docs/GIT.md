@@ -32,3 +32,13 @@ git push
 ```
 
 Required file deletions: none.
+
+
+## EP-034
+```bash
+git add .
+git commit -m "EP-034: Overhaul international citation engine"
+git push
+```
+
+No file deletion is required for EP-034.

@@ -1,5 +1,5 @@
 {
-  "version": "EP-033",
+  "version": "EP-034",
   "purpose": "Authoritative/provenance registry for CiteJury citation rules. This file is static data only and is not loaded by the public website unless a future EP explicitly wires it into the UI.",
   "lastReviewed": "2026-07-08",
   "architecture": "static-browser-first",
@@ -93,6 +93,33 @@
       "sourceUrl": "https://www.scconline.com/",
       "supportLevel": "publisher-source-observed",
       "notes": "Publisher source for SCC law reports and legal research. CiteJury uses only a narrow common core SCC component pattern and does not claim full editorial SCC style coverage."
+    },
+    {
+      "id": "bluebook-official",
+      "name": "The Bluebook: A Uniform System of Citation",
+      "jurisdiction": "United States",
+      "authorityType": "official/commercial-style-guide",
+      "sourceUrl": "https://www.legalbluebook.com/",
+      "supportLevel": "authority-registered-not-implemented",
+      "notes": "Official Bluebook source observed. Public Bluebook output is not enabled because full, reliable support requires a dedicated US legal field model and tests."
+    },
+    {
+      "id": "aglc4-official-pdf",
+      "name": "Australian Guide to Legal Citation, 4th edition",
+      "jurisdiction": "Australia",
+      "authorityType": "official-style-guide-pdf",
+      "sourceUrl": "https://law.unimelb.edu.au/__data/assets/pdf_file/0005/3181325/AGLC4-with-Bookmarks-1.pdf",
+      "supportLevel": "authority-registered-not-implemented",
+      "notes": "Official AGLC4 PDF observed from Melbourne Law School/MULR. Registered for future implementation; no public AGLC style claim yet."
+    },
+    {
+      "id": "mcgill-guide-official",
+      "name": "Canadian Guide to Uniform Legal Citation, 10th edition",
+      "jurisdiction": "Canada",
+      "authorityType": "official/commercial-style-guide",
+      "sourceUrl": "https://lawjournal.mcgill.ca/cite-guide/",
+      "supportLevel": "authority-registered-not-implemented",
+      "notes": "McGill Law Journal identifies the 10th edition as the Canadian Guide. Registered for future implementation; no public McGill output yet."
     }
   ]
 }

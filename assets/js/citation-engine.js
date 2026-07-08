@@ -1,6 +1,6 @@
 /*
   CiteJury Citation Engine
-  EP-033
+  EP-034
   Browser-first, static-site compatible, no backend dependency.
 */
 
@@ -74,15 +74,76 @@
       ]
     },
     "oscola:judgment": {
-      id: "oscola-judgment-provisional-v1",
-      status: "provisional-helper",
-      authorityFamily: "Oxford Law Faculty OSCOLA sources",
-      confidence: "medium-low",
+      id: "oscola-uk-case-scoped-v1",
+      status: "verified-scoped-rule",
+      authorityFamily: "Oxford Law Faculty OSCOLA quick reference / OSCOLA 4th edition",
+      confidence: "high-for-field-order-medium-for-user-entered-neutral-and-report-data",
       required: ["title"],
       recommended: ["year", "reporter", "page"],
       limitations: [
-        "Current output is OSCOLA-like, not a complete OSCOLA implementation.",
-        "EP-034 should implement full scoped OSCOLA rules and tests."
+        "Covers only a scoped OSCOLA UK case pattern: party names, optional neutral citation, optional law report, optional court for cases without neutral citation, and optional paragraph pinpoint.",
+        "Use the Court / neutral citation field for a UK neutral citation such as [2008] UKHL 13. If no neutral citation exists, use it for court information such as HL or CA.",
+        "CiteJury does not verify that the neutral citation, law report, or party names match the real case."
+      ]
+    },
+    "oscola:legislation": {
+      id: "oscola-uk-legislation-scoped-v1",
+      status: "verified-scoped-rule",
+      authorityFamily: "Oxford Law Faculty OSCOLA quick reference / OSCOLA 4th edition",
+      confidence: "medium-for-basic-act-and-section-pattern",
+      required: ["title", "year"],
+      recommended: ["page"],
+      limitations: [
+        "Covers only basic UK Act/instrument title + year + optional section/provision formatting.",
+        "Does not cover statutory instruments, devolved legislation, EU materials, or complex amendment history."
+      ]
+    },
+    "oscola:book": {
+      id: "oscola-book-scoped-v1",
+      status: "verified-scoped-rule",
+      authorityFamily: "Oxford Law Faculty OSCOLA quick reference / OSCOLA 4th edition",
+      confidence: "medium-for-basic-book-pattern",
+      required: ["title", "reporter", "year"],
+      recommended: ["page"],
+      limitations: [
+        "Uses the current field model: Title field must contain author + title as the user wants it displayed; Reporter / publisher contains publisher, edition if needed, and other publication details.",
+        "Does not yet separately model author, editor, edition, place, chapter, or bibliography rearrangement."
+      ]
+    },
+    "oscola:journal": {
+      id: "oscola-journal-article-scoped-v1",
+      status: "verified-scoped-rule",
+      authorityFamily: "Oxford Law Faculty OSCOLA quick reference / OSCOLA 4th edition",
+      confidence: "medium-for-basic-article-pattern",
+      required: ["title", "year", "reporter", "page"],
+      recommended: [],
+      limitations: [
+        "Uses the current field model: Title field must contain author + article title as the user wants it displayed; Reporter contains volume/issue and journal abbreviation/name.",
+        "Does not yet separately model author, article title, volume, issue, journal, first page, pinpoint, DOI, or bibliography behavior."
+      ]
+    },
+    "aglc:judgment": {
+      id: "aglc-australian-case-provisional-v1",
+      status: "authority-registered-not-public-default",
+      authorityFamily: "Australian Guide to Legal Citation 4th edition",
+      confidence: "low-until-dedicated-aglc-field-model",
+      required: ["title"],
+      recommended: ["year", "reporter", "page", "court"],
+      limitations: [
+        "Authority is registered for future expansion, but CiteJury does not yet expose a dedicated AGLC public style in the homepage form.",
+        "Do not rely on generic output for formal Australian citation until a dedicated AGLC rule and browser corpus are added."
+      ]
+    },
+    "bluebook:judgment": {
+      id: "bluebook-us-case-provisional-v1",
+      status: "authority-registered-not-public-default",
+      authorityFamily: "The Bluebook: A Uniform System of Citation",
+      confidence: "low-until-dedicated-bluebook-field-model",
+      required: ["title"],
+      recommended: ["volume", "reporter", "page", "court", "year"],
+      limitations: [
+        "Authority is registered for future expansion, but CiteJury does not yet expose a dedicated Bluebook public style in the homepage form.",
+        "The Bluebook is commercially published and highly detailed; CiteJury must add a dedicated field model and tests before claiming support."
       ]
     },
     "default": {
@@ -116,11 +177,24 @@
         "indian-legal": "Indian Legal",
         "scc": "SCC-style",
         "air": "AIR-style",
-        "oscola": "OSCOLA-like"
+        "oscola": "OSCOLA",
+        "aglc": "AGLC-scoped",
+        "bluebook": "Bluebook-scoped"
       }[style] || "Indian Legal";
     },
     neutralToken(data) {
       return `${data.year}INSC${data.page}`;
+    },
+    looksLikeUkNeutral(value) {
+      return /^\[\d{4}\]\s+(UKSC|UKHL|EWCA\s+Civ|EWCA\s+Crim|EWHC|UKPC|UKUT|EWFC)\s+\d+[A-Za-z]?/i.test(clean(value));
+    },
+    oscolaReporter(data) {
+      if (!data.reporter && !data.page) return "";
+      const year = data.year ? `[${data.year}]` : "";
+      return helpers.join([year, data.volume, data.reporter, data.page]);
+    },
+    oscolaPinpoint(data) {
+      return data.volume && /^para(graph)?\s+/i.test(data.volume) ? `[${data.volume.replace(/^para(graph)?\s+/i, "")}]` : "";
     }
   };
 
@@ -152,11 +226,26 @@
     "oscola": {
       apply(base, data) {
         if (data.sourceType === "judgment") {
-          return helpers.finish(helpers.join([data.title || "Untitled case", data.year ? `[${data.year}]` : "", data.reporter, data.page]));
+          const neutralOrCourt = data.court;
+          const neutral = helpers.looksLikeUkNeutral(neutralOrCourt) ? neutralOrCourt : "";
+          const court = neutral ? "" : neutralOrCourt;
+          const report = helpers.oscolaReporter(data);
+          const pinpoint = helpers.oscolaPinpoint(data);
+          const suffix = court && !neutral ? ` (${court})` : "";
+          return helpers.finish(helpers.join([data.title || "Untitled case", neutral, report, pinpoint]) + suffix);
+        }
+        if (data.sourceType === "legislation") {
+          return helpers.finish(helpers.join([data.title, data.year, data.page ? `s ${data.page}` : ""]));
+        }
+        if (data.sourceType === "book") {
+          return helpers.finish(`${data.title}${data.reporter || data.year ? ` (${helpers.join([data.reporter, data.year], ", ")})` : ""}${data.page ? ` ${data.page}` : ""}`);
+        }
+        if (data.sourceType === "journal") {
+          return helpers.finish(helpers.join([data.title, data.year ? `[${data.year}]` : "", data.reporter, data.page]));
         }
         return base;
       },
-      note: "OSCOLA-like output uses a bracketed year style for judgments where supplied."
+      note: "OSCOLA output is now scoped to verified UK case ordering and basic legislation/book/journal patterns from Oxford OSCOLA sources."
     }
   };
 
@@ -317,6 +406,21 @@
     if (data.citationStyle === "air" && data.sourceType === "judgment") {
       if (!digitsOnly(data.page)) return "AIR-style judgment citations require a numeric first page, for example 27.";
       if (!/^[A-Za-z]{2,12}$/.test(data.court)) return "AIR-style judgment citations require a court abbreviation, for example SC, Bom, Del, Cal, Mad, All, Ker, or Kant.";
+    }
+
+    if (data.citationStyle === "oscola" && data.sourceType === "judgment") {
+      if (data.court && /^\d{4}\s+(UKSC|UKHL|EWCA|EWHC|UKPC)/i.test(data.court)) {
+        return "For OSCOLA neutral citations, include square brackets around the neutral citation year, for example [2008] UKHL 13.";
+      }
+      if (data.reporter && !data.page) return "OSCOLA case citations with a law report should include the first page.";
+    }
+
+    if (data.citationStyle === "oscola" && data.sourceType === "legislation" && !data.year) {
+      return "OSCOLA legislation citations require the legislation year.";
+    }
+
+    if (data.citationStyle === "oscola" && ["book", "journal"].includes(data.sourceType) && !data.reporter) {
+      return "OSCOLA book and journal helpers require publisher or journal details in the Reporter / publisher / website field.";
     }
 
     if (data.sourceType === "website" && data.page && !/^https?:\/\//i.test(data.page)) {

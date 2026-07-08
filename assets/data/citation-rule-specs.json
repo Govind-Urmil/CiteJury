@@ -1,6 +1,6 @@
 {
-  "version": "EP-033",
-  "purpose": "Machine-readable rule-specification foundation for CiteJury. EP-033 narrows Indian judgment support around verified/scoped rules instead of broad plausible formatting.",
+  "version": "EP-034",
+  "purpose": "Machine-readable rule-specification foundation for CiteJury. EP-034 replaces the earlier OSCOLA-like helper with scoped, authority-backed OSCOLA outputs and registers non-implemented international authorities without claiming support.",
   "rules": [
     {
       "id": "india-supreme-court-neutral-citation-v1",
@@ -137,38 +137,6 @@
       "nextEp": "EP-036 for larger browser-only citation corpus"
     },
     {
-      "id": "oscola-judgment-provisional-v1",
-      "label": "OSCOLA-like judgment helper",
-      "status": "provisional-helper",
-      "jurisdiction": "United Kingdom / international academic use",
-      "sourceType": "judgment",
-      "style": "oscola",
-      "authorityIds": [
-        "oscola-oxford-official",
-        "oscola-4th-edition-pdf",
-        "oscola-quick-reference"
-      ],
-      "requiredFields": [
-        "title",
-        "year",
-        "reporter",
-        "page"
-      ],
-      "optionalFields": [
-        "court",
-        "volume"
-      ],
-      "validation": [
-        "title is required",
-        "year must be four digits when supplied"
-      ],
-      "limitations": [
-        "Existing output is OSCOLA-like, not a complete OSCOLA implementation.",
-        "EP-034 should implement neutral citation, law report priority, legislation, secondary sources, and bibliography behavior with tests."
-      ],
-      "nextEp": "EP-034"
-    },
-    {
       "id": "generic-legislation-readable-v1",
       "label": "Readable legislation citation helper",
       "status": "provisional-helper",
@@ -195,6 +163,176 @@
         "Provision labels, chapter numbers, enactment numbers, jurisdiction, and amendments require future rule expansion."
       ],
       "nextEp": "EP-035"
+    },
+    {
+      "id": "oscola-uk-case-scoped-v1",
+      "label": "OSCOLA UK case citation scoped rule",
+      "status": "verified-scoped-rule",
+      "jurisdiction": "United Kingdom / international academic use",
+      "sourceType": "judgment",
+      "style": "oscola",
+      "authorityIds": [
+        "oscola-oxford-official",
+        "oscola-4th-edition-pdf",
+        "oscola-quick-reference"
+      ],
+      "requiredFields": [
+        "title"
+      ],
+      "optionalFields": [
+        "year",
+        "volume",
+        "reporter",
+        "page",
+        "court"
+      ],
+      "validation": [
+        "title is required",
+        "year must be four digits when supplied",
+        "neutral citation year must be bracketed if supplied",
+        "law report citations should include first page"
+      ],
+      "formatting": [
+        "party names first",
+        "neutral citation follows party names when supplied",
+        "law report follows neutral citation when supplied",
+        "court appears in parentheses only where no neutral citation is supplied",
+        "paragraph pinpoint appears in square brackets when supplied using volume field value prefixed with paragraph"
+      ],
+      "limitations": [
+        "Does not verify real case metadata",
+        "Does not handle every UK court/report series or bibliography behavior",
+        "Uses existing generic field names until EP-035 field-level explainability work"
+      ],
+      "nextEp": "EP-036 for larger browser-only citation corpus"
+    },
+    {
+      "id": "oscola-uk-legislation-scoped-v1",
+      "label": "OSCOLA UK legislation citation scoped rule",
+      "status": "verified-scoped-rule",
+      "jurisdiction": "United Kingdom / international academic use",
+      "sourceType": "legislation",
+      "style": "oscola",
+      "authorityIds": [
+        "oscola-oxford-official",
+        "oscola-quick-reference"
+      ],
+      "requiredFields": [
+        "title",
+        "year"
+      ],
+      "optionalFields": [
+        "page"
+      ],
+      "validation": [
+        "title is required",
+        "year must be four digits",
+        "provision is optional"
+      ],
+      "limitations": [
+        "Basic Act/provision formatting only",
+        "Does not cover statutory instruments or complex legislative histories"
+      ],
+      "nextEp": "EP-035"
+    },
+    {
+      "id": "oscola-book-scoped-v1",
+      "label": "OSCOLA book citation scoped helper",
+      "status": "verified-scoped-rule",
+      "jurisdiction": "United Kingdom / international academic use",
+      "sourceType": "book",
+      "style": "oscola",
+      "authorityIds": [
+        "oscola-oxford-official",
+        "oscola-4th-edition-pdf"
+      ],
+      "requiredFields": [
+        "title",
+        "reporter",
+        "year"
+      ],
+      "optionalFields": [
+        "page"
+      ],
+      "limitations": [
+        "Current field model combines author and title in title field and publisher details in reporter field",
+        "No separate author/editor/edition fields yet"
+      ],
+      "nextEp": "EP-035"
+    },
+    {
+      "id": "oscola-journal-article-scoped-v1",
+      "label": "OSCOLA journal article scoped helper",
+      "status": "verified-scoped-rule",
+      "jurisdiction": "United Kingdom / international academic use",
+      "sourceType": "journal",
+      "style": "oscola",
+      "authorityIds": [
+        "oscola-oxford-official",
+        "oscola-4th-edition-pdf"
+      ],
+      "requiredFields": [
+        "title",
+        "year",
+        "reporter",
+        "page"
+      ],
+      "optionalFields": [],
+      "limitations": [
+        "Current field model combines author and article title in title field and volume/journal details in reporter field",
+        "No DOI, issue, article-title, or bibliography model yet"
+      ],
+      "nextEp": "EP-035"
+    },
+    {
+      "id": "aglc-australian-case-provisional-v1",
+      "label": "AGLC Australian case citation authority registry",
+      "status": "authority-registered-not-public-default",
+      "jurisdiction": "Australia",
+      "sourceType": "judgment",
+      "style": "aglc",
+      "authorityIds": [
+        "aglc4-official-pdf"
+      ],
+      "requiredFields": [
+        "title"
+      ],
+      "optionalFields": [
+        "year",
+        "reporter",
+        "page",
+        "court"
+      ],
+      "limitations": [
+        "Registered for future implementation only; no public AGLC support claim yet"
+      ],
+      "nextEp": "Future scoped EP after EP-040 or approved expansion"
+    },
+    {
+      "id": "bluebook-us-case-provisional-v1",
+      "label": "Bluebook US case citation authority registry",
+      "status": "authority-registered-not-public-default",
+      "jurisdiction": "United States",
+      "sourceType": "judgment",
+      "style": "bluebook",
+      "authorityIds": [
+        "bluebook-official"
+      ],
+      "requiredFields": [
+        "title"
+      ],
+      "optionalFields": [
+        "volume",
+        "reporter",
+        "page",
+        "court",
+        "year"
+      ],
+      "limitations": [
+        "Registered for future implementation only; no public Bluebook support claim yet"
+      ],
+      "nextEp": "Future scoped EP after EP-040 or approved expansion"
     }
-  ]
+  ],
+  "lastReviewed": "2026-07-08"
 }

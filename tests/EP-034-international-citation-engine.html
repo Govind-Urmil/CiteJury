@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>EP-034 International Citation Engine Tests</title></head>
+<body>
+<h1>EP-034 International Citation Engine Tests</h1>
+<pre id="results">Running...</pre>
+<script src="../assets/js/citation-engine.js"></script>
+<script>
+(function () {
+  const cases = [
+    { name: "OSCOLA case neutral plus report", input: { citationStyle: "oscola", sourceType: "judgment", title: "Corr v IBC Vehicles Ltd", court: "[2008] UKHL 13", year: "2008", volume: "1", reporter: "AC", page: "884" }, expectOk: true, expectCitation: "Corr v IBC Vehicles Ltd [2008] UKHL 13 [2008] 1 AC 884." },
+    { name: "OSCOLA case report only with court", input: { citationStyle: "oscola", sourceType: "judgment", title: "Page v Smith", year: "1996", reporter: "AC", page: "155", court: "HL" }, expectOk: true, expectCitation: "Page v Smith [1996] AC 155 (HL)." },
+    { name: "OSCOLA neutral citation requires brackets", input: { citationStyle: "oscola", sourceType: "judgment", title: "Example v Example", court: "2008 UKHL 13", year: "2008", reporter: "AC", page: "884" }, expectOk: false, expectErrorIncludes: "square brackets" },
+    { name: "OSCOLA report requires page", input: { citationStyle: "oscola", sourceType: "judgment", title: "Example v Example", year: "2008", reporter: "AC" }, expectOk: false, expectErrorIncludes: "first page" },
+    { name: "OSCOLA legislation basic", input: { citationStyle: "oscola", sourceType: "legislation", title: "Human Rights Act", year: "1998", page: "6" }, expectOk: true, expectCitation: "Human Rights Act 1998 s 6." },
+    { name: "OSCOLA legislation requires year", input: { citationStyle: "oscola", sourceType: "legislation", title: "Human Rights Act" }, expectOk: false, expectErrorIncludes: "legislation year" },
+    { name: "OSCOLA book basic", input: { citationStyle: "oscola", sourceType: "book", title: "Andrew Burrows, Remedies for Torts and Breach of Contract", reporter: "OUP, 3rd edn", year: "2004", page: "317" }, expectOk: true, expectCitation: "Andrew Burrows, Remedies for Torts and Breach of Contract (OUP, 3rd edn, 2004) 317." },
+    { name: "OSCOLA journal basic", input: { citationStyle: "oscola", sourceType: "journal", title: "Paul Craig, Theory, Pure Theory and Values in Public Law", year: "2005", reporter: "Public Law", page: "440" }, expectOk: true, expectCitation: "Paul Craig, Theory, Pure Theory and Values in Public Law [2005] Public Law 440." },
+    { name: "OSCOLA metadata is scoped verified", input: { citationStyle: "oscola", sourceType: "judgment", title: "A v B" }, expectOk: true, expectRule: "oscola-uk-case-scoped-v1" },
+    { name: "Indian SCC still works", input: { citationStyle: "scc", sourceType: "judgment", title: "A v B", year: "2020", volume: "1", page: "10" }, expectOk: true, expectCitation: "A v B, (2020) 1 SCC 10." }
+  ];
+
+  const lines = [];
+  let passed = 0;
+  cases.forEach((test) => {
+    const result = window.CiteJuryCitationEngine.generate(test.input);
+    let ok = result.ok === test.expectOk;
+    if (test.expectCitation) ok = ok && result.citation === test.expectCitation;
+    if (test.expectErrorIncludes) ok = ok && result.error.includes(test.expectErrorIncludes);
+    if (test.expectRule) ok = ok && result.rule && result.rule.id === test.expectRule;
+    if (ok) passed += 1;
+    lines.push(`${ok ? "PASS" : "FAIL"}: ${test.name}`);
+    if (!ok) lines.push(`  Result: ${JSON.stringify(result)}`);
+  });
+  lines.unshift(`EP-034 tests: ${passed}/${cases.length} passed`);
+  document.getElementById("results").textContent = lines.join("\n");
+})();
+</script>
+</body>
+</html>

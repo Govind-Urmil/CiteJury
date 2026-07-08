@@ -1,0 +1,35 @@
+{
+  "version": "EP-034",
+  "purpose": "Scope map for international citation support. This file is static data and documents what CiteJury supports, narrows, or intentionally does not claim.",
+  "lastReviewed": "2026-07-08",
+  "publiclySupportedStyles": [
+    {
+      "style": "oscola",
+      "scope": "Scoped OSCOLA support for UK cases, basic legislation, basic books, and basic journal articles using existing generic fields.",
+      "status": "verified-scoped-rule",
+      "notCovered": [
+        "Full OSCOLA 5th edition transition rules",
+        "EU/international materials",
+        "statutory instruments",
+        "tables of authorities",
+        "bibliography rearrangement",
+        "complete author/editor/edition field model"
+      ]
+    }
+  ],
+  "registeredNotPubliclySupported": [
+    {
+      "style": "bluebook",
+      "reason": "Official authority is commercial/detailed and requires a US-specific field model and tests before support can be trustworthy."
+    },
+    {
+      "style": "aglc",
+      "reason": "AGLC4 authority is available, but a dedicated Australian field model and test corpus are required before public support."
+    },
+    {
+      "style": "mcgill",
+      "reason": "McGill Guide authority is registered, but no citation output is implemented."
+    }
+  ],
+  "performancePromise": "This data is not loaded by normal visitors unless a future EP explicitly wires it into the UI. EP-034 does not add backend, database, runtime dependency, build step, ads, or analytics."
+}

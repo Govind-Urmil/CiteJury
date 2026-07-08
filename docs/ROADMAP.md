@@ -1,10 +1,9 @@
 # CiteJury Engineering Roadmap
 
 ## Completed
-EP-001 through EP-032.
+EP-001 through EP-033.
 
 ## Next Planned EPs
-- EP-033 Indian Legal Citation Engine Overhaul
 - EP-034 International Citation Engine Overhaul
 - EP-035 Citation Validation and Explainability System
 - EP-036 Citation Accuracy Browser Test Corpus
@@ -30,3 +29,14 @@ EP-001 through EP-032.
 - Preserved static/browser-only architecture, inactive ads, inactive analytics, and zero-runtime website operation.
 
 Next: EP-034 — International Citation Engine Overhaul.
+
+
+## EP-034 deliverables
+
+- Replaced provisional OSCOLA-like judgment output with scoped OSCOLA case logic.
+- Added scoped OSCOLA support for basic legislation, book, and journal citations.
+- Registered Bluebook, AGLC4, and McGill authority families without claiming public generator support.
+- Added `assets/data/international-citation-scope.json`.
+- Added browser-only EP-034 deterministic test page.
+
+Next: EP-035 — Citation Validation and Explainability System.

@@ -34,4 +34,5 @@
 | EP-030 | Final Gold Release | Complete |
 | EP-031 | Repo and launch safety fixes | Complete |
 | EP-032 | Citation Authority Foundation | Complete |
-| EP-033 | Indian Legal Citation Engine Overhaul | Ready |
+| EP-033 | Indian Legal Citation Engine Overhaul | Complete |
+| EP-034 | International Citation Engine Overhaul | Ready |
