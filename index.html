@@ -14,7 +14,7 @@
   <link rel="canonical" href="https://citejury.citejury.workers.dev/">
   <meta property="og:url" content="https://citejury.citejury.workers.dev/">
   <link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="assets/css/style.css?v=054">
+  <link rel="stylesheet" href="assets/css/style.css?v=055">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"WebApplication","name":"CiteJury","applicationCategory":"EducationalApplication","operatingSystem":"Any","description":"Privacy-first browser-based legal citation formatting and learning tool.","isAccessibleForFree":true}
 </script>
@@ -97,24 +97,24 @@
             </select>
           </div>
 
-          <label for="source-title">Case / source title <span aria-hidden="true">*</span></label>
+          <label for="source-title">Case / source title <span class="field-status" data-field-status="title"></span></label>
           <input id="source-title" name="title" placeholder="Justice K.S. Puttaswamy (Retd.) v. Union of India" required autocomplete="off" aria-describedby="title-help">
           <small id="title-help" class="field-help">Use the official case, Act, article, book, journal, or webpage title. For OSCOLA books/journals, include author + title in the title field until dedicated author fields are added.</small>
 
-          <label for="source-year">Year</label>
+          <label for="source-year">Year <span class="field-status" data-field-status="year"></span></label>
           <input id="source-year" name="year" placeholder="2017" inputmode="numeric" pattern="[0-9]{4}" autocomplete="off" aria-describedby="year-help">
           <small id="year-help" class="field-help">Use a 4-digit year only, for example 2017. For Supreme Court neutral citations, this is the year in the neutral citation token.</small>
 
-          <label for="source-reporter">Reporter / publisher / website</label>
+          <label for="source-reporter">Reporter / publisher / website <span class="field-status" data-field-status="reporter"></span></label>
           <input id="source-reporter" name="reporter" placeholder="SCC / AC / publisher / journal" autocomplete="off">
 
-          <label for="source-volume">Volume</label>
+          <label for="source-volume">Volume <span class="field-status" data-field-status="volume"></span></label>
           <input id="source-volume" name="volume" placeholder="10" autocomplete="off">
 
-          <label for="source-page">Page / section / article / URL / neutral sequence</label>
+          <label for="source-page">Page / section / article / URL / neutral sequence <span class="field-status" data-field-status="page"></span></label>
           <input id="source-page" name="page" placeholder="1" autocomplete="off">
 
-          <label for="source-court">Court / institution</label>
+          <label for="source-court">Court / institution <span class="field-status" data-field-status="court"></span></label>
           <input id="source-court" name="court" placeholder="Supreme Court of India" autocomplete="off">
 
           <div class="privacy-inline" role="note">CiteJury processes this form in your browser. No server submission is used.</div>
@@ -193,8 +193,8 @@
     </div>
   </footer>
 
-  <script src="assets/js/citation-engine.js?v=054"></script>
-  <script src="assets/js/app.js?v=054"></script>
-  <script src="assets/js/revenue-readiness.js?v=054"></script>
+  <script src="assets/js/citation-engine.js?v=055"></script>
+  <script src="assets/js/app.js?v=055"></script>
+  <script src="assets/js/revenue-readiness.js?v=055"></script>
 </body>
 </html>

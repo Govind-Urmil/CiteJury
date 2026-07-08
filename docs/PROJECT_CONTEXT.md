@@ -162,3 +162,7 @@ Cross-browser validation navigation fix: invalid citation fields now use mobile-
 
 ## EP-054
 Asset cache-busting and update freshness: public CSS/JS references now include `?v=054` query versions so browsers fetch updated assets after deployments without users clearing cache. Increment asset version when public CSS/JS changes.
+
+
+## EP-055
+Dynamic field requirements, inline validation, and Batch A authority-content improvements completed.

@@ -181,3 +181,9 @@ Next: manual Google Search Console/Bing setup, then future ad approval/activatio
 - Added versioned CSS/JS asset URLs across public pages and browser test pages.
 - Added `assets/asset-version.json` documenting the current asset version.
 - Preserves static/browser-only/host-portable architecture and Cloudflare/S3 portability.
+
+
+## EP-055 — Citation Form Clarity, Inline Validation & Batch A Content Upgrade
+- Dynamic Required/Optional field labels.
+- Inline field errors with invalid-field navigation.
+- Expanded five priority citation guides.

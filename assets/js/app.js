@@ -129,6 +129,44 @@
     court: clean(formData.get("court"))
   });
 
+  const fieldNames = Object.keys(fieldSelectors);
+  const getCurrentSpec = () => {
+    const data = getData(new FormData(form));
+    return window.CiteJuryCitationEngine.getRuleSpec ? window.CiteJuryCitationEngine.getRuleSpec(data) : null;
+  };
+  const clearInlineErrors = () => {
+    document.querySelectorAll(".field-error").forEach((node) => node.remove());
+    clearInvalidFields();
+  };
+  const updateFieldStatuses = () => {
+    if (!form) return;
+    const data = getData(new FormData(form));
+    const spec = window.CiteJuryCitationEngine.getRuleSpec(data);
+    fieldNames.forEach((name) => {
+      const marker = document.querySelector(`[data-field-status="${name}"]`);
+      if (!marker) return;
+      const required = (spec.required || []).includes(name);
+      marker.textContent = required ? "Required *" : "Optional";
+      marker.classList.toggle("required", required);
+    });
+  };
+  const renderInlineErrors = (result) => {
+    clearInlineErrors();
+    const missing = result?.validation?.missingRequiredFields || [inferInvalidField(result)];
+    missing.forEach((name) => {
+      const field = document.querySelector(fieldSelectors[name]);
+      if (!field) return;
+      field.setAttribute("aria-invalid", "true");
+      const message = document.createElement("div");
+      message.className = "field-error";
+      message.id = `${field.id}-error`;
+      message.setAttribute("role", "alert");
+      message.textContent = `${name === "page" ? "Page / section / article / URL / neutral sequence" : name.charAt(0).toUpperCase()+name.slice(1)} is required for this citation type.`;
+      field.parentNode.insertBefore(message, field);
+      field.setAttribute("aria-describedby", [field.getAttribute("aria-describedby"), message.id].filter(Boolean).join(" "));
+    });
+  };
+
   const renderParts = (items = []) => {
     if (!parts) return;
     parts.innerHTML = "";
@@ -252,13 +290,14 @@
         explain.textContent = "Fix the highlighted issue and generate again.";
         renderParts([]);
         renderValidation(result.validation);
+        renderInlineErrors(result);
         focusInvalidField(result);
         return;
       }
 
       error.hidden = true;
       error.textContent = "";
-      clearInvalidFields();
+      clearInlineErrors();
       applyResult(result);
       renderStyleAlternatives(window.CiteJuryCitationEngine.generateStyleAlternatives(getData(new FormData(form))));
     });
@@ -269,6 +308,11 @@
         event.target.removeAttribute("aria-invalid");
       }
     });
+  }
+
+  if (form) {
+    updateFieldStatuses();
+    form.addEventListener("change", updateFieldStatuses);
   }
 
   if (copy && output) {

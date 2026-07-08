@@ -200,3 +200,7 @@ Resolved mobile Chrome validation navigation reliability. Next roadmap priority 
 
 ## EP-054 — Completed
 Browser cache-busting added for CSS/JS update freshness. Future EPs that change public CSS/JS should increment the asset version.
+
+
+## EP-055 — Completed
+Citation form clarity and first evidence-based content upgrade batch completed.
