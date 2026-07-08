@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+<title id="title">CiteJury social preview</title>
+<desc id="desc">CiteJury legal citation toolkit preview image.</desc>
+<rect width="1200" height="630" fill="#f7f8fb"/>
+<rect x="70" y="70" width="1060" height="490" rx="36" fill="#ffffff" stroke="#d8dee9" stroke-width="4"/>
+<circle cx="165" cy="165" r="52" fill="#0f766e"/>
+<text x="165" y="181" text-anchor="middle" font-family="Arial, sans-serif" font-size="42" font-weight="700" fill="#ffffff">CJ</text>
+<text x="245" y="155" font-family="Arial, sans-serif" font-size="58" font-weight="800" fill="#111827">CiteJury</text>
+<text x="245" y="210" font-family="Arial, sans-serif" font-size="31" fill="#374151">Generate • Understand • Verify</text>
+<text x="110" y="330" font-family="Arial, sans-serif" font-size="54" font-weight="800" fill="#111827">Indian Legal Citation Toolkit</text>
+<text x="110" y="395" font-family="Arial, sans-serif" font-size="30" fill="#4b5563">Privacy-first, browser-only citation help for law students and researchers.</text>
+<rect x="110" y="450" width="265" height="58" rx="20" fill="#0f766e"/>
+<text x="242" y="488" text-anchor="middle" font-family="Arial, sans-serif" font-size="25" font-weight="700" fill="#ffffff">Generate</text>
+<rect x="395" y="450" width="265" height="58" rx="20" fill="#eaf5f3" stroke="#0f766e"/>
+<text x="528" y="488" text-anchor="middle" font-family="Arial, sans-serif" font-size="25" font-weight="700" fill="#0f766e">Check</text>
+<rect x="680" y="450" width="265" height="58" rx="20" fill="#eaf5f3" stroke="#0f766e"/>
+<text x="813" y="488" text-anchor="middle" font-family="Arial, sans-serif" font-size="25" font-weight="700" fill="#0f766e">Verify</text>
+</svg>

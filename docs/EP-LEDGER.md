@@ -232,3 +232,13 @@ Next: manual Google Search Console/Bing setup, then future ad approval/activatio
 - Added ADR, technical, functional, release metadata, developer diagnostics, and verification history panels.
 - Added reusable WFVS, Verification Checklist, and Release Checklist documentation.
 - Bumped asset version to 062.
+
+
+## EP-063 — Public UX Polish
+- Added Generate/Check mode switch and smart empty state.
+- Added four curated Try Example workflows for SCI neutral, SCC, AIR, and Constitution citations.
+- Disabled Copy/Download until a citation exists and improved copied feedback.
+- Added default Citation Anatomy example before generation.
+- Added static social preview SVG plus og:image and twitter:image metadata.
+- Added FAQ structured data and clarified inactive ads/privacy wording.
+- Bumped asset version to 063.

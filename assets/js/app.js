@@ -41,6 +41,10 @@
   const error = document.querySelector("#form-error");
   const copy = document.querySelector("#copy-citation");
   const download = document.querySelector("#download-citation");
+  const copyStatus = document.querySelector("#copy-status");
+  const modeButtons = document.querySelectorAll("[data-mode-target]");
+  const workspacePanels = document.querySelectorAll("[data-workspace-panel]");
+  const exampleButtons = document.querySelectorAll("[data-example]");
   const styleAlternatives = document.querySelector("#style-alternatives");
   const styleAlternativeList = document.querySelector("#style-alternative-list");
   const citationAnatomy = document.querySelector("#citation-anatomy");
@@ -53,6 +57,13 @@
   const checkerIssues = document.querySelector("#checker-issues");
   const checkerSuggestion = document.querySelector("#checker-suggestion");
   let currentResult = null;
+
+  const setActionButtonsEnabled = (enabled) => {
+    if (copy) copy.disabled = !enabled;
+    if (download) download.disabled = !enabled;
+  };
+
+  setActionButtonsEnabled(false);
 
   const fieldSelectors = {
     title: "#source-title",
@@ -482,8 +493,15 @@
 
   const clearCitationAnatomy = () => {
     if (!citationAnatomy || !citationAnatomyContent) return;
-    citationAnatomyContent.innerHTML = "";
-    citationAnatomy.hidden = true;
+    citationAnatomyContent.innerHTML = `
+      <div class="anatomy-components">
+        <article class="anatomy-component"><strong>2023</strong><span>Decision year</span><p>The year in a Supreme Court neutral citation.</p></article>
+        <article class="anatomy-component"><strong>INSC</strong><span>Supreme Court identifier</span><p>Shows the citation is a Supreme Court of India neutral citation.</p></article>
+        <article class="anatomy-component"><strong>154</strong><span>Sequence number</span><p>The neutral citation decision sequence.</p></article>
+      </div>
+      <div class="anatomy-explain"><h4>Try an example</h4><p>Generate a citation to replace this example with citation-specific anatomy, verification steps, and common mistakes.</p></div>
+    `;
+    citationAnatomy.hidden = false;
   };
 
 
@@ -498,6 +516,7 @@
     renderParts(result.parts);
     renderValidation(result.validation);
     renderCitationAnatomy(result);
+    setActionButtonsEnabled(true);
   };
 
   const renderValidation = (validation) => {
@@ -620,6 +639,7 @@
     renderStyleAlternatives([]);
     clearCitationAnatomy();
     currentResult = null;
+    setActionButtonsEnabled(false);
   };
 
   if (form && output && explain && error && window.CiteJuryCitationEngine) {
@@ -894,6 +914,96 @@
     });
   }
 
+
+  const switchWorkspaceMode = (mode) => {
+    modeButtons.forEach((button) => {
+      const active = button.dataset.modeTarget === mode;
+      button.classList.toggle("active", active);
+      button.setAttribute("aria-pressed", String(active));
+    });
+    workspacePanels.forEach((panel) => {
+      panel.hidden = panel.dataset.workspacePanel !== mode;
+    });
+    const target = document.querySelector(`[data-workspace-panel="${mode}"]`);
+    if (target) target.scrollIntoView({ behavior: prefersReducedMotion() ? "auto" : "smooth", block: "start" });
+  };
+
+  modeButtons.forEach((button) => {
+    button.addEventListener("click", () => switchWorkspaceMode(button.dataset.modeTarget));
+  });
+
+  const examples = {
+    "sc-neutral": {
+      citationStyle: "indian-legal",
+      sourceType: "sc-neutral-judgment",
+      title: "Example v Union of India",
+      year: "2023",
+      reporter: "",
+      volume: "",
+      page: "154",
+      court: "Supreme Court of India"
+    },
+    scc: {
+      citationStyle: "scc",
+      sourceType: "judgment",
+      title: "Example v Union of India",
+      year: "2023",
+      reporter: "SCC",
+      volume: "7",
+      page: "154",
+      court: "Supreme Court of India"
+    },
+    air: {
+      citationStyle: "air",
+      sourceType: "judgment",
+      title: "Example v Union of India",
+      year: "2023",
+      reporter: "AIR",
+      volume: "",
+      page: "154",
+      court: "SC"
+    },
+    constitution: {
+      citationStyle: "indian-legal",
+      sourceType: "constitution",
+      title: "Constitution of India",
+      year: "1950",
+      reporter: "",
+      volume: "",
+      page: "Article 21",
+      court: "India"
+    }
+  };
+
+  const fillExample = (name) => {
+    const data = examples[name];
+    if (!data || !form) return;
+    switchWorkspaceMode("generate");
+    Object.entries({
+      citationStyle: "#citation-style",
+      sourceType: "#source-type",
+      title: "#source-title",
+      year: "#source-year",
+      reporter: "#source-reporter",
+      volume: "#source-volume",
+      page: "#source-page",
+      court: "#source-court"
+    }).forEach(([key, selector]) => {
+      const field = document.querySelector(selector);
+      if (field) field.value = data[key] || "";
+    });
+    updateFieldStatuses();
+    const result = window.CiteJuryCitationEngine.generate(getData(new FormData(form)));
+    if (result.ok) applyResult(result);
+    const panel = document.querySelector(".result-panel");
+    if (panel) panel.scrollIntoView({ behavior: prefersReducedMotion() ? "auto" : "smooth", block: "start" });
+  };
+
+  exampleButtons.forEach((button) => {
+    button.addEventListener("click", () => fillExample(button.dataset.example));
+  });
+
+
   if (copy && output) {
     copy.addEventListener("click", async () => {
       const text = output.textContent.trim();
@@ -901,7 +1011,8 @@
 
       try {
         await navigator.clipboard.writeText(text);
-        copy.textContent = "Copied";
+        copy.textContent = "Copied ✓";
+        if (copyStatus) copyStatus.textContent = "Copied to clipboard.";
         copy.setAttribute("aria-label", "Citation copied to clipboard");
       } catch {
         copy.textContent = "Copy failed";
@@ -910,6 +1021,7 @@
 
       setTimeout(() => {
         copy.textContent = "Copy citation";
+          if (copyStatus) copyStatus.textContent = "";
         copy.removeAttribute("aria-label");
       }, 1400);
     });

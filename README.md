@@ -153,3 +153,7 @@ Citation Checker™ lets users paste existing citations and receive rule-based s
 
 ### EP-062
 Website Factory Verification Suite is available at `tests/index.html`. Use it as the release verification dashboard before future EP deployment.
+
+
+### EP-063
+Public UX polish adds a Generate/Check mode switch, curated examples, disabled action states, default Citation Anatomy, social preview metadata, FAQ structured data, and clearer inactive-ad wording.

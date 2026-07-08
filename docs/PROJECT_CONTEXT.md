@@ -194,3 +194,7 @@ Citation Checker™ launched as CiteJury's second flagship tool. It checks paste
 
 ## EP-062
 Website Factory Verification Suite launched as reusable quality infrastructure for CiteJury and future static websites. Future EPs should pass WFVS before release.
+
+
+## EP-063
+Public UX polish completed using EP-062 as the source of truth and Codex's ZIP as reference only. The release improves first-time clarity without adding backend/API/database/analytics or external dependencies.
