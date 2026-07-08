@@ -27,8 +27,21 @@ jobs:
           test -f assets/css/style.css
           test -f assets/js/app.js
           test -f assets/js/citation-engine.js
+          test -f assets/js/revenue-readiness.js
           test -f docs/PROJECT_CONTEXT.md
           test -f docs/EP-LEDGER.md
+
+      - name: Check JavaScript syntax
+        run: |
+          node --check assets/js/app.js
+          node --check assets/js/citation-engine.js
+          node --check assets/js/revenue-readiness.js
+          node --check tests/citation-accuracy-corpus.js
+
+      - name: Check JSON validity
+        run: |
+          python -m json.tool assets/asset-version.json >/dev/null
+          find assets/data -name '*.json' -print0 | xargs -0 -n1 python -m json.tool >/dev/null
 
       - name: Check browser-only architecture in runtime files
         run: |
@@ -38,6 +51,24 @@ jobs:
         run: |
           ! grep -RniE "api[_-]?key[[:space:]]*=|secret[[:space:]]*=|password[[:space:]]*=|private[_-]?key[[:space:]]*=|access[_-]?token[[:space:]]*=" index.html trust.html privacy.html terms.html guides assets
 
-      - name: Check no active third-party ad script in runtime files
+      - name: Check no active third-party ad script in public HTML
         run: |
-          ! grep -RniE "googlesyndication|doubleclick|adsbygoogle|adservice" index.html trust.html privacy.html terms.html guides assets
+          ! grep -RniE "https?://[^\"']*(googlesyndication|doubleclick|adsbygoogle|adservice)" index.html trust.html privacy.html terms.html guides
+          ! grep -RniE "data-revenue-enabled=[\"']true[\"']" index.html trust.html privacy.html terms.html guides
+
+      - name: Check asset version consistency
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          version = json.loads(Path('assets/asset-version.json').read_text())['assetVersion']
+          bad = []
+          for path in [Path('index.html'), Path('privacy.html'), Path('terms.html'), Path('trust.html'), *Path('guides').glob('*.html')]:
+              text = path.read_text()
+              if 'assets/css/style.css' in text and f'assets/css/style.css?v={version}' not in text and f'../assets/css/style.css?v={version}' not in text:
+                  bad.append(str(path))
+              if 'assets/js/app.js' in text and f'assets/js/app.js?v={version}' not in text and f'../assets/js/app.js?v={version}' not in text:
+                  bad.append(str(path))
+          if bad:
+              raise SystemExit('Asset version mismatch: ' + ', '.join(sorted(set(bad))))
+          PY

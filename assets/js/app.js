@@ -9,7 +9,7 @@
 
     const manifest = document.createElement("link");
     manifest.rel = "manifest";
-    manifest.href = "manifest.webmanifest";
+    manifest.href = document.currentScript && document.currentScript.src ? new URL("../../manifest.webmanifest", document.currentScript.src).pathname : "manifest.webmanifest";
     document.head.appendChild(manifest);
   };
 
@@ -611,8 +611,8 @@
       button.textContent = "Copy this style";
       button.addEventListener("click", async () => {
         try {
-          await navigator.clipboard.writeText(variant.text);
-          button.textContent = "Copied";
+          const copied = await copyTextToClipboard(variant.text);
+          button.textContent = copied ? "Copied" : "Copy failed";
         } catch {
           button.textContent = "Copy failed";
         }
@@ -893,7 +893,7 @@
       card.className = `checker-issue ${issue.level}`;
       appendText(card, "strong", `${issue.level === "error" ? "✗" : "⚠"} ${issue.message}`);
       appendText(card, "p", issue.why);
-      if (issue.fix) appendText(card, "em", issue.fix);
+      if (issue.fix) appendText(card, "p", issue.fix, "checker-fix");
       checkerIssues.appendChild(card);
     });
 
@@ -1075,7 +1075,8 @@
       if (!text || text === "Your citation will appear here.") return;
 
       try {
-        await navigator.clipboard.writeText(text);
+        const copied = await copyTextToClipboard(text);
+        if (!copied) throw new Error("copy-failed");
         copy.textContent = "Copied ✓";
         if (copyStatus) copyStatus.textContent = "Copied to clipboard.";
         copy.setAttribute("aria-label", "Citation copied to clipboard");

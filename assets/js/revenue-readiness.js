@@ -17,6 +17,13 @@
     slots.forEach((slot) => hide(slot, reason));
   };
 
+  const explicitActivation = document.currentScript && document.currentScript.dataset.revenueEnabled === "true";
+
+  if (!explicitActivation) {
+    hideAll("inactive");
+    return;
+  }
+
   if (!slots.length || !window.fetch) {
     hideAll("unsupported");
     return;
@@ -77,7 +84,7 @@
     }
   };
 
-  fetch(configUrl(), { cache: "no-store" })
+  fetch(configUrl(), { cache: "default" })
     .then((response) => response.ok ? response.json() : Promise.reject(new Error("ad-config-unavailable")))
     .then((config) => {
       if (!config || config.ads_active !== true) {

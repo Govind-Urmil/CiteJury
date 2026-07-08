@@ -262,3 +262,17 @@ Next: manual Google Search Console/Bing setup, then future ad approval/activatio
 - Restored closed-by-default mobile navigation with `.site-nav.open` toggle behavior.
 - Removed leftover malformed workspace-switch block that crashed homepage JavaScript and broke Check/`#checker` behavior.
 - Bumped asset version to 064a.
+
+
+## EP-065 — Production Stability & Navigation Hardening
+- Fixed the CI advertising false-positive by checking only active third-party ad references in public HTML while preserving dormant ad-readiness code.
+- Added JavaScript syntax and JSON validity checks to the static CI workflow so malformed runtime JavaScript is caught before release.
+- Bumped the public asset version to 065 and corrected stale/typoed test asset references.
+- Strengthened the EP-064A hotfix browser test so it loads `app.js`, toggles mobile navigation, and renders Citation Checker output.
+- Restored mobile navigation access on secondary pages by adding the shared menu button, primary nav target, and shared app script.
+- Consolidated mobile navigation CSS behavior into the 850px breakpoint while keeping Checker grid behavior responsive at 760px.
+- Added the shared clipboard fallback to alternative style copy buttons and main citation copy behavior.
+- Kept inactive advertising fail-closed without an uncached config request and tightened inactive CSP network exposure.
+- Added `tests` to deployment ignore rules so internal browser checks are not shipped with public assets.
+- Changed Checker fix guidance from standalone emphasis to structured paragraph text.
+- Preserved static/browser-only, zero-backend, zero-database, zero-API architecture.

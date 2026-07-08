@@ -4,7 +4,7 @@
 EP-001 through EP-049. Live launch and final unattended-operation release complete.
 
 ## Next Planned EPs
-None. Create a new EP only for verified production issues, citation-authority improvements, search/ad account requirements, or hosting/domain migration.
+EP-066 should be created only after live EP-065 verification and Codex review. Candidate deferred items: citation rules single-source cleanup, WFVS hard-coded pass cleanup, PNG/JPEG social preview, sitemap per-page lastmod hygiene, and manifest dependency simplification.
 
 ## Architecture Rules
 - No backend or database without explicit approval.

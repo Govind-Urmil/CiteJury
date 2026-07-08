@@ -1,14 +1,43 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><title>EP-064A Hotfix Checks</title></head>
-<body><pre id="results"></pre>
-<script src="../assets/js/citation-engine.js?v=064a"></script>
-<script>
-const engine = window.CiteJuryCitationEngine;
-const sci = engine.generate({citationStyle:"indian-legal",sourceType:"sc-neutral-judgment",title:"Example v Union of India",year:"2023",page:"154"});
-const checks = [
-  ["JS engine loaded", typeof engine.generate === "function"],
-  ["SCI neutral spaced", sci.ok && sci.citation.includes("2023 INSC 154")],
-  ["Hotfix asset version loaded", document.querySelector('script[src*="v=064a"]') !== null]
-];
-document.getElementById("results").textContent = checks.map(([n,o])=>`${o?"PASS":"FAIL"}: ${n}`).join("\n");
-</script></body></html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>EP-064A/EP-065 Hotfix Checks</title>
+</head>
+<body>
+  <header class="site-header">
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav">Menu</button>
+    <nav id="primary-nav" class="site-nav" aria-label="Primary"><a href="#checker">Checker</a></nav>
+  </header>
+  <form id="citation-checker-form">
+    <textarea id="citation-check-input">2023 INSC 154</textarea>
+    <button type="submit">Check</button>
+  </form>
+  <h2 id="checker-heading">Paste a citation to begin</h2>
+  <p id="checker-summary"></p>
+  <div id="checker-components"></div>
+  <div id="checker-issues"></div>
+  <div id="checker-suggestion" hidden></div>
+  <section id="checker"></section>
+  <pre id="results"></pre>
+
+  <script src="../assets/js/citation-engine.js?v=065"></script>
+  <script src="../assets/js/app.js?v=065"></script>
+  <script>
+    const engine = window.CiteJuryCitationEngine;
+    const sci = engine.generate({citationStyle:"indian-legal",sourceType:"sc-neutral-judgment",title:"Example v Union of India",year:"2023",page:"154"});
+    document.querySelector(".nav-toggle").click();
+    document.querySelector("#citation-checker-form").dispatchEvent(new Event("submit", {bubbles:true, cancelable:true}));
+    const checks = [
+      ["Citation engine loaded", typeof engine.generate === "function"],
+      ["App script loaded", document.querySelector('script[src="../assets/js/app.js?v=065"]') !== null],
+      ["SCI neutral spaced", sci.ok && sci.citation.includes("2023 INSC 154")],
+      ["Mobile menu toggles", document.querySelector("#primary-nav").classList.contains("open")],
+      ["Checker renders result", document.querySelector("#checker-heading").textContent.includes("SCI Neutral Citation")],
+      ["No stale pre-065 asset references", !new RegExp(["v", "064a"].join("=")).test(Array.from(document.scripts).map((script) => script.getAttribute("src") || "").join(" "))]
+    ];
+    document.getElementById("results").textContent = checks.map(([name, ok]) => `${ok ? "PASS" : "FAIL"}: ${name}`).join("\n");
+  </script>
+</body>
+</html>

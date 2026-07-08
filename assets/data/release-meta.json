@@ -1,6 +1,6 @@
 {
-  "version": "EP-049",
-  "stage": "final-unattended-operation-release",
+  "version": "EP-065",
+  "stage": "production-stability-navigation-hardening",
   "backend": false,
   "database": false,
   "python_runtime_required": false,
@@ -10,15 +10,15 @@
   "analytics_active": false,
   "hosting_model": "static-free-host-first",
   "manual_cleanup_required": [],
-  "final_planned_ep": true,
+  "final_planned_ep": false,
   "github_pages_initial_launch": true,
   "manifest_loaded_on_http_only": true,
   "custom_domain_required_now": false,
   "searchEngineLaunchReady": true,
   "productionBaseUrl": "https://citejury.citejury.workers.dev",
   "sitemapUrl": "https://citejury.citejury.workers.dev/sitemap.xml",
-  "latest_ep": "EP-049",
-  "latest_title": "Final unattended operation release",
+  "latest_ep": "EP-065",
+  "latest_title": "Production Stability & Navigation Hardening",
   "updated": "2026-07-08",
   "unattended_operation_release": true
 }
