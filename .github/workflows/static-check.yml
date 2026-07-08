@@ -32,12 +32,12 @@ jobs:
 
       - name: Check browser-only architecture in runtime files
         run: |
-          ! grep -RniE "express\(|app\.listen|django|flask|fastapi|sqlalchemy|sqlite|postgres|mongodb|mysql|redis|server\.js|requirements\.txt|package-lock\.json" index.html trust.html privacy.html terms.html guides assets || true
+          ! grep -RniE "express\(|app\.listen|django|flask|fastapi|sqlalchemy|sqlite|postgres|mongodb|mysql|redis|server\.js|requirements\.txt|package-lock\.json" index.html trust.html privacy.html terms.html guides assets
 
       - name: Check no likely secrets in runtime files
         run: |
-          ! grep -RniE "api[_-]?key[[:space:]]*=|secret[[:space:]]*=|password[[:space:]]*=|private[_-]?key[[:space:]]*=|access[_-]?token[[:space:]]*=" index.html trust.html privacy.html terms.html guides assets || true
+          ! grep -RniE "api[_-]?key[[:space:]]*=|secret[[:space:]]*=|password[[:space:]]*=|private[_-]?key[[:space:]]*=|access[_-]?token[[:space:]]*=" index.html trust.html privacy.html terms.html guides assets
 
       - name: Check no active third-party ad script in runtime files
         run: |
-          ! grep -RniE "googlesyndication|doubleclick|adsbygoogle|adservice" index.html trust.html privacy.html terms.html guides assets || true
+          ! grep -RniE "googlesyndication|doubleclick|adsbygoogle|adservice" index.html trust.html privacy.html terms.html guides assets

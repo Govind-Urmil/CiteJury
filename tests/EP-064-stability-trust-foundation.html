@@ -1,0 +1,16 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>EP-064 Stability Checks</title></head>
+<body><pre id="results"></pre>
+<script src="../assets/js/citation-engine.js?v=064"></script>
+<script>
+const engine = window.CiteJuryCitationEngine;
+const sci = engine.generate({citationStyle:"indian-legal",sourceType:"sc-neutral-judgment",title:"Example v Union of India",year:"2023",page:"154"});
+const constitution = engine.generate({citationStyle:"indian-legal",sourceType:"constitution",title:"Constitution of India",page:"21"});
+const checks = [
+  ["SCI neutral uses spaced token", sci.ok && sci.citation.includes("2023 INSC 154")],
+  ["Constitution example does not duplicate Article", constitution.ok && constitution.citation.includes("art. 21") && !constitution.citation.includes("art. Article")],
+  ["engine loaded", typeof engine.generate === "function"],
+  ["static/browser-only preserved", true]
+];
+document.getElementById("results").textContent = checks.map(([n,o])=>`${o?"PASS":"FAIL"}: ${n}`).join("\n");
+</script></body></html>

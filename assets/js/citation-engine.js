@@ -226,7 +226,7 @@
       }[style] || "Indian Legal";
     },
     neutralToken(data) {
-      return `${data.year}INSC${data.page}`;
+      return `${data.year} INSC ${data.page}`;
     },
     looksLikeUkNeutral(value) {
       return /^\[\d{4}\]\s+(UKSC|UKHL|EWCA\s+Civ|EWCA\s+Crim|EWHC|UKPC|UKUT|EWFC)\s+\d+[A-Za-z]?/i.test(clean(value));

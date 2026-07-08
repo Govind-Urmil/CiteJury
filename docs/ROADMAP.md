@@ -236,3 +236,7 @@ WFVS completed. EP-063 will handle public UX polish separately.
 
 ## EP-063 — Completed
 Public UX Polish completed. Next planned direction: authority-building/comparison content, unless Codex release review identifies higher-priority defects.
+
+
+## EP-064 — Completed
+Stability and foundation fixes completed. Next direction should return to growth and authority work unless release review finds a blocker.

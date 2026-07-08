@@ -242,3 +242,16 @@ Next: manual Google Search Console/Bing setup, then future ad approval/activatio
 - Added static social preview SVG plus og:image and twitter:image metadata.
 - Added FAQ structured data and clarified inactive ads/privacy wording.
 - Bumped asset version to 063.
+
+
+## EP-064 — Stability, Trust & Foundation
+- Fixed checker deep-link/reload behavior and workspace hash handling.
+- Improved workspace accessibility with live announcements and focus management.
+- Fixed Constitution example to avoid duplicated article wording.
+- Standardized SCI neutral citation output to spaced format: `2023 INSC 154`.
+- Replaced checker user-input rendering with safe DOM/textContent rendering.
+- Added clipboard fallback for restricted/older browsers.
+- Restored mobile navigation visibility on secondary pages.
+- Added guide meta descriptions, sitemap lastmod metadata, and stronger WFVS checks.
+- Added Website Factory Coding Standard and Technical Debt Register.
+- Bumped asset version to 064.

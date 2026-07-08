@@ -157,3 +157,7 @@ Website Factory Verification Suite is available at `tests/index.html`. Use it as
 
 ### EP-063
 Public UX polish adds a Generate/Check mode switch, curated examples, disabled action states, default Citation Anatomy, social preview metadata, FAQ structured data, and clearer inactive-ad wording.
+
+
+### EP-064
+Stability release addressing checker deep links, safe rendering, mobile navigation, accessibility, clipboard fallback, SCI neutral consistency, meaningful WFVS checks, and Website Factory coding standards.

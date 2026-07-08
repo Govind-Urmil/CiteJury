@@ -198,3 +198,7 @@ Website Factory Verification Suite launched as reusable quality infrastructure f
 
 ## EP-063
 Public UX polish completed using EP-062 as the source of truth and Codex's ZIP as reference only. The release improves first-time clarity without adding backend/API/database/analytics or external dependencies.
+
+
+## EP-064
+Stability, Trust & Foundation release completed. This release addresses Codex review findings around deep links, mobile navigation, user-input rendering safety, accessibility, neutral citation consistency, meaningful WFVS checks, and Website Factory coding standards.

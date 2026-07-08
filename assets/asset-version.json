@@ -1,6 +1,6 @@
 {
-  "assetVersion": "063",
+  "assetVersion": "064",
   "purpose": "Cache-busting version for public CSS and JavaScript asset URLs.",
   "policy": "Increment this value and update HTML query strings whenever public CSS or JavaScript changes.",
-  "lastEp": "EP-063"
+  "lastEp": "EP-064"
 }

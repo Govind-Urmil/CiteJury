@@ -231,3 +231,7 @@ Apply over the repository and commit once. No file deletions required. Open `tes
 
 ## EP-063
 Apply over the repository and commit once. Run `tests/index.html` before pushing. No file deletions required.
+
+
+## EP-064
+Apply over the repository and commit once. Run `tests/index.html` and `tests/EP-064-stability-trust-foundation.html` before pushing. No file deletions required.

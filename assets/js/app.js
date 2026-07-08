@@ -45,6 +45,7 @@
   const modeButtons = document.querySelectorAll("[data-mode-target]");
   const workspacePanels = document.querySelectorAll("[data-workspace-panel]");
   const exampleButtons = document.querySelectorAll("[data-example]");
+  const workspaceStatus = document.querySelector("#workspace-status");
   const styleAlternatives = document.querySelector("#style-alternatives");
   const styleAlternativeList = document.querySelector("#style-alternative-list");
   const citationAnatomy = document.querySelector("#citation-anatomy");
@@ -863,35 +864,50 @@
     return "Incomplete";
   };
 
+  const appendText = (parent, tag, text, className = "") => {
+    const el = document.createElement(tag);
+    if (className) el.className = className;
+    el.textContent = text;
+    parent.appendChild(el);
+    return el;
+  };
+
   const renderCheckerResult = (report) => {
     if (!checkerHeading || !checkerSummary || !checkerComponents || !checkerIssues || !checkerSuggestion) return;
     checkerHeading.textContent = report.type;
-    checkerSummary.innerHTML = `<strong>${confidenceLabel(report.confidence)}</strong> — ${report.confidence}% confidence. ${report.status}.`;
-    checkerComponents.innerHTML = "";
+    checkerSummary.textContent = `${confidenceLabel(report.confidence)} — ${report.confidence}% confidence. ${report.status}.`;
+
+    checkerComponents.replaceChildren();
     report.components.forEach((item) => {
       const card = document.createElement("article");
       card.className = `checker-component ${item.status}`;
-      card.innerHTML = `<strong>${item.label}</strong><span>${item.value}</span>${item.detail ? `<p>${item.detail}</p>` : ""}`;
+      appendText(card, "strong", item.label);
+      appendText(card, "span", item.value);
+      if (item.detail) appendText(card, "p", item.detail);
       checkerComponents.appendChild(card);
     });
 
-    checkerIssues.innerHTML = "";
+    checkerIssues.replaceChildren();
     report.issues.forEach((issue) => {
       const card = document.createElement("article");
       card.className = `checker-issue ${issue.level}`;
-      card.innerHTML = `<strong>${issue.level === "error" ? "✗" : "⚠"} ${issue.message}</strong><p>${issue.why}</p>${issue.fix ? `<p><em>${issue.fix}</em></p>` : ""}`;
+      appendText(card, "strong", `${issue.level === "error" ? "✗" : "⚠"} ${issue.message}`);
+      appendText(card, "p", issue.why);
+      if (issue.fix) appendText(card, "em", issue.fix);
       checkerIssues.appendChild(card);
     });
 
     if (report.suggestion) {
       checkerSuggestion.hidden = false;
-      checkerSuggestion.innerHTML = `<strong>Suggested structure</strong><code>${report.suggestion}</code><p>Only use a suggestion after verifying missing factual values from the source.</p>`;
+      checkerSuggestion.replaceChildren();
+      appendText(checkerSuggestion, "strong", "Suggested structure");
+      appendText(checkerSuggestion, "code", report.suggestion);
+      appendText(checkerSuggestion, "p", "Only use a suggestion after verifying missing factual values from the source.");
     } else {
       checkerSuggestion.hidden = true;
-      checkerSuggestion.innerHTML = "";
+      checkerSuggestion.replaceChildren();
     }
   };
-
 
 
   if (checkerForm && checkerInput) {
@@ -904,19 +920,45 @@
       window.setTimeout(() => {
         if (checkerHeading) checkerHeading.textContent = "Paste a citation to begin";
         if (checkerSummary) checkerSummary.textContent = "Citation Checker™ will show detected components, confidence, issues, and safe correction guidance.";
-        if (checkerComponents) checkerComponents.innerHTML = "";
-        if (checkerIssues) checkerIssues.innerHTML = "";
+        if (checkerComponents) checkerComponents.replaceChildren();
+        if (checkerIssues) checkerIssues.replaceChildren();
         if (checkerSuggestion) {
           checkerSuggestion.hidden = true;
-          checkerSuggestion.innerHTML = "";
+          checkerSuggestion.replaceChildren();
         }
       }, 0);
     });
   }
 
 
-  const switchWorkspaceMode = (mode) => {
+  const switchWorkspaceMode = (mode, options = {}) => {
+    const requested = mode === "check" ? "check" : "generate";
     modeButtons.forEach((button) => {
+      const active = button.dataset.modeTarget === requested;
+      button.classList.toggle("active", active);
+      button.setAttribute("aria-pressed", String(active));
+    });
+    workspacePanels.forEach((panel) => {
+      const active = panel.dataset.workspacePanel === requested;
+      panel.hidden = !active;
+      panel.setAttribute("aria-hidden", String(!active));
+    });
+    if (workspaceStatus) {
+      workspaceStatus.textContent = requested === "check" ? "Check Citation workspace selected." : "Generate Citation workspace selected.";
+    }
+    if (options.updateHash !== false) {
+      const nextHash = requested === "check" ? "#checker" : "#generator";
+      if (window.location.hash !== nextHash) window.history.pushState({ workspace: requested }, "", nextHash);
+    }
+    const target = requested === "check" ? document.querySelector("#checker") : document.querySelector("#citation-generator-panel");
+    if (target && options.scroll !== false) target.scrollIntoView({ behavior: prefersReducedMotion() ? "auto" : "smooth", block: "start" });
+    if (options.focus !== false) {
+      const focusTarget = requested === "check" ? checkerInput : document.querySelector("#citation-style");
+      window.setTimeout(() => focusTarget && focusTarget.focus({ preventScroll: true }), 120);
+    }
+  };
+
+  modeButtons.forEach((button) => {
       const active = button.dataset.modeTarget === mode;
       button.classList.toggle("active", active);
       button.setAttribute("aria-pressed", String(active));
@@ -929,8 +971,21 @@
   };
 
   modeButtons.forEach((button) => {
-    button.addEventListener("click", () => switchWorkspaceMode(button.dataset.modeTarget));
+    button.addEventListener("click", () => switchWorkspaceMode(button.dataset.modeTarget, { updateHash: true, focus: true }));
   });
+
+
+  const applyWorkspaceFromHash = () => {
+    if (window.location.hash === "#checker") {
+      switchWorkspaceMode("check", { updateHash: false, scroll: false, focus: false });
+    } else if (window.location.hash === "#generator" || !window.location.hash) {
+      switchWorkspaceMode("generate", { updateHash: false, scroll: false, focus: false });
+    }
+  };
+
+  window.addEventListener("hashchange", applyWorkspaceFromHash);
+  window.addEventListener("popstate", applyWorkspaceFromHash);
+  applyWorkspaceFromHash();
 
   const examples = {
     "sc-neutral": {
@@ -970,7 +1025,7 @@
       year: "1950",
       reporter: "",
       volume: "",
-      page: "Article 21",
+      page: "21",
       court: "India"
     }
   };
@@ -978,7 +1033,7 @@
   const fillExample = (name) => {
     const data = examples[name];
     if (!data || !form) return;
-    switchWorkspaceMode("generate");
+    switchWorkspaceMode("generate", { updateHash: false, focus: false });
     Object.entries({
       citationStyle: "#citation-style",
       sourceType: "#source-type",
@@ -1003,6 +1058,28 @@
     button.addEventListener("click", () => fillExample(button.dataset.example));
   });
 
+
+
+  const copyTextToClipboard = async (text) => {
+    if (navigator.clipboard && window.isSecureContext) {
+      await navigator.clipboard.writeText(text);
+      return true;
+    }
+    const temp = document.createElement("textarea");
+    temp.value = text;
+    temp.setAttribute("readonly", "");
+    temp.style.position = "fixed";
+    temp.style.left = "-9999px";
+    document.body.appendChild(temp);
+    temp.select();
+    let ok = false;
+    try {
+      ok = document.execCommand("copy");
+    } finally {
+      document.body.removeChild(temp);
+    }
+    return ok;
+  };
 
   if (copy && output) {
     copy.addEventListener("click", async () => {
