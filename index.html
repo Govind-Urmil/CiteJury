@@ -56,7 +56,7 @@
           <blockquote>Justice K.S. Puttaswamy (Retd.) v. Union of India, (2017) 10 SCC 1.</blockquote>
           <div class="demo-rule"></div>
           <strong>Why this citation?</strong>
-          <p class="demo-note">Case name, year, volume, reporter abbreviation, and first page are formatted in the selected style.</p>
+          <p class="demo-note">Case name, neutral citation token, year, volume, reporter abbreviation, court, and first page are formatted within explicitly scoped rules.</p>
         </aside>
       </div>
     </section>
@@ -86,6 +86,7 @@
           <div class="field-row">
             <label for="source-type">Source type</label>
             <select id="source-type" name="sourceType">
+              <option value="sc-neutral-judgment">Supreme Court neutral citation</option>
               <option value="judgment">Judgment</option>
               <option value="legislation">Legislation</option>
               <option value="constitution">Constitution</option>
@@ -97,11 +98,11 @@
 
           <label for="source-title">Case / source title <span aria-hidden="true">*</span></label>
           <input id="source-title" name="title" placeholder="Justice K.S. Puttaswamy (Retd.) v. Union of India" required autocomplete="off" aria-describedby="title-help">
-          <small id="title-help" class="field-help">Use the official case, Act, article, book, journal, or webpage title.</small>
+          <small id="title-help" class="field-help">Use the official case, Act, article, book, journal, or webpage title. For Supreme Court neutral citations, use the case name as it appears in the official source.</small>
 
           <label for="source-year">Year</label>
           <input id="source-year" name="year" placeholder="2017" inputmode="numeric" pattern="[0-9]{4}" autocomplete="off" aria-describedby="year-help">
-          <small id="year-help" class="field-help">Use a 4-digit year only, for example 2017.</small>
+          <small id="year-help" class="field-help">Use a 4-digit year only, for example 2017. For Supreme Court neutral citations, this is the year in the neutral citation token.</small>
 
           <label for="source-reporter">Reporter / publisher / website</label>
           <input id="source-reporter" name="reporter" placeholder="SCC" autocomplete="off">
@@ -109,7 +110,7 @@
           <label for="source-volume">Volume</label>
           <input id="source-volume" name="volume" placeholder="10" autocomplete="off">
 
-          <label for="source-page">Page / section / article / URL</label>
+          <label for="source-page">Page / section / article / URL / neutral sequence</label>
           <input id="source-page" name="page" placeholder="1" autocomplete="off">
 
           <label for="source-court">Court / institution</label>
@@ -169,13 +170,13 @@
 
     <section id="styles" class="section muted">
       <div class="container section-heading"><p class="eyebrow">Citation styles</p><h2>Start in India. Work globally.</h2></div>
-      <div class="container styles"><span>Indian Legal</span><span>SCC</span><span>AIR</span><span>OSCOLA</span><span>Bluebook</span><span>APA Legal</span></div>
+      <div class="container styles"><span>SCI Neutral</span><span>Indian Legal</span><span>SCC</span><span>AIR</span><span>OSCOLA</span><span>Bluebook</span><span>APA Legal</span></div>
     </section>
 
     <section id="guides" class="section"><div class="container section-heading"><p class="eyebrow">Learn legal citation</p><h2>Practical citation guides</h2><p>Clear, beginner-friendly resources designed to help users understand legal citations as well as generate them.</p></div><div class="container feature-grid"><article><h3>Legal Citation Basics</h3><p>Start with the essential parts of a legal citation.</p><p><a href="guides/legal-citation-basics.html">Read guide →</a></p></article><article><h3>SCC Citation Guide</h3><p>Understand the common structure of SCC citations.</p><p><a href="guides/scc-citation.html">Read guide →</a></p></article><article><h3>AIR Citation Guide</h3><p>Learn the basic components of AIR citations.</p><p><a href="guides/air-citation.html">Read guide →</a></p></article></div></section>
 <section id="growth-guides" class="section muted"><div class="container section-heading"><p class="eyebrow">Popular legal citation guides</p><h2>Learn the citations Indian users search for</h2><p>Short practical guides for students, researchers, and advocates who need quick citation clarity.</p></div><div class="container feature-grid"><article><h3>Supreme Court judgment</h3><p>Learn the structure of common Supreme Court judgment citations.</p><p><a href="guides/how-to-cite-supreme-court-judgment.html">Read guide →</a></p></article><article><h3>Constitution of India</h3><p>Understand how to cite articles and provisions.</p><p><a href="guides/how-to-cite-constitution-of-india.html">Read guide →</a></p></article><article><h3>Bare Act or Statute</h3><p>Learn how to cite sections and provisions from Indian statutes.</p><p><a href="guides/how-to-cite-bare-act.html">Read guide →</a></p></article></div></section>
 <section id="advanced-guides" class="section"><div class="container section-heading"><p class="eyebrow">More citation resources</p><h2>Go deeper into legal citation</h2><p>Practical resources for law students, moot court participants, researchers, and legal writers.</p></div><div class="container feature-grid"><article><h3>OSCOLA for Indian students</h3><p>Learn practical OSCOLA concepts for common legal sources.</p><p><a href="guides/oscola-citation-guide-india.html">Read guide →</a></p></article><article><h3>Moot memorial citations</h3><p>Build better citation habits for moot court memorials.</p><p><a href="guides/moot-court-memorial-citation-guide.html">Read guide →</a></p></article><article><h3>Law journal articles</h3><p>Understand the components used when citing journal articles.</p><p><a href="guides/how-to-cite-law-journal-article.html">Read guide →</a></p></article></div></section>
-<section id="trust-accuracy" class="section"><div class="container section-heading"><p class="eyebrow">Trust and accuracy</p><h2>Transparent citation help, not blind automation</h2><p>CiteJury explains citation components and keeps privacy central. Users should verify important citations against official court, university, journal, publisher, or style-guide requirements.</p></div><div class="container feature-grid"><article><h3>Clear limitations</h3><p>Citations are generated as formatting assistance and should be checked before formal use.</p></article><article><h3>Bug-fix workflow</h3><p>If a bug is reported, it can be brought back into the EP workflow and fixed cleanly in a new commit.</p></article><article><h3>Privacy-first</h3><p>The generator runs in-browser and does not require a backend for citation form processing.</p></article></div></section>
+<section id="trust-accuracy" class="section"><div class="container section-heading"><p class="eyebrow">Trust and accuracy</p><h2>Transparent citation help, not blind automation</h2><p>CiteJury explains citation components and keeps privacy central. Users should verify important citations against official court, university, journal, publisher, or style-guide requirements.</p></div><div class="container feature-grid"><article><h3>Clear limitations</h3><p>Citations are generated within labelled scopes. Supreme Court neutral citation token formatting is stricter; reporter-style citations still require source verification before formal use.</p></article><article><h3>Bug-fix workflow</h3><p>If a bug is reported, it can be brought back into the EP workflow and fixed cleanly in a new commit.</p></article><article><h3>Privacy-first</h3><p>The generator runs in-browser and does not require a backend for citation form processing.</p></article></div></section>
 <section id="faq" class="section">
       <div class="container section-heading"><p class="eyebrow">FAQ</p><h2>Questions, answered clearly.</h2></div>
       <div class="container faq">

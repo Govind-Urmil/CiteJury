@@ -1,6 +1,6 @@
 /*
   CiteJury Citation Engine
-  EP-032
+  EP-033
   Browser-first, static-site compatible, no backend dependency.
 */
 
@@ -8,6 +8,9 @@
   "use strict";
 
   const clean = (value) => String(value || "").trim();
+  const digitsOnly = (value) => /^\d+$/.test(clean(value));
+
+  const normalizeCourt = (value) => clean(value).replace(/\s+/g, " ");
 
   const normalize = (data = {}) => ({
     citationStyle: clean(data.citationStyle || "indian-legal"),
@@ -17,42 +20,57 @@
     reporter: clean(data.reporter),
     volume: clean(data.volume),
     page: clean(data.page),
-    court: clean(data.court)
+    court: normalizeCourt(data.court)
   });
 
   const ruleSpecs = {
+    "indian-legal:sc-neutral-judgment": {
+      id: "india-supreme-court-neutral-citation-v1",
+      status: "verified-format-scope",
+      authorityFamily: "Supreme Court of India neutral citation notice dated 06 July 2023",
+      confidence: "high-for-neutral-token-format-medium-for-user-entered-case-name",
+      required: ["title", "year", "page"],
+      recommended: [],
+      limitations: [
+        "Only covers Supreme Court of India neutral citation token formatting: year + INSC + sequence number.",
+        "CiteJury does not verify whether the entered sequence number belongs to the entered case.",
+        "Users should verify the neutral citation against the official Supreme Court/e-SCR source."
+      ]
+    },
     "indian-legal:judgment": {
-      id: "generic-indian-judgment-readable-v1",
-      status: "provisional-helper",
-      authorityFamily: "India-first citation practice; verify against court/reporter requirements",
+      id: "generic-indian-judgment-readable-v2",
+      status: "scoped-helper",
+      authorityFamily: "India-first citation practice with stronger neutral-citation priority",
       confidence: "medium-low",
       required: ["title"],
       recommended: ["year", "reporter", "page", "court"],
       limitations: [
-        "Readable helper, not a complete Indian citation standard.",
-        "Reporter-specific rules are scheduled for EP-033."
+        "Readable helper only; choose Supreme Court neutral citation, SCC-style, or AIR-style for narrower Indian judgment rules.",
+        "Reporter-specific editorial requirements still require manual verification."
       ]
     },
     "scc:judgment": {
-      id: "scc-style-judgment-provisional-v1",
-      status: "provisional-helper",
-      authorityFamily: "Indian law report citation practice; reporter-specific verification required",
-      confidence: "low",
-      required: ["title"],
-      recommended: ["year", "volume", "reporter", "page"],
+      id: "scc-law-report-judgment-scoped-v1",
+      status: "scoped-reporter-helper",
+      authorityFamily: "Supreme Court Cases / Indian law-report citation practice",
+      confidence: "medium-for-core-components-low-for-editorial-edge-cases",
+      required: ["title", "year", "volume", "page"],
+      recommended: ["reporter"],
       limitations: [
-        "SCC-style output is provisional until EP-033 verifies reporter-specific examples and edge cases."
+        "Formats the common core SCC law-report pattern only: case name, (year) volume SCC first page.",
+        "Does not verify party names, parallel citations, pinpoint references, supplement reports, or editorial variants."
       ]
     },
     "air:judgment": {
-      id: "air-style-judgment-provisional-v1",
-      status: "provisional-helper",
-      authorityFamily: "Indian AIR-style law report practice; reporter-specific verification required",
-      confidence: "low",
-      required: ["title"],
-      recommended: ["year", "court", "page"],
+      id: "air-law-report-judgment-scoped-v1",
+      status: "scoped-reporter-helper",
+      authorityFamily: "All India Reporter / Indian law-report citation practice",
+      confidence: "medium-for-core-components-low-for-editorial-edge-cases",
+      required: ["title", "year", "court", "page"],
+      recommended: [],
       limitations: [
-        "AIR-style output is provisional until EP-033 verifies reporter-specific examples and edge cases."
+        "Formats the common core AIR pattern only: case name, AIR year court abbreviation first page.",
+        "Does not verify parallel citations, regional reporter variations, party names, or pinpoint references."
       ]
     },
     "oscola:judgment": {
@@ -81,7 +99,7 @@
   };
 
   const getRuleSpec = (data) => ruleSpecs[`${data.citationStyle}:${data.sourceType}`] || ruleSpecs.default;
-
+  const getMissingRequired = (data, spec) => (spec.required || []).filter((field) => !data[field]);
   const getMissingRecommended = (data, spec) => (spec.recommended || []).filter((field) => !data[field]);
 
   const helpers = {
@@ -100,30 +118,36 @@
         "air": "AIR-style",
         "oscola": "OSCOLA-like"
       }[style] || "Indian Legal";
+    },
+    neutralToken(data) {
+      return `${data.year}INSC${data.page}`;
     }
   };
 
   const styleTransforms = {
     "indian-legal": {
       apply(base) { return base; },
-      note: "Indian Legal keeps citation components readable and practical for Indian legal writing."
+      note: "Indian Legal now prioritises narrow, explainable Indian judgment rules where supported."
     },
     "scc": {
       apply(base, data) {
         if (data.sourceType !== "judgment") return base;
-        const year = data.year ? `(${data.year})` : "";
-        const reporter = data.reporter || "SCC";
-        return helpers.finish(helpers.join([data.title || "Untitled case", helpers.join([year, data.volume, reporter, data.page])], ", "));
+        return helpers.finish(helpers.join([
+          data.title,
+          helpers.join([`(${data.year})`, data.volume, "SCC", data.page])
+        ], ", "));
       },
-      note: "SCC-style prioritises year, volume, SCC reporter abbreviation, and first page for judgments."
+      note: "SCC-style output is limited to the common core law-report pattern: case name, year, volume, SCC, and first page."
     },
     "air": {
       apply(base, data) {
         if (data.sourceType !== "judgment") return base;
-        const court = data.court || "SC";
-        return helpers.finish(helpers.join([data.title || "Untitled case", helpers.join(["AIR", data.year, court, data.page])], ", "));
+        return helpers.finish(helpers.join([
+          data.title,
+          helpers.join(["AIR", data.year, data.court.toUpperCase(), data.page])
+        ], ", "));
       },
-      note: "AIR-style commonly uses AIR, year, court abbreviation, and page for judgments."
+      note: "AIR-style output is limited to the common core law-report pattern: case name, AIR, year, court abbreviation, and first page."
     },
     "oscola": {
       apply(base, data) {
@@ -137,6 +161,22 @@
   };
 
   const rules = {
+    "sc-neutral-judgment"(data) {
+      const token = helpers.neutralToken(data);
+      return {
+        citation: helpers.finish(helpers.join([data.title, token], ", ")),
+        explanation: "Supreme Court of India neutral citations use a court-issued publisher-neutral token made from year, INSC, and a sequence number.",
+        parts: [
+          `Case name: ${data.title}`,
+          `Neutral citation token: ${token}`,
+          `Year: ${data.year}`,
+          "Court code: INSC",
+          `Sequence number: ${data.page}`,
+          "Scope: Supreme Court of India judgments/orders only"
+        ]
+      };
+    },
+
     judgment(data) {
       const year = data.year ? `(${data.year})` : "";
       const reporter = helpers.join([data.volume, data.reporter, data.page]);
@@ -249,9 +289,36 @@
     }
   };
 
-  const validate = (data) => {
+  const validate = (rawData) => {
+    const data = normalize(rawData);
+    const spec = getRuleSpec(data);
+    const missingRequired = getMissingRequired(data, spec);
+
+    if (missingRequired.length) {
+      const labels = missingRequired.map((field) => field === "page" && data.sourceType === "sc-neutral-judgment" ? "sequence number" : field);
+      return `Required field missing for this citation rule: ${labels.join(", ")}.`;
+    }
+
     if (!data.title) return "Please enter a case or source title.";
     if (data.year && !/^\d{4}$/.test(data.year)) return "Year should be a 4-digit value, for example 2017.";
+
+    if (data.sourceType === "sc-neutral-judgment") {
+      if (!digitsOnly(data.page)) return "Supreme Court neutral citation sequence number should contain digits only, for example 1 or 785.";
+      if (data.court && !/^(supreme court of india|sc|sci)$/i.test(data.court)) {
+        return "Supreme Court neutral citation support is currently scoped only to the Supreme Court of India.";
+      }
+    }
+
+    if (data.citationStyle === "scc" && data.sourceType === "judgment") {
+      if (!digitsOnly(data.volume)) return "SCC-style judgment citations require a numeric volume, for example 10.";
+      if (!digitsOnly(data.page)) return "SCC-style judgment citations require a numeric first page, for example 1.";
+    }
+
+    if (data.citationStyle === "air" && data.sourceType === "judgment") {
+      if (!digitsOnly(data.page)) return "AIR-style judgment citations require a numeric first page, for example 27.";
+      if (!/^[A-Za-z]{2,12}$/.test(data.court)) return "AIR-style judgment citations require a court abbreviation, for example SC, Bom, Del, Cal, Mad, All, Ker, or Kant.";
+    }
+
     if (data.sourceType === "website" && data.page && !/^https?:\/\//i.test(data.page)) {
       return "For website citations, enter a full URL starting with http:// or https://.";
     }
@@ -268,27 +335,29 @@
 
     const rule = rules[data.sourceType] || rules.judgment;
     const base = rule(data);
-    const transformer = styleTransforms[data.citationStyle] || styleTransforms["indian-legal"];
+    const transformer = data.sourceType === "sc-neutral-judgment" ? styleTransforms["indian-legal"] : (styleTransforms[data.citationStyle] || styleTransforms["indian-legal"]);
     const citation = transformer.apply(base.citation, data);
     const spec = getRuleSpec(data);
+    const missingRequired = getMissingRequired(data, spec);
     const missingRecommended = getMissingRecommended(data, spec);
 
     return {
       ok: true,
       sourceType: data.sourceType,
-      citationStyle: data.citationStyle,
+      citationStyle: data.sourceType === "sc-neutral-judgment" ? "indian-legal" : data.citationStyle,
       rule: {
         id: spec.id,
         status: spec.status,
         authorityFamily: spec.authorityFamily,
         confidence: spec.confidence,
+        missingRequired,
         missingRecommended,
         limitations: spec.limitations
       },
       citation,
       explanation: `${base.explanation} Style note: ${transformer.note}`,
       parts: [
-        `Style: ${helpers.styleLabel(data.citationStyle)}`,
+        `Style: ${helpers.styleLabel(data.sourceType === "sc-neutral-judgment" ? "indian-legal" : data.citationStyle)}`,
         `Rule: ${spec.id}`,
         `Rule status: ${spec.status}`,
         `Authority family: ${spec.authorityFamily}`,

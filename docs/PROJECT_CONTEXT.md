@@ -31,3 +31,10 @@ Citation authority and reliability remain the main product priority. EP-032 crea
 
 ## Next
 EP-033: Indian Legal Citation Engine Overhaul.
+
+
+## EP-033 current state
+
+EP-032 was committed by Govind. EP-033 was generated from the uploaded EP-032 repository ZIP as the source of truth. EP-033 focuses on Indian legal citation reliability and adds a verified-format Supreme Court of India neutral citation rule (`YYYYINSCN`), scoped SCC and AIR reporter helpers, authority/scope data, and browser-only manual tests. No backend, database, Python runtime, Node runtime, build step, ads, analytics, or paid infrastructure was added. Required deletion commands: none.
+
+Next planned EP after EP-033 commit: EP-034 — International Citation Engine Overhaul.

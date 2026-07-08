@@ -19,3 +19,14 @@ EP-001 through EP-032.
 - No active ads or analytics without explicit approval.
 - Static, reusable, free-to-host-first codebase.
 - Citation rule changes require scope, rationale, validation logic, and tests.
+
+
+## EP-033 deliverables
+
+- Added Supreme Court of India neutral citation token rule with strict validation.
+- Narrowed SCC and AIR support to scoped reporter helpers with explicit limitations.
+- Added `assets/data/indian-citation-scope.json`.
+- Added browser-only EP-033 manual test page.
+- Preserved static/browser-only architecture, inactive ads, inactive analytics, and zero-runtime website operation.
+
+Next: EP-034 — International Citation Engine Overhaul.

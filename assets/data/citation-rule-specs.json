@@ -1,56 +1,140 @@
 {
-  "version": "EP-032",
-  "purpose": "Machine-readable rule-specification foundation for CiteJury. Rules here describe support status and provenance; they do not automatically mean full production accuracy.",
+  "version": "EP-033",
+  "purpose": "Machine-readable rule-specification foundation for CiteJury. EP-033 narrows Indian judgment support around verified/scoped rules instead of broad plausible formatting.",
   "rules": [
     {
-      "id": "generic-indian-judgment-readable-v1",
+      "id": "india-supreme-court-neutral-citation-v1",
+      "label": "Supreme Court of India neutral citation",
+      "status": "verified-format-scope",
+      "jurisdiction": "India",
+      "sourceType": "sc-neutral-judgment",
+      "style": "indian-legal",
+      "authorityIds": [
+        "sci-neutral-format-notice-2023",
+        "sci-neutral-citation",
+        "scr-official-reports"
+      ],
+      "requiredFields": [
+        "title",
+        "year",
+        "page"
+      ],
+      "optionalFields": [
+        "court"
+      ],
+      "validation": [
+        "title is required",
+        "year must be four digits",
+        "sequence number must contain digits only",
+        "court, if supplied, must identify Supreme Court of India"
+      ],
+      "formatting": [
+        "token is year + INSC + sequence number with no inserted spaces",
+        "full output is case name, token"
+      ],
+      "limitations": [
+        "Does not verify that the sequence number belongs to the entered case",
+        "Does not cover High Court neutral citations",
+        "Does not add parallel citations or pinpoints"
+      ],
+      "nextEp": "EP-036 for larger browser-only citation corpus"
+    },
+    {
+      "id": "generic-indian-judgment-readable-v2",
       "label": "Readable Indian judgment citation helper",
-      "status": "provisional-helper",
+      "status": "scoped-helper",
       "jurisdiction": "India",
       "sourceType": "judgment",
       "style": "indian-legal",
-      "authorityIds": ["scr-official-reports", "sci-neutral-citation", "ili-citation-style"],
-      "requiredFields": ["title"],
-      "optionalFields": ["year", "volume", "reporter", "page", "court"],
-      "validation": ["title is required", "year must be four digits when supplied"],
-      "limitations": [
-        "Current output is a practical readable helper, not a fully verified Indian court citation standard.",
-        "Reporter-specific Indian rules require EP-033 overhaul before high-confidence claims."
+      "authorityIds": [
+        "sci-neutral-citation",
+        "scr-official-reports",
+        "ili-citation-style"
       ],
-      "nextEp": "EP-033"
+      "requiredFields": [
+        "title"
+      ],
+      "optionalFields": [
+        "year",
+        "volume",
+        "reporter",
+        "page",
+        "court"
+      ],
+      "validation": [
+        "title is required",
+        "year must be four digits when supplied"
+      ],
+      "limitations": [
+        "Readable helper only; prefer the narrower SCI neutral, SCC, or AIR rules when applicable",
+        "Reporter-specific editorial requirements still require manual verification"
+      ],
+      "nextEp": "EP-035"
     },
     {
-      "id": "scc-style-judgment-provisional-v1",
-      "label": "SCC-style judgment helper",
-      "status": "provisional-helper",
+      "id": "scc-law-report-judgment-scoped-v1",
+      "label": "SCC law-report judgment citation scoped helper",
+      "status": "scoped-reporter-helper",
       "jurisdiction": "India",
       "sourceType": "judgment",
       "style": "scc",
-      "authorityIds": ["scr-official-reports"],
-      "requiredFields": ["title", "year", "reporter", "page"],
-      "optionalFields": ["volume", "court"],
-      "validation": ["title is required", "year must be four digits when supplied", "missing reporter/page reduces confidence"],
-      "limitations": [
-        "SCC is a reporter-style helper only in this EP.",
-        "Do not treat generated output as verified SCC editorial style until EP-033 adds rule-level authority and tests."
+      "authorityIds": [
+        "scc-online-ebc",
+        "scr-official-reports"
       ],
-      "nextEp": "EP-033"
+      "requiredFields": [
+        "title",
+        "year",
+        "volume",
+        "page"
+      ],
+      "optionalFields": [
+        "reporter",
+        "court"
+      ],
+      "validation": [
+        "title is required",
+        "year must be four digits",
+        "volume must contain digits",
+        "first page must contain digits"
+      ],
+      "limitations": [
+        "Common core pattern only: case name, (year) volume SCC first page",
+        "Does not verify party names, parallel citations, pinpoints, supplement reports, or editorial variants"
+      ],
+      "nextEp": "EP-036 for larger browser-only citation corpus"
     },
     {
-      "id": "air-style-judgment-provisional-v1",
-      "label": "AIR-style judgment helper",
-      "status": "provisional-helper",
+      "id": "air-law-report-judgment-scoped-v1",
+      "label": "AIR law-report judgment citation scoped helper",
+      "status": "scoped-reporter-helper",
       "jurisdiction": "India",
       "sourceType": "judgment",
       "style": "air",
-      "authorityIds": ["ili-citation-style"],
-      "requiredFields": ["title", "year", "court", "page"],
-      "optionalFields": ["reporter", "volume"],
-      "validation": ["title is required", "year must be four digits when supplied", "missing court/page reduces confidence"],
-      "limitations": [
-        "AIR output remains provisional until reporter-specific examples and edge cases are verified in EP-033."
+      "authorityIds": [
+        "ili-citation-style"
       ],
-      "nextEp": "EP-033"
+      "requiredFields": [
+        "title",
+        "year",
+        "court",
+        "page"
+      ],
+      "optionalFields": [
+        "reporter",
+        "volume"
+      ],
+      "validation": [
+        "title is required",
+        "year must be four digits",
+        "court abbreviation is required",
+        "first page must contain digits"
+      ],
+      "limitations": [
+        "Common core pattern only: case name, AIR year court first page",
+        "Does not verify regional variations, parallel citations, pinpoints, or party names"
+      ],
+      "nextEp": "EP-036 for larger browser-only citation corpus"
     },
     {
       "id": "oscola-judgment-provisional-v1",
@@ -59,10 +143,25 @@
       "jurisdiction": "United Kingdom / international academic use",
       "sourceType": "judgment",
       "style": "oscola",
-      "authorityIds": ["oscola-oxford-official", "oscola-4th-edition-pdf", "oscola-quick-reference"],
-      "requiredFields": ["title", "year", "reporter", "page"],
-      "optionalFields": ["court", "volume"],
-      "validation": ["title is required", "year must be four digits when supplied"],
+      "authorityIds": [
+        "oscola-oxford-official",
+        "oscola-4th-edition-pdf",
+        "oscola-quick-reference"
+      ],
+      "requiredFields": [
+        "title",
+        "year",
+        "reporter",
+        "page"
+      ],
+      "optionalFields": [
+        "court",
+        "volume"
+      ],
+      "validation": [
+        "title is required",
+        "year must be four digits when supplied"
+      ],
       "limitations": [
         "Existing output is OSCOLA-like, not a complete OSCOLA implementation.",
         "EP-034 should implement neutral citation, law report priority, legislation, secondary sources, and bibliography behavior with tests."
@@ -76,11 +175,25 @@
       "jurisdiction": "General / India-first",
       "sourceType": "legislation",
       "style": "any-current-style",
-      "authorityIds": ["ili-citation-style", "silc-working-draft", "oscola-oxford-official"],
-      "requiredFields": ["title"],
-      "optionalFields": ["year", "page"],
-      "validation": ["title is required", "year must be four digits when supplied"],
-      "limitations": ["Provision labels, chapter numbers, enactment numbers, jurisdiction, and amendments require future rule expansion."],
+      "authorityIds": [
+        "ili-citation-style",
+        "silc-working-draft",
+        "oscola-oxford-official"
+      ],
+      "requiredFields": [
+        "title"
+      ],
+      "optionalFields": [
+        "year",
+        "page"
+      ],
+      "validation": [
+        "title is required",
+        "year must be four digits when supplied"
+      ],
+      "limitations": [
+        "Provision labels, chapter numbers, enactment numbers, jurisdiction, and amendments require future rule expansion."
+      ],
       "nextEp": "EP-035"
     }
   ]

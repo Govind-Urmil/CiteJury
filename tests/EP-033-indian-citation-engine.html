@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>EP-033 Indian citation engine tests</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body { font-family: system-ui, sans-serif; margin: 2rem; max-width: 900px; }
+    pre { white-space: pre-wrap; background: #f4f4f4; padding: 1rem; border-radius: .5rem; }
+    .pass { color: #146c2e; font-weight: 700; }
+    .fail { color: #9f1239; font-weight: 700; }
+  </style>
+</head>
+<body>
+  <h1>EP-033 Indian citation engine tests</h1>
+  <p>This file is manual/browser-only test coverage. It is not loaded by the public website.</p>
+  <p id="summary">Running…</p>
+  <pre id="log"></pre>
+  <script src="../assets/js/citation-engine.js"></script>
+  <script>
+    const tests = [
+      {
+        name: "SCI neutral citation token uses official no-space token structure",
+        input: { sourceType: "sc-neutral-judgment", citationStyle: "indian-legal", title: "Example v. Union of India", year: "2023", page: "1" },
+        expect: { ok: true, citation: "Example v. Union of India, 2023INSC1.", ruleId: "india-supreme-court-neutral-citation-v1" }
+      },
+      {
+        name: "SCI neutral citation rejects non-digit sequence",
+        input: { sourceType: "sc-neutral-judgment", citationStyle: "indian-legal", title: "Example v. Union of India", year: "2023", page: "A1" },
+        expect: { ok: false }
+      },
+      {
+        name: "SCI neutral citation rejects non-SCI court when supplied",
+        input: { sourceType: "sc-neutral-judgment", citationStyle: "indian-legal", title: "Example v. Union of India", year: "2023", page: "1", court: "Delhi High Court" },
+        expect: { ok: false }
+      },
+      {
+        name: "SCC scoped format",
+        input: { sourceType: "judgment", citationStyle: "scc", title: "Justice K.S. Puttaswamy (Retd.) v. Union of India", year: "2017", volume: "10", page: "1" },
+        expect: { ok: true, citation: "Justice K.S. Puttaswamy (Retd.) v. Union of India, (2017) 10 SCC 1.", ruleId: "scc-law-report-judgment-scoped-v1" }
+      },
+      {
+        name: "SCC requires volume",
+        input: { sourceType: "judgment", citationStyle: "scc", title: "Example v. State", year: "2017", page: "1" },
+        expect: { ok: false }
+      },
+      {
+        name: "AIR scoped format uppercases court abbreviation",
+        input: { sourceType: "judgment", citationStyle: "air", title: "A.K. Gopalan v. State of Madras", year: "1950", court: "sc", page: "27" },
+        expect: { ok: true, citation: "A.K. Gopalan v. State of Madras, AIR 1950 SC 27.", ruleId: "air-law-report-judgment-scoped-v1" }
+      },
+      {
+        name: "AIR rejects missing court abbreviation",
+        input: { sourceType: "judgment", citationStyle: "air", title: "Example v. State", year: "1950", page: "27" },
+        expect: { ok: false }
+      },
+      {
+        name: "Generic Indian judgment remains available with scoped-helper status",
+        input: { sourceType: "judgment", citationStyle: "indian-legal", title: "Example v. State", year: "2020", reporter: "SCR", page: "10", court: "Supreme Court of India" },
+        expect: { ok: true, ruleId: "generic-indian-judgment-readable-v2" }
+      },
+      {
+        name: "Website URL validation remains intact",
+        input: { sourceType: "website", citationStyle: "indian-legal", title: "Example", page: "example.com" },
+        expect: { ok: false }
+      }
+    ];
+
+    const log = [];
+    let passed = 0;
+
+    tests.forEach((test) => {
+      const result = window.CiteJuryCitationEngine.generate(test.input);
+      const okMatch = result.ok === test.expect.ok;
+      const citationMatch = !test.expect.citation || result.citation === test.expect.citation;
+      const ruleMatch = !test.expect.ruleId || (result.rule && result.rule.id === test.expect.ruleId);
+      const pass = okMatch && citationMatch && ruleMatch;
+      if (pass) passed += 1;
+      log.push(`${pass ? "PASS" : "FAIL"}: ${test.name}`);
+      if (!pass) log.push(`  Result: ${JSON.stringify(result)}`);
+    });
+
+    const summary = document.getElementById("summary");
+    summary.className = passed === tests.length ? "pass" : "fail";
+    summary.textContent = `${passed}/${tests.length} tests passed.`;
+    document.getElementById("log").textContent = log.join("\n");
+  </script>
+</body>
+</html>

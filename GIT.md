@@ -19,3 +19,16 @@ git push
 
 No file deletion is required for EP-032.
 
+
+
+## EP-033
+
+After extracting `CiteJury_EP-033.zip` over the repository:
+
+```bash
+git add .
+git commit -m "EP-033: Overhaul Indian citation engine"
+git push
+```
+
+Required file deletions: none.

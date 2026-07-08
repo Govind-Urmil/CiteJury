@@ -1,5 +1,5 @@
 {
-  "version": "EP-032",
+  "version": "EP-033",
   "purpose": "Authoritative/provenance registry for CiteJury citation rules. This file is static data only and is not loaded by the public website unless a future EP explicitly wires it into the UI.",
   "lastReviewed": "2026-07-08",
   "architecture": "static-browser-first",
@@ -11,7 +11,7 @@
       "authorityType": "official-court-source",
       "sourceUrl": "https://www.sci.gov.in/neutral-citation/",
       "supportLevel": "official-source-observed",
-      "notes": "Official Supreme Court neutral citation lookup exists. Formatting details should be implemented only after rule-specific verification against official notices and sample outputs."
+      "notes": "Official Supreme Court neutral citation lookup exists and remains the user verification route for generated SCI neutral citation tokens."
     },
     {
       "id": "scr-official-reports",
@@ -38,7 +38,7 @@
       "authorityType": "official-court-notice",
       "sourceUrl": "https://cdnbbsr.s3waas.gov.in/s3ec0490f1f4972d133619a60c30f3559e/documents/notices-circulars/06072023_105659.pdf",
       "supportLevel": "official-source-observed",
-      "notes": "Observed format description uses year + INSC + sequence. EP-033 should convert this into a strict Supreme Court neutral citation rule with tests."
+      "notes": "Official notice states Supreme Court neutral citation format uses year + INSC + sequence number, e.g. 2023INSC1, and describes phased implementation from July 06, 2023."
     },
     {
       "id": "oscola-oxford-official",
@@ -84,6 +84,15 @@
       "sourceUrl": "https://www.ili.ac.in/cstyle.pdf",
       "supportLevel": "institutional-style-guide",
       "notes": "Institutional legal citation guidance; useful for comparing Indian academic citation practice, not a universal court authority."
+    },
+    {
+      "id": "scc-online-ebc",
+      "name": "SCC Online / Eastern Book Company",
+      "jurisdiction": "India",
+      "authorityType": "publisher-law-report-source",
+      "sourceUrl": "https://www.scconline.com/",
+      "supportLevel": "publisher-source-observed",
+      "notes": "Publisher source for SCC law reports and legal research. CiteJury uses only a narrow common core SCC component pattern and does not claim full editorial SCC style coverage."
     }
   ]
 }

@@ -1,0 +1,41 @@
+{
+  "version": "EP-033",
+  "lastReviewed": "2026-07-08",
+  "purpose": "Static scope registry for Indian legal citation support. This file documents what CiteJury currently supports, what it deliberately does not claim, and which rules need manual verification.",
+  "supportedRules": [
+    {
+      "ruleId": "india-supreme-court-neutral-citation-v1",
+      "scope": "Supreme Court of India neutral citation token formatting for judgments/orders",
+      "format": "YYYYINSCN",
+      "exampleToken": "2023INSC1",
+      "authorityIds": ["sci-neutral-format-notice-2023", "sci-neutral-citation", "scr-official-reports"],
+      "confidence": "high for token structure; medium for full citation because case names and sequence numbers are user-entered",
+      "requiresManualVerification": true,
+      "notCovered": [
+        "High Court neutral citation formats",
+        "Verification that a sequence number belongs to a specific case",
+        "Parallel citations",
+        "Pinpoint paragraphs",
+        "Party-name correction"
+      ]
+    },
+    {
+      "ruleId": "scc-law-report-judgment-scoped-v1",
+      "scope": "Common core SCC law-report judgment citation component order",
+      "format": "Case name, (year) volume SCC first page",
+      "authorityIds": ["scc-online-ebc", "scr-official-reports"],
+      "confidence": "medium for core components; low for editorial edge cases",
+      "requiresManualVerification": true,
+      "notCovered": ["SCC OnLine identifiers", "SCC supplement series", "pinpoint paragraphs", "parallel citations", "editorial variants"]
+    },
+    {
+      "ruleId": "air-law-report-judgment-scoped-v1",
+      "scope": "Common core AIR law-report judgment citation component order",
+      "format": "Case name, AIR year court first page",
+      "authorityIds": ["ili-citation-style"],
+      "confidence": "medium for core components; low for editorial edge cases",
+      "requiresManualVerification": true,
+      "notCovered": ["regional reporter variations", "parallel citations", "pinpoint paragraphs", "party-name correction"]
+    }
+  ]
+}
