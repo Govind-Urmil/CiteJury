@@ -1,0 +1,28 @@
+{
+  "version": "EP-038",
+  "status": "production-hardening-ready",
+  "architecture": "static-browser-only",
+  "backend": false,
+  "database": false,
+  "runtime_dependency": false,
+  "ads_active": false,
+  "analytics_active": false,
+  "headers": [
+    "Content-Security-Policy",
+    "Strict-Transport-Security",
+    "X-Content-Type-Options",
+    "Referrer-Policy",
+    "X-Frame-Options",
+    "Permissions-Policy",
+    "Cross-Origin-Opener-Policy",
+    "Cache-Control"
+  ],
+  "csp_posture": "self-hosted-only; third-party ad/analytics origins intentionally blocked until approved",
+  "unattended_operation_principles": [
+    "no server maintenance surface",
+    "no database migrations or credentials",
+    "no active third-party scripts by default",
+    "manual browser tests remain available in /tests/",
+    "ads require future ADR and privacy update before activation"
+  ]
+}

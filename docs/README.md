@@ -8,3 +8,5 @@ Important files:
 - ROADMAP.md
 - EP-LEDGER.md
 - ADR/
+
+- EP-038: Security, privacy, production headers, and inactive ad-readiness hardening.

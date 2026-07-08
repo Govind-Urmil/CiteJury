@@ -66,3 +66,8 @@ No files are removed in EP-036.
 ## EP-037 Content Quality and Authority Rewrite
 
 EP-037 is complete. The public guide pages were rewritten to reduce template-like content and improve trust, authority, verification habits, and transparent limitations. No backend, database, runtime dependency, active ads, analytics, or external scripts were added. Ads remain inactive but reserved for future responsible monetization after explicit approval.
+
+
+## EP-038 status
+
+EP-038 was completed after EP-037 commit. It hardens production headers, privacy documentation, inactive ad-readiness guardrails, and unattended-operation posture while preserving the locked static/browser-only architecture. Ads and analytics remain inactive and require future explicit approval before activation.

@@ -1,10 +1,9 @@
 # CiteJury Engineering Roadmap
 
 ## Completed
-EP-001 through EP-037.
+EP-001 through EP-038.
 
 ## Next Planned EPs
-- EP-038 Security, Privacy and Production Hardening
 - EP-039 Deployment Release Candidate
 - EP-040 Final Production Gold Release
 
@@ -71,3 +70,16 @@ Next: EP-037 — Content Quality and Authority Rewrite.
 - Preserved public performance: no corpus load, no external script, no active ads, no analytics, no backend.
 
 Next: EP-038 — Security, Privacy and Production Hardening.
+
+
+## EP-038 deliverables
+
+- Added strict static-host production headers including CSP, HSTS, referrer, frame, permissions, cross-origin opener, and cache policy.
+- Strengthened privacy language for browser-only processing, inactive ads, inactive analytics, and future ad disclosure requirements.
+- Added `assets/data/security-privacy-hardening.json`.
+- Updated ad-readiness config without activating any ad or analytics script.
+- Added production ad CSP template and EP-038 hardening documentation.
+- Added browser-only EP-038 security/privacy test page.
+- Preserved long-term unattended static operation: no backend, database, build step, runtime dependency, active ads, or active analytics.
+
+Next: EP-039 — Deployment Release Candidate.

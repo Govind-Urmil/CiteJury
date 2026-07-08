@@ -1,12 +1,18 @@
 {
-  "version": "EP-013",
+  "version": "EP-038",
   "status": "reserved-not-active",
+  "ads_active": false,
+  "analytics_active": false,
+  "requires_future_adr_for_ads": true,
+  "privacy_update_required_before_ads": true,
+  "csp_update_required_before_ads": true,
   "principles": [
     "No intrusive ads inside active citation workflow",
     "No backend dependency",
-    "No paid dependency",
-    "No ad network script until approved in a future EP",
-    "Ad slots are layout reservations only"
+    "No paid dependency required for site operation",
+    "No ad network script until explicitly approved in a future EP/ADR",
+    "Ad slots are layout reservations only",
+    "Future ad activation must preserve citation performance, accessibility, privacy, and trust"
   ],
   "slots": [
     {
@@ -21,5 +27,6 @@
       "format": "responsive-banner",
       "active": false
     }
-  ]
+  ],
+  "approved_ad_network_origins": []
 }

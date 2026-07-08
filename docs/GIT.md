@@ -73,3 +73,14 @@ git add .
 git commit -m "EP-037: Rewrite content quality and authority guides"
 git push
 ```
+
+
+## EP-038 commit
+
+```bash
+git add .
+git commit -m "EP-038: Harden security privacy and production readiness"
+git push
+```
+
+No file deletion is required for EP-038.

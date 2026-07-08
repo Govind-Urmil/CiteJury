@@ -3,7 +3,7 @@
 Privacy-first legal citation tools built with Indian legal practice in mind.
 
 ## Current Release
-EP-036: Citation Accuracy Browser Test Corpus.
+EP-038: Security, Privacy and Production Hardening.
 
 ## Architecture
 Static, browser-first, reusable, free-to-host first, with no backend/database/runtime dependency.
@@ -40,3 +40,8 @@ EP-036 adds a large deterministic browser-only citation accuracy corpus for manu
 ## EP-037 update
 
 Public guide content has been rewritten for authority-aware citation education, clearer limitations, and long-term static operation. Ads and analytics remain inactive.
+
+
+## EP-038 Security, Privacy and Production Hardening
+
+EP-038 adds strict production security headers, privacy-policy hardening, inactive ad-readiness guardrails, and long-term unattended-operation documentation. Ads and analytics remain inactive; future monetization requires an approved ADR/EP, privacy update, and CSP update.

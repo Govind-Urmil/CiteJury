@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>EP-038 Security Privacy Hardening Test</title>
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+<main class="container section">
+  <h1>EP-038 Security Privacy Hardening Test</h1>
+  <pre id="out">Running...</pre>
+</main>
+<script>
+(async()=>{
+  const results=[];
+  async function text(path){const r=await fetch(path); return r.ok ? r.text() : ''}
+  async function json(path){const r=await fetch(path); return r.ok ? r.json() : null}
+  const headers=await text('../_headers');
+  const privacy=await text('../privacy.html');
+  const ads=await json('../assets/data/ads-config.json');
+  const hardening=await json('../assets/data/security-privacy-hardening.json');
+  const requiredHeaders=['Content-Security-Policy','Strict-Transport-Security','X-Content-Type-Options','Referrer-Policy','X-Frame-Options','Permissions-Policy','Cross-Origin-Opener-Policy'];
+  for (const h of requiredHeaders) results.push([h, headers.includes(h)]);
+  results.push(['CSP default self', headers.includes("default-src 'self'")]);
+  results.push(['CSP object none', headers.includes("object-src 'none'")]);
+  results.push(['CSP frame ancestors', headers.includes("frame-ancestors 'self'")]);
+  results.push(['Tests CSP override exists', headers.includes('/tests/*') && headers.includes("script-src 'self' 'unsafe-inline'")]);
+  results.push(['Privacy says no active third-party ads', privacy.includes('does not currently load third-party ad network scripts')]);
+  results.push(['Privacy says future update required', privacy.includes('privacy policy must be updated before activation')]);
+  results.push(['Ads inactive', ads && ads.ads_active === false && ads.analytics_active === false]);
+  results.push(['No approved ad origins', ads && Array.isArray(ads.approved_ad_network_origins) && ads.approved_ad_network_origins.length === 0]);
+  results.push(['Hardening static', hardening && hardening.architecture === 'static-browser-only' && hardening.backend === false && hardening.database === false]);
+  const failed=results.filter(([,ok])=>!ok).map(([name])=>name);
+  document.getElementById('out').textContent = failed.length ? 'FAILED\n'+failed.join('\n') : 'PASSED '+results.length+'/'+results.length+' EP-038 checks';
+  if (failed.length) throw new Error(failed.join('; '));
+})();
+</script>
+</body>
+</html>
