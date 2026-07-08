@@ -10,3 +10,8 @@ Important files:
 - ADR/
 
 - EP-038: Security, privacy, production headers, and inactive ad-readiness hardening.
+
+
+## EP-049
+
+See `FINAL_UNATTENDED_OPERATION_RELEASE.md`, `RECOVERY_AND_MIGRATION_RUNBOOK.md`, and `SEARCH_AND_ADS_NEXT_STEPS.md`.

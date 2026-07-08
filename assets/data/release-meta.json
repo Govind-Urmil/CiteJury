@@ -1,6 +1,6 @@
 {
-  "version": "EP-047",
-  "stage": "github-pages-homepage-cleanup",
+  "version": "EP-049",
+  "stage": "final-unattended-operation-release",
   "backend": false,
   "database": false,
   "python_runtime_required": false,
@@ -10,14 +10,15 @@
   "analytics_active": false,
   "hosting_model": "static-free-host-first",
   "manual_cleanup_required": [],
-  "final_planned_ep": false,
+  "final_planned_ep": true,
   "github_pages_initial_launch": true,
   "manifest_loaded_on_http_only": true,
   "custom_domain_required_now": false,
   "searchEngineLaunchReady": true,
   "productionBaseUrl": "https://citejury.citejury.workers.dev",
   "sitemapUrl": "https://citejury.citejury.workers.dev/sitemap.xml",
-  "latest_ep": "EP-048",
-  "latest_title": "Advertisement activation framework",
-  "updated": "2026-07-08"
+  "latest_ep": "EP-049",
+  "latest_title": "Final unattended operation release",
+  "updated": "2026-07-08",
+  "unattended_operation_release": true
 }

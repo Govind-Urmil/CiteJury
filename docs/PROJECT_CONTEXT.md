@@ -137,3 +137,8 @@ EP-047 was generated after EP-046 was committed and live. It prepares the tempor
 
 Next: get AdSense account/site approval and then use the documented config-only activation path, or proceed to EP-049 final unattended operation release.
 
+
+
+## EP-049 Final Unattended Operation Release
+
+EP-049 was generated after EP-048 was committed and the live site was checked directly at `https://citejury.citejury.workers.dev`. It records the final unattended-operation release, recovery/migration runbooks, and search/ads next-step guidance. CiteJury remains static/browser-only with no backend, no database, no active analytics, and inactive fail-closed ad readiness. Future EPs should be avoided unless a real production issue, citation-authority improvement, search/ad account requirement, or hosting/domain migration appears.

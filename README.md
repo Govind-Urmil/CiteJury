@@ -96,3 +96,8 @@ CiteJury is prepared for initial search-engine discovery at `https://citejury.ci
 ## EP-048 Advertisement activation framework
 
 Real ads remain inactive until a valid publisher ID, ads.txt, slot IDs, privacy review, and live smoke test are completed.
+
+
+## EP-049 Final unattended operation release
+
+EP-049 records the final low-maintenance handoff for the live Cloudflare Workers deployment at `https://citejury.citejury.workers.dev`. CiteJury remains static/browser-only, ads and analytics remain inactive, and future work should be limited to real production issues, citation-authority improvements, search/ad account requirements, or hosting/domain migration. See `docs/FINAL_UNATTENDED_OPERATION_RELEASE.md`.

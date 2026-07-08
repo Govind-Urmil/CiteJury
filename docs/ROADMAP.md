@@ -1,10 +1,10 @@
 # CiteJury Engineering Roadmap
 
 ## Completed
-EP-001 through EP-040. Planned roadmap complete.
+EP-001 through EP-049. Live launch and final unattended-operation release complete.
 
 ## Next Planned EPs
-- EP-040 Final Production Gold Release
+None. Create a new EP only for verified production issues, citation-authority improvements, search/ad account requirements, or hosting/domain migration.
 
 ## Architecture Rules
 - No backend or database without explicit approval.
@@ -175,3 +175,8 @@ Next: complete webmaster verification and sitemap submission, then prepare ad ac
 
 Next: get AdSense account/site approval and then use the documented config-only activation path, or proceed to EP-049 final unattended operation release.
 
+
+
+## EP-049 Final Unattended Operation Release
+
+EP-049 finalizes the live Cloudflare Workers Static Assets handoff for `https://citejury.citejury.workers.dev`. The site remains static/browser-only, host-portable, and designed for long unattended operation. Ads and analytics remain inactive. Search-engine and ad activation tasks are now manual account-level steps documented in the repository.

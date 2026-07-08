@@ -138,3 +138,16 @@ Next: Google Search Console/Bing verification and sitemap submission, then EP-04
 
 Next: get AdSense account/site approval and then use the documented config-only activation path, or proceed to EP-049 final unattended operation release.
 
+
+
+## EP-049 Final Unattended Operation Release
+
+- Base: committed EP-048 repository ZIP.
+- Live URL checked directly: `https://citejury.citejury.workers.dev`.
+- Added final unattended-operation metadata and runbooks.
+- Updated release metadata, roadmap, README, GIT instructions, and project context.
+- Added browser-only EP-049 final-operation validation page.
+- Preserved static/browser-only architecture, no backend, no database, no active analytics, inactive ads, and host portability.
+- Real ads remain inactive until Govind has account approval, publisher/slot IDs, ads.txt, privacy review, and explicit activation approval.
+
+Next: manual Google Search Console/Bing setup, then future ad approval/activation only when ready. No routine EPs needed.

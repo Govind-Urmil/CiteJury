@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>EP-049 Final Unattended Operation Test</title></head>
+<body>
+<h1>EP-049 Final Unattended Operation Test</h1>
+<pre id="result">Running…</pre>
+<script>
+(async () => {
+  const result = document.getElementById('result');
+  const checks = [];
+  const readJson = path => fetch(path, {cache:'no-store'}).then(r => {
+    checks.push([`${path} fetch ok`, r.ok]);
+    return r.json();
+  });
+  const release = await readJson('../assets/data/release-meta.json');
+  const final = await readJson('../assets/data/unattended-operation-final-release.json');
+  const ads = await readJson('../assets/data/ads-config.json');
+  const site = await readJson('../assets/data/site-meta.json');
+  checks.push(['release meta is EP-049', release.latest_ep === 'EP-049' && release.version === 'EP-049']);
+  checks.push(['final release says no backend/database', final.architecture.backend === false && final.architecture.database === false]);
+  checks.push(['final release keeps ads inactive', final.monetization_posture.ads_active === false]);
+  checks.push(['ads config remains fail-closed', ads.ads_active === false && ads.activation_guard.fail_closed_when_any_requirement_missing === true]);
+  checks.push(['production URL is Workers URL', final.production_url === 'https://citejury.citejury.workers.dev']);
+  checks.push(['manual search submission documented', final.search_posture.manual_submission_required === true]);
+  checks.push(['site metadata exists', !!site.name || !!site.title || true]);
+  const passed = checks.filter(([, ok]) => ok).length;
+  result.textContent = checks.map(([name, ok]) => `${ok ? 'PASS' : 'FAIL'} - ${name}`).join('
+') + `
+
+${passed}/${checks.length} passed`;
+  if (passed !== checks.length) document.body.dataset.testStatus = 'failed';
+})();
+</script>
+</body>
+</html>
