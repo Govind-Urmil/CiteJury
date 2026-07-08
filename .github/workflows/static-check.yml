@@ -60,15 +60,21 @@ jobs:
         run: |
           python - <<'PY'
           import json
+          import re
           from pathlib import Path
           version = json.loads(Path('assets/asset-version.json').read_text())['assetVersion']
           bad = []
-          for path in [Path('index.html'), Path('privacy.html'), Path('terms.html'), Path('trust.html'), *Path('guides').glob('*.html')]:
+          checked = []
+          paths = [Path('index.html'), Path('privacy.html'), Path('terms.html'), Path('trust.html'), Path('404.html'), *Path('guides').glob('*.html'), *Path('tests').glob('*.html')]
+          pattern = re.compile(r'(?:\.\./)?assets/(?:css/style\.css|js/(?:app|citation-engine|revenue-readiness)\.js)\?v=([^"\']+)')
+          for path in paths:
               text = path.read_text()
-              if 'assets/css/style.css' in text and f'assets/css/style.css?v={version}' not in text and f'../assets/css/style.css?v={version}' not in text:
-                  bad.append(str(path))
-              if 'assets/js/app.js' in text and f'assets/js/app.js?v={version}' not in text and f'../assets/js/app.js?v={version}' not in text:
-                  bad.append(str(path))
+              for match in pattern.finditer(text):
+                  checked.append(f'{path}:{match.group(0)}')
+                  if match.group(1) != version:
+                      bad.append(f'{path}: {match.group(0)}')
+          if not checked:
+              raise SystemExit('No versioned asset references found')
           if bad:
-              raise SystemExit('Asset version mismatch: ' + ', '.join(sorted(set(bad))))
+              raise SystemExit('Asset version mismatch: ' + '; '.join(sorted(bad)))
           PY

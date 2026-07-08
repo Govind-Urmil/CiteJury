@@ -19,17 +19,36 @@
   const nav = document.querySelector("#primary-nav");
 
   if (toggle && nav) {
+    const setNavigationOpen = (open) => {
+      toggle.setAttribute("aria-expanded", String(open));
+      toggle.setAttribute("aria-label", open ? "Close navigation menu" : "Open navigation menu");
+      toggle.textContent = open ? "Close" : "Menu";
+      nav.classList.toggle("open", open);
+    };
+
     toggle.addEventListener("click", () => {
-      const open = toggle.getAttribute("aria-expanded") === "true";
-      toggle.setAttribute("aria-expanded", String(!open));
-      nav.classList.toggle("open", !open);
+      setNavigationOpen(toggle.getAttribute("aria-expanded") !== "true");
     });
 
     nav.addEventListener("click", (event) => {
-      if (event.target.closest("a")) {
-        toggle.setAttribute("aria-expanded", "false");
-        nav.classList.remove("open");
+      if (event.target.closest("a")) setNavigationOpen(false);
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && toggle.getAttribute("aria-expanded") === "true") {
+        setNavigationOpen(false);
+        toggle.focus({ preventScroll: true });
       }
+    });
+
+    document.addEventListener("click", (event) => {
+      if (toggle.getAttribute("aria-expanded") !== "true") return;
+      if (event.target.closest(".nav-shell")) return;
+      setNavigationOpen(false);
+    });
+
+    window.addEventListener("resize", () => {
+      if (window.matchMedia("(min-width: 851px)").matches) setNavigationOpen(false);
     });
   }
 
@@ -948,7 +967,7 @@
     }
     if (options.updateHash !== false) {
       const nextHash = requested === "check" ? "#checker" : "#generator";
-      if (window.location.hash !== nextHash) window.history.pushState({ workspace: requested }, "", nextHash);
+      if (window.location.hash !== nextHash) window.history.replaceState({ workspace: requested }, "", nextHash);
     }
     const target = requested === "check" ? document.querySelector("#checker") : document.querySelector("#citation-generator-panel");
     if (target && options.scroll !== false) target.scrollIntoView({ behavior: prefersReducedMotion() ? "auto" : "smooth", block: "start" });

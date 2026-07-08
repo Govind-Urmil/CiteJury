@@ -238,4 +238,4 @@ Apply over the repository and commit once. Run `tests/index.html` and `tests/EP-
 
 
 ## EP-064A
-Apply over EP-064 and commit once. Clear cache or use `?v=065` after deployment.
+Apply over EP-064 and commit once. Clear cache or use `?v=066` after deployment.

@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>EP-066 Navigation Accessibility & Release Gate Checks</title>
+  <link rel="stylesheet" href="../assets/css/style.css?v=066">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav-shell">
+      <a class="brand" href="../index.html"><span class="brand-mark">CJ</span>CiteJury</a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" aria-label="Open navigation menu">Menu</button>
+      <nav id="primary-nav" class="site-nav" aria-label="Primary"><a href="../index.html#generator">Generator</a></nav>
+    </div>
+  </header>
+  <main class="container section"><h1>EP-066 Checks</h1><pre id="out">Running...</pre></main>
+  <script src="../assets/js/citation-engine.js?v=066"></script>
+  <script src="../assets/js/app.js?v=066"></script>
+  <script>
+    const out = document.querySelector('#out');
+    const checks = [];
+    const add = (name, pass) => checks.push({ name, pass: Boolean(pass) });
+    const toggle = document.querySelector('.nav-toggle');
+    const nav = document.querySelector('#primary-nav');
+    toggle.click();
+    add('menu opens', toggle.getAttribute('aria-expanded') === 'true' && nav.classList.contains('open'));
+    add('menu label reflects open state', toggle.getAttribute('aria-label') === 'Close navigation menu' && toggle.textContent === 'Close');
+    document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape' }));
+    add('escape closes menu', toggle.getAttribute('aria-expanded') === 'false' && !nav.classList.contains('open'));
+    toggle.click();
+    document.body.dispatchEvent(new MouseEvent('click', { bubbles: true }));
+    add('outside click closes menu', toggle.getAttribute('aria-expanded') === 'false' && !nav.classList.contains('open'));
+    add('app script loaded with EP-066 version', document.querySelector('script[src="../assets/js/app.js?v=066"]') !== null);
+    const failed = checks.filter((item) => !item.pass);
+    out.textContent = checks.map((item) => `${item.pass ? 'PASS' : 'FAIL'} — ${item.name}`).join('\n');
+    if (failed.length) throw new Error('EP-066 checks failed: ' + failed.map((item) => item.name).join(', '));
+  </script>
+</body>
+</html>

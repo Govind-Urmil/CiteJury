@@ -1,6 +1,6 @@
 {
-  "version": "EP-065",
-  "stage": "production-stability-navigation-hardening",
+  "version": "EP-066",
+  "stage": "navigation-accessibility-release-gate-hardening",
   "backend": false,
   "database": false,
   "python_runtime_required": false,
@@ -17,8 +17,8 @@
   "searchEngineLaunchReady": true,
   "productionBaseUrl": "https://citejury.citejury.workers.dev",
   "sitemapUrl": "https://citejury.citejury.workers.dev/sitemap.xml",
-  "latest_ep": "EP-065",
-  "latest_title": "Production Stability & Navigation Hardening",
+  "latest_ep": "EP-066",
+  "latest_title": "Navigation Accessibility & Release Gate Hardening",
   "updated": "2026-07-08",
   "unattended_operation_release": true
 }

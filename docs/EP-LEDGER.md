@@ -276,3 +276,16 @@ Next: manual Google Search Console/Bing setup, then future ad approval/activatio
 - Added `tests` to deployment ignore rules so internal browser checks are not shipped with public assets.
 - Changed Checker fix guidance from standalone emphasis to structured paragraph text.
 - Preserved static/browser-only, zero-backend, zero-database, zero-API architecture.
+
+
+## EP-066 — Navigation Accessibility & Release Gate Hardening
+- Added Escape-key and outside-click closing for mobile navigation.
+- Updated mobile menu text and accessible label to reflect open/closed state.
+- Added resize-state synchronization so open mobile navigation resets when returning to desktop width.
+- Replaced workspace hash switching pushState with replaceState to avoid browser-history buildup during Generate/Check switching.
+- Expanded asset-version CI coverage across app, citation engine, revenue readiness, 404, guide, and test references.
+- Added a dedicated EP-066 functional test for navigation accessibility behavior and asset-version ownership.
+- Added 404 description, theme color, and favicon metadata.
+- Documented that future ad activation requires a coordinated CSP update and fresh smoke testing.
+- Bumped asset version to 066.
+- Preserved static/browser-only, zero-backend, zero-database, zero-API architecture.

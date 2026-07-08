@@ -37,6 +37,10 @@ After AdSense approval, update configuration/data files rather than changing web
 - If AdSense fails to load, the citation generator continues to work.
 - When moving to a custom domain, update sitemap/canonical URLs, AdSense site entry, and `/ads.txt` for the new host.
 
+## Production CSP activation note
+
+EP-065/EP-066 keep the production Content Security Policy restricted to same-origin resources while ads are inactive. Turning on AdSense later is therefore not a config-only switch: the approved ad activation EP must also update `_headers` to allow only the exact required Google advertising domains, then run privacy, security, mobile, and citation-regression smoke tests before deployment.
+
 ## Sources checked
 
 - Google AdSense program policies.
