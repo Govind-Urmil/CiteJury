@@ -137,3 +137,7 @@ Citation form labels and helper text now update dynamically by style/source type
 
 ### EP-058
 Citation Anatomy™ explains generated citations component-by-component with verification checklist, common mistakes, and related learning links.
+
+
+### EP-059
+Five priority citation guides were expanded into stronger educational resources with examples, common mistakes, verification workflows, and internal links.

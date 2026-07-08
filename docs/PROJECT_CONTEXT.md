@@ -178,3 +178,7 @@ Dynamic citation field labels and helper text were added. APA/Chicago appear onl
 
 ## EP-058
 Citation Anatomy™ launched as CiteJury's first flagship educational feature. It remains fully static/browser-only and explains generated citations with anatomy components, verification checklists, common mistakes, and relevant guide links.
+
+
+## EP-059
+Authority Guides Expansion completed for five priority pages. The guides now support CiteJury's educational positioning with practical citation anatomy, verification habits, common mistakes, and internal links.

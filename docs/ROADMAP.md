@@ -216,3 +216,7 @@ Generator UX now changes field labels/helper text based on selected citation sty
 
 ## EP-058 — Completed
 Citation Anatomy™ added. Next authority-building priorities remain guide expansion, comparison pages, and Citation Decision Tree.
+
+
+## EP-059 — Completed
+First major authority-content expansion completed. Next authority priorities: comparison center and Citation Decision Tree.

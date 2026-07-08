@@ -205,3 +205,9 @@ Next: manual Google Search Console/Bing setup, then future ad approval/activatio
 - Added Citation Anatomy™ after successful generation.
 - Added rule-aware component explanations, why-this-format text, verification checklist, common mistakes, and learn-more links.
 - Bumped asset version to 058.
+
+
+## EP-059 — Authority Guides Expansion
+- Expanded five priority authority guides: Legal Citation Basics, SCC, AIR, Supreme Court judgment, and OSCOLA India.
+- Added anatomy-style explanations, required-field guidance, common mistakes, source/authority notes, and internal learning paths.
+- Bumped asset version to 059.
