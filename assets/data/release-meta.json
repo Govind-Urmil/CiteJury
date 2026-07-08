@@ -16,5 +16,8 @@
   "custom_domain_required_now": false,
   "searchEngineLaunchReady": true,
   "productionBaseUrl": "https://citejury.citejury.workers.dev",
-  "sitemapUrl": "https://citejury.citejury.workers.dev/sitemap.xml"
+  "sitemapUrl": "https://citejury.citejury.workers.dev/sitemap.xml",
+  "latest_ep": "EP-048",
+  "latest_title": "Advertisement activation framework",
+  "updated": "2026-07-08"
 }

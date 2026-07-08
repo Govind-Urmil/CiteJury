@@ -151,3 +151,12 @@ img,svg{max-width:100%;height:auto}
 .ad-slot[hidden],
 .guide-revenue-slot[hidden]{display:none!important}
 .guide-revenue-slot{width:min(100%,820px);margin:48px auto 0}
+
+.revenue-slot[data-revenue-status="adsense-ready"]{
+  min-height:280px;
+  display:block;
+  overflow:hidden;
+}
+.revenue-slot ins.adsbygoogle{
+  min-height:250px;
+}

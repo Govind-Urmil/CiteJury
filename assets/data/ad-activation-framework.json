@@ -1,0 +1,16 @@
+{
+  "ep": "EP-048",
+  "title": "Advertisement activation framework",
+  "status": "complete-ad-framework-inactive-until-publisher-id-and-adsense-approval",
+  "live_url": "https://citejury.citejury.workers.dev",
+  "provider": "Google AdSense candidate",
+  "real_ads_serving": false,
+  "reason_real_ads_not_serving": "No AdSense publisher/client ID or site approval has been provided yet.",
+  "architecture": "static browser-first website; Cloudflare Workers Static Assets now; portable to S3/static hosts later",
+  "guardrails": [
+    "Fail closed when config is inactive or incomplete",
+    "No ad script loads while ads_active is false",
+    "No ads inside generator form, citation output, validation, explanation, copy, or download controls",
+    "AdSense activation requires ads.txt, privacy review, and live smoke testing"
+  ]
+}

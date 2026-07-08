@@ -91,3 +91,8 @@ EP-046 completed a live production audit against `https://citejury.citejury.work
 ## EP-047 Search Engine Launch
 
 CiteJury is prepared for initial search-engine discovery at `https://citejury.citejury.workers.dev`. Ads and analytics remain inactive. Submit the sitemap only after the EP-047 deployment is live and webmaster verification is completed with real account-generated tokens.
+
+
+## EP-048 Advertisement activation framework
+
+Real ads remain inactive until a valid publisher ID, ads.txt, slot IDs, privacy review, and live smoke test are completed.

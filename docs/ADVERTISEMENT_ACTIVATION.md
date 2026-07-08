@@ -1,0 +1,44 @@
+# EP-048 Advertisement Activation Framework
+
+EP-048 prepares CiteJury for responsible advertising without turning on real advertisements. The site remains static, browser-first, host-portable, and free of backend/database/runtime requirements.
+
+## Current state
+
+- Live production URL: `https://citejury.citejury.workers.dev`
+- Candidate provider: Google AdSense
+- Real ad serving: **inactive**
+- Analytics: **inactive**
+- No publisher ID has been added.
+- No third-party ad script loads while `ads_active` is `false`.
+
+## Why ads are not fully active yet
+
+Google AdSense requires the publisher to use the AdSense code from the account, and ads.txt should contain the correct publisher ID when used. CiteJury cannot safely activate real ads until Govind has a real AdSense publisher/client ID and the site is approved in AdSense.
+
+## Future no-code activation path
+
+After AdSense approval, update configuration/data files rather than changing website logic:
+
+1. Copy the real AdSense client ID, for example `ca-pub-XXXXXXXXXXXXXXXX`.
+2. Copy the ads.txt publisher ID, for example `pub-XXXXXXXXXXXXXXXX`.
+3. Rename/copy `ads.txt.template` to `ads.txt` and replace the placeholder publisher ID.
+4. In `assets/data/ads-config.json`, set:
+   - `provider_policy.publisher_client_id` to the real `ca-pub-...` value.
+   - `provider_policy.ads_txt_publisher_id` to the matching `pub-...` value.
+   - approved slot `ad_slot` IDs from AdSense.
+   - `active: true` only for selected slots.
+   - `ads_active: true` after the privacy and smoke-test checks pass.
+5. Commit and push. Cloudflare will deploy the static update.
+
+## Guardrails
+
+- No ad is placed inside citation form fields, citation output, copy/download controls, validation messages, or explanation panels.
+- If config is missing, disabled, malformed, or incomplete, all slots stay hidden.
+- If AdSense fails to load, the citation generator continues to work.
+- When moving to a custom domain, update sitemap/canonical URLs, AdSense site entry, and `/ads.txt` for the new host.
+
+## Sources checked
+
+- Google AdSense program policies.
+- Google AdSense ads.txt guide.
+- Google AdSense code setup guidance for Auto ads/ad units.

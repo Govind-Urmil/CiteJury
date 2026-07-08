@@ -1,61 +1,75 @@
 {
-  "version": "EP-044",
-  "status": "passive-revenue-ready-but-inactive-until-explicit-approval",
+  "version": "EP-048",
+  "status": "adsense-activation-ready-but-disabled-until-publisher-id-and-approval",
   "ads_active": false,
   "analytics_active": false,
-  "requires_future_adr_for_ads": true,
-  "privacy_update_required_before_ads": true,
-  "csp_update_required_before_ads": true,
-  "durability_goal": "Prepare stable first-party ad containers and fail-closed behaviour so future approved ads do not break the citation workflow if an ad network is unavailable.",
-  "activation_model": "Inactive by default. Future activation must update this config, privacy disclosures, CSP/headers, provider identifiers, and perform a production ad review before enabling third-party ad scripts.",
-  "principles": [
-    "No third-party ad scripts without explicit approval",
-    "No ads inside active citation form fields, generated citation output, copy/download controls, validation messages, or trust explanations",
-    "Ad containers must fail closed when config is missing, malformed, inactive, blocked, or unsupported",
-    "No backend, database, account system, or paid infrastructure required for ad readiness",
-    "Ad layout must reserve safe vertical space only when ads are intentionally enabled",
-    "Ad activation must preserve citation performance, accessibility, privacy, and user trust",
-    "Do not make citation accuracy or legal information dependent on an ad network"
-  ],
+  "approved_provider": "google-adsense",
+  "activation_guard": {
+    "requires_explicit_owner_approval": true,
+    "requires_adsense_site_status_ready": true,
+    "requires_valid_publisher_client_id": true,
+    "requires_ads_txt_with_matching_publisher_id": true,
+    "requires_privacy_review": true,
+    "requires_live_production_smoke_test": true,
+    "fail_closed_when_any_requirement_missing": true
+  },
   "provider_policy": {
-    "approved_provider": null,
-    "approved_ad_network_origins": [],
-    "publisher_id": null,
+    "approved_provider": "google-adsense",
+    "approved_ad_network_origins": [
+      "https://pagead2.googlesyndication.com",
+      "https://googleads.g.doubleclick.net",
+      "https://tpc.googlesyndication.com"
+    ],
+    "publisher_client_id": "",
+    "ads_txt_publisher_id": "",
+    "ad_script_url": "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js",
     "requires_consent_review": true,
     "requires_ads_txt_review": true,
-    "requires_live_domain_review": true
+    "requires_live_domain_review": true,
+    "current_live_domain": "https://citejury.citejury.workers.dev"
   },
   "slots": [
     {
       "id": "ad-home-after-generator",
       "location": "homepage after citation generator",
-      "format": "responsive-display",
+      "format": "auto",
       "active": false,
-      "max_density": "one primary display slot above guide links",
-      "placement_guardrail": "Never insert inside the form, citation preview, validation, or explanation panel."
+      "ad_slot": "",
+      "max_density": "one primary display slot below the citation workspace",
+      "placement_guardrail": "Never insert inside the form, citation preview, validation, copy/download controls, or explanation panel."
     },
     {
       "id": "ad-home-before-faq",
       "location": "homepage before FAQ",
-      "format": "responsive-display",
+      "format": "auto",
       "active": false,
-      "max_density": "one low-priority display slot near bottom of homepage",
+      "ad_slot": "",
+      "max_density": "one low-priority display slot near the bottom of the homepage",
       "placement_guardrail": "Must not interrupt the user while creating or copying a citation."
     },
     {
       "id": "ad-guide-footer",
-      "location": "guide pages above footer",
-      "format": "responsive-display",
+      "location": "guide pages near article end",
+      "format": "auto",
       "active": false,
-      "max_density": "one guide-page display slot near article end",
-      "placement_guardrail": "Must not appear before the core answer of a guide page."
+      "ad_slot": "",
+      "max_density": "one guide-page display slot after the core educational answer",
+      "placement_guardrail": "Must not appear before the guide's main answer or within legal citation examples."
     }
+  ],
+  "future_activation_steps": [
+    "Create or approve the site in Google AdSense for the current production URL or custom domain.",
+    "Replace provider_policy.publisher_client_id with ca-pub-XXXXXXXXXXXXXXXX.",
+    "Replace provider_policy.ads_txt_publisher_id with pub-XXXXXXXXXXXXXXXX and publish ads.txt from ads.txt.template.",
+    "Set only approved slot IDs active with real numeric ad_slot values.",
+    "Set ads_active to true only after a live smoke test and privacy review.",
+    "If a custom domain is adopted later, update current_live_domain, sitemap/canonical URLs, ads.txt, and AdSense site entry."
   ],
   "failure_behavior": [
     "If ads-config.json cannot be fetched, all revenue slots stay hidden.",
-    "If ads_active is false, all revenue slots stay hidden.",
-    "If a slot is not listed or not active, that slot stays hidden.",
-    "If an approved provider is missing, slots stay hidden.",
-    "If a third-party network fails, citation functionality remains unaffected."
+    "If ads_active is false, all revenue slots stay hidden and no third-party script is loaded.",
+    "If the provider, client ID, or ad slot is missing or invalid, that slot stays hidden.",
+    "If an ad network fails, the citation generator remains usable.",
+    "No legal citation text, form input, or generated citation is sent to CiteJury's server because there is no backend."
   ]
 }

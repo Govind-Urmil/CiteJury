@@ -123,3 +123,17 @@ EP-046 is the live production audit and verified-fix package after the temporary
 ## EP-047 Search Engine Launch
 
 EP-047 was generated after EP-046 was committed and live. It prepares the temporary Cloudflare Workers URL `https://citejury.citejury.workers.dev` for search-engine launch, adds search-engine launch metadata/docs, removes unsupported public generator-style claims, and tightens deployment/indexing hygiene for internal repository surfaces. Ads and analytics remain inactive.
+
+## EP-048 Advertisement Activation Framework
+
+- Base: committed EP-047 repository ZIP.
+- Live URL checked directly: `https://citejury.citejury.workers.dev`.
+- Added a fail-closed Google AdSense activation framework.
+- Added `ads.txt.template`, ad activation metadata, and activation documentation.
+- Updated privacy copy for future advertising readiness while keeping real ad scripts inactive.
+- Updated CSP/header preparation for future approved AdSense loading.
+- Preserved static/browser-only architecture, no backend, no database, no analytics, and host portability.
+- Real ads are still inactive because Govind has not provided a valid AdSense publisher/client ID, ads.txt publisher ID, or approved ad slot IDs.
+
+Next: get AdSense account/site approval and then use the documented config-only activation path, or proceed to EP-049 final unattended operation release.
+

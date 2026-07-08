@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>EP-048 Advertisement Activation Test</title></head>
+<body>
+<h1>EP-048 Advertisement Activation Test</h1>
+<pre id="result">Running…</pre>
+<aside class="revenue-slot" data-revenue-slot="ad-home-after-generator" hidden></aside>
+<script src="../assets/js/revenue-readiness.js"></script>
+<script>
+(async () => {
+  const result = document.getElementById('result');
+  const checks = [];
+  const config = await fetch('../assets/data/ads-config.json', {cache:'no-store'}).then(r => r.json());
+  checks.push(['config version is EP-048', config.version === 'EP-048']);
+  checks.push(['ads inactive by default', config.ads_active === false]);
+  checks.push(['analytics inactive', config.analytics_active === false]);
+  checks.push(['provider is Google AdSense candidate', config.provider_policy.approved_provider === 'google-adsense']);
+  checks.push(['no publisher client ID committed', !config.provider_policy.publisher_client_id]);
+  checks.push(['slot IDs inactive by default', config.slots.every(s => s.active === false)]);
+  await new Promise(resolve => setTimeout(resolve, 200));
+  checks.push(['no AdSense script loaded while inactive', !document.querySelector('script[data-citejury-adsense]')]);
+  checks.push(['revenue slot remains hidden', document.querySelector('[data-revenue-slot]').hidden === true]);
+  const passed = checks.filter(([, ok]) => ok).length;
+  result.textContent = checks.map(([name, ok]) => `${ok ? 'PASS' : 'FAIL'} - ${name}`).join('\n') + `\n\n${passed}/${checks.length} passed`;
+  if (passed !== checks.length) document.body.dataset.testStatus = 'failed';
+})();
+</script>
+</body>
+</html>

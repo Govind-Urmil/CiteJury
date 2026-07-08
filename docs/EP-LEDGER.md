@@ -124,3 +124,17 @@ Next: EP-047 — Search Engine Launch.
 - Preserved static/browser-only architecture, no backend, no database, inactive ads, inactive analytics, and host portability.
 
 Next: Google Search Console/Bing verification and sitemap submission, then EP-048 advertisement activation only after explicit approval.
+
+## EP-048 Advertisement Activation Framework
+
+- Base: committed EP-047 repository ZIP.
+- Live URL checked directly: `https://citejury.citejury.workers.dev`.
+- Added a fail-closed Google AdSense activation framework.
+- Added `ads.txt.template`, ad activation metadata, and activation documentation.
+- Updated privacy copy for future advertising readiness while keeping real ad scripts inactive.
+- Updated CSP/header preparation for future approved AdSense loading.
+- Preserved static/browser-only architecture, no backend, no database, no analytics, and host portability.
+- Real ads are still inactive because Govind has not provided a valid AdSense publisher/client ID, ads.txt publisher ID, or approved ad slot IDs.
+
+Next: get AdSense account/site approval and then use the documented config-only activation path, or proceed to EP-049 final unattended operation release.
+
