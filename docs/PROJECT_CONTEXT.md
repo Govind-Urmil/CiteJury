@@ -182,3 +182,7 @@ Citation Anatomy™ launched as CiteJury's first flagship educational feature. I
 
 ## EP-059
 Authority Guides Expansion completed for five priority pages. The guides now support CiteJury's educational positioning with practical citation anatomy, verification habits, common mistakes, and internal links.
+
+
+## EP-060
+Visual Citation Learning added static, lightweight visual explanation components across priority authority guides while preserving no-backend/no-runtime ADR.

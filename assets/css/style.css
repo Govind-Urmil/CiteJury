@@ -179,3 +179,13 @@ img,svg{max-width:100%;height:auto}
 .example-card,.source-note{margin:1rem 0;padding:1rem;border:1px solid rgba(17,24,39,.12);border-radius:.85rem;background:rgba(255,255,255,.72)}
 .example-card code{white-space:normal}
 .source-note{background:rgba(246,248,251,.9)}
+
+.visual-anatomy,.structure-card,.mistake-card,.flow-diagram,.decision-card{margin:1rem 0;padding:1rem;border:1px solid rgba(17,24,39,.12);border-radius:1rem;background:rgba(255,255,255,.82)}
+.visual-citation{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:1.05rem;font-weight:700;letter-spacing:.02em;overflow-x:auto;white-space:pre}
+.visual-labels{display:grid;grid-template-columns:repeat(auto-fit,minmax(135px,1fr));gap:.6rem;margin-top:.8rem}
+.visual-labels span,.structure-steps span{display:block;padding:.55rem .65rem;border-radius:.75rem;background:rgba(14,95,80,.08);font-size:.9rem}
+.structure-steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:.5rem;margin-top:.75rem}
+.mistake-card strong{display:block}.mistake-card .wrong{color:#b42318}.mistake-card .right{color:#0f766e}
+.flow-diagram ol{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:.5rem;list-style:none;padding:0}
+.flow-diagram li{padding:.65rem;border-radius:.75rem;background:rgba(37,99,235,.08);text-align:center;font-weight:700}
+.decision-card ul{padding-left:1.2rem}

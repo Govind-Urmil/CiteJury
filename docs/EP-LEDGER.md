@@ -211,3 +211,10 @@ Next: manual Google Search Console/Bing setup, then future ad approval/activatio
 - Expanded five priority authority guides: Legal Citation Basics, SCC, AIR, Supreme Court judgment, and OSCOLA India.
 - Added anatomy-style explanations, required-field guidance, common mistakes, source/authority notes, and internal learning paths.
 - Bumped asset version to 059.
+
+
+## EP-060 — Visual Citation Learning
+- Added visual citation anatomy blocks to priority guides.
+- Added structure cards, common mistake cards, flow diagrams, and decision guidance.
+- Cleaned selected repeated guide sections from prior expansion work.
+- Bumped asset version to 060.

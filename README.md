@@ -141,3 +141,7 @@ Citation Anatomy™ explains generated citations component-by-component with ver
 
 ### EP-059
 Five priority citation guides were expanded into stronger educational resources with examples, common mistakes, verification workflows, and internal links.
+
+
+### EP-060
+Priority citation guides now include visual anatomy blocks, structure cards, mistake cards, and citation flow diagrams.

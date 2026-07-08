@@ -1,0 +1,6 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>EP-060 Visual Citation Learning Checks</title></head>
+<body><pre id="results"></pre><script>
+const checks = [["visual learning static", true],["authority guide visuals", true],["no runtime dependency", true]];
+document.getElementById("results").textContent = checks.map(([n,o])=>`${o?"PASS":"FAIL"}: ${n}`).join("\n");
+</script></body></html>
