@@ -24,6 +24,7 @@
       toggle.setAttribute("aria-label", open ? "Close navigation menu" : "Open navigation menu");
       toggle.textContent = open ? "Close" : "Menu";
       nav.classList.toggle("open", open);
+      if (!open) nav.scrollTop = 0;
     };
 
     toggle.addEventListener("click", () => {
@@ -995,9 +996,19 @@
     }
   };
 
-  window.addEventListener("hashchange", applyWorkspaceFromHash);
-  window.addEventListener("popstate", applyWorkspaceFromHash);
-  applyWorkspaceFromHash();
+  const hasWorkspaceRouter = Boolean(
+    workspacePanels.length &&
+    document.querySelector("[data-workspace-panel='generate']") &&
+    document.querySelector("[data-workspace-panel='check']") &&
+    document.querySelector("#citation-generator-panel") &&
+    document.querySelector("#checker")
+  );
+
+  if (hasWorkspaceRouter) {
+    window.addEventListener("hashchange", applyWorkspaceFromHash);
+    window.addEventListener("popstate", applyWorkspaceFromHash);
+    applyWorkspaceFromHash();
+  }
 
   const examples = {
     "sc-neutral": {

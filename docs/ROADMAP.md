@@ -4,7 +4,7 @@
 EP-001 through EP-049. Live launch and final unattended-operation release complete.
 
 ## Next Planned EPs
-EP-067 should be created only after live EP-066 verification and Codex review. Candidate deferred items: citation rules single-source cleanup, WFVS hard-coded pass cleanup, PNG/JPEG social preview, sitemap per-page lastmod hygiene, and manifest dependency simplification.
+EP-069 should focus on AdSense and production-readiness only after EP-068 live verification and Codex review. Keep the release freeze active: no new product features unless they directly support launch, accessibility, SEO, security, or regression prevention. Deferred items remain citation rules single-source cleanup, WFVS hard-coded pass cleanup, sitemap per-page lastmod hygiene, header deduplication, and guide-page script splitting.
 
 ## Architecture Rules
 - No backend or database without explicit approval.

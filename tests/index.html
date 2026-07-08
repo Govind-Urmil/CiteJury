@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="robots" content="noindex,nofollow">
   <title>Website Factory Verification Suite | CiteJury</title>
-  <link rel="stylesheet" href="../assets/css/style.css?v=067">
+  <link rel="stylesheet" href="../assets/css/style.css?v=068">
   <style>
     .wfvs-shell{max-width:1100px;margin:0 auto;padding:2rem 1rem}
     .wfvs-hero,.wfvs-card{border:1px solid rgba(17,24,39,.12);border-radius:1rem;background:#fff;padding:1rem;margin:1rem 0}
@@ -28,7 +28,7 @@
     </section>
 
     <section class="wfvs-grid">
-      <article class="wfvs-card"><h2>Release</h2><p><strong>Project:</strong> CiteJury</p><p><strong>EP:</strong> EP-066</p><p><strong>Asset:</strong> <span id="asset-version">066</span></p></article>
+      <article class="wfvs-card"><h2>Release</h2><p><strong>Project:</strong> CiteJury</p><p><strong>EP:</strong> EP-068</p><p><strong>Asset:</strong> <span id="asset-version">068</span></p></article>
       <article class="wfvs-card"><h2>ADR</h2><div id="adr-tests"></div></article>
       <article class="wfvs-card"><h2>Technical</h2><div id="technical-tests"></div></article>
       <article class="wfvs-card"><h2>Functional</h2><div id="functional-tests"></div></article>
@@ -45,13 +45,13 @@
     </section>
   
     <section class="test-card">
-      <h2>EP-067 Launch Stability & SEO Hardening</h2>
-      <p>Checks unknown fragment normalization, mobile navigation scroll safety, PNG social preview fallback, asset versioning, and supported-browser documentation.</p>
-      <p><a href="EP-067-launch-stability-seo-hardening.html">Open EP-067 verification</a></p>
+      <h2>EP-068 Launch Candidate Hardening</h2>
+      <p>Checks workspace-scoped fragment routing, release metadata, asset versioning, and regression hardening before launch-readiness work.</p>
+      <p><a href="EP-068-launch-candidate-hardening.html">Open EP-068 verification</a></p>
     </section>
 </main>
 
-  <script src="../assets/js/citation-engine.js?v=067"></script>
+  <script src="../assets/js/citation-engine.js?v=068"></script>
   <script>
     const tests = [];
     const add = (group, name, ok, detail = "") => tests.push({ group, name, ok: Boolean(ok), detail });
@@ -67,7 +67,7 @@
     add("Technical", "robots.txt expected", true);
     add("Technical", "sitemap.xml expected", true);
     add("Technical", "404.html expected", true);
-    add("Technical", "Asset version 066", Array.from(document.scripts).some((script) => script.getAttribute("src") === "../assets/js/citation-engine.js?v=067"));
+    add("Technical", "Asset version 068", Array.from(document.scripts).some((script) => script.getAttribute("src") === "../assets/js/citation-engine.js?v=068"));
 
     const engine = window.CiteJuryCitationEngine;
     const genSci = engine.generate({citationStyle:"indian-legal",sourceType:"sc-neutral-judgment",title:"Example v Union of India",year:"2023",page:"154"});
@@ -82,7 +82,7 @@
     add("Functional", "Citation Checker expected on homepage", document.querySelector("#checker") !== null);
     add("Functional", "Mode switch expected on homepage", document.querySelector("[data-mode-target]") !== null);
 
-    ["EP-058 Citation Anatomy", "EP-059 Authority Guides", "EP-060 Visual Learning", "EP-061 Citation Checker", "EP-064A WFVS", "EP-066 Navigation Accessibility"].forEach((name) => add("History", name, true));
+    ["EP-058 Citation Anatomy", "EP-059 Authority Guides", "EP-060 Visual Learning", "EP-061 Citation Checker", "EP-064A WFVS", "EP-066 Navigation Accessibility", "EP-067 Launch Stability", "EP-068 Launch Candidate Hardening"].forEach((name) => add("History", name, true));
 
     const groups = ["ADR", "Technical", "Functional", "History"];
     groups.forEach((group) => {
@@ -98,7 +98,7 @@
       document.getElementById("dev-panel").hidden = false;
       document.getElementById("dev-output").textContent = JSON.stringify({
         userAgent: navigator.userAgent,
-        assetVersion: "066",
+        assetVersion: "068",
         url: location.href,
         testsRun: tests.length,
         passed

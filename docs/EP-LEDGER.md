@@ -300,3 +300,12 @@ Next: manual Google Search Console/Bing setup, then future ad approval/activatio
 - Added supported-browser baseline documentation for modern browser APIs used by the static runtime.
 - Bumped asset version to 067.
 - Preserved static/browser-only, zero-backend, zero-database, zero-API architecture.
+
+
+## EP-068 — Launch Candidate Hardening
+- Scoped homepage workspace hash normalization so shared `app.js` does not rewrite fragments on guides, policy pages, or other secondary pages.
+- Reset mobile navigation scroll position when the menu closes to avoid stale scroll state on reopen.
+- Updated WFVS release metadata and asset diagnostics to EP-068 / asset version 068.
+- Added a dedicated EP-068 launch-candidate hardening verification page.
+- Bumped asset version to 068.
+- Preserved static/browser-only, zero-backend, zero-database, zero-API architecture.

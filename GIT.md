@@ -238,4 +238,15 @@ Apply over the repository and commit once. Run `tests/index.html` and `tests/EP-
 
 
 ## EP-064A
-Apply over EP-064 and commit once. Clear cache or use `?v=066` after deployment.
+Apply over EP-064 and commit once. Clear cache after deployment if needed.
+
+
+## EP-068 commit
+
+```bash
+git add .
+git commit -m "EP-068: Launch Candidate Hardening"
+git push
+```
+
+No file deletion is required for EP-068.

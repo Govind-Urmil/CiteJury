@@ -96,3 +96,18 @@ jobs:
           test -f assets/og/citejury-social-preview.png
           grep -q "citejury-social-preview.png" index.html
           grep -q 'og:image:type" content="image/png"' index.html
+
+      - name: Check EP-068 release metadata and workspace hash scope
+        run: |
+          grep -q "EP-068" tests/index.html
+          grep -q "assetVersion: \"068\"" tests/index.html
+          grep -q "EP-068-launch-candidate-hardening.html" tests/index.html
+          grep -q "hasWorkspaceRouter" assets/js/app.js
+          python - <<'PY'
+          from pathlib import Path
+          text = Path('assets/js/app.js').read_text()
+          guard = text.index('if (hasWorkspaceRouter)')
+          for marker in ['window.addEventListener("hashchange"', 'window.addEventListener("popstate"', 'applyWorkspaceFromHash();']:
+              if text.index(marker, guard) < guard:
+                  raise SystemExit(f'{marker} is not scoped to hasWorkspaceRouter')
+          PY
