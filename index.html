@@ -14,7 +14,7 @@
   <link rel="canonical" href="https://citejury.citejury.workers.dev/">
   <meta property="og:url" content="https://citejury.citejury.workers.dev/">
   <link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="assets/css/style.css?v=060">
+  <link rel="stylesheet" href="assets/css/style.css?v=061">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"WebApplication","name":"CiteJury","applicationCategory":"EducationalApplication","operatingSystem":"Any","description":"Privacy-first browser-based legal citation formatting and learning tool.","isAccessibleForFree":true}
 </script>
@@ -27,7 +27,7 @@
       <a class="brand" href="#hero" aria-label="CiteJury home"><span class="brand-mark">CJ</span>CiteJury</a>
       <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" aria-label="Open navigation menu">Menu</button>
       <nav id="primary-nav" class="site-nav" aria-label="Primary">
-        <a href="#generator">Generator</a>
+        <a href="#generator">Generator</a><a href="#checker">Checker</a>
         <a href="#benefits">Why CiteJury</a>
         <a href="#styles">Styles</a>
         <a href="#faq">FAQ</a><a href="trust.html">Trust</a>
@@ -165,6 +165,36 @@
       </div>
     </section>
 
+
+    <section id="checker" class="section checker-section">
+      <div class="container section-heading">
+        <p class="eyebrow">Citation Checker™</p>
+        <h2>Check an existing citation</h2>
+        <p>Paste a citation you already have. CiteJury detects known legal-citation patterns, explains missing components, and suggests safe next steps without AI, backend calls, URL fetching, or guessing factual values.</p>
+      </div>
+
+      <div class="container checker-grid">
+        <form id="citation-checker-form" class="checker-form" novalidate>
+          <label for="citation-check-input">Paste citation to check</label>
+          <textarea id="citation-check-input" name="citationCheck" rows="5" placeholder="Example: AIR 2023 SC 154 or (2023) 7 SCC 154"></textarea>
+          <div class="form-actions">
+            <button class="btn primary" type="submit">Check citation</button>
+            <button class="btn secondary" type="reset">Clear</button>
+          </div>
+          <p class="field-help">Supported first: Supreme Court neutral citations, SCC, AIR, and scoped OSCOLA-like drafts. CiteJury checks structure; it never verifies facts against external databases.</p>
+        </form>
+
+        <aside class="checker-result-panel" aria-live="polite">
+          <p class="eyebrow">Checker result</p>
+          <h3 id="checker-heading">Paste a citation to begin</h3>
+          <div id="checker-summary" class="checker-summary">Citation Checker™ will show detected components, confidence, issues, and safe correction guidance.</div>
+          <div id="checker-components" class="checker-components"></div>
+          <div id="checker-issues" class="checker-issues"></div>
+          <div id="checker-suggestion" class="checker-suggestion" hidden></div>
+        </aside>
+      </div>
+    </section>
+
     <aside class="revenue-slot" data-revenue-slot="ad-home-after-generator" hidden aria-label="Advertisement area"></aside>
 
     <section id="benefits" class="section muted">
@@ -203,8 +233,8 @@
     </div>
   </footer>
 
-  <script src="assets/js/citation-engine.js?v=060"></script>
-  <script src="assets/js/app.js?v=060"></script>
-  <script src="assets/js/revenue-readiness.js?v=060"></script>
+  <script src="assets/js/citation-engine.js?v=061"></script>
+  <script src="assets/js/app.js?v=061"></script>
+  <script src="assets/js/revenue-readiness.js?v=061"></script>
 </body>
 </html>

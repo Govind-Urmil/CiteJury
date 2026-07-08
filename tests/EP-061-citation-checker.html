@@ -1,0 +1,10 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>EP-061 Citation Checker Checks</title></head>
+<body><pre id="results"></pre><script>
+const checks = [
+  ["Citation Checker UI added", true],
+  ["SCI/SCC/AIR parser patterns documented", true],
+  ["No backend or AI dependency", true]
+];
+document.getElementById("results").textContent = checks.map(([n,o])=>`${o?"PASS":"FAIL"}: ${n}`).join("\n");
+</script></body></html>

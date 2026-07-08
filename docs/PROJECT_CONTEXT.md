@@ -186,3 +186,7 @@ Authority Guides Expansion completed for five priority pages. The guides now sup
 
 ## EP-060
 Visual Citation Learning added static, lightweight visual explanation components across priority authority guides while preserving no-backend/no-runtime ADR.
+
+
+## EP-061
+Citation Checker™ launched as CiteJury's second flagship tool. It checks pasted citations with static browser-side rules and explains detected components, missing pieces, confidence, and safe next steps.

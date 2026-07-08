@@ -189,3 +189,15 @@ img,svg{max-width:100%;height:auto}
 .flow-diagram ol{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:.5rem;list-style:none;padding:0}
 .flow-diagram li{padding:.65rem;border-radius:.75rem;background:rgba(37,99,235,.08);text-align:center;font-weight:700}
 .decision-card ul{padding-left:1.2rem}
+
+.checker-section{background:linear-gradient(180deg,rgba(246,248,251,.75),rgba(255,255,255,.95))}
+.checker-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:1.25rem;align-items:start}
+.checker-form,.checker-result-panel{padding:1rem;border:1px solid rgba(17,24,39,.12);border-radius:1rem;background:rgba(255,255,255,.86)}
+.checker-form textarea{width:100%;min-height:9rem;resize:vertical}
+.checker-components{display:grid;grid-template-columns:repeat(auto-fit,minmax(135px,1fr));gap:.6rem;margin:1rem 0}
+.checker-component,.checker-issue,.checker-suggestion{padding:.75rem;border-radius:.8rem;border:1px solid rgba(17,24,39,.12);background:#fff}
+.checker-component strong,.checker-component span{display:block}
+.checker-component.ok{border-left:4px solid #0f766e}.checker-component.warning{border-left:4px solid #b7791f}.checker-component.error{border-left:4px solid #b42318}
+.checker-issue.warning{background:rgba(183,121,31,.07)}.checker-issue.error{background:rgba(180,35,24,.07)}
+.checker-suggestion code{display:block;margin:.5rem 0;padding:.5rem;border-radius:.5rem;background:rgba(17,24,39,.06);white-space:normal}
+@media (max-width: 760px){.checker-grid{grid-template-columns:1fr}}

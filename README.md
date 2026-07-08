@@ -145,3 +145,7 @@ Five priority citation guides were expanded into stronger educational resources 
 
 ### EP-060
 Priority citation guides now include visual anatomy blocks, structure cards, mistake cards, and citation flow diagrams.
+
+
+### EP-061
+Citation Checker™ lets users paste existing citations and receive rule-based structural checks, confidence, issues, and safe suggestions without AI or backend services.

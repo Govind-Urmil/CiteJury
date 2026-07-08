@@ -218,3 +218,10 @@ Next: manual Google Search Console/Bing setup, then future ad approval/activatio
 - Added structure cards, common mistake cards, flow diagrams, and decision guidance.
 - Cleaned selected repeated guide sections from prior expansion work.
 - Bumped asset version to 060.
+
+
+## EP-061 — Citation Checker™
+- Added rule-based Citation Checker™ for SCI neutral, SCC, AIR, and scoped legal citation drafts.
+- Added confidence labels, component detection, issues, explanations, and safe structure suggestions.
+- No AI, backend, database, URL fetching, or guessing introduced.
+- Bumped asset version to 061.

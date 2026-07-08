@@ -45,6 +45,13 @@
   const styleAlternativeList = document.querySelector("#style-alternative-list");
   const citationAnatomy = document.querySelector("#citation-anatomy");
   const citationAnatomyContent = document.querySelector("#citation-anatomy-content");
+  const checkerForm = document.querySelector("#citation-checker-form");
+  const checkerInput = document.querySelector("#citation-check-input");
+  const checkerHeading = document.querySelector("#checker-heading");
+  const checkerSummary = document.querySelector("#checker-summary");
+  const checkerComponents = document.querySelector("#checker-components");
+  const checkerIssues = document.querySelector("#checker-issues");
+  const checkerSuggestion = document.querySelector("#checker-suggestion");
   let currentResult = null;
 
   const fieldSelectors = {
@@ -657,6 +664,234 @@
   if (form) {
     updateFieldStatuses();
     form.addEventListener("change", updateFieldStatuses);
+  }
+
+
+  const checkerComponent = (label, value, status = "ok", detail = "") => ({ label, value, status, detail });
+  const checkerIssue = (level, message, why, fix = "") => ({ level, message, why, fix });
+
+  const detectCitationPattern = (raw) => {
+    const text = clean(raw).replace(/\s+/g, " ");
+    if (!text) {
+      return {
+        type: "Empty input",
+        confidence: 0,
+        status: "Incomplete",
+        components: [],
+        issues: [checkerIssue("error", "Citation is empty.", "Citation Checker™ needs text to inspect.", "Paste an existing citation.")],
+        suggestion: ""
+      };
+    }
+
+    let m = text.match(/^(\d{4})\s+INSC\s+(\d+)$/i);
+    if (m) {
+      return {
+        type: "Supreme Court neutral citation",
+        confidence: 98,
+        status: "Likely complete",
+        components: [
+          checkerComponent("Year", m[1], "ok", "Decision year detected."),
+          checkerComponent("Identifier", "INSC", "ok", "Supreme Court neutral identifier detected."),
+          checkerComponent("Sequence", m[2], "ok", "Neutral sequence number detected.")
+        ],
+        issues: [checkerIssue("warning", "Verify the official case title separately.", "A neutral citation token does not confirm party-name spelling.", "Check the official judgment record.")],
+        suggestion: text.toUpperCase()
+      };
+    }
+
+    m = text.match(/^(\d{4})\s+INSC$/i);
+    if (m) {
+      return {
+        type: "Supreme Court neutral citation",
+        confidence: 66,
+        status: "Incomplete",
+        components: [
+          checkerComponent("Year", m[1], "ok"),
+          checkerComponent("Identifier", "INSC", "ok"),
+          checkerComponent("Sequence", "Missing", "error")
+        ],
+        issues: [checkerIssue("error", "Neutral sequence number missing.", "SCI neutral citations require the number after INSC.", "Add the verified sequence number after INSC.")],
+        suggestion: `${m[1]} INSC [sequence number]`
+      };
+    }
+
+    m = text.match(/^INSC\s+(\d+)$/i);
+    if (m) {
+      return {
+        type: "Supreme Court neutral citation",
+        confidence: 66,
+        status: "Incomplete",
+        components: [
+          checkerComponent("Year", "Missing", "error"),
+          checkerComponent("Identifier", "INSC", "ok"),
+          checkerComponent("Sequence", m[1], "ok")
+        ],
+        issues: [checkerIssue("error", "Decision year missing.", "SCI neutral citations require the year before INSC.", "Add the verified decision year before INSC.")],
+        suggestion: `[year] INSC ${m[1]}`
+      };
+    }
+
+    m = text.match(/^\(?(\d{4})\)?\s+(\d+)\s+SCC\s+(\d+)$/i);
+    if (m) {
+      return {
+        type: "SCC citation",
+        confidence: 96,
+        status: "Likely complete",
+        components: [
+          checkerComponent("Year", m[1], "ok"),
+          checkerComponent("Volume", m[2], "ok"),
+          checkerComponent("Reporter", "SCC", "ok"),
+          checkerComponent("Opening page", m[3], "ok")
+        ],
+        issues: [checkerIssue("warning", "Verify the case title and opening page.", "The checker validates structure, not reporter database facts.", "Check the SCC source before submission.")],
+        suggestion: `(${m[1]}) ${m[2]} SCC ${m[3]}`
+      };
+    }
+
+    m = text.match(/^\(?(\d{4})\)?\s+SCC\s+(\d+)$/i);
+    if (m) {
+      return {
+        type: "SCC citation",
+        confidence: 74,
+        status: "Incomplete",
+        components: [
+          checkerComponent("Year", m[1], "ok"),
+          checkerComponent("Volume", "Missing", "error"),
+          checkerComponent("Reporter", "SCC", "ok"),
+          checkerComponent("Opening page", m[2], "ok")
+        ],
+        issues: [checkerIssue("error", "SCC volume missing.", "SCC citations require year, volume, reporter and opening page.", "Add the verified SCC volume before SCC.")],
+        suggestion: `(${m[1]}) [volume] SCC ${m[2]}`
+      };
+    }
+
+    m = text.match(/^AIR\s+(\d{4})\s+([A-Z]{2,6})\s+(\d+)$/i);
+    if (m) {
+      return {
+        type: "AIR citation",
+        confidence: 96,
+        status: "Likely complete",
+        components: [
+          checkerComponent("Reporter", "AIR", "ok"),
+          checkerComponent("Year", m[1], "ok"),
+          checkerComponent("Court", m[2].toUpperCase(), "ok"),
+          checkerComponent("Opening page", m[3], "ok")
+        ],
+        issues: [checkerIssue("warning", "Verify the court abbreviation.", "AIR court abbreviations must match the reporter source.", "Check the AIR citation before submission.")],
+        suggestion: `AIR ${m[1]} ${m[2].toUpperCase()} ${m[3]}`
+      };
+    }
+
+    m = text.match(/^AIR\s+(\d{4})\s+(\d+)$/i);
+    if (m) {
+      return {
+        type: "AIR citation",
+        confidence: 74,
+        status: "Incomplete",
+        components: [
+          checkerComponent("Reporter", "AIR", "ok"),
+          checkerComponent("Year", m[1], "ok"),
+          checkerComponent("Court", "Missing", "error"),
+          checkerComponent("Opening page", m[2], "ok")
+        ],
+        issues: [checkerIssue("error", "Court abbreviation missing.", "AIR citations need the court abbreviation between year and page.", "Add the verified court abbreviation, for example SC where applicable.")],
+        suggestion: `AIR ${m[1]} [court] ${m[2]}`
+      };
+    }
+
+    m = text.match(/^AIR\s+([A-Z]{2,6})\s+(\d+)$/i);
+    if (m) {
+      return {
+        type: "AIR citation",
+        confidence: 66,
+        status: "Incomplete",
+        components: [
+          checkerComponent("Reporter", "AIR", "ok"),
+          checkerComponent("Year", "Missing", "error"),
+          checkerComponent("Court", m[1].toUpperCase(), "ok"),
+          checkerComponent("Opening page", m[2], "ok")
+        ],
+        issues: [checkerIssue("error", "AIR year missing.", "AIR citations require the reporter year after AIR.", "Add the verified AIR year after AIR.")],
+        suggestion: `AIR [year] ${m[1].toUpperCase()} ${m[2]}`
+      };
+    }
+
+    if (/oscola|v\.| v |chapter|article/i.test(text)) {
+      return {
+        type: "Scoped legal citation draft",
+        confidence: 55,
+        status: "Needs review",
+        components: [checkerComponent("Citation text", text, "warning", "Pattern may be legal, but not enough structure was detected for a confident check.")],
+        issues: [checkerIssue("warning", "Pattern not confidently recognized.", "Some legal citations require more context than the checker can infer.", "Use the generator or verify against the relevant guide.")],
+        suggestion: ""
+      };
+    }
+
+    return {
+      type: "Unknown citation pattern",
+      confidence: 30,
+      status: "Incomplete",
+      components: [checkerComponent("Input", text, "warning", "No supported pattern detected.")],
+      issues: [checkerIssue("error", "Unsupported or incomplete citation pattern.", "The checker currently supports SCI neutral, SCC and AIR patterns first.", "Use the generator or compare with the relevant guide.")],
+      suggestion: ""
+    };
+  };
+
+  const confidenceLabel = (score) => {
+    if (score >= 95) return "Likely Complete";
+    if (score >= 80) return "Needs Verification";
+    return "Incomplete";
+  };
+
+  const renderCheckerResult = (report) => {
+    if (!checkerHeading || !checkerSummary || !checkerComponents || !checkerIssues || !checkerSuggestion) return;
+    checkerHeading.textContent = report.type;
+    checkerSummary.innerHTML = `<strong>${confidenceLabel(report.confidence)}</strong> — ${report.confidence}% confidence. ${report.status}.`;
+    checkerComponents.innerHTML = "";
+    report.components.forEach((item) => {
+      const card = document.createElement("article");
+      card.className = `checker-component ${item.status}`;
+      card.innerHTML = `<strong>${item.label}</strong><span>${item.value}</span>${item.detail ? `<p>${item.detail}</p>` : ""}`;
+      checkerComponents.appendChild(card);
+    });
+
+    checkerIssues.innerHTML = "";
+    report.issues.forEach((issue) => {
+      const card = document.createElement("article");
+      card.className = `checker-issue ${issue.level}`;
+      card.innerHTML = `<strong>${issue.level === "error" ? "✗" : "⚠"} ${issue.message}</strong><p>${issue.why}</p>${issue.fix ? `<p><em>${issue.fix}</em></p>` : ""}`;
+      checkerIssues.appendChild(card);
+    });
+
+    if (report.suggestion) {
+      checkerSuggestion.hidden = false;
+      checkerSuggestion.innerHTML = `<strong>Suggested structure</strong><code>${report.suggestion}</code><p>Only use a suggestion after verifying missing factual values from the source.</p>`;
+    } else {
+      checkerSuggestion.hidden = true;
+      checkerSuggestion.innerHTML = "";
+    }
+  };
+
+
+
+  if (checkerForm && checkerInput) {
+    checkerForm.addEventListener("submit", (event) => {
+      event.preventDefault();
+      renderCheckerResult(detectCitationPattern(checkerInput.value));
+    });
+
+    checkerForm.addEventListener("reset", () => {
+      window.setTimeout(() => {
+        if (checkerHeading) checkerHeading.textContent = "Paste a citation to begin";
+        if (checkerSummary) checkerSummary.textContent = "Citation Checker™ will show detected components, confidence, issues, and safe correction guidance.";
+        if (checkerComponents) checkerComponents.innerHTML = "";
+        if (checkerIssues) checkerIssues.innerHTML = "";
+        if (checkerSuggestion) {
+          checkerSuggestion.hidden = true;
+          checkerSuggestion.innerHTML = "";
+        }
+      }, 0);
+    });
   }
 
   if (copy && output) {
