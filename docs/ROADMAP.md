@@ -184,3 +184,7 @@ EP-049 finalizes the live Cloudflare Workers Static Assets handoff for `https://
 
 ## EP-050 — Completed
 Public polish and validation error navigation completed. Future work is traffic/indexing/content growth and approved monetization activation rather than arbitrary EP expansion.
+
+
+## EP-051 — Completed
+Corrected validation navigation so users are taken directly to the field that needs correction.

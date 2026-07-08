@@ -45,6 +45,50 @@
   const styleAlternativeList = document.querySelector("#style-alternative-list");
   let currentResult = null;
 
+  const fieldSelectors = {
+    title: "#source-title",
+    year: "#source-year",
+    reporter: "#source-reporter",
+    volume: "#source-volume",
+    page: "#source-page",
+    court: "#source-court"
+  };
+
+  const clearInvalidFields = () => {
+    Object.values(fieldSelectors).forEach((selector) => {
+      const field = document.querySelector(selector);
+      if (field) field.removeAttribute("aria-invalid");
+    });
+  };
+
+  const inferInvalidField = (result) => {
+    const missing = result && result.validation && result.validation.missingRequiredFields;
+    if (Array.isArray(missing) && missing.length) return missing[0];
+
+    const message = String((result && result.error) || "").toLowerCase();
+    if (/title|case or source/.test(message)) return "title";
+    if (/year/.test(message)) return "year";
+    if (/volume/.test(message)) return "volume";
+    if (/reporter|publisher|journal|website field/.test(message)) return "reporter";
+    if (/page|sequence|url|section|article/.test(message)) return "page";
+    if (/court|institution|abbreviation/.test(message)) return "court";
+    return "title";
+  };
+
+  const focusInvalidField = (result) => {
+    const fieldName = inferInvalidField(result);
+    const field = document.querySelector(fieldSelectors[fieldName] || fieldSelectors.title);
+    if (!field) return;
+
+    field.setAttribute("aria-invalid", "true");
+    field.scrollIntoView({ behavior: "smooth", block: "center" });
+    try {
+      field.focus({ preventScroll: true });
+    } catch {
+      field.focus();
+    }
+  };
+
   const getData = (formData) => ({
     citationStyle: clean(formData.get("citationStyle")),
     sourceType: clean(formData.get("sourceType")),
@@ -151,6 +195,7 @@
       error.hidden = true;
       error.textContent = "";
     }
+    clearInvalidFields();
 
     if (output) output.textContent = "Your citation will appear here.";
     if (explain) explain.textContent = "Fill the form and generate a citation to see the explanation.";
@@ -173,26 +218,23 @@
         explain.textContent = "Fix the highlighted issue and generate again.";
         renderParts([]);
         renderValidation(result.validation);
-
-        // Bring the validation error into view so users can immediately fix it.
-        // Focus without a second scroll for keyboard and assistive-technology users.
-        error.setAttribute("tabindex", "-1");
-        error.scrollIntoView({ behavior: "smooth", block: "center" });
-        try {
-          error.focus({ preventScroll: true });
-        } catch {
-          error.focus();
-        }
+        focusInvalidField(result);
         return;
       }
 
       error.hidden = true;
       error.textContent = "";
+      clearInvalidFields();
       applyResult(result);
       renderStyleAlternatives(window.CiteJuryCitationEngine.generateStyleAlternatives(getData(new FormData(form))));
     });
 
     form.addEventListener("reset", () => setTimeout(resetPreview, 0));
+    form.addEventListener("input", (event) => {
+      if (event.target && event.target.matches("input, select, textarea")) {
+        event.target.removeAttribute("aria-invalid");
+      }
+    });
   }
 
   if (copy && output) {

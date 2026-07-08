@@ -146,3 +146,7 @@ EP-049 was generated after EP-048 was committed and the live site was checked di
 
 ## EP-050
 Public polish and validation-error navigation: failed generation now scrolls to and focuses the visible error message; public ad-placeholder copy was re-audited and remains absent from public pages.
+
+
+## EP-051
+Validation navigation correction: failed generation now scrolls to and focuses the specific invalid input field instead of the generic error message. Live EP-050 feedback showed the previous behavior did not meet the desired UX.

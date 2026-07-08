@@ -105,3 +105,7 @@ EP-049 records the final low-maintenance handoff for the live Cloudflare Workers
 
 ### EP-050
 Generator validation failures automatically bring the error message into view and focus it for faster correction.
+
+
+### EP-051
+Validation errors now focus the relevant form field so users can correct input faster on desktop and mobile.

@@ -157,3 +157,9 @@ Next: manual Google Search Console/Bing setup, then future ad approval/activatio
 - Added automatic smooth scroll and focus to generator validation errors.
 - Re-audited public pages for internal/ad-placeholder messaging.
 - Preserved static, browser-only, host-portable architecture.
+
+
+## EP-051 — Scroll to Invalid Input Field
+- Corrected generator validation UX to scroll/focus the invalid input field.
+- Added raw validation field metadata for deterministic UI targeting.
+- Preserved browser-only/static architecture and ad-inactive state.

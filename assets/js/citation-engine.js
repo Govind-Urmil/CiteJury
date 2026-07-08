@@ -192,7 +192,9 @@
       authorityFamily: spec.authorityFamily,
       confidence: spec.confidence,
       missingRequired: labelFields(missingRequired),
+      missingRequiredFields: missingRequired.slice(),
       missingRecommended: labelFields(missingRecommended),
+      missingRecommendedFields: missingRecommended.slice(),
       manualVerification: severity !== "strong" || missingRecommended.length > 0,
       checklist: [
         "Verify party/source name spelling against the original source.",

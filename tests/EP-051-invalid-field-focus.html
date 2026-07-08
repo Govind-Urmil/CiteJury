@@ -1,0 +1,10 @@
+<!doctype html><meta charset="utf-8"><title>EP-051 invalid field focus checks</title><pre id="out"></pre><script src="../assets/js/citation-engine.js"></script><script>
+const r1 = window.CiteJuryCitationEngine.generate({citationStyle:'scc',sourceType:'judgment',title:'A v B',year:'2020',page:'1'});
+const r2 = window.CiteJuryCitationEngine.generate({citationStyle:'indian-legal',sourceType:'sc-neutral-judgment',title:'A v B',year:'2023'});
+const checks=[
+ ['SCC missing volume exposes raw field', !r1.ok && r1.validation.missingRequiredFields.includes('volume')],
+ ['SCI neutral missing sequence exposes page field', !r2.ok && r2.validation.missingRequiredFields.includes('page')],
+ ['Engine remains browser global', !!window.CiteJuryCitationEngine]
+];
+document.getElementById('out').textContent=checks.map(c=>(c[1]?'PASS: ':'FAIL: ')+c[0]).join('\n');
+</script>
