@@ -22,8 +22,8 @@
   <section id="checker"></section>
   <pre id="results"></pre>
 
-  <script src="../assets/js/citation-engine.js?v=068"></script>
-  <script src="../assets/js/app.js?v=068"></script>
+  <script src="../assets/js/citation-engine.js?v=069"></script>
+  <script src="../assets/js/app.js?v=069"></script>
   <script>
     const engine = window.CiteJuryCitationEngine;
     const sci = engine.generate({citationStyle:"indian-legal",sourceType:"sc-neutral-judgment",title:"Example v Union of India",year:"2023",page:"154"});
@@ -31,7 +31,7 @@
     document.querySelector("#citation-checker-form").dispatchEvent(new Event("submit", {bubbles:true, cancelable:true}));
     const checks = [
       ["Citation engine loaded", typeof engine.generate === "function"],
-      ["App script loaded", document.querySelector('script[src="../assets/js/app.js?v=068"]') !== null],
+      ["App script loaded", document.querySelector('script[src="../assets/js/app.js?v=069"]') !== null],
       ["SCI neutral spaced", sci.ok && sci.citation.includes("2023 INSC 154")],
       ["Mobile menu toggles", document.querySelector("#primary-nav").classList.contains("open")],
       ["Checker renders result", document.querySelector("#checker-heading").textContent.includes("SCI Neutral Citation")],

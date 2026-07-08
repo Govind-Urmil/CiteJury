@@ -46,3 +46,8 @@ EP-065/EP-066 keep the production Content Security Policy restricted to same-ori
 - Google AdSense program policies.
 - Google AdSense ads.txt guide.
 - Google AdSense code setup guidance for Auto ads/ad units.
+
+
+## EP-069 launch-readiness update
+
+AdSense activation remains approval-gated. EP-069 improves documentation and launch SEO metadata but does not enable ads, does not add active third-party ad scripts, and does not loosen the production CSP. Real ad activation still requires owner approval, a real AdSense publisher ID, matching ads.txt, privacy review, CSP update, and live smoke testing.

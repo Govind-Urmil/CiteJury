@@ -4,14 +4,14 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="robots" content="noindex,nofollow">
-  <title>EP-068 Launch Candidate Hardening | CiteJury</title>
-  <link rel="stylesheet" href="../assets/css/style.css?v=068">
+  <title>EP-069 Launch Candidate Hardening | CiteJury</title>
+  <link rel="stylesheet" href="../assets/css/style.css?v=069">
 </head>
 <body>
   <main class="content-page">
-    <p class="eyebrow">EP-068 verification</p>
+    <p class="eyebrow">EP-069 verification</p>
     <h1>Launch Candidate Hardening Checks</h1>
-    <p>This browser-only page verifies the EP-068 regression-hardening scope without requiring a backend, build step, database, or external API.</p>
+    <p>This browser-only page verifies the EP-069 regression-hardening scope without requiring a backend, build step, database, or external API.</p>
     <section class="trust-card">
       <h2>Expected manual checks</h2>
       <ul>
@@ -27,13 +27,13 @@
       <div id="results">Running…</div>
     </section>
   </main>
-  <script src="../assets/js/citation-engine.js?v=068"></script>
+  <script src="../assets/js/citation-engine.js?v=069"></script>
   <script>
     const results = [];
     const add = (name, ok) => results.push({ name, ok: Boolean(ok) });
     add("Citation engine loads", typeof window.CiteJuryCitationEngine === "object");
     add("No workspace panels on this test page", document.querySelectorAll("[data-workspace-panel]").length === 0);
-    add("Asset version is 068", Array.from(document.scripts).some((script) => script.src.includes("citation-engine.js?v=068")));
+    add("Asset version is 069", Array.from(document.scripts).some((script) => script.src.includes("citation-engine.js?v=069")));
     const html = results.map((test) => `<p><strong class="${test.ok ? "wfvs-pass" : "wfvs-fail"}">${test.ok ? "PASS" : "FAIL"}</strong> ${test.name}</p>`).join("");
     document.querySelector("#results").innerHTML = html;
   </script>

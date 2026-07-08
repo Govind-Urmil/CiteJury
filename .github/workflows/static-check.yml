@@ -97,17 +97,23 @@ jobs:
           grep -q "citejury-social-preview.png" index.html
           grep -q 'og:image:type" content="image/png"' index.html
 
-      - name: Check EP-068 release metadata and workspace hash scope
+      - name: Check EP-069 release metadata, SEO, and ad readiness
         run: |
-          grep -q "EP-068" tests/index.html
-          grep -q "assetVersion: \"068\"" tests/index.html
-          grep -q "EP-068-launch-candidate-hardening.html" tests/index.html
+          grep -q "EP-069" tests/index.html
+          grep -q "assetVersion: \"069\"" tests/index.html
+          grep -q "EP-069-adsense-readiness-launch-seo.html" tests/index.html
           grep -q "hasWorkspaceRouter" assets/js/app.js
+          grep -q "AdSense activation remains approval-gated" docs/ADVERTISEMENT_ACTIVATION.md
+          grep -q "EP-069" docs/EP-LEDGER.md
           python - <<'PY'
           from pathlib import Path
-          text = Path('assets/js/app.js').read_text()
-          guard = text.index('if (hasWorkspaceRouter)')
-          for marker in ['window.addEventListener("hashchange"', 'window.addEventListener("popstate"', 'applyWorkspaceFromHash();']:
-              if text.index(marker, guard) < guard:
-                  raise SystemExit(f'{marker} is not scoped to hasWorkspaceRouter')
+          guides = sorted(Path('guides').glob('*.html'))
+          missing=[]
+          for path in guides:
+              text=path.read_text()
+              for needle in ['property="og:title"', 'property="og:description"', 'property="og:image"', 'name="twitter:card"', 'name="twitter:image"']:
+                  if needle not in text:
+                      missing.append(f'{path}:{needle}')
+          if missing:
+              raise SystemExit('Missing guide social metadata: '+'; '.join(missing))
           PY

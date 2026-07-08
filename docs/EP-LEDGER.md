@@ -309,3 +309,13 @@ Next: manual Google Search Console/Bing setup, then future ad approval/activatio
 - Added a dedicated EP-068 launch-candidate hardening verification page.
 - Bumped asset version to 068.
 - Preserved static/browser-only, zero-backend, zero-database, zero-API architecture.
+
+
+## EP-069 — AdSense Readiness & Launch SEO
+- Fixed WFVS homepage-only false-failure checks by keeping homepage workspace assertions out of the dashboard DOM context.
+- Added complete Open Graph and Twitter preview metadata to guide pages using the static PNG social preview.
+- Added social image alt metadata to improve crawler/accessibility context.
+- Kept AdSense activation approval-gated and inactive by default; no third-party ad script is enabled.
+- Updated CI/static checks for EP-069 release metadata, guide social metadata, and ad-readiness documentation.
+- Bumped asset version to 069.
+- Preserved static/browser-only, zero-backend, zero-database, zero-API architecture.
