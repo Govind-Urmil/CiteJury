@@ -365,3 +365,11 @@ Next: manual Google Search Console/Bing setup, then future ad approval/activatio
 - Added SCC Anatomy volume visibility.
 - Improved Generator/Checker selector visual prominence.
 - Added homepage Citation Doctor mention.
+
+
+## EP-075A: Checker Safety Hotfix
+- Fixed Checker safety around INSC runtime paths.
+- Added stale-result clearing before Checker execution.
+- Downgraded unsafe AIR court tokens and implausible numeric values.
+- Removed standalone Citation Doctor homepage callout.
+- Preserved static/browser-only architecture.

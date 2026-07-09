@@ -1,10 +1,10 @@
 <!doctype html>
 <meta charset="utf-8">
-<title>EP-075 Citation Doctor Accuracy & Final UI Polish</title>
-<h1>EP-075 Citation Doctor Accuracy & Final UI Polish</h1>
+<title>EP-075A Checker Safety Hotfix</title>
+<h1>EP-075A Checker Safety Hotfix</h1>
 <pre id="results">Running…</pre>
-<script src="../assets/js/citation-engine.js?v=075"></script>
-<script src="../assets/js/app.js?v=075"></script>
+<script src="../assets/js/citation-engine.js?v=075a"></script>
+<script src="../assets/js/app.js?v=075a"></script>
 <script>
 const results = [];
 const pass = (name, ok, detail = "") => results.push(`${ok ? "PASS" : "FAIL"}: ${name}${detail ? " — " + detail : ""}`);
@@ -50,7 +50,7 @@ if (engine) {
 }
 
 const source = document.documentElement.outerHTML;
-pass("test page asset references use 073b", source.includes("?v=075") && !source.includes("?v=075") && !source.includes("?v=075"));
+pass("test page asset references use 073b", source.includes("?v=075a") && !source.includes("?v=075a") && !source.includes("?v=075a"));
 
 document.querySelector("#results").textContent = results.join("\n");
 document.documentElement.dataset.testStatus = results.some((line) => line.startsWith("FAIL")) ? "fail" : "pass";

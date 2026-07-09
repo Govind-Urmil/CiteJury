@@ -273,3 +273,5 @@ button:disabled{opacity:.52;cursor:not-allowed}
 .workspace-card.active {
   box-shadow: 0 0 0 3px rgba(49, 94, 251, 0.16);
 }
+
+.checker-doctor-card p { white-space: pre-wrap; }

@@ -745,6 +745,27 @@
 
   const checkerComponent = (label, value, status = "ok", detail = "") => ({ label, value, status, detail });
   const checkerIssue = (level, message, why, fix = "") => ({ level, message, why, fix });
+  const plausibleYear = (value) => {
+    const year = Number(clean(value));
+    return Number.isInteger(year) && year >= 1800 && year <= 2099;
+  };
+
+  const plausiblePositiveNumber = (value, max = 100000) => {
+    const text = clean(value);
+    if (!/^[1-9]\d*$/.test(text)) return false;
+    const number = Number(text);
+    return Number.isInteger(number) && number > 0 && number <= max;
+  };
+
+  const knownAirCourts = new Set(["SC", "BOM", "CAL", "DEL", "MAD", "ALL", "AP", "KANT", "KER", "MP", "PAT", "RAJ", "GUJ", "ORI", "PH", "P&H", "GAU", "JK", "J&K", "HP", "UTR", "UTT", "CHH", "JHAR", "TRI", "MEG", "SIK", "MAN", "NAG"]);
+  const reservedAirCourtTokens = new Set(["AIR", "SCC", "INSC", "SCR"]);
+
+  const assessAirCourt = (value) => {
+    const normalized = clean(value).replace(/\./g, "").toUpperCase();
+    if (!normalized || reservedAirCourtTokens.has(normalized)) return { ok: false, known: false };
+    return { ok: true, known: knownAirCourts.has(normalized) };
+  };
+
   const normalizeDoctorSuggestion = (value) => clean(value).replace(/\s+/g, " ").replace(/\.$/, "");
 
   const buildCitationDoctorReport = (diagnosis, rawInput) => {
@@ -847,17 +868,23 @@
     // EP-073: recognize common complete citations that include a case name.
     let m = text.match(/^(.+?),\s*AIR\s+(\d{4})\s+([A-Z][A-Z0-9.]*)\s+(\d+)$/i);
     if (m) {
+      const courtCheck = assessAirCourt(m[3]);
+      const plausible = plausibleYear(m[2]) && plausiblePositiveNumber(m[4]);
+      const issues = [checkerIssue("warning", "Verify party names and reporter details.", "Pattern recognition does not verify the citation against an official source.", "Check the authoritative report.")];
+      if (!courtCheck.ok) issues.push(checkerIssue("error", "Court abbreviation needs review.", "This token is not safe as an AIR court abbreviation.", "Use the correct court abbreviation, such as SC for Supreme Court."));
+      else if (!courtCheck.known) issues.push(checkerIssue("warning", "Court abbreviation needs verification.", "This court token is not in CiteJury’s common AIR court list.", "Verify the reporter citation before relying on it."));
+      if (!plausible) issues.push(checkerIssue("warning", "Year or page number looks implausible.", "The citation shape matches AIR, but one or more numeric values need verification.", "Check the citation against the source."));
       return {
         type: "AIR citation",
-        confidence: 97,
-        status: "Likely complete",
+        confidence: courtCheck.ok && courtCheck.known && plausible ? 97 : courtCheck.ok ? 72 : 58,
+        status: courtCheck.ok && courtCheck.known && plausible ? "Likely complete" : "Needs review",
         components: [
           checkerComponent("Case name", m[1], "ok"),
-          checkerComponent("Year", m[2], "ok"),
-          checkerComponent("Court", m[3].toUpperCase(), "ok"),
-          checkerComponent("Page", m[4], "ok")
+          checkerComponent("Year", m[2], plausibleYear(m[2]) ? "ok" : "warning"),
+          checkerComponent("Court", m[3].toUpperCase(), courtCheck.ok && courtCheck.known ? "ok" : "warning"),
+          checkerComponent("Page", m[4], plausiblePositiveNumber(m[4]) ? "ok" : "warning")
         ],
-        issues: [checkerIssue("warning", "Verify party names and reporter details.", "Pattern recognition does not verify the citation against an official source.", "Check the authoritative report.")],
+        issues,
         suggestion: `${m[1]}, AIR ${m[2]} ${m[3].toUpperCase()} ${m[4]}`
       };
     }
@@ -931,18 +958,21 @@
     if (m) {
       const caseName = m[1] ? m[1].trim() : "Not supplied";
       const hasCaseName = caseName !== "Not supplied";
+      const plausible = plausibleYear(m[2]) && plausiblePositiveNumber(m[3], 999) && plausiblePositiveNumber(m[4]);
+      const issues = [checkerIssue("warning", "Verify the case title and opening page.", "The checker validates structure, not reporter database facts.", "Check the SCC source before submission.")];
+      if (!plausible) issues.push(checkerIssue("warning", "Year, volume or page looks implausible.", "The citation shape matches SCC, but one or more numeric values need verification.", "Check year, volume and page against the source."));
       return {
         type: "SCC citation",
-        confidence: hasCaseName ? 97 : 96,
-        status: "Likely complete",
+        confidence: plausible ? (hasCaseName ? 97 : 96) : 72,
+        status: plausible ? "Likely complete" : "Needs review",
         components: [
           checkerComponent("Case name", caseName, hasCaseName ? "ok" : "warning", hasCaseName ? "Case title detected before the SCC citation." : "Citation-only input is valid, but verify the case title separately."),
-          checkerComponent("Year", m[2], "ok"),
-          checkerComponent("Volume", m[3], "ok"),
+          checkerComponent("Year", m[2], plausibleYear(m[2]) ? "ok" : "warning"),
+          checkerComponent("Volume", m[3], plausiblePositiveNumber(m[3], 999) ? "ok" : "warning"),
           checkerComponent("Reporter", "SCC", "ok"),
-          checkerComponent("Opening page", m[4], "ok")
+          checkerComponent("Opening page", m[4], plausiblePositiveNumber(m[4]) ? "ok" : "warning")
         ],
-        issues: [checkerIssue("warning", "Verify the case title and opening page.", "The checker validates structure, not reporter database facts.", "Check the SCC source before submission.")],
+        issues,
         suggestion: `${hasCaseName ? `${caseName}, ` : ""}(${m[2]}) ${m[3]} SCC ${m[4]}`
       };
     }
@@ -968,17 +998,23 @@
 
     m = text.match(/^AIR\s+(\d{4})\s+([A-Z]{2,6})\s+(\d+)$/i);
     if (m) {
+      const courtCheck = assessAirCourt(m[2]);
+      const plausible = plausibleYear(m[1]) && plausiblePositiveNumber(m[3]);
+      const issues = [checkerIssue("warning", "Verify the court abbreviation.", "AIR court abbreviations must match the reporter source.", "Check the AIR citation before submission.")];
+      if (!courtCheck.ok) issues.push(checkerIssue("error", "Court abbreviation needs review.", "This token is not safe as an AIR court abbreviation.", "Use the correct court abbreviation, such as SC for Supreme Court."));
+      else if (!courtCheck.known) issues.push(checkerIssue("warning", "Court abbreviation needs verification.", "This court token is not in CiteJury’s common AIR court list.", "Verify the reporter citation before relying on it."));
+      if (!plausible) issues.push(checkerIssue("warning", "Year or page number looks implausible.", "The citation shape matches AIR, but one or more numeric values need verification.", "Check the citation against the source."));
       return {
         type: "AIR citation",
-        confidence: 96,
-        status: "Likely complete",
+        confidence: courtCheck.ok && courtCheck.known && plausible ? 96 : courtCheck.ok ? 72 : 58,
+        status: courtCheck.ok && courtCheck.known && plausible ? "Likely complete" : "Needs review",
         components: [
           checkerComponent("Reporter", "AIR", "ok"),
-          checkerComponent("Year", m[1], "ok"),
-          checkerComponent("Court", m[2].toUpperCase(), "ok"),
-          checkerComponent("Opening page", m[3], "ok")
+          checkerComponent("Year", m[1], plausibleYear(m[1]) ? "ok" : "warning"),
+          checkerComponent("Court", m[2].toUpperCase(), courtCheck.ok && courtCheck.known ? "ok" : "warning"),
+          checkerComponent("Opening page", m[3], plausiblePositiveNumber(m[3]) ? "ok" : "warning")
         ],
-        issues: [checkerIssue("warning", "Verify the court abbreviation.", "AIR court abbreviations must match the reporter source.", "Check the AIR citation before submission.")],
+        issues,
         suggestion: `AIR ${m[1]} ${m[2].toUpperCase()} ${m[3]}`
       };
     }
@@ -1093,7 +1129,27 @@
   if (checkerForm && checkerInput) {
     checkerForm.addEventListener("submit", (event) => {
       event.preventDefault();
-      renderCheckerResult(detectCitationPattern(checkerInput.value));
+      if (checkerHeading) checkerHeading.textContent = "Checking citation…";
+      if (checkerSummary) checkerSummary.textContent = "CiteJury is reviewing the pasted citation.";
+      if (checkerComponents) checkerComponents.replaceChildren();
+      if (checkerIssues) checkerIssues.replaceChildren();
+      if (checkerSuggestion) {
+        checkerSuggestion.hidden = true;
+        checkerSuggestion.replaceChildren();
+      }
+      try {
+        renderCheckerResult(detectCitationPattern(checkerInput.value));
+      } catch (err) {
+        if (checkerHeading) checkerHeading.textContent = "Unable to check citation";
+        if (checkerSummary) checkerSummary.textContent = "CiteJury could not safely inspect this citation. Please review the text and try again.";
+        if (checkerIssues) {
+          const card = document.createElement("article");
+          card.className = "checker-issue error";
+          appendText(card, "strong", "✗ Checker error");
+          appendText(card, "p", "The previous result has been cleared so stale guidance is not shown.");
+          checkerIssues.appendChild(card);
+        }
+      }
     });
 
     checkerForm.addEventListener("reset", () => {

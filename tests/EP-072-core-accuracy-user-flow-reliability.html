@@ -4,17 +4,17 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="robots" content="noindex,nofollow">
-  <title>EP-075 Core Accuracy & User Flow Reliability | CiteJury</title>
-  <link rel="stylesheet" href="../assets/css/style.css?v=075">
+  <title>EP-075A Core Accuracy & User Flow Reliability | CiteJury</title>
+  <link rel="stylesheet" href="../assets/css/style.css?v=075a">
 </head>
 <body>
   <main class="container section">
-    <p class="eyebrow">EP-075 verification</p>
+    <p class="eyebrow">EP-075A verification</p>
     <h1>Core Accuracy & User Flow Reliability</h1>
     <p>This static smoke page checks SCC checker recognition guards, copy/download reliability signals, mobile result scrolling, citation-engine loading, and ad-disabled guardrails without enabling ads.</p>
     <section class="trust-card" id="ep072-results" aria-live="polite"><h2>Results</h2></section>
   </main>
-  <script src="../assets/js/citation-engine.js?v=075"></script>
+  <script src="../assets/js/citation-engine.js?v=075a"></script>
   <script>
     (async () => {
       const results = document.getElementById("ep072-results");
@@ -22,7 +22,7 @@
       const add = (name, ok, detail = "") => checks.push({ name, ok: Boolean(ok), detail });
       const escapeHtml = (value) => String(value).replace(/[&<>"]/g, (char) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[char]));
 
-      const hasScript = Array.from(document.scripts).some((script) => script.getAttribute("src") === "../assets/js/citation-engine.js?v=075");
+      const hasScript = Array.from(document.scripts).some((script) => script.getAttribute("src") === "../assets/js/citation-engine.js?v=075a");
       add("Asset version is 072", hasScript);
 
       const engineReady = typeof window.CiteJuryCitationEngine === "object" && typeof window.CiteJuryCitationEngine.generate === "function";
@@ -38,7 +38,7 @@
         const [configResponse, homepageResponse, appResponse] = await Promise.all([
           fetch("../assets/data/ads-config.json", { cache: "no-store" }),
           fetch("../index.html", { cache: "no-store" }),
-          fetch("../assets/js/app.js?v=075", { cache: "no-store" })
+          fetch("../assets/js/app.js?v=075a", { cache: "no-store" })
         ]);
         const config = await configResponse.json();
         const homepage = await homepageResponse.text();
@@ -47,7 +47,7 @@
         add("Ad slot uniqueness policy is documented", config.ad_slot_policy && config.ad_slot_policy.public_pages_must_not_duplicate_slot_ids === true);
         const activeAdScript = /https?:\/\/[^"']*(googlesyndication|doubleclick|adsbygoogle|adservice)/i.test(homepage);
         add("Homepage has no active third-party ad script", !activeAdScript);
-        add("Homepage keeps revenue script local", homepage.includes("assets/js/revenue-readiness.js?v=075"));
+        add("Homepage keeps revenue script local", homepage.includes("assets/js/revenue-readiness.js?v=075a"));
         add("Mobile nav toggle markup present", homepage.includes("class=\"nav-toggle\"") && homepage.includes("aria-expanded=\"false\""));
         add("Workspace panels present on homepage", homepage.includes("data-workspace-panel=\"generate\"") && homepage.includes("data-workspace-panel=\"check\""));
         add("SCC checker accepts case-name citations", appSource.includes("Case title detected before the SCC citation"));
@@ -87,7 +87,7 @@
       add("No database required", true);
 
       results.insertAdjacentHTML("beforeend", checks.map((check) => `<p><strong>${check.ok ? "PASS" : "FAIL"}</strong> — ${escapeHtml(check.name)}${check.detail ? ` <small>${escapeHtml(check.detail)}</small>` : ""}</p>`).join(""));
-      document.title = checks.every((check) => check.ok) ? "PASS — EP-075" : "REVIEW — EP-075";
+      document.title = checks.every((check) => check.ok) ? "PASS — EP-075A" : "REVIEW — EP-075A";
     })();
   </script>
 </body>

@@ -1,5 +1,5 @@
 {
-  "version": "EP-075",
+  "version": "EP-075A",
   "stage": "core-accuracy-user-flow-reliability",
   "backend": false,
   "database": false,
@@ -17,11 +17,11 @@
   "searchEngineLaunchReady": true,
   "productionBaseUrl": "https://citejury.citejury.workers.dev",
   "sitemapUrl": "https://citejury.citejury.workers.dev/sitemap.xml",
-  "latest_ep": "EP-075",
-  "latest_title": "Citation Doctor Accuracy & Final UI Polish",
+  "latest_ep": "EP-075A",
+  "latest_title": "Checker Safety Hotfix",
   "updated": "2026-07-09",
   "unattended_operation_release": true,
-  "currentEp": "EP-075",
-  "assetVersion": "075",
-  "releaseName": "Citation Doctor Accuracy & Final UI Polish"
+  "currentEp": "EP-075A",
+  "assetVersion": "075a",
+  "releaseName": "Checker Safety Hotfix"
 }
