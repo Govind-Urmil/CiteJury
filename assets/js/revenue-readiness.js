@@ -1,7 +1,22 @@
 (() => {
   "use strict";
 
-  const slots = Array.from(document.querySelectorAll("[data-revenue-slot]"));
+  const allSlots = Array.from(document.querySelectorAll("[data-revenue-slot]"));
+  const seenSlotIds = new Set();
+  const slots = [];
+
+  allSlots.forEach((slot) => {
+    const slotId = slot.getAttribute("data-revenue-slot") || "";
+    if (seenSlotIds.has(slotId)) {
+      slot.hidden = true;
+      slot.setAttribute("data-revenue-status", "duplicate-slot-disabled");
+      slot.textContent = "";
+      return;
+    }
+    seenSlotIds.add(slotId);
+    slots.push(slot);
+  });
+
   const ADSENSE_ORIGIN = "https://pagead2.googlesyndication.com";
   const ADSENSE_SCRIPT = `${ADSENSE_ORIGIN}/pagead/js/adsbygoogle.js`;
   const CLIENT_ID_PATTERN = /^ca-pub-\d{16}$/;

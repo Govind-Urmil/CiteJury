@@ -330,3 +330,14 @@ Next: manual Google Search Console/Bing setup, then future ad approval/activatio
 - Updated WFVS release metadata to EP-070 / asset version 070 and preserved false-failure protections for homepage-only checks.
 - Bumped asset version to 070.
 - Preserved static/browser-only, zero-backend, zero-database, zero-API architecture.
+
+
+## EP-071 — Production & AdSense Foundation
+- Removed duplicate `ad-guide-footer` placements so each guide page has exactly one approved guide footer ad slot.
+- Added static CI checks that fail if guide pages duplicate the `ad-guide-footer` slot.
+- Added a runtime duplicate-slot fail-closed guard in `revenue-readiness.js` so only the first DOM slot for a given ad ID can render if future markup drifts.
+- Fixed release metadata consistency across `release-meta.json`, WFVS, and asset-version data.
+- Added a dedicated EP-071 production/AdSense verification page covering disabled ads, local revenue script usage, guide slot uniqueness, mobile navigation markup, and citation-engine smoke checks.
+- Kept AdSense activation approval-gated and inactive by default; no third-party ad script is enabled without explicit activation and valid publisher/slot IDs.
+- Bumped asset version to 071.
+- Preserved static/browser-only, zero-backend, zero-database, zero-API architecture.

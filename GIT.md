@@ -261,3 +261,14 @@ git push
 ```
 
 No file deletion is required for EP-070.
+
+
+## EP-071 commit
+
+```bash
+git add .
+git commit -m "EP-071: Production & AdSense Foundation"
+git push
+```
+
+No file deletion is required for EP-071.

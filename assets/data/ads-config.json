@@ -1,6 +1,6 @@
 {
-  "version": "EP-048",
-  "status": "adsense-activation-ready-but-disabled-until-publisher-id-and-approval",
+  "version": "EP-071",
+  "status": "adsense-activation-ready-but-disabled-until-publisher-id-and-owner-approval",
   "ads_active": false,
   "analytics_active": false,
   "approved_provider": "google-adsense",
@@ -71,5 +71,10 @@
     "If the provider, client ID, or ad slot is missing or invalid, that slot stays hidden.",
     "If an ad network fails, the citation generator remains usable.",
     "No legal citation text, form input, or generated citation is sent to CiteJury's server because there is no backend."
-  ]
+  ],
+  "ad_slot_policy": {
+    "public_pages_must_not_duplicate_slot_ids": true,
+    "guide_pages_max_ad_guide_footer_slots": 1,
+    "runtime_duplicate_slot_behavior": "only the first DOM slot for a given ad id may render; later duplicates stay hidden"
+  }
 }

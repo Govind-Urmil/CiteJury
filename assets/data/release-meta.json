@@ -1,6 +1,6 @@
 {
-  "version": "EP-067",
-  "stage": "launch-stability-seo-hardening",
+  "version": "EP-071",
+  "stage": "production-adsense-foundation",
   "backend": false,
   "database": false,
   "python_runtime_required": false,
@@ -17,11 +17,11 @@
   "searchEngineLaunchReady": true,
   "productionBaseUrl": "https://citejury.citejury.workers.dev",
   "sitemapUrl": "https://citejury.citejury.workers.dev/sitemap.xml",
-  "latest_ep": "EP-067",
-  "latest_title": "Launch Stability & SEO Hardening",
+  "latest_ep": "EP-071",
+  "latest_title": "Production & AdSense Foundation",
   "updated": "2026-07-09",
   "unattended_operation_release": true,
-  "currentEp": "EP-070",
-  "assetVersion": "070",
-  "releaseName": "Release Candidate Stabilization"
+  "currentEp": "EP-071",
+  "assetVersion": "071",
+  "releaseName": "Production & AdSense Foundation"
 }

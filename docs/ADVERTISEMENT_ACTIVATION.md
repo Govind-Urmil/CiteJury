@@ -55,3 +55,7 @@ AdSense activation remains approval-gated. EP-069 improves documentation and lau
 ## EP-070 release-candidate update
 
 EP-070 keeps ads disabled while strengthening release checks for the homepage revenue path and `assets/data/ads-config.json`. AdSense remains approval-gated. EP-071 may activate production ads only after owner approval, a valid publisher ID, matching `ads.txt`, privacy review, CSP update, and live smoke testing.
+
+## EP-071 production/AdSense foundation update
+
+EP-071 removes duplicate guide footer ad slots, adds CI and runtime duplicate-slot guardrails, and keeps all advertising disabled until owner approval and valid AdSense details are configured. The production CSP remains conservative while ads are inactive. A future activation commit must add the exact AdSense CSP allowances, publish a matching `ads.txt`, configure real publisher/client and slot IDs, set `ads_active` only after smoke testing, and verify no duplicate slots or citation-workspace interference.

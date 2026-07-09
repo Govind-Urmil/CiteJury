@@ -97,13 +97,13 @@ jobs:
           grep -q "citejury-social-preview.png" index.html
           grep -q 'og:image:type" content="image/png"' index.html
 
-      - name: Check EP-070 release metadata, SEO, ad readiness, and router scope
+      - name: Check EP-071 release metadata, SEO, ad readiness, duplicate slots, and router scope
         run: |
-          grep -q "EP-070" tests/index.html
-          grep -q "assetVersion: \"070\"" tests/index.html
-          grep -q "EP-070-release-candidate-stabilization.html" tests/index.html
+          grep -q "EP-071" tests/index.html
+          grep -q "assetVersion: \"071\"" tests/index.html
+          grep -q "EP-071-production-adsense-foundation.html" tests/index.html
           grep -q "AdSense activation remains approval-gated" docs/ADVERTISEMENT_ACTIVATION.md
-          grep -q "EP-070" docs/EP-LEDGER.md
+          grep -q "EP-071" docs/EP-LEDGER.md
           grep -q "2026-07-09" sitemap.xml
           python - <<'PY'
           from pathlib import Path
@@ -134,8 +134,21 @@ jobs:
 
           ads_config = Path('assets/data/ads-config.json').read_text()
           if '"ads_active": false' not in ads_config:
-              raise SystemExit('Ads must remain disabled in EP-070')
+              raise SystemExit('Ads must remain disabled in EP-071')
           homepage = Path('index.html').read_text()
           if 'googlesyndication' in homepage or 'adsbygoogle' in homepage or 'doubleclick' in homepage:
               raise SystemExit('Homepage must not include active third-party ad scripts before explicit activation')
+
+
+          guide_slot_errors=[]
+          for path in sorted(Path('guides').glob('*.html')):
+              count = path.read_text().count('data-revenue-slot="ad-guide-footer"')
+              if count != 1:
+                  guide_slot_errors.append(f'{path}: expected 1 ad-guide-footer slot, found {count}')
+          if guide_slot_errors:
+              raise SystemExit('Guide ad slot uniqueness failed: ' + '; '.join(guide_slot_errors))
+
+          config = __import__('json').loads(Path('assets/data/ads-config.json').read_text())
+          if not config.get('ad_slot_policy', {}).get('public_pages_must_not_duplicate_slot_ids'):
+              raise SystemExit('Ad slot uniqueness policy missing from ads-config.json')
           PY

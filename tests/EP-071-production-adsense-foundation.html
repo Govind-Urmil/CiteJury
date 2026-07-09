@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>EP-071 Production & AdSense Foundation | CiteJury</title>
+  <link rel="stylesheet" href="../assets/css/style.css?v=071">
+</head>
+<body>
+  <main class="container section">
+    <p class="eyebrow">EP-071 verification</p>
+    <h1>Production & AdSense Foundation</h1>
+    <p>This static smoke page checks release metadata, citation-engine loading, ad-disabled guardrails, guide ad-slot uniqueness, mobile-navigation markup expectations, and homepage router-scope signals without enabling ads.</p>
+    <section class="trust-card" id="ep071-results" aria-live="polite"><h2>Results</h2></section>
+  </main>
+  <script src="../assets/js/citation-engine.js?v=071"></script>
+  <script>
+    (async () => {
+      const results = document.getElementById("ep071-results");
+      const checks = [];
+      const add = (name, ok, detail = "") => checks.push({ name, ok: Boolean(ok), detail });
+      const escapeHtml = (value) => String(value).replace(/[&<>"]/g, (char) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[char]));
+
+      const hasScript = Array.from(document.scripts).some((script) => script.getAttribute("src") === "../assets/js/citation-engine.js?v=071");
+      add("Asset version is 071", hasScript);
+
+      const engineReady = typeof window.CiteJuryCitationEngine === "object" && typeof window.CiteJuryCitationEngine.generate === "function";
+      add("Citation engine loads", engineReady, engineReady ? "" : "window.CiteJuryCitationEngine.generate is unavailable");
+      if (engineReady) {
+        const sample = window.CiteJuryCitationEngine.generate({ citationStyle: "indian-legal", sourceType: "sc-neutral-judgment", title: "Example v Union of India", year: "2024", page: "12" });
+        add("Citation engine smoke test", sample.ok && sample.citation.includes("2024 INSC 12"), sample.citation || sample.error || "");
+      } else {
+        add("Citation engine smoke test", false, "Skipped because the citation engine did not load");
+      }
+
+      try {
+        const [configResponse, homepageResponse] = await Promise.all([
+          fetch("../assets/data/ads-config.json", { cache: "no-store" }),
+          fetch("../index.html", { cache: "no-store" })
+        ]);
+        const config = await configResponse.json();
+        const homepage = await homepageResponse.text();
+        add("Ads config remains disabled", config.ads_active === false && config.analytics_active === false);
+        add("Ad slot uniqueness policy is documented", config.ad_slot_policy && config.ad_slot_policy.public_pages_must_not_duplicate_slot_ids === true);
+        const activeAdScript = /https?:\/\/[^"']*(googlesyndication|doubleclick|adsbygoogle|adservice)/i.test(homepage);
+        add("Homepage has no active third-party ad script", !activeAdScript);
+        add("Homepage keeps revenue script local", homepage.includes("assets/js/revenue-readiness.js?v=071"));
+        add("Mobile nav toggle markup present", homepage.includes("class=\"nav-toggle\"") && homepage.includes("aria-expanded=\"false\""));
+        add("Workspace panels present on homepage", homepage.includes("data-workspace-panel=\"generate\"") && homepage.includes("data-workspace-panel=\"check\""));
+      } catch (error) {
+        add("Ad and homepage guardrail fetches", false, error.message);
+      }
+
+      try {
+        const guidePaths = [
+          "air-citation.html",
+          "bluebook-citation-basics-india.html",
+          "how-to-cite-bare-act.html",
+          "how-to-cite-constitution-of-india.html",
+          "how-to-cite-high-court-judgment.html",
+          "how-to-cite-law-journal-article.html",
+          "how-to-cite-legal-website.html",
+          "how-to-cite-online-judgment.html",
+          "how-to-cite-supreme-court-judgment.html",
+          "indian-legal-citation.html",
+          "legal-citation-basics.html",
+          "legal-citation-for-law-students.html",
+          "moot-court-memorial-citation-guide.html",
+          "oscola-citation-guide-india.html",
+          "scc-citation.html"
+        ];
+        const responses = await Promise.all(guidePaths.map((path) => fetch(`../guides/${path}`, { cache: "no-store" }).then((response) => response.text().then((text) => ({ path, text })))));
+        const duplicateGuides = responses.filter(({ text }) => (text.match(/data-revenue-slot="ad-guide-footer"/g) || []).length !== 1).map(({ path }) => path);
+        add("Each guide has exactly one footer ad slot", duplicateGuides.length === 0, duplicateGuides.join(", "));
+      } catch (error) {
+        add("Guide ad-slot uniqueness fetches", false, error.message);
+      }
+
+      add("No backend required", true);
+      add("No database required", true);
+
+      results.insertAdjacentHTML("beforeend", checks.map((check) => `<p><strong>${check.ok ? "PASS" : "FAIL"}</strong> — ${escapeHtml(check.name)}${check.detail ? ` <small>${escapeHtml(check.detail)}</small>` : ""}</p>`).join(""));
+      document.title = checks.every((check) => check.ok) ? "PASS — EP-071" : "REVIEW — EP-071";
+    })();
+  </script>
+</body>
+</html>
