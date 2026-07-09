@@ -1,10 +1,10 @@
 <!doctype html>
 <meta charset="utf-8">
-<title>EP-079 Production Freeze Candidate</title>
-<h1>EP-079 Production Freeze Candidate</h1>
+<title>EP-080 Final Audit Hotfix</title>
+<h1>EP-080 Final Audit Hotfix</h1>
 <pre id="results">Running…</pre>
-<script src="../assets/js/citation-engine.js?v=079"></script>
-<script src="../assets/js/app.js?v=079"></script>
+<script src="../assets/js/citation-engine.js?v=080"></script>
+<script src="../assets/js/app.js?v=080"></script>
 <script>
 const results = [];
 const pass = (name, ok, detail = "") => results.push(`${ok ? "PASS" : "FAIL"}: ${name}${detail ? " — " + detail : ""}`);
@@ -17,7 +17,7 @@ if (engine) {
   pass("OSCOLA generation has no stale volume", oscola.ok && !/\[1932\]\s+10\s+AC/.test(oscola.citation), oscola.citation || oscola.error || "");
 }
 const source = document.documentElement.outerHTML;
-pass("asset refs use 074", source.includes("?v=079") && !/\?v=(072|073|073a|073b)\b/.test(source));
+pass("asset refs use 074", source.includes("?v=080") && !/\?v=(072|073|073a|073b)\b/.test(source));
 pass("Citation Doctor helper shipped", typeof window !== "undefined");
 document.querySelector("#results").textContent = results.join("\n");
 document.documentElement.dataset.testStatus = results.some((line) => line.startsWith("FAIL")) ? "fail" : "pass";

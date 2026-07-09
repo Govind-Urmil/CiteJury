@@ -1,5 +1,5 @@
 {
-  "version": "EP-072",
+  "version": "EP-080",
   "status": "adsense-activation-ready-but-disabled-until-publisher-id-and-owner-approval",
   "ads_active": false,
   "analytics_active": false,
@@ -83,7 +83,8 @@
   "activation_requires_csp_update": true,
   "activation_requires_ads_txt": true,
   "publisher_id_placeholder": "ca-pub-XXXXXXXXXXXXXXXX",
-  "release": "EP-079",
+  "release": "EP-080",
   "production_freeze_candidate": true,
-  "activation_requires_final_codex_audit": true
+  "activation_requires_final_codex_audit": true,
+  "assetVersion": "080"
 }

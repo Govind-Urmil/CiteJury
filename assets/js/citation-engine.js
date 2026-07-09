@@ -8,6 +8,16 @@
   "use strict";
 
   const clean = (value) => String(value || "").trim();
+
+  const normalizeProvisionLocator = (value, kind = "section") => {
+    const raw = clean(value);
+    if (!raw) return "";
+    const pattern = kind === "article"
+      ? /^(?:art\.?|article)\s*/i
+      : /^(?:s\.?|sec\.?|section)\s*/i;
+    return raw.replace(pattern, "").trim();
+  };
+
   const digitsOnly = (value) => /^\d+$/.test(clean(value));
 
   const normalizeCourt = (value) => clean(value).replace(/\s+/g, " ");
@@ -278,7 +288,7 @@
           return helpers.finish(helpers.join([data.title || "Untitled case", neutral, report, pinpoint]) + suffix);
         }
         if (data.sourceType === "legislation") {
-          return helpers.finish(helpers.join([data.title, data.year, data.page ? `s ${data.page}` : ""]));
+          return helpers.finish(helpers.join([data.title, data.year, data.page ? `s ${normalizeProvisionLocator(data.page, "section")}` : ""]));
         }
         if (data.sourceType === "book") {
           return helpers.finish(`${data.title}${data.reporter || data.year ? ` (${helpers.join([data.reporter, data.year], ", ")})` : ""}${data.page ? ` ${data.page}` : ""}`);
@@ -350,7 +360,7 @@
       const citation = helpers.finish(helpers.join([
         data.title || "Untitled legislation",
         data.year,
-        data.page ? `s. ${data.page}` : ""
+        data.page ? `s. ${normalizeProvisionLocator(data.page, "section")}` : ""
       ], ", "));
 
       return {
@@ -367,7 +377,7 @@
     constitution(data) {
       const citation = helpers.finish(helpers.join([
         data.title || "Constitution of India",
-        data.page ? `art. ${data.page}` : ""
+        data.page ? `art. ${normalizeProvisionLocator(data.page, "article")}` : ""
       ], ", "));
 
       return {

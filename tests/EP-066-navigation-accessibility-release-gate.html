@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>EP-066 Navigation Accessibility & Release Gate Checks</title>
-  <link rel="stylesheet" href="../assets/css/style.css?v=079">
+  <link rel="stylesheet" href="../assets/css/style.css?v=080">
 </head>
 <body>
   <header class="site-header">
@@ -15,8 +15,8 @@
     </div>
   </header>
   <main class="container section"><h1>EP-066 Checks</h1><pre id="out">Running...</pre></main>
-  <script src="../assets/js/citation-engine.js?v=079"></script>
-  <script src="../assets/js/app.js?v=079"></script>
+  <script src="../assets/js/citation-engine.js?v=080"></script>
+  <script src="../assets/js/app.js?v=080"></script>
   <script>
     const out = document.querySelector('#out');
     const checks = [];
@@ -31,7 +31,7 @@
     toggle.click();
     document.body.dispatchEvent(new MouseEvent('click', { bubbles: true }));
     add('outside click closes menu', toggle.getAttribute('aria-expanded') === 'false' && !nav.classList.contains('open'));
-    add('app script loaded with EP-066 version', document.querySelector('script[src="../assets/js/app.js?v=079"]') !== null);
+    add('app script loaded with EP-066 version', document.querySelector('script[src="../assets/js/app.js?v=080"]') !== null);
     const failed = checks.filter((item) => !item.pass);
     out.textContent = checks.map((item) => `${item.pass ? 'PASS' : 'FAIL'} — ${item.name}`).join('\n');
     if (failed.length) throw new Error('EP-066 checks failed: ' + failed.map((item) => item.name).join(', '));

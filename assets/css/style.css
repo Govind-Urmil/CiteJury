@@ -299,3 +299,5 @@ button:disabled{opacity:.52;cursor:not-allowed}
 [data-mode-target].active {
   box-shadow: 0 0 0 3px rgba(49, 94, 251, 0.16);
 }
+
+.doctor-original { white-space: pre-wrap; }

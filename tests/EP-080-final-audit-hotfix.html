@@ -1,0 +1,25 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>EP-080 Final Audit Hotfix</title>
+<h1>EP-080 Final Audit Hotfix</h1>
+<pre id="results">Running…</pre>
+<script src="../assets/js/citation-engine.js?v=080"></script>
+<script src="../assets/js/app.js?v=080"></script>
+<script>
+const results = [];
+const pass = (name, ok, detail = "") => results.push(`${ok ? "PASS" : "FAIL"}: ${name}${detail ? " — " + detail : ""}`);
+const engine = window.CiteJuryCitationEngine;
+pass("citation engine loaded", !!engine);
+if (engine) {
+  const legislation = engine.generate({citationStyle:"indian-legal",sourceType:"legislation",title:"Information Technology Act",year:"2000",page:"s 66A",reporter:"",volume:"",court:""});
+  pass("legislation prefix normalized", legislation.ok && !/s\.\s*s\s/i.test(legislation.citation), legislation.citation || legislation.error || "");
+  const constitution = engine.generate({citationStyle:"indian-legal",sourceType:"constitution",title:"Constitution of India",year:"",page:"Article 21",reporter:"",volume:"",court:"India"});
+  pass("constitution prefix normalized", constitution.ok && !/art\.\s*article/i.test(constitution.citation), constitution.citation || constitution.error || "");
+  const journal = engine.generate({citationStyle:"oscola",sourceType:"journal",title:"Privacy and the Constitution",year:"2021",volume:"12",reporter:"Indian Law Review",page:"45",court:""});
+  pass("OSCOLA journal includes volume", journal.ok && /12/.test(journal.citation), journal.citation || journal.error || "");
+}
+const source = document.documentElement.outerHTML;
+pass("asset refs use 080", source.includes("?v=080") && !/\?v=(072|073|073a|073b|074|075|075a|076|077|078|079)\b/.test(source));
+document.querySelector("#results").textContent = results.join("\n");
+document.documentElement.dataset.testStatus = results.some((line) => line.startsWith("FAIL")) ? "fail" : "pass";
+</script>

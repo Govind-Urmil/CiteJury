@@ -406,3 +406,12 @@ Next: manual Google Search Console/Bing setup, then future ad approval/activatio
 - Added Search Console final-steps documentation.
 - Kept ads disabled pending final audit and explicit activation.
 - Preserved Generator, Checker, Citation Doctor, and static/browser-only architecture.
+
+
+## EP-080: Final Audit Hotfix
+- Fixed final audit blockers for citation contamination and formatting normalization.
+- Normalized duplicated section/article prefixes.
+- Included OSCOLA journal volume.
+- Suppressed unsafe Doctor suggestions when Checker reports error-level issues.
+- Updated release metadata and ads config to EP-080.
+- Preserved static/browser-only architecture.

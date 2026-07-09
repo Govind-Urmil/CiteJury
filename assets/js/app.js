@@ -278,7 +278,7 @@
       "air:judgment": ["title", "year", "court", "page"],
       "oscola:judgment": ["title", "year", "reporter", "page", "court"],
       "oscola:legislation": ["title", "year", "page"],
-      "oscola:book": ["title", "year", "reporter", "page"],
+      "oscola:book": ["title", "year", "reporter"],
       "oscola:journal": ["title", "year", "reporter", "page"],
       "oscola:website": ["title", "year", "reporter", "page"],
       "indian-legal:constitution": ["title", "page"]
@@ -817,11 +817,13 @@
     const originalLabel = document.createElement("strong");
     originalLabel.textContent = "Original";
     const originalValue = document.createElement("p");
+    originalValue.className = "doctor-original";
     originalValue.textContent = String(rawInput || "") || "No citation provided.";
 
     card.append(heading, summary, originalLabel, originalValue);
 
-    if (report.suggested) {
+    const hasDoctorErrorIssue = Array.isArray(diagnosis.issues) && diagnosis.issues.some((issue) => issue && issue.level === "error");
+    if (report.suggested && !hasDoctorErrorIssue) {
       const suggestedLabel = document.createElement("strong");
       suggestedLabel.textContent = "Suggested";
       const suggestedValue = document.createElement("p");
