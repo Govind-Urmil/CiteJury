@@ -743,7 +743,7 @@
   const checkerIssue = (level, message, why, fix = "") => ({ level, message, why, fix });
 
   const detectCitationPattern = (raw) => {
-    const text = clean(raw).replace(/\s+/g, " ");
+    const text = clean(raw).replace(/\s+/g, " ").replace(/\.$/, "");
     if (!text) {
       return {
         type: "Empty input",

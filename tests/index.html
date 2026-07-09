@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="robots" content="noindex,nofollow">
   <title>Website Factory Verification Suite | CiteJury</title>
-  <link rel="stylesheet" href="../assets/css/style.css?v=073a">
+  <link rel="stylesheet" href="../assets/css/style.css?v=073b">
   <style>
     .wfvs-shell{max-width:1100px;margin:0 auto;padding:2rem 1rem}
     .wfvs-hero,.wfvs-card{border:1px solid rgba(17,24,39,.12);border-radius:1rem;background:#fff;padding:1rem;margin:1rem 0}
@@ -28,7 +28,7 @@
     </section>
 
     <section class="wfvs-grid">
-      <article class="wfvs-card"><h2>Release</h2><p><strong>Project:</strong> CiteJury</p><p><strong>EP:</strong> EP-073A</p><p><strong>Asset:</strong> <span id="asset-version">072</span></p></article>
+      <article class="wfvs-card"><h2>Release</h2><p><strong>Project:</strong> CiteJury</p><p><strong>EP:</strong> EP-073BB</p><p><strong>Asset:</strong> <span id="asset-version">072</span></p></article>
       <article class="wfvs-card"><h2>ADR</h2><div id="adr-tests"></div></article>
       <article class="wfvs-card"><h2>Technical</h2><div id="technical-tests"></div></article>
       <article class="wfvs-card"><h2>Functional</h2><div id="functional-tests"></div></article>
@@ -45,13 +45,13 @@
     </section>
   
     <section class="test-card">
-      <h2>EP-073A Core Accuracy & User Flow Reliability</h2>
+      <h2>EP-073BB Core Accuracy & User Flow Reliability</h2>
       <p>Checks release metadata, asset versioning, ad-disabled guardrails, mobile navigation readiness, and RC stabilization gates.</p>
-      <p><a href="EP-073A-core-accuracy-user-flow-reliability.html">Open EP-073A verification</a></p>
+      <p><a href="EP-073BB-core-accuracy-user-flow-reliability.html">Open EP-073BB verification</a></p>
     </section>
 </main>
 
-  <script src="../assets/js/citation-engine.js?v=073a"></script>
+  <script src="../assets/js/citation-engine.js?v=073b"></script>
   <script>
     const tests = [];
     const add = (group, name, ok, detail = "") => tests.push({ group, name, ok: Boolean(ok), detail });
@@ -67,7 +67,7 @@
     add("Technical", "robots.txt expected", true);
     add("Technical", "sitemap.xml expected", true);
     add("Technical", "404.html expected", true);
-    add("Technical", "Asset version 072", Array.from(document.scripts).some((script) => script.getAttribute("src") === "../assets/js/citation-engine.js?v=073a"));
+    add("Technical", "Asset version 072", Array.from(document.scripts).some((script) => script.getAttribute("src") === "../assets/js/citation-engine.js?v=073b"));
 
     const engine = window.CiteJuryCitationEngine;
     if (engine && typeof engine.generate === "function") {
@@ -90,7 +90,7 @@
     add("Functional", "Citation Checker expected on homepage", true, "Not asserted on the WFVS test page to avoid false failures.");
     add("Functional", "Mode switch expected on homepage", true, "Not asserted on the WFVS test page to avoid false failures.");
 
-    ["EP-058 Citation Anatomy", "EP-059 Authority Guides", "EP-060 Visual Learning", "EP-061 Citation Checker", "EP-064A WFVS", "EP-066 Navigation Accessibility", "EP-067 Launch Stability", "EP-073A Core Accuracy & User Flow Reliability"].forEach((name) => add("History", name, true));
+    ["EP-058 Citation Anatomy", "EP-059 Authority Guides", "EP-060 Visual Learning", "EP-061 Citation Checker", "EP-064A WFVS", "EP-066 Navigation Accessibility", "EP-067 Launch Stability", "EP-073BB Core Accuracy & User Flow Reliability"].forEach((name) => add("History", name, true));
 
     const groups = ["ADR", "Technical", "Functional", "History"];
     groups.forEach((group) => {
@@ -106,7 +106,7 @@
       document.getElementById("dev-panel").hidden = false;
       document.getElementById("dev-output").textContent = JSON.stringify({
         userAgent: navigator.userAgent,
-        assetVersion: "073a",
+        assetVersion: "073b",
         url: location.href,
         testsRun: tests.length,
         passed

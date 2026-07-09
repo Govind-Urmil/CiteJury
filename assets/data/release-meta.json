@@ -1,5 +1,5 @@
 {
-  "version": "EP-073",
+  "version": "EP-073B",
   "stage": "core-accuracy-user-flow-reliability",
   "backend": false,
   "database": false,
@@ -17,11 +17,11 @@
   "searchEngineLaunchReady": true,
   "productionBaseUrl": "https://citejury.citejury.workers.dev",
   "sitemapUrl": "https://citejury.citejury.workers.dev/sitemap.xml",
-  "latest_ep": "EP-073",
+  "latest_ep": "EP-073B",
   "latest_title": "Core Accuracy & User Flow Reliability",
   "updated": "2026-07-09",
   "unattended_operation_release": true,
-  "currentEp": "EP-073",
-  "assetVersion": "073",
+  "currentEp": "EP-073B",
+  "assetVersion": "073b",
   "releaseName": "Core Accuracy & User Flow Reliability"
 }
