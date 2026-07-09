@@ -389,3 +389,12 @@ Next: manual Google Search Console/Bing setup, then future ad approval/activatio
 - Preserved tool safety safeguards from EP-075A/EP-076.
 - Kept ads disabled by default.
 - Preserved static/browser-only architecture.
+
+
+## EP-078: Monetization & Production Readiness
+- Added advertisement activation checklist.
+- Added final comprehensive Codex audit prompt.
+- Hardened ads-disabled default configuration.
+- Added ads.txt template for future AdSense activation.
+- Preserved Generator, Checker and Citation Doctor runtime behavior.
+- Preserved static/browser-only architecture.

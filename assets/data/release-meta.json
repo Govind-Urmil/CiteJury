@@ -1,5 +1,5 @@
 {
-  "version": "EP-077",
+  "version": "EP-078",
   "stage": "core-accuracy-user-flow-reliability",
   "backend": false,
   "database": false,
@@ -17,11 +17,11 @@
   "searchEngineLaunchReady": true,
   "productionBaseUrl": "https://citejury.citejury.workers.dev",
   "sitemapUrl": "https://citejury.citejury.workers.dev/sitemap.xml",
-  "latest_ep": "EP-077",
-  "latest_title": "Final UI & Production Readiness Polish",
+  "latest_ep": "EP-078",
+  "latest_title": "Monetization & Production Readiness",
   "updated": "2026-07-09",
   "unattended_operation_release": true,
-  "currentEp": "EP-077",
-  "assetVersion": "077",
-  "releaseName": "Final UI & Production Readiness Polish"
+  "currentEp": "EP-078",
+  "assetVersion": "078",
+  "releaseName": "Monetization & Production Readiness"
 }

@@ -76,5 +76,12 @@
     "public_pages_must_not_duplicate_slot_ids": true,
     "guide_pages_max_ad_guide_footer_slots": 1,
     "runtime_duplicate_slot_behavior": "only the first DOM slot for a given ad id may render; later duplicates stay hidden"
-  }
+  },
+  "activation_requires_owner_approval": true,
+  "activation_requires_adsense_approval": true,
+  "activation_requires_privacy_review": true,
+  "activation_requires_csp_update": true,
+  "activation_requires_ads_txt": true,
+  "publisher_id_placeholder": "ca-pub-XXXXXXXXXXXXXXXX",
+  "release": "EP-078"
 }
