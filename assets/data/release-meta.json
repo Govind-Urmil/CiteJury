@@ -1,5 +1,5 @@
 {
-  "version": "EP-076",
+  "version": "EP-077",
   "stage": "core-accuracy-user-flow-reliability",
   "backend": false,
   "database": false,
@@ -17,11 +17,11 @@
   "searchEngineLaunchReady": true,
   "productionBaseUrl": "https://citejury.citejury.workers.dev",
   "sitemapUrl": "https://citejury.citejury.workers.dev/sitemap.xml",
-  "latest_ep": "EP-076",
-  "latest_title": "Final Tool Accuracy & Stability Sprint",
+  "latest_ep": "EP-077",
+  "latest_title": "Final UI & Production Readiness Polish",
   "updated": "2026-07-09",
   "unattended_operation_release": true,
-  "currentEp": "EP-076",
-  "assetVersion": "076",
-  "releaseName": "Final Tool Accuracy & Stability Sprint"
+  "currentEp": "EP-077",
+  "assetVersion": "077",
+  "releaseName": "Final UI & Production Readiness Polish"
 }

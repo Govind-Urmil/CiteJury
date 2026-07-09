@@ -381,3 +381,11 @@ Next: manual Google Search Console/Bing setup, then future ad approval/activatio
 - Kept standalone Citation Doctor homepage callout removed.
 - Updated release metadata and regression test target to EP-076.
 - Preserved static/browser-only architecture.
+
+
+## EP-077: Final UI & Production Readiness Polish
+- Added final production-freeze checklist.
+- Kept Citation Doctor surfaced through Checker rather than a standalone homepage callout.
+- Preserved tool safety safeguards from EP-075A/EP-076.
+- Kept ads disabled by default.
+- Preserved static/browser-only architecture.

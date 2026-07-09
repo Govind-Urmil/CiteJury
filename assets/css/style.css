@@ -275,3 +275,27 @@ button:disabled{opacity:.52;cursor:not-allowed}
 }
 
 .checker-doctor-card p { white-space: pre-wrap; }
+
+.tool-note {
+  margin: 0.75rem 0 1rem;
+  padding: 0.85rem 1rem;
+  border: 1px solid var(--border-color, #d7dde8);
+  border-radius: 0.75rem;
+  background: var(--surface-muted, #f7f9fc);
+  font-size: 0.95rem;
+}
+
+[data-mode-target] {
+  border-width: 2px;
+}
+
+[data-mode-target] strong {
+  display: block;
+  font-size: clamp(1.2rem, 2vw, 1.55rem);
+  line-height: 1.15;
+  margin-bottom: 0.35rem;
+}
+
+[data-mode-target].active {
+  box-shadow: 0 0 0 3px rgba(49, 94, 251, 0.16);
+}

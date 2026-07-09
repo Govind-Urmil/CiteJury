@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="robots" content="noindex,nofollow">
   <title>EP-071 Production & AdSense Foundation | CiteJury</title>
-  <link rel="stylesheet" href="../assets/css/style.css?v=076">
+  <link rel="stylesheet" href="../assets/css/style.css?v=077">
 </head>
 <body>
   <main class="container section">
@@ -14,7 +14,7 @@
     <p>This static smoke page checks release metadata, citation-engine loading, ad-disabled guardrails, guide ad-slot uniqueness, mobile-navigation markup expectations, and homepage router-scope signals without enabling ads.</p>
     <section class="trust-card" id="ep071-results" aria-live="polite"><h2>Results</h2></section>
   </main>
-  <script src="../assets/js/citation-engine.js?v=076"></script>
+  <script src="../assets/js/citation-engine.js?v=077"></script>
   <script>
     (async () => {
       const results = document.getElementById("ep071-results");
@@ -22,7 +22,7 @@
       const add = (name, ok, detail = "") => checks.push({ name, ok: Boolean(ok), detail });
       const escapeHtml = (value) => String(value).replace(/[&<>"]/g, (char) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[char]));
 
-      const hasScript = Array.from(document.scripts).some((script) => script.getAttribute("src") === "../assets/js/citation-engine.js?v=076");
+      const hasScript = Array.from(document.scripts).some((script) => script.getAttribute("src") === "../assets/js/citation-engine.js?v=077");
       add("Asset version is 071", hasScript);
 
       const engineReady = typeof window.CiteJuryCitationEngine === "object" && typeof window.CiteJuryCitationEngine.generate === "function";
@@ -45,7 +45,7 @@
         add("Ad slot uniqueness policy is documented", config.ad_slot_policy && config.ad_slot_policy.public_pages_must_not_duplicate_slot_ids === true);
         const activeAdScript = /https?:\/\/[^"']*(googlesyndication|doubleclick|adsbygoogle|adservice)/i.test(homepage);
         add("Homepage has no active third-party ad script", !activeAdScript);
-        add("Homepage keeps revenue script local", homepage.includes("assets/js/revenue-readiness.js?v=076"));
+        add("Homepage keeps revenue script local", homepage.includes("assets/js/revenue-readiness.js?v=077"));
         add("Mobile nav toggle markup present", homepage.includes("class=\"nav-toggle\"") && homepage.includes("aria-expanded=\"false\""));
         add("Workspace panels present on homepage", homepage.includes("data-workspace-panel=\"generate\"") && homepage.includes("data-workspace-panel=\"check\""));
       } catch (error) {
