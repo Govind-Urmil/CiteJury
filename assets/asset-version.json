@@ -1,7 +1,9 @@
 {
-  "assetVersion": "081",
+  "assetVersion": "082",
   "purpose": "Cache-busting version for public CSS and JavaScript asset URLs.",
   "policy": "Increment this value and update HTML query strings whenever public CSS or JavaScript changes.",
-  "lastEp": "TI-1",
-  "version": "081"
+  "lastEp": "TI-2",
+  "version": "TI-2",
+  "currentEp": "TI-2",
+  "releaseName": "Trust Calibration Release"
 }

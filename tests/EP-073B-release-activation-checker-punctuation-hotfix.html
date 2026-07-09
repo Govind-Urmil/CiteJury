@@ -1,10 +1,10 @@
 <!doctype html>
 <meta charset="utf-8">
-<title>TI-1 Trust Initiative Validation Engine</title>
-<h1>TI-1 Trust Initiative Validation Engine</h1>
+<title>TI-2 Trust Initiative Validation Engine</title>
+<h1>TI-2 Trust Initiative Validation Engine</h1>
 <pre id="results">Running…</pre>
-<script src="../assets/js/citation-engine.js?v=081"></script>
-<script src="../assets/js/app.js?v=081"></script>
+<script src="../assets/js/citation-engine.js?v=082"></script>
+<script src="../assets/js/app.js?v=082"></script>
 <script>
 const results = [];
 const pass = (name, ok, detail = "") => results.push(`${ok ? "PASS" : "FAIL"}: ${name}${detail ? " — " + detail : ""}`);
@@ -50,7 +50,7 @@ if (engine) {
 }
 
 const source = document.documentElement.outerHTML;
-pass("test page asset references use 073b", source.includes("?v=081") && !source.includes("?v=081") && !source.includes("?v=081"));
+pass("test page asset references use 073b", source.includes("?v=082") && !source.includes("?v=082") && !source.includes("?v=082"));
 
 document.querySelector("#results").textContent = results.join("\n");
 document.documentElement.dataset.testStatus = results.some((line) => line.startsWith("FAIL")) ? "fail" : "pass";
