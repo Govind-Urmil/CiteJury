@@ -1,5 +1,15 @@
-<!doctype html><meta charset="utf-8"><title>EP-073 regression scope</title>
-<h1>EP-073 Citation Isolation & Checker Accuracy Hotfix</h1>
-<p>Verify cross-format isolation, complete AIR/INSC recognition, copy, download, and prior release regressions.</p>
-<script src="../assets/js/citation-engine.js?v=073"></script>
-<script src="../assets/js/app.js?v=073"></script>
+<!doctype html><meta charset="utf-8"><title>EP-073A Hotfix Gate</title>
+<h1>EP-073A Hotfix Gate</h1><pre id="results"></pre>
+<script src="../assets/js/citation-engine.js?v=073a"></script>
+<script>
+const out=[]; const assert=(name,ok)=>out.push(`${ok?"PASS":"FAIL"}: ${name}`);
+const e=window.CiteJuryCitationEngine;
+assert("engine loaded",!!e);
+if(e){
+ const r=e.generate({citationStyle:"indian-legal",sourceType:"judgment",title:"Kesavananda Bharati",year:"1973",volume:"4",reporter:"SCC",page:"225",court:""});
+ assert("Indian Legal judgment preserves volume",r.ok && /\(1973\) 4 SCC 225/.test(r.citation));
+}
+document.querySelector("#results").textContent=out.join("\n");
+if(out.some(x=>x.startsWith("FAIL"))) document.documentElement.dataset.testStatus="fail";
+else document.documentElement.dataset.testStatus="pass";
+</script>

@@ -273,7 +273,7 @@
     const key = `${citationStyle}:${sourceType}`;
     const allowedFields = {
       "indian-legal:sc-neutral-judgment": ["title", "year", "page"],
-      "indian-legal:judgment": ["title", "year", "reporter", "page", "court"],
+      "indian-legal:judgment": ["title", "year", "reporter", "volume", "page", "court"],
       "scc:judgment": ["title", "year", "volume", "page"],
       "air:judgment": ["title", "year", "court", "page"],
       "oscola:judgment": ["title", "year", "reporter", "page", "court"],
