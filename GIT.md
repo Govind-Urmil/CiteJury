@@ -272,3 +272,14 @@ git push
 ```
 
 No file deletion is required for EP-071.
+
+
+## EP-072 commit
+
+```bash
+git add .
+git commit -m "EP-072: Core Accuracy & User Flow Reliability"
+git push
+```
+
+No file deletion is required for EP-072.

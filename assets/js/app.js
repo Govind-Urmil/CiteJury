@@ -664,6 +664,14 @@
     setActionButtonsEnabled(false);
   };
 
+  const scrollToCitationResult = () => {
+    const panel = document.querySelector(".result-panel");
+    if (!panel) return;
+    window.setTimeout(() => {
+      panel.scrollIntoView({ behavior: prefersReducedMotion() ? "auto" : "smooth", block: "start" });
+    }, 80);
+  };
+
   if (form && output && explain && error && window.CiteJuryCitationEngine) {
     // Use CiteJury's own validation instead of native browser blocking validation.
     // Native validation can prevent the submit handler from running, which means
@@ -693,6 +701,7 @@
       clearInlineErrors();
       applyResult(result);
       renderStyleAlternatives(buildDisplayVariants(result));
+      scrollToCitationResult();
     });
 
     form.addEventListener("reset", () => setTimeout(resetPreview, 0));
@@ -773,37 +782,42 @@
       };
     }
 
-    m = text.match(/^\(?(\d{4})\)?\s+(\d+)\s+SCC\s+(\d+)$/i);
+    m = text.match(/^(?:(.+?),\s*)?\(?(\d{4})\)?\s+(\d+)\s+SCC\s+(\d+)$/i);
     if (m) {
+      const caseName = m[1] ? m[1].trim() : "Not supplied";
+      const hasCaseName = caseName !== "Not supplied";
       return {
         type: "SCC citation",
-        confidence: 96,
+        confidence: hasCaseName ? 97 : 96,
         status: "Likely complete",
         components: [
-          checkerComponent("Year", m[1], "ok"),
-          checkerComponent("Volume", m[2], "ok"),
+          checkerComponent("Case name", caseName, hasCaseName ? "ok" : "warning", hasCaseName ? "Case title detected before the SCC citation." : "Citation-only input is valid, but verify the case title separately."),
+          checkerComponent("Year", m[2], "ok"),
+          checkerComponent("Volume", m[3], "ok"),
           checkerComponent("Reporter", "SCC", "ok"),
-          checkerComponent("Opening page", m[3], "ok")
+          checkerComponent("Opening page", m[4], "ok")
         ],
         issues: [checkerIssue("warning", "Verify the case title and opening page.", "The checker validates structure, not reporter database facts.", "Check the SCC source before submission.")],
-        suggestion: `(${m[1]}) ${m[2]} SCC ${m[3]}`
+        suggestion: `${hasCaseName ? `${caseName}, ` : ""}(${m[2]}) ${m[3]} SCC ${m[4]}`
       };
     }
 
-    m = text.match(/^\(?(\d{4})\)?\s+SCC\s+(\d+)$/i);
+    m = text.match(/^(?:(.+?),\s*)?\(?(\d{4})\)?\s+SCC\s+(\d+)$/i);
     if (m) {
+      const caseName = m[1] ? m[1].trim() : "";
       return {
         type: "SCC citation",
         confidence: 74,
         status: "Incomplete",
         components: [
-          checkerComponent("Year", m[1], "ok"),
+          checkerComponent("Case name", caseName || "Not supplied", caseName ? "ok" : "warning"),
+          checkerComponent("Year", m[2], "ok"),
           checkerComponent("Volume", "Missing", "error"),
           checkerComponent("Reporter", "SCC", "ok"),
-          checkerComponent("Opening page", m[2], "ok")
+          checkerComponent("Opening page", m[3], "ok")
         ],
         issues: [checkerIssue("error", "SCC volume missing.", "SCC citations require year, volume, reporter and opening page.", "Add the verified SCC volume before SCC.")],
-        suggestion: `(${m[1]}) [volume] SCC ${m[2]}`
+        suggestion: `${caseName ? `${caseName}, ` : ""}(${m[2]}) [volume] SCC ${m[3]}`
       };
     }
 
@@ -1084,24 +1098,38 @@
 
 
   const copyTextToClipboard = async (text) => {
+    const legacyCopy = () => {
+      const temp = document.createElement("textarea");
+      temp.value = text;
+      temp.setAttribute("readonly", "");
+      temp.style.position = "fixed";
+      temp.style.top = "0";
+      temp.style.left = "0";
+      temp.style.width = "1px";
+      temp.style.height = "1px";
+      temp.style.opacity = "0";
+      document.body.appendChild(temp);
+      temp.focus({ preventScroll: true });
+      temp.select();
+      temp.setSelectionRange(0, temp.value.length);
+      let ok = false;
+      try {
+        ok = document.execCommand("copy");
+      } finally {
+        document.body.removeChild(temp);
+      }
+      return ok;
+    };
+
     if (navigator.clipboard && window.isSecureContext) {
-      await navigator.clipboard.writeText(text);
-      return true;
+      try {
+        await navigator.clipboard.writeText(text);
+        return true;
+      } catch {
+        return legacyCopy();
+      }
     }
-    const temp = document.createElement("textarea");
-    temp.value = text;
-    temp.setAttribute("readonly", "");
-    temp.style.position = "fixed";
-    temp.style.left = "-9999px";
-    document.body.appendChild(temp);
-    temp.select();
-    let ok = false;
-    try {
-      ok = document.execCommand("copy");
-    } finally {
-      document.body.removeChild(temp);
-    }
-    return ok;
+    return legacyCopy();
   };
 
   if (copy && output) {
@@ -1139,9 +1167,14 @@
 
       anchor.href = url;
       anchor.download = "citejury-citation.txt";
+      anchor.style.display = "none";
+      document.body.appendChild(anchor);
       anchor.click();
 
-      URL.revokeObjectURL(url);
+      window.setTimeout(() => {
+        URL.revokeObjectURL(url);
+        anchor.remove();
+      }, 1000);
     });
   }
 

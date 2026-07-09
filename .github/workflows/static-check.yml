@@ -97,13 +97,13 @@ jobs:
           grep -q "citejury-social-preview.png" index.html
           grep -q 'og:image:type" content="image/png"' index.html
 
-      - name: Check EP-071 release metadata, SEO, ad readiness, duplicate slots, and router scope
+      - name: Check EP-072 release metadata, accuracy, user-flow reliability, ad readiness, duplicate slots, and router scope
         run: |
-          grep -q "EP-071" tests/index.html
-          grep -q "assetVersion: \"071\"" tests/index.html
-          grep -q "EP-071-production-adsense-foundation.html" tests/index.html
+          grep -q "EP-072" tests/index.html
+          grep -q "assetVersion: \"072\"" tests/index.html
+          grep -q "EP-072-core-accuracy-user-flow-reliability.html" tests/index.html
           grep -q "AdSense activation remains approval-gated" docs/ADVERTISEMENT_ACTIVATION.md
-          grep -q "EP-071" docs/EP-LEDGER.md
+          grep -q "EP-072" docs/EP-LEDGER.md
           grep -q "2026-07-09" sitemap.xml
           python - <<'PY'
           from pathlib import Path
@@ -134,7 +134,7 @@ jobs:
 
           ads_config = Path('assets/data/ads-config.json').read_text()
           if '"ads_active": false' not in ads_config:
-              raise SystemExit('Ads must remain disabled in EP-071')
+              raise SystemExit('Ads must remain disabled in EP-072')
           homepage = Path('index.html').read_text()
           if 'googlesyndication' in homepage or 'adsbygoogle' in homepage or 'doubleclick' in homepage:
               raise SystemExit('Homepage must not include active third-party ad scripts before explicit activation')
@@ -151,4 +151,13 @@ jobs:
           config = __import__('json').loads(Path('assets/data/ads-config.json').read_text())
           if not config.get('ad_slot_policy', {}).get('public_pages_must_not_duplicate_slot_ids'):
               raise SystemExit('Ad slot uniqueness policy missing from ads-config.json')
+
+          if 'Case title detected before the SCC citation' not in app:
+              raise SystemExit('EP-072 SCC checker case-name recognition guard missing')
+          if 'return legacyCopy();' not in app:
+              raise SystemExit('EP-072 clipboard fallback retry guard missing')
+          if 'window.setTimeout(() => {\n        URL.revokeObjectURL(url);' not in app:
+              raise SystemExit('EP-072 delayed download cleanup guard missing')
+          if 'scrollToCitationResult' not in app:
+              raise SystemExit('EP-072 mobile result scroll guard missing')
           PY

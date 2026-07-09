@@ -1,6 +1,6 @@
 {
-  "version": "EP-071",
-  "stage": "production-adsense-foundation",
+  "version": "EP-072",
+  "stage": "core-accuracy-user-flow-reliability",
   "backend": false,
   "database": false,
   "python_runtime_required": false,
@@ -17,11 +17,11 @@
   "searchEngineLaunchReady": true,
   "productionBaseUrl": "https://citejury.citejury.workers.dev",
   "sitemapUrl": "https://citejury.citejury.workers.dev/sitemap.xml",
-  "latest_ep": "EP-071",
-  "latest_title": "Production & AdSense Foundation",
+  "latest_ep": "EP-072",
+  "latest_title": "Core Accuracy & User Flow Reliability",
   "updated": "2026-07-09",
   "unattended_operation_release": true,
-  "currentEp": "EP-071",
-  "assetVersion": "071",
-  "releaseName": "Production & AdSense Foundation"
+  "currentEp": "EP-072",
+  "assetVersion": "072",
+  "releaseName": "Core Accuracy & User Flow Reliability"
 }

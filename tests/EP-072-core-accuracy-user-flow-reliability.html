@@ -4,26 +4,26 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="robots" content="noindex,nofollow">
-  <title>EP-071 Production & AdSense Foundation | CiteJury</title>
+  <title>EP-072 Core Accuracy & User Flow Reliability | CiteJury</title>
   <link rel="stylesheet" href="../assets/css/style.css?v=072">
 </head>
 <body>
   <main class="container section">
-    <p class="eyebrow">EP-071 verification</p>
-    <h1>Production & AdSense Foundation</h1>
-    <p>This static smoke page checks release metadata, citation-engine loading, ad-disabled guardrails, guide ad-slot uniqueness, mobile-navigation markup expectations, and homepage router-scope signals without enabling ads.</p>
-    <section class="trust-card" id="ep071-results" aria-live="polite"><h2>Results</h2></section>
+    <p class="eyebrow">EP-072 verification</p>
+    <h1>Core Accuracy & User Flow Reliability</h1>
+    <p>This static smoke page checks SCC checker recognition guards, copy/download reliability signals, mobile result scrolling, citation-engine loading, and ad-disabled guardrails without enabling ads.</p>
+    <section class="trust-card" id="ep072-results" aria-live="polite"><h2>Results</h2></section>
   </main>
   <script src="../assets/js/citation-engine.js?v=072"></script>
   <script>
     (async () => {
-      const results = document.getElementById("ep071-results");
+      const results = document.getElementById("ep072-results");
       const checks = [];
       const add = (name, ok, detail = "") => checks.push({ name, ok: Boolean(ok), detail });
       const escapeHtml = (value) => String(value).replace(/[&<>"]/g, (char) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[char]));
 
       const hasScript = Array.from(document.scripts).some((script) => script.getAttribute("src") === "../assets/js/citation-engine.js?v=072");
-      add("Asset version is 071", hasScript);
+      add("Asset version is 072", hasScript);
 
       const engineReady = typeof window.CiteJuryCitationEngine === "object" && typeof window.CiteJuryCitationEngine.generate === "function";
       add("Citation engine loads", engineReady, engineReady ? "" : "window.CiteJuryCitationEngine.generate is unavailable");
@@ -35,12 +35,14 @@
       }
 
       try {
-        const [configResponse, homepageResponse] = await Promise.all([
+        const [configResponse, homepageResponse, appResponse] = await Promise.all([
           fetch("../assets/data/ads-config.json", { cache: "no-store" }),
-          fetch("../index.html", { cache: "no-store" })
+          fetch("../index.html", { cache: "no-store" }),
+          fetch("../assets/js/app.js?v=072", { cache: "no-store" })
         ]);
         const config = await configResponse.json();
         const homepage = await homepageResponse.text();
+        const appSource = await appResponse.text();
         add("Ads config remains disabled", config.ads_active === false && config.analytics_active === false);
         add("Ad slot uniqueness policy is documented", config.ad_slot_policy && config.ad_slot_policy.public_pages_must_not_duplicate_slot_ids === true);
         const activeAdScript = /https?:\/\/[^"']*(googlesyndication|doubleclick|adsbygoogle|adservice)/i.test(homepage);
@@ -48,6 +50,10 @@
         add("Homepage keeps revenue script local", homepage.includes("assets/js/revenue-readiness.js?v=072"));
         add("Mobile nav toggle markup present", homepage.includes("class=\"nav-toggle\"") && homepage.includes("aria-expanded=\"false\""));
         add("Workspace panels present on homepage", homepage.includes("data-workspace-panel=\"generate\"") && homepage.includes("data-workspace-panel=\"check\""));
+        add("SCC checker accepts case-name citations", appSource.includes("Case title detected before the SCC citation"));
+        add("Clipboard fallback retries after Clipboard API failure", appSource.includes("return legacyCopy();"));
+        add("Download cleanup is delayed for browser reliability", appSource.includes("URL.revokeObjectURL(url)") && appSource.includes("anchor.remove()"));
+        add("Generate flow scrolls to result", appSource.includes("scrollToCitationResult"));
       } catch (error) {
         add("Ad and homepage guardrail fetches", false, error.message);
       }
@@ -81,7 +87,7 @@
       add("No database required", true);
 
       results.insertAdjacentHTML("beforeend", checks.map((check) => `<p><strong>${check.ok ? "PASS" : "FAIL"}</strong> — ${escapeHtml(check.name)}${check.detail ? ` <small>${escapeHtml(check.detail)}</small>` : ""}</p>`).join(""));
-      document.title = checks.every((check) => check.ok) ? "PASS — EP-071" : "REVIEW — EP-071";
+      document.title = checks.every((check) => check.ok) ? "PASS — EP-072" : "REVIEW — EP-072";
     })();
   </script>
 </body>

@@ -341,3 +341,13 @@ Next: manual Google Search Console/Bing setup, then future ad approval/activatio
 - Kept AdSense activation approval-gated and inactive by default; no third-party ad script is enabled without explicit activation and valid publisher/slot IDs.
 - Bumped asset version to 071.
 - Preserved static/browser-only, zero-backend, zero-database, zero-API architecture.
+
+## EP-072 — Core Accuracy & User Flow Reliability
+- Improved Citation Checker recognition for complete SCC citations that include case names before the reporter citation.
+- Preserved high-confidence recognition for citation-only SCC inputs such as `(2017) 10 SCC 1`.
+- Added stronger clipboard fallback behavior by retrying the legacy copy path if the modern Clipboard API fails.
+- Improved `.txt` download reliability by attaching the temporary anchor to the DOM and delaying object URL cleanup.
+- Added automatic scroll-to-result behavior after successful generation to improve mobile completion flow.
+- Added EP-072 release checks for SCC checker recognition guards, copy/download reliability signals, mobile result flow, and ad-disabled guardrails.
+- Bumped asset version to 072.
+- Preserved static/browser-only, zero-backend, zero-database, zero-API architecture.
