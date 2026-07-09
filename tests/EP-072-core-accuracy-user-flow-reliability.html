@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="robots" content="noindex,nofollow">
   <title>TI-2 Core Accuracy & User Flow Reliability | CiteJury</title>
-  <link rel="stylesheet" href="../assets/css/style.css?v=082">
+  <link rel="stylesheet" href="../assets/css/style.css?v=082a">
 </head>
 <body>
   <main class="container section">
@@ -14,7 +14,7 @@
     <p>This static smoke page checks SCC checker recognition guards, copy/download reliability signals, mobile result scrolling, citation-engine loading, and ad-disabled guardrails without enabling ads.</p>
     <section class="trust-card" id="ep072-results" aria-live="polite"><h2>Results</h2></section>
   </main>
-  <script src="../assets/js/citation-engine.js?v=082"></script>
+  <script src="../assets/js/citation-engine.js?v=082a"></script>
   <script>
     (async () => {
       const results = document.getElementById("ep072-results");
@@ -22,7 +22,7 @@
       const add = (name, ok, detail = "") => checks.push({ name, ok: Boolean(ok), detail });
       const escapeHtml = (value) => String(value).replace(/[&<>"]/g, (char) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[char]));
 
-      const hasScript = Array.from(document.scripts).some((script) => script.getAttribute("src") === "../assets/js/citation-engine.js?v=082");
+      const hasScript = Array.from(document.scripts).some((script) => script.getAttribute("src") === "../assets/js/citation-engine.js?v=082a");
       add("Asset version is 072", hasScript);
 
       const engineReady = typeof window.CiteJuryCitationEngine === "object" && typeof window.CiteJuryCitationEngine.generate === "function";
@@ -38,7 +38,7 @@
         const [configResponse, homepageResponse, appResponse] = await Promise.all([
           fetch("../assets/data/ads-config.json", { cache: "no-store" }),
           fetch("../index.html", { cache: "no-store" }),
-          fetch("../assets/js/app.js?v=082", { cache: "no-store" })
+          fetch("../assets/js/app.js?v=082a", { cache: "no-store" })
         ]);
         const config = await configResponse.json();
         const homepage = await homepageResponse.text();
@@ -47,7 +47,7 @@
         add("Ad slot uniqueness policy is documented", config.ad_slot_policy && config.ad_slot_policy.public_pages_must_not_duplicate_slot_ids === true);
         const activeAdScript = /https?:\/\/[^"']*(googlesyndication|doubleclick|adsbygoogle|adservice)/i.test(homepage);
         add("Homepage has no active third-party ad script", !activeAdScript);
-        add("Homepage keeps revenue script local", homepage.includes("assets/js/revenue-readiness.js?v=082"));
+        add("Homepage keeps revenue script local", homepage.includes("assets/js/revenue-readiness.js?v=082a"));
         add("Mobile nav toggle markup present", homepage.includes("class=\"nav-toggle\"") && homepage.includes("aria-expanded=\"false\""));
         add("Workspace panels present on homepage", homepage.includes("data-workspace-panel=\"generate\"") && homepage.includes("data-workspace-panel=\"check\""));
         add("SCC checker accepts case-name citations", appSource.includes("Case title detected before the SCC citation"));

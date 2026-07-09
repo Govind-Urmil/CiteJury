@@ -3,8 +3,8 @@
 <title>TI-2 Trust Initiative Validation Engine</title>
 <h1>TI-2 Trust Initiative Validation Engine</h1>
 <pre id="results">Running…</pre>
-<script src="../assets/js/citation-engine.js?v=082"></script>
-<script src="../assets/js/app.js?v=082"></script>
+<script src="../assets/js/citation-engine.js?v=082a"></script>
+<script src="../assets/js/app.js?v=082a"></script>
 <script>
 const results = [];
 const pass = (name, ok, detail = "") => results.push(`${ok ? "PASS" : "FAIL"}: ${name}${detail ? " — " + detail : ""}`);
@@ -50,7 +50,7 @@ if (engine) {
 }
 
 const source = document.documentElement.outerHTML;
-pass("test page asset references use 073b", source.includes("?v=082") && !source.includes("?v=082") && !source.includes("?v=082"));
+pass("test page asset references use 073b", source.includes("?v=082a") && !source.includes("?v=082a") && !source.includes("?v=082a"));
 
 document.querySelector("#results").textContent = results.join("\n");
 document.documentElement.dataset.testStatus = results.some((line) => line.startsWith("FAIL")) ? "fail" : "pass";
