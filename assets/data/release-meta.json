@@ -1,5 +1,5 @@
 {
-  "version": "EP-075A",
+  "version": "EP-076",
   "stage": "core-accuracy-user-flow-reliability",
   "backend": false,
   "database": false,
@@ -17,11 +17,11 @@
   "searchEngineLaunchReady": true,
   "productionBaseUrl": "https://citejury.citejury.workers.dev",
   "sitemapUrl": "https://citejury.citejury.workers.dev/sitemap.xml",
-  "latest_ep": "EP-075A",
-  "latest_title": "Checker Safety Hotfix",
+  "latest_ep": "EP-076",
+  "latest_title": "Final Tool Accuracy & Stability Sprint",
   "updated": "2026-07-09",
   "unattended_operation_release": true,
-  "currentEp": "EP-075A",
-  "assetVersion": "075a",
-  "releaseName": "Checker Safety Hotfix"
+  "currentEp": "EP-076",
+  "assetVersion": "076",
+  "releaseName": "Final Tool Accuracy & Stability Sprint"
 }

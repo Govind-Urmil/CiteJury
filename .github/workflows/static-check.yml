@@ -97,13 +97,13 @@ jobs:
           grep -q "citejury-social-preview.png" index.html
           grep -q 'og:image:type" content="image/png"' index.html
 
-      - name: Check EP-075A release metadata, accuracy, user-flow reliability, ad readiness, duplicate slots, and router scope
+      - name: Check EP-076 release metadata, accuracy, user-flow reliability, ad readiness, duplicate slots, and router scope
         run: |
-          grep -q "EP-075A" tests/index.html
+          grep -q "EP-076" tests/index.html
           grep -q "assetVersion: \"072\"" tests/index.html
-          grep -q "EP-075A-checker-safety-hotfix.html" tests/index.html
+          grep -q "EP-076-final-tool-accuracy-stability-sprint.html" tests/index.html
           grep -q "AdSense activation remains approval-gated" docs/ADVERTISEMENT_ACTIVATION.md
-          grep -q "EP-075A" docs/EP-LEDGER.md
+          grep -q "EP-076" docs/EP-LEDGER.md
           grep -q "2026-07-09" sitemap.xml
           python - <<'PY'
           from pathlib import Path
@@ -134,7 +134,7 @@ jobs:
 
           ads_config = Path('assets/data/ads-config.json').read_text()
           if '"ads_active": false' not in ads_config:
-              raise SystemExit('Ads must remain disabled in EP-075A')
+              raise SystemExit('Ads must remain disabled in EP-076')
           homepage = Path('index.html').read_text()
           if 'googlesyndication' in homepage or 'adsbygoogle' in homepage or 'doubleclick' in homepage:
               raise SystemExit('Homepage must not include active third-party ad scripts before explicit activation')
@@ -153,11 +153,11 @@ jobs:
               raise SystemExit('Ad slot uniqueness policy missing from ads-config.json')
 
           if 'Case title detected before the SCC citation' not in app:
-              raise SystemExit('EP-075A SCC checker case-name recognition guard missing')
+              raise SystemExit('EP-076 SCC checker case-name recognition guard missing')
           if 'return legacyCopy();' not in app:
-              raise SystemExit('EP-075A clipboard fallback retry guard missing')
+              raise SystemExit('EP-076 clipboard fallback retry guard missing')
           if 'window.setTimeout(() => {\n        URL.revokeObjectURL(url);' not in app:
-              raise SystemExit('EP-075A delayed download cleanup guard missing')
+              raise SystemExit('EP-076 delayed download cleanup guard missing')
           if 'scrollToCitationResult' not in app:
-              raise SystemExit('EP-075A mobile result scroll guard missing')
+              raise SystemExit('EP-076 mobile result scroll guard missing')
           PY

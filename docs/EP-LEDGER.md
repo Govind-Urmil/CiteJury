@@ -373,3 +373,11 @@ Next: manual Google Search Console/Bing setup, then future ad approval/activatio
 - Downgraded unsafe AIR court tokens and implausible numeric values.
 - Removed standalone Citation Doctor homepage callout.
 - Preserved static/browser-only architecture.
+
+
+## EP-076: Final Tool Accuracy & Stability Sprint
+- Consolidated Checker/Citation Doctor safety safeguards after EP-075A.
+- Preserved Indian Legal volume and SCC Anatomy improvements.
+- Kept standalone Citation Doctor homepage callout removed.
+- Updated release metadata and regression test target to EP-076.
+- Preserved static/browser-only architecture.

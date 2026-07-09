@@ -11,11 +11,13 @@ const pass = (name, ok, detail = "") => results.push(`${ok ? "PASS" : "FAIL"}: $
 const engine = window.CiteJuryCitationEngine;
 pass("citation engine loaded", !!engine);
 if (engine) {
+  const scc = engine.generate({citationStyle:"scc",sourceType:"judgment",title:"Case Name",year:"2017",volume:"10",reporter:"SCC",page:"1",court:""});
+  pass("SCC generator", scc.ok && /\(2017\) 10 SCC 1/.test(scc.citation), scc.citation || scc.error || "");
   const indian = engine.generate({citationStyle:"indian-legal",sourceType:"judgment",title:"Kesavananda Bharati",year:"1973",volume:"4",reporter:"SCC",page:"225",court:""});
-  pass("Indian Legal judgment preserves volume", indian.ok && /\(1973\) 4 SCC 225/.test(indian.citation), indian.citation || indian.error || "");
+  pass("Indian Legal volume preserved", indian.ok && /\(1973\) 4 SCC 225/.test(indian.citation), indian.citation || indian.error || "");
 }
 const source = document.documentElement.outerHTML;
-pass("asset refs use 075", source.includes("?v=076") && !/\?v=(072|073|073a|073b|074)\b/.test(source));
+pass("asset refs use 076", source.includes("?v=076") && !/\?v=(072|073|073a|073b|074|075|075a)\b/.test(source));
 document.querySelector("#results").textContent = results.join("\n");
 document.documentElement.dataset.testStatus = results.some((line) => line.startsWith("FAIL")) ? "fail" : "pass";
 </script>
