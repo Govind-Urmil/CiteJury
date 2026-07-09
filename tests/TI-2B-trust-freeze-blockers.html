@@ -1,0 +1,81 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>TI-2B Trust Freeze Blockers</title>
+<h1>TI-2B Trust Freeze Blockers</h1>
+<pre id="results">Running...</pre>
+
+<iframe id="site" src="../index.html#checker" title="CiteJury test frame"></iframe>
+
+<script>
+const results = document.querySelector("#results");
+const unsafeInputs = [
+  "(2099) 10 SCC 1",
+  "AIR 2099 SC 597",
+  "2099 INSC 1",
+  "(0000) 10 SCC 1",
+  "AIR 0000 SC 597",
+  "0000 INSC 1"
+];
+const validInputs = [
+  "(2017) 10 SCC 1",
+  "AIR 1978 SC 597",
+  "2017 INSC 1",
+  "AIR 1978 P&H 597",
+  "AIR 1978 J&K 597"
+];
+
+const pass = [];
+const fail = [];
+const assert = (condition, label) => (condition ? pass : fail).push(label);
+
+const frame = document.querySelector("#site");
+frame.addEventListener("load", () => {
+  const win = frame.contentWindow;
+  const doc = frame.contentDocument;
+  const checkerInput = doc.querySelector("#citation-check-input");
+  const checkerForm = doc.querySelector("#citation-checker-form");
+
+  unsafeInputs.forEach((input) => {
+    checkerInput.value = input;
+    checkerForm.dispatchEvent(new Event("submit", { bubbles: true, cancelable: true }));
+    const summary = doc.querySelector("#checker-summary").textContent;
+    const confidence = Number((summary.match(/(\d+)% confidence/) || [])[1] || 999);
+    const suggestionHidden = doc.querySelector("#checker-suggestion").hidden;
+    assert(confidence <= 50, `${input} confidence <= 50`);
+    assert(suggestionHidden, `${input} unsafe suggestion hidden`);
+  });
+
+  validInputs.forEach((input) => {
+    checkerInput.value = input;
+    checkerForm.dispatchEvent(new Event("submit", { bubbles: true, cancelable: true }));
+    const heading = doc.querySelector("#checker-heading").textContent;
+    const summary = doc.querySelector("#checker-summary").textContent;
+    const confidence = Number((summary.match(/(\d+)% confidence/) || [])[1] || 0);
+    assert(!/Unknown/.test(heading), `${input} recognized`);
+    assert(confidence >= 90, `${input} high confidence`);
+  });
+
+  const engine = win.CiteJuryCitationEngine;
+  [
+    ["future SCC refused", { citationStyle: "scc", sourceType: "judgment", title: "Case", year: "2099", volume: "10", reporter: "SCC", page: "1" }],
+    ["zero SCC refused", { citationStyle: "scc", sourceType: "judgment", title: "Case", year: "2017", volume: "0", reporter: "SCC", page: "1" }],
+    ["extreme SCC refused", { citationStyle: "scc", sourceType: "judgment", title: "Case", year: "2017", volume: "999999", reporter: "SCC", page: "1" }],
+    ["AIR reporter token refused", { citationStyle: "air", sourceType: "judgment", title: "Case", year: "1978", court: "SCC", page: "597" }],
+    ["zero INSC refused", { citationStyle: "indian-legal", sourceType: "sc-neutral-judgment", title: "Case", year: "2017", page: "0" }]
+  ].forEach(([label, data]) => {
+    assert(!engine.generate(data).ok, label);
+  });
+
+  const provision = engine.generate({ citationStyle: "indian-legal", sourceType: "legislation", title: "IT Act", year: "2000", page: "section 66A" });
+  assert(provision.citation === "IT Act, 2000, s. 66A.", "provision prefix normalized");
+
+  const journal = engine.generate({ citationStyle: "oscola", sourceType: "journal", title: "Privacy and the Constitution", year: "2021", volume: "12", reporter: "Indian Law Review", page: "45" });
+  assert(journal.citation === "Privacy and the Constitution [2021] 12 Indian Law Review 45.", "OSCOLA journal output includes volume");
+  assert(journal.parts.some((part) => part === "Volume: 12"), "OSCOLA journal anatomy includes volume");
+  assert(engine.generateStyleAlternatives({ citationStyle: "oscola", sourceType: "journal", title: "Privacy and the Constitution", year: "2021", volume: "12", reporter: "Indian Law Review", page: "45" }).some((item) => item.citation.includes("[2021] 12 Indian Law Review 45")), "OSCOLA journal alternative includes volume");
+
+  results.textContent = fail.length
+    ? `FAIL\n${fail.join("\n")}\n\nPASS\n${pass.join("\n")}`
+    : `PASS\n${pass.join("\n")}`;
+});
+</script>
