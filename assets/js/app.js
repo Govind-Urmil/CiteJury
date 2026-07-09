@@ -823,7 +823,7 @@
 
     card.append(heading, summary, originalLabel, originalValue);
 
-    const hasDoctorErrorIssue = Array.isArray(diagnosis.issues) && diagnosis.issues.some((issue) => issue && issue.level === "error");
+    const hasDoctorErrorIssue = Array.isArray(diagnosis.issues) && diagnosis.issues.some((issue) => issue && issue.level === "error" || issue.level === "warning");
     if (report.suggested && !hasDoctorErrorIssue) {
       const suggestedLabel = document.createElement("strong");
       suggestedLabel.textContent = "Suggested";
@@ -1110,7 +1110,7 @@
     report.issues.forEach((issue) => {
       const card = document.createElement("article");
       card.className = `checker-issue ${issue.level}`;
-      appendText(card, "strong", `${issue.level === "error" ? "✗" : "⚠"} ${issue.message}`);
+      appendText(card, "strong", `${issue.level === "error" || issue.level === "warning" ? "✗" : "⚠"} ${issue.message}`);
       appendText(card, "p", issue.why);
       if (issue.fix) appendText(card, "p", issue.fix, "checker-fix");
       checkerIssues.appendChild(card);
@@ -1386,3 +1386,14 @@
     slot.setAttribute("data-ad-status", "reserved");
   });
 })();
+
+
+/* TI2B_SAFE_DOCTOR */
+function TI2B_SAFE_DOCTOR(diag){
+  if(!diag) return false;
+  const c=Number(diag.confidence||0);
+  const st=(diag.status||'').toLowerCase();
+  const issues=Array.isArray(diag.issues)?diag.issues:[];
+  const unsafe=issues.some(i=>i&&(/warning|error/i).test(i.level||''));
+  return c>=90 && st==='likely complete' && !unsafe;
+}

@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="robots" content="noindex,nofollow">
   <title>Website Factory Verification Suite | CiteJury</title>
-  <link rel="stylesheet" href="../assets/css/style.css?v=082a">
+  <link rel="stylesheet" href="../assets/css/style.css?v=082b">
   <style>
     .wfvs-shell{max-width:1100px;margin:0 auto;padding:2rem 1rem}
     .wfvs-hero,.wfvs-card{border:1px solid rgba(17,24,39,.12);border-radius:1rem;background:#fff;padding:1rem;margin:1rem 0}
@@ -51,7 +51,7 @@
     </section>
 </main>
 
-  <script src="../assets/js/citation-engine.js?v=082a"></script>
+  <script src="../assets/js/citation-engine.js?v=082b"></script>
   <script>
     const tests = [];
     const add = (group, name, ok, detail = "") => tests.push({ group, name, ok: Boolean(ok), detail });
@@ -67,7 +67,7 @@
     add("Technical", "robots.txt expected", true);
     add("Technical", "sitemap.xml expected", true);
     add("Technical", "404.html expected", true);
-    add("Technical", "Asset version 072", Array.from(document.scripts).some((script) => script.getAttribute("src") === "../assets/js/citation-engine.js?v=082a"));
+    add("Technical", "Asset version 072", Array.from(document.scripts).some((script) => script.getAttribute("src") === "../assets/js/citation-engine.js?v=082b"));
 
     const engine = window.CiteJuryCitationEngine;
     if (engine && typeof engine.generate === "function") {
