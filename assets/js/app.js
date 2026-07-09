@@ -265,16 +265,37 @@
     }, 80);
   };
 
-  const getData = (formData) => ({
-    citationStyle: clean(formData.get("citationStyle")),
-    sourceType: clean(formData.get("sourceType")),
-    title: clean(formData.get("title")),
-    year: clean(formData.get("year")),
-    reporter: clean(formData.get("reporter")),
-    volume: clean(formData.get("volume")),
-    page: clean(formData.get("page")),
-    court: clean(formData.get("court"))
-  });
+  // EP-073: isolate citation data by active format so values left in hidden
+  // fields cannot contaminate another citation rule after switching formats.
+  const getData = (formData) => {
+    const citationStyle = clean(formData.get("citationStyle"));
+    const sourceType = clean(formData.get("sourceType"));
+    const key = `${citationStyle}:${sourceType}`;
+    const allowedFields = {
+      "indian-legal:sc-neutral-judgment": ["title", "year", "page"],
+      "indian-legal:judgment": ["title", "year", "reporter", "page", "court"],
+      "scc:judgment": ["title", "year", "volume", "page"],
+      "air:judgment": ["title", "year", "court", "page"],
+      "oscola:judgment": ["title", "year", "reporter", "page", "court"],
+      "oscola:legislation": ["title", "year", "page"],
+      "oscola:book": ["title", "year", "reporter", "page"],
+      "oscola:journal": ["title", "year", "reporter", "page"],
+      "oscola:website": ["title", "year", "reporter", "page"],
+      "indian-legal:constitution": ["title", "page"]
+    };
+    const allowed = new Set(allowedFields[key] || ["title", "year", "reporter", "volume", "page", "court"]);
+    const value = (name) => allowed.has(name) ? clean(formData.get(name)) : "";
+    return {
+      citationStyle,
+      sourceType,
+      title: value("title"),
+      year: value("year"),
+      reporter: value("reporter"),
+      volume: value("volume"),
+      page: value("page"),
+      court: value("court")
+    };
+  };
 
   const fieldNames = Object.keys(fieldSelectors);
   const getCurrentSpec = () => {
@@ -734,7 +755,42 @@
       };
     }
 
-    let m = text.match(/^(\d{4})\s+INSC\s+(\d+)$/i);
+    // EP-073: recognize common complete citations that include a case name.
+    let m = text.match(/^(.+?),\s*AIR\s+(\d{4})\s+([A-Z][A-Z0-9.]*)\s+(\d+)$/i);
+    if (m) {
+      return {
+        type: "AIR citation",
+        confidence: 97,
+        status: "Likely complete",
+        components: [
+          checkerComponent("Case name", m[1], "ok"),
+          checkerComponent("Year", m[2], "ok"),
+          checkerComponent("Court", m[3].toUpperCase(), "ok"),
+          checkerComponent("Page", m[4], "ok")
+        ],
+        issues: [checkerIssue("warning", "Verify party names and reporter details.", "Pattern recognition does not verify the citation against an official source.", "Check the authoritative report.")],
+        suggestion: `${m[1]}, AIR ${m[2]} ${m[3].toUpperCase()} ${m[4]}`
+      };
+    }
+
+    m = text.match(/^(.+?),\s*(\d{4})\s+INSC\s+(\d+)$/i);
+    if (m) {
+      return {
+        type: "Supreme Court neutral citation",
+        confidence: 98,
+        status: "Likely complete",
+        components: [
+          checkerComponent("Case name", m[1], "ok"),
+          checkerComponent("Year", m[2], "ok"),
+          checkerComponent("Identifier", "INSC", "ok"),
+          checkerComponent("Sequence", m[3], "ok")
+        ],
+        issues: [checkerIssue("warning", "Verify the case title against the official judgment.", "Pattern recognition does not verify party-name spelling.", "Check the official Supreme Court record.")],
+        suggestion: `${m[1]}, ${m[2]} INSC ${m[3]}`
+      };
+    }
+
+    m = text.match(/^(\d{4})\s+INSC\s+(\d+)$/i);
     if (m) {
       return {
         type: "Supreme Court neutral citation",
