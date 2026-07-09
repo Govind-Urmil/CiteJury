@@ -1,5 +1,5 @@
 {
-  "version": "EP-073B",
+  "version": "074",
   "stage": "core-accuracy-user-flow-reliability",
   "backend": false,
   "database": false,
@@ -17,11 +17,11 @@
   "searchEngineLaunchReady": true,
   "productionBaseUrl": "https://citejury.citejury.workers.dev",
   "sitemapUrl": "https://citejury.citejury.workers.dev/sitemap.xml",
-  "latest_ep": "EP-073B",
-  "latest_title": "Core Accuracy & User Flow Reliability",
+  "latest_ep": "EP-074",
+  "latest_title": "Citation Doctor Foundation & Release Hardening",
   "updated": "2026-07-09",
   "unattended_operation_release": true,
-  "currentEp": "EP-073B",
-  "assetVersion": "073b",
-  "releaseName": "Core Accuracy & User Flow Reliability"
+  "currentEp": "EP-074",
+  "assetVersion": "074",
+  "releaseName": "Citation Doctor Foundation & Release Hardening"
 }

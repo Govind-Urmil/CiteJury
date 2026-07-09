@@ -741,6 +741,90 @@
 
   const checkerComponent = (label, value, status = "ok", detail = "") => ({ label, value, status, detail });
   const checkerIssue = (level, message, why, fix = "") => ({ level, message, why, fix });
+  const normalizeDoctorSuggestion = (value) => clean(value).replace(/\s+/g, " ").replace(/\.$/, "");
+
+  const buildCitationDoctorReport = (diagnosis, rawInput) => {
+    const original = clean(rawInput);
+    if (!diagnosis || !original) {
+      return {
+        summary: "Paste a citation to receive a structured diagnosis.",
+        suggested: "",
+        reasons: ["No citation text was available to inspect."]
+      };
+    }
+
+    const suggested = normalizeDoctorSuggestion(diagnosis.suggestion || "");
+    const originalComparable = normalizeDoctorSuggestion(original);
+    const reasons = [];
+
+    if (diagnosis.type && diagnosis.type !== "Unknown format") reasons.push(`Detected ${diagnosis.type}.`);
+    if (diagnosis.confidence >= 90) reasons.push("The citation contains the core components expected for this pattern.");
+    else if (diagnosis.confidence >= 60) reasons.push("The citation resembles a supported pattern but needs manual review.");
+    else reasons.push("CiteJury could not confidently match this to a supported citation pattern.");
+
+    (diagnosis.issues || []).forEach((issue) => {
+      if (issue && issue.message) reasons.push(issue.fix ? `${issue.message} ${issue.fix}` : issue.message);
+    });
+
+    if (suggested && suggested.toLowerCase() !== originalComparable.toLowerCase()) reasons.push("A normalized suggestion is available for comparison.");
+
+    return {
+      summary: diagnosis.status === "Likely complete" ? "This citation looks structurally complete, but important citations should still be verified against an authoritative source." : "This citation needs review before you rely on it.",
+      suggested,
+      reasons: reasons.slice(0, 5)
+    };
+  };
+
+  const appendCitationDoctorReport = (container, diagnosis, rawInput) => {
+    if (!container) return;
+    const report = buildCitationDoctorReport(diagnosis, rawInput);
+    const card = document.createElement("section");
+    card.className = "checker-doctor-card";
+    card.setAttribute("aria-label", "Citation Doctor diagnostic report");
+
+    const heading = document.createElement("h4");
+    heading.textContent = "Citation Doctor™";
+
+    const summary = document.createElement("p");
+    summary.textContent = report.summary;
+
+    const originalLabel = document.createElement("strong");
+    originalLabel.textContent = "Original";
+    const originalValue = document.createElement("p");
+    originalValue.textContent = clean(rawInput) || "No citation provided.";
+
+    card.append(heading, summary, originalLabel, originalValue);
+
+    if (report.suggested) {
+      const suggestedLabel = document.createElement("strong");
+      suggestedLabel.textContent = "Suggested";
+      const suggestedValue = document.createElement("p");
+      suggestedValue.textContent = report.suggested.endsWith(".") ? report.suggested : `${report.suggested}.`;
+      const copySuggested = document.createElement("button");
+      copySuggested.type = "button";
+      copySuggested.className = "secondary-button";
+      copySuggested.textContent = "Copy suggested citation";
+      copySuggested.addEventListener("click", async () => {
+        const copied = await copyTextToClipboard(suggestedValue.textContent);
+        copySuggested.textContent = copied ? "Copied suggested citation" : "Copy failed";
+        setTimeout(() => { copySuggested.textContent = "Copy suggested citation"; }, 1400);
+      });
+      card.append(suggestedLabel, suggestedValue, copySuggested);
+    }
+
+    const why = document.createElement("strong");
+    why.textContent = "Why";
+    const list = document.createElement("ul");
+    report.reasons.forEach((reason) => {
+      const item = document.createElement("li");
+      item.textContent = reason;
+      list.appendChild(item);
+    });
+    card.append(why, list);
+    container.appendChild(card);
+  };
+
+
 
   const detectCitationPattern = (raw) => {
     const text = clean(raw).replace(/\s+/g, " ").replace(/\.$/, "");
@@ -988,16 +1072,16 @@
       checkerIssues.appendChild(card);
     });
 
+    checkerSuggestion.hidden = false;
+    checkerSuggestion.replaceChildren();
+
     if (report.suggestion) {
-      checkerSuggestion.hidden = false;
-      checkerSuggestion.replaceChildren();
       appendText(checkerSuggestion, "strong", "Suggested structure");
       appendText(checkerSuggestion, "code", report.suggestion);
       appendText(checkerSuggestion, "p", "Only use a suggestion after verifying missing factual values from the source.");
-    } else {
-      checkerSuggestion.hidden = true;
-      checkerSuggestion.replaceChildren();
     }
+
+    appendCitationDoctorReport(checkerSuggestion, report, checkerInput ? checkerInput.value : "");
   };
 
 

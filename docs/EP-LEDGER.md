@@ -351,3 +351,9 @@ Next: manual Google Search Console/Bing setup, then future ad approval/activatio
 - Added EP-072 release checks for SCC checker recognition guards, copy/download reliability signals, mobile result flow, and ad-disabled guardrails.
 - Bumped asset version to 072.
 - Preserved static/browser-only, zero-backend, zero-database, zero-API architecture.
+
+
+## EP-074: Citation Doctor Foundation & Release Hardening
+- Added Citation Doctor diagnostic layer over Citation Checker.
+- Fixed release verification metadata inherited from EP-073B.
+- Preserved browser-only/static architecture.
