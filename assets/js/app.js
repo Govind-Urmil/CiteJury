@@ -438,12 +438,16 @@
         component(data.year, "Publication year", "Publication or last-updated year if available.")
       ];
     }
-    return [
+    const genericComponents = [
       component(data.title, "Source title", "The main title or case/source name."),
-      component(data.year, "Year", "The year used by the selected citation rule."),
+      component(data.year, "Year", "The year used by the selected citation rule.")
+    ];
+    if (data.volume) genericComponents.push(component(data.volume, "Volume", "The volume number used by the selected citation rule."));
+    genericComponents.push(
       component(data.reporter, "Reporter / publisher", "The reporter, publisher, journal, or website."),
       component(data.page, "Page / provision / URL", "The locator required by the selected source type.")
-    ];
+    );
+    return genericComponents;
   };
 
   const whyFormatText = (data, result) => {
@@ -744,8 +748,9 @@
   const normalizeDoctorSuggestion = (value) => clean(value).replace(/\s+/g, " ").replace(/\.$/, "");
 
   const buildCitationDoctorReport = (diagnosis, rawInput) => {
-    const original = clean(rawInput);
-    if (!diagnosis || !original) {
+    const original = String(rawInput || "");
+    const originalTrimmed = clean(rawInput);
+    if (!diagnosis || !originalTrimmed) {
       return {
         summary: "Paste a citation to receive a structured diagnosis.",
         suggested: "",
@@ -754,10 +759,10 @@
     }
 
     const suggested = normalizeDoctorSuggestion(diagnosis.suggestion || "");
-    const originalComparable = normalizeDoctorSuggestion(original);
+    const originalComparable = normalizeDoctorSuggestion(originalTrimmed);
     const reasons = [];
 
-    if (diagnosis.type && diagnosis.type !== "Unknown format") reasons.push(`Detected ${diagnosis.type}.`);
+    if (diagnosis.type && !["Unknown format", "Unknown citation pattern"].includes(diagnosis.type)) reasons.push(`Detected ${diagnosis.type}.`);
     if (diagnosis.confidence >= 90) reasons.push("The citation contains the core components expected for this pattern.");
     else if (diagnosis.confidence >= 60) reasons.push("The citation resembles a supported pattern but needs manual review.");
     else reasons.push("CiteJury could not confidently match this to a supported citation pattern.");
@@ -791,7 +796,7 @@
     const originalLabel = document.createElement("strong");
     originalLabel.textContent = "Original";
     const originalValue = document.createElement("p");
-    originalValue.textContent = clean(rawInput) || "No citation provided.";
+    originalValue.textContent = String(rawInput || "") || "No citation provided.";
 
     card.append(heading, summary, originalLabel, originalValue);
 
@@ -861,13 +866,13 @@
     if (m) {
       return {
         type: "Supreme Court neutral citation",
-        confidence: 98,
-        status: "Likely complete",
+        confidence: plausibleYear(m[2]) && plausiblePositiveNumber(m[3]) ? 98 : 72,
+        status: plausibleYear(m[2]) && plausiblePositiveNumber(m[3]) ? "Likely complete" : "Needs review",
         components: [
           checkerComponent("Case name", m[1], "ok"),
-          checkerComponent("Year", m[2], "ok"),
+          checkerComponent("Year", m[2], plausibleYear(m[2]) ? "ok" : "warning"),
           checkerComponent("Identifier", "INSC", "ok"),
-          checkerComponent("Sequence", m[3], "ok")
+          checkerComponent("Sequence", m[3], plausiblePositiveNumber(m[3]) ? "ok" : "warning")
         ],
         issues: [checkerIssue("warning", "Verify the case title against the official judgment.", "Pattern recognition does not verify party-name spelling.", "Check the official Supreme Court record.")],
         suggestion: `${m[1]}, ${m[2]} INSC ${m[3]}`
@@ -878,12 +883,12 @@
     if (m) {
       return {
         type: "Supreme Court neutral citation",
-        confidence: 98,
-        status: "Likely complete",
+        confidence: plausibleYear(m[1]) && plausiblePositiveNumber(m[2]) ? 98 : 72,
+        status: plausibleYear(m[1]) && plausiblePositiveNumber(m[2]) ? "Likely complete" : "Needs review",
         components: [
-          checkerComponent("Year", m[1], "ok", "Decision year detected."),
+          checkerComponent("Year", m[1], plausibleYear(m[1]) ? "ok" : "warning", "Decision year detected."),
           checkerComponent("Identifier", "INSC", "ok", "Supreme Court neutral identifier detected."),
-          checkerComponent("Sequence", m[2], "ok", "Neutral sequence number detected.")
+          checkerComponent("Sequence", m[2], plausiblePositiveNumber(m[2]) ? "ok" : "warning", "Neutral sequence number detected.")
         ],
         issues: [checkerIssue("warning", "Verify the official case title separately.", "A neutral citation token does not confirm party-name spelling.", "Check the official judgment record.")],
         suggestion: text.toUpperCase()

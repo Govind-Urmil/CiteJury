@@ -357,3 +357,11 @@ Next: manual Google Search Console/Bing setup, then future ad approval/activatio
 - Added Citation Doctor diagnostic layer over Citation Checker.
 - Fixed release verification metadata inherited from EP-073B.
 - Preserved browser-only/static architecture.
+
+
+## EP-075: Citation Doctor Accuracy & Final UI Polish
+- Hardened Citation Doctor accuracy and wording.
+- Added AIR court/token and plausibility safeguards.
+- Added SCC Anatomy volume visibility.
+- Improved Generator/Checker selector visual prominence.
+- Added homepage Citation Doctor mention.

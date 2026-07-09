@@ -1,5 +1,5 @@
 {
-  "version": "074",
+  "version": "EP-075",
   "stage": "core-accuracy-user-flow-reliability",
   "backend": false,
   "database": false,
@@ -17,11 +17,11 @@
   "searchEngineLaunchReady": true,
   "productionBaseUrl": "https://citejury.citejury.workers.dev",
   "sitemapUrl": "https://citejury.citejury.workers.dev/sitemap.xml",
-  "latest_ep": "EP-074",
-  "latest_title": "Citation Doctor Foundation & Release Hardening",
+  "latest_ep": "EP-075",
+  "latest_title": "Citation Doctor Accuracy & Final UI Polish",
   "updated": "2026-07-09",
   "unattended_operation_release": true,
-  "currentEp": "EP-074",
-  "assetVersion": "074",
-  "releaseName": "Citation Doctor Foundation & Release Hardening"
+  "currentEp": "EP-075",
+  "assetVersion": "075",
+  "releaseName": "Citation Doctor Accuracy & Final UI Polish"
 }

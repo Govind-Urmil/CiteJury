@@ -239,3 +239,37 @@ button:disabled{opacity:.52;cursor:not-allowed}
 .checker-doctor-card .secondary-button {
   margin: 0.25rem 0 0.75rem;
 }
+
+.feature-callout {
+  margin: 1.5rem 0;
+  padding: 1rem 1.15rem;
+  border: 1px solid var(--border-color, #d7dde8);
+  border-left: 4px solid var(--accent-color, #315efb);
+  border-radius: 0.85rem;
+  background: var(--surface-muted, #f7f9fc);
+}
+
+.feature-callout p {
+  margin: 0;
+}
+
+.workspace-card,
+.mode-card,
+[data-mode-target] {
+  border-width: 2px;
+}
+
+[data-mode-target] strong,
+.mode-card strong,
+.workspace-card strong {
+  display: block;
+  font-size: clamp(1.2rem, 2vw, 1.55rem);
+  line-height: 1.15;
+  margin-bottom: 0.35rem;
+}
+
+[data-mode-target].active,
+.mode-card.active,
+.workspace-card.active {
+  box-shadow: 0 0 0 3px rgba(49, 94, 251, 0.16);
+}

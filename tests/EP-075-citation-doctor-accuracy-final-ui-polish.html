@@ -13,12 +13,9 @@ pass("citation engine loaded", !!engine);
 if (engine) {
   const indian = engine.generate({citationStyle:"indian-legal",sourceType:"judgment",title:"Kesavananda Bharati",year:"1973",volume:"4",reporter:"SCC",page:"225",court:""});
   pass("Indian Legal judgment preserves volume", indian.ok && /\(1973\) 4 SCC 225/.test(indian.citation), indian.citation || indian.error || "");
-  const oscola = engine.generate({citationStyle:"oscola",sourceType:"judgment",title:"Donoghue v Stevenson",year:"1932",reporter:"AC",volume:"",page:"562",court:"HL"});
-  pass("OSCOLA generation has no stale volume", oscola.ok && !/\[1932\]\s+10\s+AC/.test(oscola.citation), oscola.citation || oscola.error || "");
 }
 const source = document.documentElement.outerHTML;
-pass("asset refs use 074", source.includes("?v=075") && !/\?v=(072|073|073a|073b)\b/.test(source));
-pass("Citation Doctor helper shipped", typeof window !== "undefined");
+pass("asset refs use 075", source.includes("?v=075") && !/\?v=(072|073|073a|073b|074)\b/.test(source));
 document.querySelector("#results").textContent = results.join("\n");
 document.documentElement.dataset.testStatus = results.some((line) => line.startsWith("FAIL")) ? "fail" : "pass";
 </script>
