@@ -1,5 +1,5 @@
 {
-  "version": "EP-080",
+  "version": "TI-1",
   "stage": "core-accuracy-user-flow-reliability",
   "backend": false,
   "database": false,
@@ -17,11 +17,11 @@
   "searchEngineLaunchReady": true,
   "productionBaseUrl": "https://citejury.citejury.workers.dev",
   "sitemapUrl": "https://citejury.citejury.workers.dev/sitemap.xml",
-  "latest_ep": "EP-080",
-  "latest_title": "Final Audit Hotfix",
+  "latest_ep": "TI-1",
+  "latest_title": "Trust Initiative Validation Engine",
   "updated": "2026-07-09",
   "unattended_operation_release": true,
-  "currentEp": "EP-080",
-  "assetVersion": "080",
-  "releaseName": "Final Audit Hotfix"
+  "currentEp": "TI-1",
+  "assetVersion": "081",
+  "releaseName": "Trust Initiative Validation Engine"
 }

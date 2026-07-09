@@ -747,7 +747,8 @@
   const checkerIssue = (level, message, why, fix = "") => ({ level, message, why, fix });
   const plausibleYear = (value) => {
     const year = Number(clean(value));
-    return Number.isInteger(year) && year >= 1800 && year <= 2099;
+    const currentYear = new Date().getFullYear();
+    return Number.isInteger(year) && year >= 1800 && year <= currentYear;
   };
 
   const plausiblePositiveNumber = (value, max = 100000) => {
@@ -868,7 +869,7 @@
     }
 
     // EP-073: recognize common complete citations that include a case name.
-    let m = text.match(/^(.+?),\s*AIR\s+(\d{4})\s+([A-Z][A-Z0-9.]*)\s+(\d+)$/i);
+    let m = text.match(/^(.+?),\s*AIR\s+(\d{4})\s+([A-Z][A-Z0-9.&]*)\s+(\d+)$/i);
     if (m) {
       const courtCheck = assessAirCourt(m[3]);
       const plausible = plausibleYear(m[2]) && plausiblePositiveNumber(m[4]);
@@ -998,7 +999,7 @@
       };
     }
 
-    m = text.match(/^AIR\s+(\d{4})\s+([A-Z]{2,6})\s+(\d+)$/i);
+    m = text.match(/^AIR\s+(\d{4})\s+([A-Z&]{2,6})\s+(\d+)$/i);
     if (m) {
       const courtCheck = assessAirCourt(m[2]);
       const plausible = plausibleYear(m[1]) && plausiblePositiveNumber(m[3]);
@@ -1038,7 +1039,7 @@
       };
     }
 
-    m = text.match(/^AIR\s+([A-Z]{2,6})\s+(\d+)$/i);
+    m = text.match(/^AIR\s+([A-Z&]{2,6})\s+(\d+)$/i);
     if (m) {
       return {
         type: "AIR citation",

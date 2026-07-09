@@ -9,14 +9,47 @@
 
   const clean = (value) => String(value || "").trim();
 
-  const normalizeProvisionLocator = (value, kind = "section") => {
-    const raw = clean(value);
-    if (!raw) return "";
-    const pattern = kind === "article"
-      ? /^(?:art\.?|article)\s*/i
-      : /^(?:s\.?|sec\.?|section)\s*/i;
-    return raw.replace(pattern, "").trim();
+  const TrustValidation = {
+    currentYear: new Date().getFullYear(),
+    clean(value) {
+      return String(value || "").trim();
+    },
+    normalizeSpaces(value) {
+      return this.clean(value).replace(/\s+/g, " ");
+    },
+    isPlausibleYear(value, options = {}) {
+      const year = Number(this.clean(value));
+      const maxFuture = Number.isInteger(options.maxFuture) ? options.maxFuture : 0;
+      return Number.isInteger(year) && year >= 1800 && year <= this.currentYear + maxFuture;
+    },
+    isPositiveInteger(value, max = 100000) {
+      const text = this.clean(value);
+      if (!/^[1-9]\d*$/.test(text)) return false;
+      const number = Number(text);
+      return Number.isInteger(number) && number > 0 && number <= max;
+    },
+    normalizeProvision(value, kind = "section") {
+      const raw = this.normalizeSpaces(value);
+      if (!raw) return "";
+      const pattern = kind === "article" ? /^(?:article|art\.?)\s*/i : /^(?:section|sec\.?|s\.?)\s*/i;
+      return raw.replace(pattern, "").trim();
+    },
+    airCourtToken(value) {
+      return this.clean(value).replace(/\./g, "").toUpperCase();
+    },
+    knownAirCourts: new Set(["SC", "BOM", "CAL", "DEL", "MAD", "ALL", "AP", "KANT", "KER", "MP", "PAT", "RAJ", "GUJ", "ORI", "PH", "P&H", "GAU", "JK", "J&K", "HP", "UTR", "UTT", "CHH", "JHAR", "TRI", "MEG", "SIK", "MAN", "NAG"]),
+    reservedAirCourtTokens: new Set(["AIR", "SCC", "INSC", "SCR"]),
+    assessAirCourt(value) {
+      const token = this.airCourtToken(value);
+      if (!token || this.reservedAirCourtTokens.has(token)) return { ok: false, known: false, token };
+      return { ok: true, known: this.knownAirCourts.has(token), token };
+    }
   };
+
+  if (typeof window !== "undefined") window.CiteJuryTrustValidation = TrustValidation;
+
+
+  const normalizeProvisionLocator = (value, kind = "section") => TrustValidation.normalizeProvision(value, kind);
 
   const digitsOnly = (value) => /^\d+$/.test(clean(value));
 
@@ -294,7 +327,7 @@
           return helpers.finish(`${data.title}${data.reporter || data.year ? ` (${helpers.join([data.reporter, data.year], ", ")})` : ""}${data.page ? ` ${data.page}` : ""}`);
         }
         if (data.sourceType === "journal") {
-          return helpers.finish(helpers.join([data.title, data.year ? `[${data.year}]` : "", data.reporter, data.page]));
+          return helpers.finish(helpers.join([data.title, data.year ? `[${data.year}]` : "", data.volume, data.reporter, data.page]));
         }
         return base;
       },
@@ -411,6 +444,7 @@
       const citation = helpers.finish(helpers.join([
         data.title || "Untitled article",
         data.year ? `(${data.year})` : "",
+        data.volume,
         data.reporter,
         data.page
       ]));
@@ -421,6 +455,7 @@
         parts: [
           `Article title: ${data.title || "missing"}`,
           data.year ? `Year: ${data.year}` : "Year: not supplied",
+          data.volume ? `Volume: ${data.volume}` : "Volume: not supplied",
           data.reporter ? `Journal: ${data.reporter}` : "Journal: not supplied",
           data.page ? `Page: ${data.page}` : "Page: not supplied"
         ]
@@ -456,23 +491,25 @@
     }
 
     if (!data.title) return buildValidationReport(data, spec, missingRequired, getMissingRecommended(data, spec), "Please enter a case or source title.");
-    if (data.year && !/^\d{4}$/.test(data.year)) return buildValidationReport(data, spec, missingRequired, getMissingRecommended(data, spec), "Year should be a 4-digit value, for example 2017.");
+    if (data.year && !TrustValidation.isPlausibleYear(data.year)) return buildValidationReport(data, spec, missingRequired, getMissingRecommended(data, spec), `Year should be a plausible year between 1800 and ${TrustValidation.currentYear}.`);
 
     if (data.sourceType === "sc-neutral-judgment") {
-      if (!digitsOnly(data.page)) return buildValidationReport(data, spec, missingRequired, getMissingRecommended(data, spec), "Supreme Court neutral citation sequence number should contain digits only, for example 1 or 785.");
+      if (!TrustValidation.isPositiveInteger(data.page)) return buildValidationReport(data, spec, missingRequired, getMissingRecommended(data, spec), "Supreme Court neutral citation sequence number should be a positive number, for example 1 or 785.");
       if (data.court && !/^(supreme court of india|sc|sci)$/i.test(data.court)) {
         return buildValidationReport(data, spec, missingRequired, getMissingRecommended(data, spec), "Supreme Court neutral citation support is currently scoped only to the Supreme Court of India.");
       }
     }
 
     if (data.citationStyle === "scc" && data.sourceType === "judgment") {
-      if (!digitsOnly(data.volume)) return buildValidationReport(data, spec, missingRequired, getMissingRecommended(data, spec), "SCC-style judgment citations require a numeric volume, for example 10.");
-      if (!digitsOnly(data.page)) return buildValidationReport(data, spec, missingRequired, getMissingRecommended(data, spec), "SCC-style judgment citations require a numeric first page, for example 1.");
+      if (!TrustValidation.isPositiveInteger(data.volume, 999)) return buildValidationReport(data, spec, missingRequired, getMissingRecommended(data, spec), "SCC-style judgment citations require a plausible positive numeric volume, for example 10.");
+      if (!TrustValidation.isPositiveInteger(data.page)) return buildValidationReport(data, spec, missingRequired, getMissingRecommended(data, spec), "SCC-style judgment citations require a plausible positive numeric first page, for example 1.");
     }
 
     if (data.citationStyle === "air" && data.sourceType === "judgment") {
-      if (!digitsOnly(data.page)) return buildValidationReport(data, spec, missingRequired, getMissingRecommended(data, spec), "AIR-style judgment citations require a numeric first page, for example 27.");
-      if (!/^[A-Za-z]{2,12}$/.test(data.court)) return buildValidationReport(data, spec, missingRequired, getMissingRecommended(data, spec), "AIR-style judgment citations require a court abbreviation, for example SC, Bom, Del, Cal, Mad, All, Ker, or Kant.");
+      if (!TrustValidation.isPositiveInteger(data.page)) return buildValidationReport(data, spec, missingRequired, getMissingRecommended(data, spec), "AIR-style judgment citations require a plausible positive numeric first page, for example 27.");
+      const airCourt = TrustValidation.assessAirCourt(data.court);
+      if (!airCourt.ok) return buildValidationReport(data, spec, missingRequired, getMissingRecommended(data, spec), "AIR-style judgment citations require a valid court abbreviation, not a reporter token such as SCC, AIR, or INSC.");
+      if (!airCourt.known) return buildValidationReport(data, spec, missingRequired, getMissingRecommended(data, spec), "AIR-style judgment citations require a recognized court abbreviation, for example SC, Bom, Del, Cal, Mad, P&H, or J&K.");
     }
 
     if (data.citationStyle === "oscola" && data.sourceType === "judgment") {

@@ -415,3 +415,11 @@ Next: manual Google Search Console/Bing setup, then future ad approval/activatio
 - Suppressed unsafe Doctor suggestions when Checker reports error-level issues.
 - Updated release metadata and ads config to EP-080.
 - Preserved static/browser-only architecture.
+
+
+## TI-1: Trust Initiative Validation Engine
+- Added shared validation principles for Generator and Checker trust alignment.
+- Rejected future years, zero/extreme numeric values, and reserved AIR court tokens in Generator.
+- Supported AIR ampersand court abbreviations in Checker parsing.
+- Fixed section/article prefix normalization and OSCOLA journal volume.
+- Added trust initiative regression page.
