@@ -1,5 +1,5 @@
 {
-  "version": "EP-078",
+  "version": "EP-079",
   "stage": "core-accuracy-user-flow-reliability",
   "backend": false,
   "database": false,
@@ -17,11 +17,11 @@
   "searchEngineLaunchReady": true,
   "productionBaseUrl": "https://citejury.citejury.workers.dev",
   "sitemapUrl": "https://citejury.citejury.workers.dev/sitemap.xml",
-  "latest_ep": "EP-078",
-  "latest_title": "Monetization & Production Readiness",
+  "latest_ep": "EP-079",
+  "latest_title": "Production Freeze Candidate",
   "updated": "2026-07-09",
   "unattended_operation_release": true,
-  "currentEp": "EP-078",
-  "assetVersion": "078",
-  "releaseName": "Monetization & Production Readiness"
+  "currentEp": "EP-079",
+  "assetVersion": "079",
+  "releaseName": "Production Freeze Candidate"
 }

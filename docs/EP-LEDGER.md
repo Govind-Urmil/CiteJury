@@ -398,3 +398,11 @@ Next: manual Google Search Console/Bing setup, then future ad approval/activatio
 - Added ads.txt template for future AdSense activation.
 - Preserved Generator, Checker and Citation Doctor runtime behavior.
 - Preserved static/browser-only architecture.
+
+
+## EP-079: Production Freeze Candidate
+- Declared CiteJury production-freeze candidate.
+- Added production-freeze candidate documentation.
+- Added Search Console final-steps documentation.
+- Kept ads disabled pending final audit and explicit activation.
+- Preserved Generator, Checker, Citation Doctor, and static/browser-only architecture.

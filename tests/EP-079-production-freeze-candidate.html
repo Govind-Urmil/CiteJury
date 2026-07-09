@@ -12,14 +12,15 @@ const engine = window.CiteJuryCitationEngine;
 pass("citation engine loaded", !!engine);
 if (engine) {
   const scc = engine.generate({citationStyle:"scc",sourceType:"judgment",title:"Case Name",year:"2017",volume:"10",reporter:"SCC",page:"1",court:""});
-  pass("SCC generator", scc.ok && /\(2017\) 10 SCC 1/.test(scc.citation), scc.citation || scc.error || "");
+  pass("SCC generator smoke", scc.ok && /\(2017\) 10 SCC 1/.test(scc.citation), scc.citation || scc.error || "");
   const air = engine.generate({citationStyle:"air",sourceType:"judgment",title:"Maneka Gandhi v. Union of India",year:"1978",volume:"",reporter:"AIR",page:"597",court:"SC"});
-  pass("AIR generator", air.ok && /AIR 1978 SC 597/.test(air.citation), air.citation || air.error || "");
-  const insc = engine.generate({citationStyle:"indian-legal",sourceType:"sc-neutral-judgment",title:"Puttaswamy v. Union of India",year:"2017",volume:"",reporter:"",page:"1",court:""});
-  pass("INSC generator", insc.ok && /2017 INSC 1/.test(insc.citation), insc.citation || insc.error || "");
+  pass("AIR generator smoke", air.ok && /AIR 1978 SC 597/.test(air.citation), air.citation || air.error || "");
+  const neutral = engine.generate({citationStyle:"indian-legal",sourceType:"sc-neutral-judgment",title:"Puttaswamy v. Union of India",year:"2017",volume:"",reporter:"",page:"1",court:""});
+  pass("INSC generator smoke", neutral.ok && /2017 INSC 1/.test(neutral.citation), neutral.citation || neutral.error || "");
 }
 const source = document.documentElement.outerHTML;
-pass("asset refs use 077", source.includes("?v=079") && !/\?v=(072|073|073a|073b|074|075|075a|076)\b/.test(source));
+pass("asset refs use 079", source.includes("?v=079") && !/\?v=(072|073|073a|073b|074|075|075a|076|077|078)\b/.test(source));
+pass("no active AdSense script on test page", !/adsbygoogle|googlesyndication|doubleclick/i.test(source));
 document.querySelector("#results").textContent = results.join("\n");
 document.documentElement.dataset.testStatus = results.some((line) => line.startsWith("FAIL")) ? "fail" : "pass";
 </script>

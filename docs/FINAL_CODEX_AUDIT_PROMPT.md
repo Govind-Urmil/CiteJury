@@ -21,3 +21,7 @@ Verify:
 
 End with:
 Release blockers, High/Medium/Low issues, exact inputs, actual outputs, root cause, minimal patch proposals, and recommendation: Freeze / Hotfix / Roll back.
+
+
+## Production Freeze Candidate Rule
+Treat EP-079 as a production-freeze candidate. Recommend only release-blocker, High/Critical, security, monetization, or indexing fixes before v1.0 freeze.
