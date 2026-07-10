@@ -1,5 +1,5 @@
 {
-  "version": "EP-082A",
+  "version": "EP-082B",
   "stage": "core-accuracy-user-flow-reliability",
   "backend": false,
   "database": false,
@@ -17,11 +17,11 @@
   "searchEngineLaunchReady": true,
   "productionBaseUrl": "https://citejury.citejury.workers.dev",
   "sitemapUrl": "https://citejury.citejury.workers.dev/sitemap.xml",
-  "latest_ep": "EP-082A",
-  "latest_title": "Final Freeze Housekeeping",
+  "latest_ep": "EP-082B",
+  "latest_title": "Deployment Housekeeping Final",
   "updated": "2026-07-09",
   "unattended_operation_release": true,
-  "currentEp": "EP-082A",
-  "assetVersion": "082a",
-  "releaseName": "Final Freeze Housekeeping"
+  "currentEp": "EP-082B",
+  "assetVersion": "082b",
+  "releaseName": "Deployment Housekeeping Final"
 }

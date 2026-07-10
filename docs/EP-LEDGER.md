@@ -437,3 +437,10 @@ Next: manual Google Search Console/Bing setup, then future ad approval/activatio
 - Repaired broken WFVS test links.
 - Aligned current public asset references and release metadata to asset version 082a.
 - Preserved trust-frozen core logic and ads-disabled safe state.
+
+
+## EP-082B: Deployment Housekeeping Final
+- Ensured all required verification pages are committed.
+- Fixed stale test-dashboard asset labels.
+- Added CI file-existence and stale-label checks.
+- Preserved frozen citation logic and disabled ads state.

@@ -1,5 +1,5 @@
 {
-  "version": "EP-082A",
+  "version": "EP-082B",
   "status": "activation-ready-awaiting-real-adsense-identifiers",
   "ads_active": false,
   "analytics_active": false,
@@ -83,10 +83,10 @@
   "activation_requires_csp_update": true,
   "activation_requires_ads_txt": true,
   "publisher_id_placeholder": "ca-pub-XXXXXXXXXXXXXXXX",
-  "release": "EP-082A",
+  "release": "EP-082B",
   "production_freeze_candidate": true,
   "activation_requires_final_codex_audit": true,
-  "assetVersion": "082a",
+  "assetVersion": "082b",
   "final_freeze_release": true,
   "activation_blocker": "Real AdSense publisher_client_id, ads_txt_publisher_id, and numeric ad_slot values are required."
 }

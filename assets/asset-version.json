@@ -1,9 +1,9 @@
 {
-  "assetVersion": "082a",
+  "assetVersion": "082b",
   "purpose": "Cache-busting version for public CSS and JavaScript asset URLs.",
   "policy": "Increment this value and update HTML query strings whenever public CSS or JavaScript changes.",
-  "lastEp": "EP-082A",
-  "version": "EP-082A",
-  "currentEp": "EP-082A",
-  "releaseName": "Final Freeze Housekeeping"
+  "lastEp": "EP-082B",
+  "version": "EP-082B",
+  "currentEp": "EP-082B",
+  "releaseName": "Deployment Housekeeping Final"
 }
