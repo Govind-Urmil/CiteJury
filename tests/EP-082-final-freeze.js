@@ -12,8 +12,9 @@
   pass("citation engine loaded", Boolean(engine));
 
   if (trust) {
-    pass("future year blocked", !trust.plausibleYear("2099"));
-    pass("zero year blocked", !trust.plausibleYear("0000"));
+    const isPlausibleYear = trust.isPlausibleYear || trust.plausibleYear;
+    pass("future year blocked", typeof isPlausibleYear === "function" && !isPlausibleYear.call(trust, "2099"));
+    pass("zero year blocked", typeof isPlausibleYear === "function" && !isPlausibleYear.call(trust, "0000"));
   }
 
   if (engine && typeof engine.generate === "function") {

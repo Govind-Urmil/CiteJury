@@ -13,12 +13,15 @@
   assert(Boolean(engine), "citation engine loaded");
 
   if (trust) {
+    const isPlausibleYear = trust.isPlausibleYear || trust.plausibleYear;
+    const isPositiveInteger = trust.isPositiveInteger || trust.positiveNumber || trust.plausiblePositiveNumber;
+    const assessAirCourt = trust.assessAirCourt || trust.validateAirCourt;
     ["2099", "0000"].forEach((year) => {
-      assert(!trust.plausibleYear(year), `${year} rejected by shared year validation`);
+      assert(typeof isPlausibleYear === "function" && !isPlausibleYear.call(trust, year), `${year} rejected by shared year validation`);
     });
-    assert(!trust.plausiblePositiveNumber("0"), "zero rejected by shared numeric validation");
-    assert(!trust.plausiblePositiveNumber("999999", 999), "extreme value rejected by shared numeric validation");
-    const airCourt = trust.validateAirCourt("SCC");
+    assert(typeof isPositiveInteger === "function" && !isPositiveInteger.call(trust, "0"), "zero rejected by shared numeric validation");
+    assert(typeof isPositiveInteger === "function" && !isPositiveInteger.call(trust, "999999", 999), "extreme value rejected by shared numeric validation");
+    const airCourt = typeof assessAirCourt === "function" ? assessAirCourt.call(trust, "SCC") : null;
     assert(airCourt && !airCourt.ok, "AIR court reporter token rejected");
   }
 
