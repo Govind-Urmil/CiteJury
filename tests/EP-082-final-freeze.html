@@ -2,14 +2,32 @@
 <meta charset="utf-8">
 <title>EP-082 Final Freeze</title>
 <h1>EP-082 Final Freeze</h1>
-<pre id="result">Running…</pre>
-<script src="../assets/js/trust-validation.js?v=082b"></script>
-<script src="../assets/js/citation-engine.js?v=082b"></script>
+<pre id="result">Running...</pre>
 <script>
+const result = document.querySelector("#result");
 const lines = [];
 const pass = (name, ok) => lines.push(`${ok ? "PASS" : "FAIL"}: ${name}`);
-pass("trust validation loaded", !!window.CiteJuryTrustValidation);
-pass("citation engine loaded", !!window.CiteJuryCitationEngine);
-pass("future year blocked", window.CiteJuryTrustValidation && !window.CiteJuryTrustValidation.plausibleYear("2099"));
-document.querySelector("#result").textContent = lines.join("\n");
+const loadScript = (src) => new Promise((resolve, reject) => {
+  const script = document.createElement("script");
+  script.src = src;
+  script.onload = resolve;
+  script.onerror = () => reject(new Error(`Failed to load ${src}`));
+  document.head.appendChild(script);
+});
+
+const run = async () => {
+  try {
+    await loadScript("../assets/js/trust-validation.js?v=082b");
+    await loadScript("../assets/js/citation-engine.js?v=082b");
+    pass("trust validation loaded", !!window.CiteJuryTrustValidation);
+    pass("citation engine loaded", !!window.CiteJuryCitationEngine);
+    pass("future year blocked", window.CiteJuryTrustValidation && !window.CiteJuryTrustValidation.plausibleYear("2099"));
+  } catch (error) {
+    pass(error.message || "script load failed", false);
+  }
+  result.textContent = lines.join("\n");
+  document.documentElement.dataset.testStatus = lines.some((line) => line.startsWith("FAIL")) ? "fail" : "pass";
+};
+
+run();
 </script>

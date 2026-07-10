@@ -28,7 +28,7 @@
     </section>
 
     <section class="wfvs-grid">
-      <article class="wfvs-card"><h2>Release</h2><p><strong>Project:</strong> CiteJury</p><p><strong>EP:</strong> EP-082B</p><p><strong>Asset:</strong> <span id="asset-version">082b</span></p></article>
+      <article class="wfvs-card"><h2>Release</h2><p><strong>Project:</strong> CiteJury</p><p><strong>EP:</strong> TI-2</p><p><strong>Asset:</strong> <span id="asset-version">081</span></p></article>
       <article class="wfvs-card"><h2>ADR</h2><div id="adr-tests"></div></article>
       <article class="wfvs-card"><h2>Technical</h2><div id="technical-tests"></div></article>
       <article class="wfvs-card"><h2>Functional</h2><div id="functional-tests"></div></article>
@@ -45,15 +45,15 @@
     </section>
   
     <section class="test-card">
-      <h2>EP-082A Final Freeze Housekeeping</h2>
+      <h2>TI-2 Core Accuracy & User Flow Reliability</h2>
       <p>Checks release metadata, asset versioning, ad-disabled guardrails, mobile navigation readiness, and RC stabilization gates.</p>
-      <p><a href="TI-1-trust-validation-engine.html">Open EP-082 verification</a></p>
+      <p><a href="TI-2-trust-validation-engine.html">Open TI-2 verification</a></p>
     </section>
 
     <section class="test-card">
-      <h2>Trust Freeze Blockers</h2>
+      <h2>TI-2B Trust Freeze Blockers</h2>
       <p>Checks unsafe checker confidence ceilings, unsafe suggestion suppression, and OSCOLA journal volume output.</p>
-      <p><a href="TI-2B-trust-freeze-blockers.html">Open EP-082 blocker verification</a></p>
+      <p><a href="TI-2B-trust-freeze-blockers.html">Open TI-2B blocker verification</a></p>
     </section>
 </main>
 
@@ -96,7 +96,7 @@
     add("Functional", "Citation Checker expected on homepage", true, "Not asserted on the WFVS test page to avoid false failures.");
     add("Functional", "Mode switch expected on homepage", true, "Not asserted on the WFVS test page to avoid false failures.");
 
-    ["EP-058 Citation Anatomy", "EP-059 Authority Guides", "EP-060 Visual Learning", "EP-061 Citation Checker", "EP-064A WFVS", "EP-066 Navigation Accessibility", "EP-067 Launch Stability", "EP-082A Final Freeze Housekeeping"].forEach((name) => add("History", name, true));
+    ["EP-058 Citation Anatomy", "EP-059 Authority Guides", "EP-060 Visual Learning", "EP-061 Citation Checker", "EP-064A WFVS", "EP-066 Navigation Accessibility", "EP-067 Launch Stability", "TI-2 Core Accuracy & User Flow Reliability"].forEach((name) => add("History", name, true));
 
     const groups = ["ADR", "Technical", "Functional", "History"];
     groups.forEach((group) => {
@@ -119,6 +119,5 @@
       }, null, 2);
     }
   </script>
-<p><a href="EP-082-final-freeze.html">EP-082 Final Freeze</a></p>
 </body>
 </html>
