@@ -108,4 +108,11 @@ CiteJury is an educational and drafting aid. It does not provide legal advice an
 
 ## License
 
-Add the repository's chosen license before accepting external contributions or reuse.
+## License
+
+No reuse license is currently granted for this repository.
+
+The source code is publicly available for viewing, learning, and reference purposes. Unless explicitly permitted by the repository owner, no rights are granted to copy, modify, distribute, sublicense, or use the code or project assets.
+
+All rights are reserved by the project owner.
+
