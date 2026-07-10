@@ -9,21 +9,24 @@
   <meta property="og:description" content="India-first legal citation generation with browser-first privacy and explainable output.">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="CiteJury">
-  <meta property="og:image" content="https://citejury.citejury.workers.dev/assets/og/citejury-social-preview.svg">
+  <meta property="og:image" content="https://citejury.citejury.workers.dev/assets/og/citejury-social-preview.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:alt" content="CiteJury legal citation toolkit preview">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:image" content="https://citejury.citejury.workers.dev/assets/og/citejury-social-preview.svg">
+  <meta name="twitter:image" content="https://citejury.citejury.workers.dev/assets/og/citejury-social-preview.png">
+  <meta name="twitter:image:alt" content="CiteJury legal citation toolkit preview">
   <title>CiteJury | Privacy-First Legal Citation Generator</title>
   <link rel="canonical" href="https://citejury.citejury.workers.dev/">
   <meta property="og:url" content="https://citejury.citejury.workers.dev/">
   <link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="assets/css/style.css?v=062">
+  <link rel="stylesheet" href="assets/css/style.css?v=082b">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"WebApplication","name":"CiteJury","applicationCategory":"EducationalApplication","operatingSystem":"Any","description":"Privacy-first browser-based legal citation formatting and learning tool.","isAccessibleForFree":true}
 </script>
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is CiteJury free?","acceptedAnswer":{"@type":"Answer","text":"Yes. CiteJury is intended to remain free for users."}},{"@type":"Question","name":"Does CiteJury store my citation data?","acceptedAnswer":{"@type":"Answer","text":"CiteJury avoids unnecessary data collection and processes citation drafts on your device."}},{"@type":"Question","name":"Is CiteJury legal advice?","acceptedAnswer":{"@type":"Answer","text":"No. CiteJury is a citation and learning tool, not a legal advice service."}}]}
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is CiteJury free?","acceptedAnswer":{"@type":"Answer","text":"Yes. CiteJury is intended to remain free for users."}},{"@type":"Question","name":"Does CiteJury store my citation data?","acceptedAnswer":{"@type":"Answer","text":"CiteJury processes citation drafts in the browser and avoids unnecessary data collection."}},{"@type":"Question","name":"Is CiteJury legal advice?","acceptedAnswer":{"@type":"Answer","text":"No. CiteJury is an educational citation tool and not a legal advice service."}},{"@type":"Question","name":"Are ads active on CiteJury?","acceptedAnswer":{"@type":"Answer","text":"No. Ad slots are currently inactive and no third-party ad scripts load unless explicitly activated later."}}]}
 </script>
 </head>
 <body>
@@ -44,6 +47,7 @@
   </header>
 
   <main id="main">
+    <div id="workspace-status" class="sr-only" role="status" aria-live="polite"></div>
     <section id="hero" class="hero">
       <div class="container hero-grid">
         <div>
@@ -73,24 +77,32 @@
       <div class="container section-heading">
         <p class="eyebrow">Citation workspace</p>
         <h2>Generate or check a citation</h2>
-        <p>Start with a citation draft or paste one you already have. CiteJury keeps both workflows browser-only, explainable, and scoped to visible citation rules.</p>
-        <div class="workspace-tabs" role="tablist" aria-label="Citation workspace mode">
-          <button class="workspace-tab active" type="button" role="tab" aria-selected="true" aria-controls="citation-generator-panel" data-workspace-tab="generate">Generate</button>
-          <button class="workspace-tab" type="button" role="tab" aria-selected="false" aria-controls="checker" data-workspace-tab="check">Check</button>
+        <p>Choose Generate to create a citation, or Check to review one you already have. Both tools stay browser-only and explain what they find.</p>
+        <div class="mode-switch" role="group" aria-label="Choose citation workflow">
+          <button class="mode-card active" type="button" data-mode-target="generate" aria-pressed="true">
+            <strong>Generate Citation</strong><span>Create a draft and understand its anatomy.</span>
+          </button>
+          <button class="mode-card" type="button" data-mode-target="check" aria-pressed="false">
+            <strong>Check Citation</strong><span>Paste an existing citation and find structural issues.</span>
+          </button>
         </div>
       </div>
 
-      <div id="citation-generator-panel" class="container generator-grid workspace-panel" role="tabpanel" data-workspace-panel="generate">
+      <div id="citation-generator-panel" class="container generator-grid workspace-panel" data-workspace-panel="generate">
         <form id="citation-form" class="generator-form" novalidate aria-describedby="generator-help">
-          <p id="generator-help" class="form-help">Required field: case / source title. All citation work stays in your browser. Field labels and Required/Optional markers change when you select a style or source type. Compare available display styles after generation and verify before submission.</p>
-          <div class="form-error" id="form-error" role="alert" hidden></div>
+          <p id="generator-help" class="form-help">Required field: case / source title. All citation work stays in your browser. Field labels and Required/Optional markers change when you select a style or source type.</p>
+          <div class="smart-empty-state" role="note">
+            <strong>Not sure where to start?</strong>
+            Try a safe example, then replace it with your own verified details.
+          </div>
           <div class="example-actions" aria-label="Try citation examples">
-            <span>Try an example:</span>
+            <span>Try example:</span>
+            <button type="button" class="btn secondary compact" data-example="sc-neutral">SCI neutral</button>
             <button type="button" class="btn secondary compact" data-example="scc">SCC</button>
             <button type="button" class="btn secondary compact" data-example="air">AIR</button>
-            <button type="button" class="btn secondary compact" data-example="sc-neutral">SCI neutral</button>
             <button type="button" class="btn secondary compact" data-example="constitution">Constitution</button>
           </div>
+          <div class="form-error" id="form-error" role="alert" hidden></div>
 
           <div class="field-row">
             <label for="citation-style">Citation style</label>
@@ -175,12 +187,11 @@
             <h3>Understand this citation</h3>
             <div id="citation-anatomy-content">
               <div class="anatomy-components">
-                <article class="anatomy-component"><strong>(2017)</strong><span>Report year</span><p>The year used by the law report.</p></article>
-                <article class="anatomy-component"><strong>10</strong><span>Volume</span><p>The reporter volume number.</p></article>
-                <article class="anatomy-component"><strong>SCC</strong><span>Reporter</span><p>The law report abbreviation.</p></article>
-                <article class="anatomy-component"><strong>1</strong><span>Opening page</span><p>The first page of the reported case.</p></article>
+                <article class="anatomy-component"><strong>2023</strong><span>Decision year</span><p>The year in a Supreme Court neutral citation.</p></article>
+                <article class="anatomy-component"><strong>INSC</strong><span>Supreme Court identifier</span><p>Shows the citation is a Supreme Court of India neutral citation.</p></article>
+                <article class="anatomy-component"><strong>154</strong><span>Sequence number</span><p>The neutral citation decision sequence.</p></article>
               </div>
-              <p class="field-help">Generate a citation to see its own parts, verification checklist, common mistakes, and related learning links.</p>
+              <div class="anatomy-explain"><h4>Try an example</h4><p>Generate a citation to replace this example with citation-specific anatomy, verification steps, and common mistakes.</p></div>
             </div>
           </section>
 
@@ -193,7 +204,7 @@
     </section>
 
 
-    <section id="checker" class="section checker-section workspace-panel" role="tabpanel" data-workspace-panel="check" hidden>
+    <section id="checker" class="section checker-section workspace-panel" data-workspace-panel="check" hidden>
       <div class="container section-heading">
         <p class="eyebrow">Citation Checker™</p>
         <h2>Check an existing citation</h2>
@@ -204,12 +215,6 @@
         <form id="citation-checker-form" class="checker-form" novalidate>
           <label for="citation-check-input">Paste citation to check</label>
           <textarea id="citation-check-input" name="citationCheck" rows="5" placeholder="Example: AIR 2023 SC 154 or (2023) 7 SCC 154"></textarea>
-          <div class="example-actions" aria-label="Try checker examples">
-            <span>Try an example:</span>
-            <button type="button" class="btn secondary compact" data-checker-example="scc">(2023) 7 SCC 154</button>
-            <button type="button" class="btn secondary compact" data-checker-example="air">AIR 2023 SC 154</button>
-            <button type="button" class="btn secondary compact" data-checker-example="incomplete">2023 SCC 154</button>
-          </div>
           <div class="form-actions">
             <button class="btn primary" type="submit">Check citation</button>
             <button class="btn secondary" type="reset">Clear</button>
@@ -257,7 +262,7 @@
         <details><summary>Is CiteJury legal advice?</summary><p>No. CiteJury is a citation and learning tool, not a legal advice service.</p></details>
       </div>
     </section>
-  </main>
+</main>
 
   <footer>
     <div class="container footer-shell">
@@ -266,9 +271,9 @@
     </div>
   </footer>
 
-  <script src="assets/js/trust-validation.js?v=062"></script>
-  <script src="assets/js/citation-engine.js?v=062"></script>
-  <script src="assets/js/app.js?v=062"></script>
-  <script src="assets/js/revenue-readiness.js?v=062"></script>
+  <script src="assets/js/trust-validation.js?v=082b"></script>
+  <script src="assets/js/citation-engine.js?v=082b"></script>
+  <script src="assets/js/app.js?v=082b"></script>
+  <script src="assets/js/revenue-readiness.js?v=082b"></script>
 </body>
 </html>

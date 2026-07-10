@@ -40,9 +40,11 @@ frame.addEventListener("load", () => {
     checkerForm.dispatchEvent(new Event("submit", { bubbles: true, cancelable: true }));
     const summary = doc.querySelector("#checker-summary").textContent;
     const confidence = Number((summary.match(/(\d+)% confidence/) || [])[1] || 999);
-    const suggestionHidden = doc.querySelector("#checker-suggestion").hidden;
+    const suggestionText = doc.querySelector("#checker-suggestion").textContent;
+    const copySuggested = Array.from(doc.querySelectorAll("#checker-suggestion button")).some((button) => /copy suggested/i.test(button.textContent));
     assert(confidence <= 50, `${input} confidence <= 50`);
-    assert(suggestionHidden, `${input} unsafe suggestion hidden`);
+    assert(!suggestionText.includes("Suggested structure"), `${input} suggested structure hidden`);
+    assert(!copySuggested, `${input} copy suggested hidden`);
   });
 
   validInputs.forEach((input) => {

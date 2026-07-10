@@ -745,13 +745,18 @@
 
   const checkerComponent = (label, value, status = "ok", detail = "") => ({ label, value, status, detail });
   const checkerIssue = (level, message, why, fix = "") => ({ level, message, why, fix });
+  const trustValidation = window.CiteJuryTrustValidation || {};
   const plausibleYear = (value) => {
+    if (trustValidation.plausibleYear) return trustValidation.plausibleYear(value);
+    if (trustValidation.isPlausibleYear) return trustValidation.isPlausibleYear(value);
     const year = Number(clean(value));
     const currentYear = new Date().getFullYear();
     return Number.isInteger(year) && year >= 1800 && year <= currentYear;
   };
 
   const plausiblePositiveNumber = (value, max = 100000) => {
+    if (trustValidation.positiveNumber) return trustValidation.positiveNumber(value, max);
+    if (trustValidation.isPositiveInteger) return trustValidation.isPositiveInteger(value, max);
     const text = clean(value);
     if (!/^[1-9]\d*$/.test(text)) return false;
     const number = Number(text);
@@ -762,10 +767,12 @@
   const reservedAirCourtTokens = new Set(["AIR", "SCC", "INSC", "SCR"]);
 
   const assessAirCourt = (value) => {
+    if (trustValidation.assessAirCourt) return trustValidation.assessAirCourt(value);
     const normalized = clean(value).replace(/\./g, "").toUpperCase();
     if (!normalized || reservedAirCourtTokens.has(normalized)) return { ok: false, known: false };
     return { ok: true, known: knownAirCourts.has(normalized) };
   };
+  const invalidConfidence = () => trustValidation.invalidConfidenceCap ? trustValidation.invalidConfidenceCap() : 50;
 
   const normalizeDoctorSuggestion = (value) => clean(value).replace(/\s+/g, " ").replace(/\.$/, "");
 
@@ -879,7 +886,7 @@
       if (!plausible) issues.push(checkerIssue("warning", "Year or page number looks implausible.", "The citation shape matches AIR, but one or more numeric values need verification.", "Check the citation against the source."));
       return {
         type: "AIR citation",
-        confidence: courtCheck.ok && courtCheck.known && plausible ? 97 : courtCheck.ok ? 72 : 58,
+        confidence: courtCheck.ok && courtCheck.known && plausible ? 97 : invalidConfidence(),
         status: courtCheck.ok && courtCheck.known && plausible ? "Likely complete" : "Needs review",
         components: [
           checkerComponent("Case name", m[1], "ok"),
@@ -888,7 +895,7 @@
           checkerComponent("Page", m[4], plausiblePositiveNumber(m[4]) ? "ok" : "warning")
         ],
         issues,
-        suggestion: `${m[1]}, AIR ${m[2]} ${m[3].toUpperCase()} ${m[4]}`
+        suggestion: courtCheck.ok && courtCheck.known && plausible ? `${m[1]}, AIR ${m[2]} ${m[3].toUpperCase()} ${m[4]}` : ""
       };
     }
 
@@ -896,7 +903,7 @@
     if (m) {
       return {
         type: "Supreme Court neutral citation",
-        confidence: plausibleYear(m[2]) && plausiblePositiveNumber(m[3]) ? 98 : 72,
+        confidence: plausibleYear(m[2]) && plausiblePositiveNumber(m[3]) ? 98 : invalidConfidence(),
         status: plausibleYear(m[2]) && plausiblePositiveNumber(m[3]) ? "Likely complete" : "Needs review",
         components: [
           checkerComponent("Case name", m[1], "ok"),
@@ -905,7 +912,7 @@
           checkerComponent("Sequence", m[3], plausiblePositiveNumber(m[3]) ? "ok" : "warning")
         ],
         issues: [checkerIssue("warning", "Verify the case title against the official judgment.", "Pattern recognition does not verify party-name spelling.", "Check the official Supreme Court record.")],
-        suggestion: `${m[1]}, ${m[2]} INSC ${m[3]}`
+        suggestion: plausibleYear(m[2]) && plausiblePositiveNumber(m[3]) ? `${m[1]}, ${m[2]} INSC ${m[3]}` : ""
       };
     }
 
@@ -913,7 +920,7 @@
     if (m) {
       return {
         type: "Supreme Court neutral citation",
-        confidence: plausibleYear(m[1]) && plausiblePositiveNumber(m[2]) ? 98 : 72,
+        confidence: plausibleYear(m[1]) && plausiblePositiveNumber(m[2]) ? 98 : invalidConfidence(),
         status: plausibleYear(m[1]) && plausiblePositiveNumber(m[2]) ? "Likely complete" : "Needs review",
         components: [
           checkerComponent("Year", m[1], plausibleYear(m[1]) ? "ok" : "warning", "Decision year detected."),
@@ -921,7 +928,7 @@
           checkerComponent("Sequence", m[2], plausiblePositiveNumber(m[2]) ? "ok" : "warning", "Neutral sequence number detected.")
         ],
         issues: [checkerIssue("warning", "Verify the official case title separately.", "A neutral citation token does not confirm party-name spelling.", "Check the official judgment record.")],
-        suggestion: text.toUpperCase()
+        suggestion: plausibleYear(m[1]) && plausiblePositiveNumber(m[2]) ? text.toUpperCase() : ""
       };
     }
 
@@ -966,7 +973,7 @@
       if (!plausible) issues.push(checkerIssue("warning", "Year, volume or page looks implausible.", "The citation shape matches SCC, but one or more numeric values need verification.", "Check year, volume and page against the source."));
       return {
         type: "SCC citation",
-        confidence: plausible ? (hasCaseName ? 97 : 96) : 72,
+        confidence: plausible ? (hasCaseName ? 97 : 96) : invalidConfidence(),
         status: plausible ? "Likely complete" : "Needs review",
         components: [
           checkerComponent("Case name", caseName, hasCaseName ? "ok" : "warning", hasCaseName ? "Case title detected before the SCC citation." : "Citation-only input is valid, but verify the case title separately."),
@@ -976,7 +983,7 @@
           checkerComponent("Opening page", m[4], plausiblePositiveNumber(m[4]) ? "ok" : "warning")
         ],
         issues,
-        suggestion: `${hasCaseName ? `${caseName}, ` : ""}(${m[2]}) ${m[3]} SCC ${m[4]}`
+        suggestion: plausible ? `${hasCaseName ? `${caseName}, ` : ""}(${m[2]}) ${m[3]} SCC ${m[4]}` : ""
       };
     }
 
@@ -1009,7 +1016,7 @@
       if (!plausible) issues.push(checkerIssue("warning", "Year or page number looks implausible.", "The citation shape matches AIR, but one or more numeric values need verification.", "Check the citation against the source."));
       return {
         type: "AIR citation",
-        confidence: courtCheck.ok && courtCheck.known && plausible ? 96 : courtCheck.ok ? 72 : 58,
+        confidence: courtCheck.ok && courtCheck.known && plausible ? 96 : invalidConfidence(),
         status: courtCheck.ok && courtCheck.known && plausible ? "Likely complete" : "Needs review",
         components: [
           checkerComponent("Reporter", "AIR", "ok"),
@@ -1018,7 +1025,7 @@
           checkerComponent("Opening page", m[3], plausiblePositiveNumber(m[3]) ? "ok" : "warning")
         ],
         issues,
-        suggestion: `AIR ${m[1]} ${m[2].toUpperCase()} ${m[3]}`
+        suggestion: courtCheck.ok && courtCheck.known && plausible ? `AIR ${m[1]} ${m[2].toUpperCase()} ${m[3]}` : ""
       };
     }
 
@@ -1119,7 +1126,9 @@
     checkerSuggestion.hidden = false;
     checkerSuggestion.replaceChildren();
 
-    if (report.suggestion) {
+    const hasUnsafeCoreComponent = report.components.some((item) => item.status === "warning" || item.status === "error");
+    const canShowSuggestion = report.suggestion && report.status === "Likely complete" && report.confidence >= 90 && !hasUnsafeCoreComponent;
+    if (canShowSuggestion) {
       appendText(checkerSuggestion, "strong", "Suggested structure");
       appendText(checkerSuggestion, "code", report.suggestion);
       appendText(checkerSuggestion, "p", "Only use a suggestion after verifying missing factual values from the source.");
