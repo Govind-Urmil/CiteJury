@@ -11,7 +11,7 @@
     .wfvs-hero,.wfvs-card{border:1px solid rgba(17,24,39,.12);border-radius:1rem;background:#fff;padding:1rem;margin:1rem 0}
     .wfvs-score{font-size:2rem;font-weight:800}
     .wfvs-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem}
-    .wfvs-pass{color:#0f766e}.wfvs-warn{color:#b7791f}.wfvs-fail{color:#b42318}
+    .wfvs-pass{color:#0f766e}.wfvs-fail{color:#b42318}
     .wfvs-test{display:flex;justify-content:space-between;gap:.75rem;border-bottom:1px solid rgba(17,24,39,.08);padding:.45rem 0}
     .wfvs-test:last-child{border-bottom:0}
     code{white-space:normal}
@@ -23,12 +23,17 @@
       <p class="eyebrow">Website Factory Verification Suite</p>
       <h1>WFVS Dashboard</h1>
       <p>Internal release verification dashboard for CiteJury and future Website Factory projects.</p>
-      <p class="wfvs-score"><span id="overall-score">Calculating…</span></p>
-      <p id="overall-status">Running static browser checks…</p>
+      <p class="wfvs-score"><span id="overall-score">Calculating...</span></p>
+      <p id="overall-status">Running static browser checks...</p>
     </section>
 
     <section class="wfvs-grid">
-      <article class="wfvs-card"><h2>Release</h2><p><strong>Project:</strong> CiteJury</p><p><strong>EP:</strong> TI-2</p><p><strong>Asset:</strong> <span id="asset-version">081</span></p></article>
+      <article class="wfvs-card">
+        <h2>Release</h2>
+        <p><strong>Project:</strong> CiteJury</p>
+        <p><strong>EP:</strong> EP-082B</p>
+        <p><strong>Asset:</strong> <span id="asset-version">082b</span></p>
+      </article>
       <article class="wfvs-card"><h2>ADR</h2><div id="adr-tests"></div></article>
       <article class="wfvs-card"><h2>Technical</h2><div id="technical-tests"></div></article>
       <article class="wfvs-card"><h2>Functional</h2><div id="functional-tests"></div></article>
@@ -39,85 +44,20 @@
       <div id="history-tests"></div>
     </section>
 
+    <section class="wfvs-card">
+      <h2>Trust Freeze Test Pages</h2>
+      <p><a href="TI-1-trust-validation-engine.html">Open TI-1 trust validation engine</a></p>
+      <p><a href="TI-2B-trust-freeze-blockers.html">Open TI-2B blocker verification</a></p>
+      <p><a href="EP-082-final-freeze.html">Open EP-082 final freeze verification</a></p>
+    </section>
+
     <section class="wfvs-card" id="dev-panel" hidden>
       <h2>Developer diagnostics</h2>
       <pre id="dev-output"></pre>
     </section>
-  
-    <section class="test-card">
-      <h2>TI-2 Core Accuracy & User Flow Reliability</h2>
-      <p>Checks release metadata, asset versioning, ad-disabled guardrails, mobile navigation readiness, and RC stabilization gates.</p>
-      <p><a href="TI-2-trust-validation-engine.html">Open TI-2 verification</a></p>
-    </section>
-
-    <section class="test-card">
-      <h2>TI-2B Trust Freeze Blockers</h2>
-      <p>Checks unsafe checker confidence ceilings, unsafe suggestion suppression, and OSCOLA journal volume output.</p>
-      <p><a href="TI-2B-trust-freeze-blockers.html">Open TI-2B blocker verification</a></p>
-    </section>
-</main>
+  </main>
 
   <script src="../assets/js/citation-engine.js?v=082b"></script>
-  <script>
-    const tests = [];
-    const add = (group, name, ok, detail = "") => tests.push({ group, name, ok: Boolean(ok), detail });
-    const row = (t) => `<div class="wfvs-test"><span>${t.name}</span><strong class="${t.ok ? "wfvs-pass" : "wfvs-fail"}">${t.ok ? "PASS" : "FAIL"}</strong></div>`;
-
-    add("ADR", "Static/browser-only architecture", true);
-    add("ADR", "No backend dependency", true);
-    add("ADR", "No database dependency", true);
-    add("ADR", "No required API calls", true);
-    add("ADR", "Free/static-hosting compatible", true);
-
-    add("Technical", "citation-engine.js loaded", typeof window.CiteJuryCitationEngine === "object");
-    add("Technical", "robots.txt expected", true);
-    add("Technical", "sitemap.xml expected", true);
-    add("Technical", "404.html expected", true);
-    add("Technical", "Asset version 082b", Array.from(document.scripts).some((script) => script.getAttribute("src") === "../assets/js/citation-engine.js?v=082b"));
-
-    const engine = window.CiteJuryCitationEngine;
-    if (engine && typeof engine.generate === "function") {
-      const genSci = engine.generate({citationStyle:"indian-legal",sourceType:"sc-neutral-judgment",title:"Example v Union of India",year:"2023",page:"154"});
-      const genScc = engine.generate({citationStyle:"scc",sourceType:"judgment",title:"Example v Union of India",year:"2023",volume:"7",page:"154"});
-      const genAir = engine.generate({citationStyle:"air",sourceType:"judgment",title:"Example v Union of India",year:"2023",court:"SC",page:"154"});
-      add("Functional", "Generator: SCI neutral", genSci.ok && genSci.citation.includes("INSC"));
-      add("Functional", "Generator: canonical SCI neutral spacing", genSci.ok && genSci.citation.includes("2023 INSC 154"));
-      add("Functional", "Generator: SCC", genScc.ok && genScc.citation.includes("SCC"));
-      add("Functional", "Generator: AIR", genAir.ok && genAir.citation.includes("AIR"));
-      add("Functional", "Rule specs available", typeof engine.getRuleSpec === "function");
-    } else {
-      add("Functional", "Generator: SCI neutral", false, "Citation engine unavailable");
-      add("Functional", "Generator: canonical SCI neutral spacing", false, "Citation engine unavailable");
-      add("Functional", "Generator: SCC", false, "Citation engine unavailable");
-      add("Functional", "Generator: AIR", false, "Citation engine unavailable");
-      add("Functional", "Rule specs available", false, "Citation engine unavailable");
-    }
-    add("Functional", "Citation Anatomy container expected on homepage", true, "Verified on index.html during live/browser smoke checks.");
-    add("Functional", "Citation Checker expected on homepage", true, "Not asserted on the WFVS test page to avoid false failures.");
-    add("Functional", "Mode switch expected on homepage", true, "Not asserted on the WFVS test page to avoid false failures.");
-
-    ["EP-058 Citation Anatomy", "EP-059 Authority Guides", "EP-060 Visual Learning", "EP-061 Citation Checker", "EP-064A WFVS", "EP-066 Navigation Accessibility", "EP-067 Launch Stability", "TI-2 Core Accuracy & User Flow Reliability"].forEach((name) => add("History", name, true));
-
-    const groups = ["ADR", "Technical", "Functional", "History"];
-    groups.forEach((group) => {
-      const target = document.getElementById(group.toLowerCase() === "history" ? "history-tests" : group.toLowerCase() + "-tests");
-      target.innerHTML = tests.filter(t => t.group === group).map(row).join("");
-    });
-
-    const passed = tests.filter(t => t.ok).length;
-    const score = Math.round((passed / tests.length) * 100);
-    document.getElementById("overall-score").textContent = `${score} / 100`;
-    document.getElementById("overall-status").innerHTML = score === 100 ? '<strong class="wfvs-pass">Overall PASS</strong>' : '<strong class="wfvs-fail">Review required</strong>';
-    if (new URLSearchParams(location.search).get("dev") === "1") {
-      document.getElementById("dev-panel").hidden = false;
-      document.getElementById("dev-output").textContent = JSON.stringify({
-        userAgent: navigator.userAgent,
-        assetVersion: "082b",
-        url: location.href,
-        testsRun: tests.length,
-        passed
-      }, null, 2);
-    }
-  </script>
+  <script src="index.js?v=082b"></script>
 </body>
 </html>

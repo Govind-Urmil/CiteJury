@@ -1,53 +1,18 @@
 <!doctype html>
-<meta charset="utf-8">
-<title>EP-082 Trust Validation Engine</title>
-<h1>EP-082 Trust Validation Engine</h1>
-<pre id="results">Running...</pre>
-<script>
-const results = [];
-const output = document.querySelector("#results");
-const pass = (name, ok, detail = "") => results.push(`${ok ? "PASS" : "FAIL"}: ${name}${detail ? " - " + detail : ""}`);
-const loadScript = (src) => new Promise((resolve, reject) => {
-  const script = document.createElement("script");
-  script.src = src;
-  script.onload = resolve;
-  script.onerror = () => reject(new Error(`Failed to load ${src}`));
-  document.head.appendChild(script);
-});
-
-const run = async () => {
-  try {
-    await loadScript("../assets/js/trust-validation.js?v=082b");
-    await loadScript("../assets/js/citation-engine.js?v=082b");
-    const trust = window.CiteJuryTrustValidation;
-    const engine = window.CiteJuryCitationEngine;
-    pass("trust validation loaded", !!trust);
-    pass("engine loaded", !!engine);
-    if (trust) {
-      pass("future year blocked", !trust.plausibleYear("2099"));
-      pass("zero year blocked", !trust.plausibleYear("0000"));
-    }
-    if (engine) {
-      const future = engine.generate({citationStyle:"scc",sourceType:"judgment",title:"Case",year:"2099",volume:"10",reporter:"SCC",page:"1",court:""});
-      pass("generator rejects future SCC year", !future.ok, future.citation || future.error || "");
-      const zero = engine.generate({citationStyle:"scc",sourceType:"judgment",title:"Case",year:"2017",volume:"0",reporter:"SCC",page:"0",court:""});
-      pass("generator rejects zero SCC volume/page", !zero.ok, zero.citation || zero.error || "");
-      const airBad = engine.generate({citationStyle:"air",sourceType:"judgment",title:"Case",year:"1978",volume:"",reporter:"AIR",court:"SCC",page:"597"});
-      pass("generator rejects AIR court reporter token", !airBad.ok, airBad.citation || airBad.error || "");
-      const section = engine.generate({citationStyle:"indian-legal",sourceType:"legislation",title:"Information Technology Act",year:"2000",page:"section 66A",reporter:"",volume:"",court:""});
-      pass("section prefix normalizes", section.ok && /s\. 66A/.test(section.citation) && !/ection/.test(section.citation), section.citation || section.error || "");
-      const article = engine.generate({citationStyle:"indian-legal",sourceType:"constitution",title:"Constitution of India",year:"",page:"Article 21",reporter:"",volume:"",court:"India"});
-      pass("article prefix normalizes", article.ok && /art\. 21/.test(article.citation) && !/icle/.test(article.citation), article.citation || article.error || "");
-      const journal = engine.generate({citationStyle:"oscola",sourceType:"journal",title:"Privacy and the Constitution",year:"2021",volume:"12",reporter:"Indian Law Review",page:"45",court:""});
-      pass("OSCOLA journal includes volume", journal.ok && /12/.test(journal.citation), journal.citation || journal.error || "");
-    }
-    pass("asset refs use 082b", document.documentElement.outerHTML.includes("?v=082b") && !/\?v=(072|073|073a|073b|074|075|075a|076|077|078|079|080)\b/.test(document.documentElement.outerHTML));
-  } catch (error) {
-    pass(error.message || "script load failed", false);
-  }
-  output.textContent = results.join("\n");
-  document.documentElement.dataset.testStatus = results.some((line) => line.startsWith("FAIL")) ? "fail" : "pass";
-};
-
-run();
-</script>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>EP-082 Trust Validation Engine</title>
+</head>
+<body>
+  <main>
+    <h1>EP-082 Trust Validation Engine</h1>
+    <pre id="results">Running...</pre>
+  </main>
+  <script src="../assets/js/trust-validation.js?v=082b"></script>
+  <script src="../assets/js/citation-engine.js?v=082b"></script>
+  <script src="TI-1-trust-validation-engine.js?v=082b"></script>
+</body>
+</html>
