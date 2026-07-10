@@ -279,7 +279,7 @@
       "oscola:judgment": ["title", "year", "reporter", "page", "court"],
       "oscola:legislation": ["title", "year", "page"],
       "oscola:book": ["title", "year", "reporter"],
-      "oscola:journal": ["title", "year", "reporter", "page"],
+      "oscola:journal": ["title", "year", "volume", "reporter", "page"],
       "oscola:website": ["title", "year", "reporter", "page"],
       "indian-legal:constitution": ["title", "page"]
     };

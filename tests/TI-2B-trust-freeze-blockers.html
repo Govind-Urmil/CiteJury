@@ -4,7 +4,7 @@
 <h1>TI-2B Trust Freeze Blockers</h1>
 <pre id="results">Running...</pre>
 
-<iframe id="site" src="../index.html#checker" title="CiteJury test frame"></iframe>
+<iframe id="site" title="CiteJury test frame"></iframe>
 
 <script>
 const results = document.querySelector("#results");
@@ -29,7 +29,7 @@ const fail = [];
 const assert = (condition, label) => (condition ? pass : fail).push(label);
 
 const frame = document.querySelector("#site");
-frame.addEventListener("load", () => {
+const runTrustFreezeChecks = () => {
   const win = frame.contentWindow;
   const doc = frame.contentDocument;
   const checkerInput = doc.querySelector("#citation-check-input");
@@ -79,5 +79,8 @@ frame.addEventListener("load", () => {
   results.textContent = fail.length
     ? `FAIL\n${fail.join("\n")}\n\nPASS\n${pass.join("\n")}`
     : `PASS\n${pass.join("\n")}`;
-});
+};
+
+frame.addEventListener("load", runTrustFreezeChecks);
+frame.src = "../index.html#checker";
 </script>
