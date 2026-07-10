@@ -1,10 +1,10 @@
 <!doctype html>
 <meta charset="utf-8">
-<title>TI-2 Trust Initiative Validation Engine</title>
-<h1>TI-2 Trust Initiative Validation Engine</h1>
+<title>EP-082 Trust Initiative Validation Engine</title>
+<h1>EP-082 Trust Initiative Validation Engine</h1>
 <pre id="results">Running…</pre>
-<script src="../assets/js/citation-engine.js?v=082b"></script>
-<script src="../assets/js/app.js?v=082b"></script>
+<script src="../assets/js/citation-engine.js?v=082"></script>
+<script src="../assets/js/app.js?v=082"></script>
 <script>
 const results = [];
 const pass = (name, ok, detail = "") => results.push(`${ok ? "PASS" : "FAIL"}: ${name}${detail ? " — " + detail : ""}`);
@@ -15,7 +15,7 @@ if (engine) {
   pass("SCC generator smoke", scc.ok && /\(2017\) 10 SCC 1/.test(scc.citation), scc.citation || scc.error || "");
 }
 const source = document.documentElement.outerHTML;
-pass("asset refs use 078", source.includes("?v=082b") && !/\?v=(072|073|073a|073b|074|075|075a|076|077)\b/.test(source));
+pass("asset refs use 078", source.includes("?v=082") && !/\?v=(072|073|073a|073b|074|075|075a|076|077)\b/.test(source));
 pass("no AdSense script on test page", !/adsbygoogle|googlesyndication|doubleclick/i.test(source));
 document.querySelector("#results").textContent = results.join("\n");
 document.documentElement.dataset.testStatus = results.some((line) => line.startsWith("FAIL")) ? "fail" : "pass";

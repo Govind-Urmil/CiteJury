@@ -301,3 +301,41 @@ button:disabled{opacity:.52;cursor:not-allowed}
 }
 
 .doctor-original { white-space: pre-wrap; }
+
+/* EP-082 FINAL FREEZE POLISH */
+[data-mode-target] {
+  border-width: 2px;
+  min-height: 7.25rem;
+  transition: box-shadow .18s ease, transform .18s ease, border-color .18s ease;
+}
+
+[data-mode-target]:hover {
+  transform: translateY(-1px);
+}
+
+[data-mode-target]:focus-visible {
+  outline: 3px solid currentColor;
+  outline-offset: 3px;
+}
+
+[data-mode-target].active {
+  box-shadow: 0 0 0 3px rgba(49, 94, 251, .16);
+}
+
+[data-mode-target] strong {
+  display: block;
+  font-size: clamp(1.25rem, 2vw, 1.6rem);
+  line-height: 1.15;
+  margin-bottom: .4rem;
+}
+
+.checker-doctor-card,
+.result-panel {
+  scroll-margin-top: 6rem;
+}
+
+@media (max-width: 640px) {
+  [data-mode-target] {
+    min-height: auto;
+  }
+}

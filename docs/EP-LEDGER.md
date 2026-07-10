@@ -423,3 +423,10 @@ Next: manual Google Search Console/Bing setup, then future ad approval/activatio
 - Supported AIR ampersand court abbreviations in Checker parsing.
 - Fixed section/article prefix normalization and OSCOLA journal volume.
 - Added trust initiative regression page.
+
+
+## EP-082: Final Freeze & Ad Activation Ready
+- Declared the citation core trust-frozen.
+- Added final UI polish and trust-freeze test alias.
+- Added safe public ads.txt and final AdSense activation requirements.
+- Ads remain fail-closed until real approved identifiers are supplied.

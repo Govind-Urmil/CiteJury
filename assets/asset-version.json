@@ -1,9 +1,9 @@
 {
-  "assetVersion": "082b",
+  "assetVersion": "082",
   "purpose": "Cache-busting version for public CSS and JavaScript asset URLs.",
   "policy": "Increment this value and update HTML query strings whenever public CSS or JavaScript changes.",
-  "lastEp": "TI-2B",
-  "version": "TI-2B",
-  "currentEp": "TI-2B",
-  "releaseName": "Trust Calibration Release"
+  "lastEp": "EP-082",
+  "version": "EP-082",
+  "currentEp": "EP-082",
+  "releaseName": "Final Freeze & Ad Activation Ready"
 }

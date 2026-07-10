@@ -1,6 +1,6 @@
 {
-  "version": "EP-080",
-  "status": "adsense-activation-ready-but-disabled-until-publisher-id-and-owner-approval",
+  "version": "EP-082",
+  "status": "activation-ready-awaiting-real-adsense-identifiers",
   "ads_active": false,
   "analytics_active": false,
   "approved_provider": "google-adsense",
@@ -86,5 +86,7 @@
   "release": "EP-080",
   "production_freeze_candidate": true,
   "activation_requires_final_codex_audit": true,
-  "assetVersion": "080"
+  "assetVersion": "080",
+  "final_freeze_release": true,
+  "activation_blocker": "Real AdSense publisher_client_id, ads_txt_publisher_id, and numeric ad_slot values are required."
 }

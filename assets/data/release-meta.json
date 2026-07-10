@@ -1,5 +1,5 @@
 {
-  "version": "TI-2B",
+  "version": "EP-082",
   "stage": "core-accuracy-user-flow-reliability",
   "backend": false,
   "database": false,
@@ -17,11 +17,11 @@
   "searchEngineLaunchReady": true,
   "productionBaseUrl": "https://citejury.citejury.workers.dev",
   "sitemapUrl": "https://citejury.citejury.workers.dev/sitemap.xml",
-  "latest_ep": "TI-2B",
-  "latest_title": "Trust Initiative Validation Engine",
+  "latest_ep": "EP-082",
+  "latest_title": "Final Freeze & Ad Activation Ready",
   "updated": "2026-07-09",
   "unattended_operation_release": true,
-  "currentEp": "TI-2B",
-  "assetVersion": "082b",
-  "releaseName": "Trust Calibration Release"
+  "currentEp": "EP-082",
+  "assetVersion": "082",
+  "releaseName": "Final Freeze & Ad Activation Ready"
 }

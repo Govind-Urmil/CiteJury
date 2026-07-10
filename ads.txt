@@ -1,0 +1,3 @@
+# CiteJury ads.txt
+# Advertising is not active because approved AdSense publisher and slot IDs have not yet been supplied.
+# Replace this file with the approved Google AdSense record during activation.
