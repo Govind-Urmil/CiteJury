@@ -3,8 +3,8 @@
 <title>EP-082 Trust Initiative Validation Engine</title>
 <h1>EP-082 Trust Initiative Validation Engine</h1>
 <pre id="results">Running…</pre>
-<script src="../assets/js/citation-engine.js?v=082"></script>
-<script src="../assets/js/app.js?v=082"></script>
+<script src="../assets/js/citation-engine.js?v=082a"></script>
+<script src="../assets/js/app.js?v=082a"></script>
 <script>
 const results = [];
 const pass = (name, ok, detail = "") => results.push(`${ok ? "PASS" : "FAIL"}: ${name}${detail ? " — " + detail : ""}`);
@@ -17,7 +17,7 @@ if (engine) {
   pass("OSCOLA generation has no stale volume", oscola.ok && !/\[1932\]\s+10\s+AC/.test(oscola.citation), oscola.citation || oscola.error || "");
 }
 const source = document.documentElement.outerHTML;
-pass("asset refs use 074", source.includes("?v=082") && !/\?v=(072|073|073a|073b)\b/.test(source));
+pass("asset refs use 074", source.includes("?v=082a") && !/\?v=(072|073|073a|073b)\b/.test(source));
 pass("Citation Doctor helper shipped", typeof window !== "undefined");
 document.querySelector("#results").textContent = results.join("\n");
 document.documentElement.dataset.testStatus = results.some((line) => line.startsWith("FAIL")) ? "fail" : "pass";

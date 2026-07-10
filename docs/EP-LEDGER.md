@@ -430,3 +430,10 @@ Next: manual Google Search Console/Bing setup, then future ad approval/activatio
 - Added final UI polish and trust-freeze test alias.
 - Added safe public ads.txt and final AdSense activation requirements.
 - Ads remain fail-closed until real approved identifiers are supplied.
+
+
+## EP-082A: Final Freeze Housekeeping
+- Restored the final freeze verification page.
+- Repaired broken WFVS test links.
+- Aligned current public asset references and release metadata to asset version 082a.
+- Preserved trust-frozen core logic and ads-disabled safe state.

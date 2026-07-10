@@ -1,5 +1,5 @@
 {
-  "version": "EP-082",
+  "version": "EP-082A",
   "stage": "core-accuracy-user-flow-reliability",
   "backend": false,
   "database": false,
@@ -10,18 +10,18 @@
   "analytics_active": false,
   "hosting_model": "static-free-host-first",
   "manual_cleanup_required": [],
-  "final_planned_ep": false,
+  "final_planned_ep": true,
   "github_pages_initial_launch": true,
   "manifest_loaded_on_http_only": true,
   "custom_domain_required_now": false,
   "searchEngineLaunchReady": true,
   "productionBaseUrl": "https://citejury.citejury.workers.dev",
   "sitemapUrl": "https://citejury.citejury.workers.dev/sitemap.xml",
-  "latest_ep": "EP-082",
-  "latest_title": "Final Freeze & Ad Activation Ready",
+  "latest_ep": "EP-082A",
+  "latest_title": "Final Freeze Housekeeping",
   "updated": "2026-07-09",
   "unattended_operation_release": true,
-  "currentEp": "EP-082",
-  "assetVersion": "082",
-  "releaseName": "Final Freeze & Ad Activation Ready"
+  "currentEp": "EP-082A",
+  "assetVersion": "082a",
+  "releaseName": "Final Freeze Housekeeping"
 }
