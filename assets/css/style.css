@@ -339,3 +339,47 @@ button:disabled{opacity:.52;cursor:not-allowed}
     min-height: auto;
   }
 }
+
+/* Post-freeze content-only dedication */
+.dedication-section{
+  padding-top:32px;
+  background:linear-gradient(180deg,#fff,#f8fafc);
+}
+.dedication-card{
+  max-width:820px;
+  padding:32px;
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  background:#fff;
+  box-shadow:var(--shadow);
+  text-align:center;
+}
+.dedication-card h2{
+  margin-bottom:14px;
+  font-size:clamp(1.8rem,3vw,2.6rem);
+}
+.dedication-card p{
+  max-width:680px;
+  margin:0 auto;
+  color:var(--muted);
+}
+.dedication-signoff{
+  margin-top:14px!important;
+  font-weight:750;
+  color:var(--ink)!important;
+}
+.dedication-signoff a{
+  color:var(--blue);
+  text-decoration-thickness:2px;
+  text-underline-offset:3px;
+}
+.dedication-signoff a:hover{
+  color:var(--blue2);
+}
+@media(max-width:640px){
+  .dedication-card{
+    padding:24px 20px;
+    text-align:left;
+  }
+}
+
