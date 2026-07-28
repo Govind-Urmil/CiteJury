@@ -24,10 +24,10 @@
   ];
   const guideTexts = await Promise.all(guideNames.map((g) => text('../guides/' + g)));
 
-  expect('production URL metadata', audit.productionBaseUrl === 'https://citejury.citejury.workers.dev');
+  expect('production URL metadata', audit.productionBaseUrl === 'https://citejury.work-on.workers.dev');
   expect('homepage no EP helper copy', !home.includes('EP-034 adds scoped OSCOLA support'));
   expect('homepage has style switching copy', home.includes('Choose another style'));
-  expect('sitemap production URL', sitemap.includes('https://citejury.citejury.workers.dev/'));
+  expect('sitemap production URL', sitemap.includes('https://citejury.work-on.workers.dev/'));
   expect('no visible inactive guide ad copy', guideTexts.every((t) => !t.includes('Future non-intrusive ad placement reserved') && !t.includes('Ads are not active.')));
   expect('guide hidden revenue slots only', guideTexts.every((t) => t.includes('data-revenue-slot="ad-guide-footer"') && t.includes('hidden aria-label="Advertisement area"')));
   expect('ads inactive', !home.includes('googlesyndication.com') && !home.includes('adsbygoogle'));

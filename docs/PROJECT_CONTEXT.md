@@ -112,22 +112,22 @@ Next: deploy/audit the live Cloudflare URL, then enable ads only after explicit 
 
 ## EP-045 status
 
-EP-045 finalizes the temporary production URL `https://citejury.citejury.workers.dev`, absolute sitemap/canonical metadata, robots sitemap reference, and disables Cloudflare preview URLs while keeping ads/analytics inactive and preserving host portability.
+EP-045 finalizes the temporary production URL `https://citejury.work-on.workers.dev`, absolute sitemap/canonical metadata, robots sitemap reference, and disables Cloudflare preview URLs while keeping ads/analytics inactive and preserving host portability.
 
 ## EP-046 Current State
 
-EP-046 is the live production audit and verified-fix package after the temporary Cloudflare production URL went live. It uses `https://citejury.citejury.workers.dev` as the current production URL. It removes visible inactive-ad placeholder copy from guide pages, adds live-production audit metadata/docs, and preserves the locked static/browser-only architecture. Ads and analytics remain inactive.
+EP-046 is the live production audit and verified-fix package after the temporary Cloudflare production URL went live. It uses `https://citejury.work-on.workers.dev` as the current production URL. It removes visible inactive-ad placeholder copy from guide pages, adds live-production audit metadata/docs, and preserves the locked static/browser-only architecture. Ads and analytics remain inactive.
 
 
 
 ## EP-047 Search Engine Launch
 
-EP-047 was generated after EP-046 was committed and live. It prepares the temporary Cloudflare Workers URL `https://citejury.citejury.workers.dev` for search-engine launch, adds search-engine launch metadata/docs, removes unsupported public generator-style claims, and tightens deployment/indexing hygiene for internal repository surfaces. Ads and analytics remain inactive.
+EP-047 was generated after EP-046 was committed and live. It prepares the temporary Cloudflare Workers URL `https://citejury.work-on.workers.dev` for search-engine launch, adds search-engine launch metadata/docs, removes unsupported public generator-style claims, and tightens deployment/indexing hygiene for internal repository surfaces. Ads and analytics remain inactive.
 
 ## EP-048 Advertisement Activation Framework
 
 - Base: committed EP-047 repository ZIP.
-- Live URL checked directly: `https://citejury.citejury.workers.dev`.
+- Live URL checked directly: `https://citejury.work-on.workers.dev`.
 - Added a fail-closed Google AdSense activation framework.
 - Added `ads.txt.template`, ad activation metadata, and activation documentation.
 - Updated privacy copy for future advertising readiness while keeping real ad scripts inactive.
@@ -141,7 +141,7 @@ Next: get AdSense account/site approval and then use the documented config-only 
 
 ## EP-049 Final Unattended Operation Release
 
-EP-049 was generated after EP-048 was committed and the live site was checked directly at `https://citejury.citejury.workers.dev`. It records the final unattended-operation release, recovery/migration runbooks, and search/ads next-step guidance. CiteJury remains static/browser-only with no backend, no database, no active analytics, and inactive fail-closed ad readiness. Future EPs should be avoided unless a real production issue, citation-authority improvement, search/ad account requirement, or hosting/domain migration appears.
+EP-049 was generated after EP-048 was committed and the live site was checked directly at `https://citejury.work-on.workers.dev`. It records the final unattended-operation release, recovery/migration runbooks, and search/ads next-step guidance. CiteJury remains static/browser-only with no backend, no database, no active analytics, and inactive fail-closed ad readiness. Future EPs should be avoided unless a real production issue, citation-authority improvement, search/ad account requirement, or hosting/domain migration appears.
 
 
 ## EP-050

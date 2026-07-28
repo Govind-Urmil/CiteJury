@@ -93,7 +93,7 @@ Next: deploy/audit the live Cloudflare URL. Real ads require future explicit app
 ## EP-045 — Production URL and Live Launch Finalization
 
 - Base: committed EP-044 repository ZIP.
-- Production URL: `https://citejury.citejury.workers.dev`.
+- Production URL: `https://citejury.work-on.workers.dev`.
 - Added absolute sitemap/canonical/og:url metadata for public pages.
 - Disabled Wrangler preview URLs explicitly.
 - Removed remaining public internal EP/owner workflow wording.
@@ -103,7 +103,7 @@ Next: deploy/audit the live Cloudflare URL. Real ads require future explicit app
 ## EP-046 — Live Production Audit and Verified Fixes
 
 - Base: committed EP-045 repository ZIP.
-- Production URL audited: `https://citejury.citejury.workers.dev`.
+- Production URL audited: `https://citejury.work-on.workers.dev`.
 - Removed visible inactive-ad placeholder text from public guide pages while preserving inactive ad-readiness architecture.
 - Added `assets/data/live-production-audit.json`.
 - Added `docs/LIVE_PRODUCTION_AUDIT.md`.
@@ -116,7 +116,7 @@ Next: EP-047 — Search Engine Launch.
 ## EP-047 — Search Engine Launch
 
 - Base: committed EP-046 repository ZIP.
-- Production URL: `https://citejury.citejury.workers.dev`.
+- Production URL: `https://citejury.work-on.workers.dev`.
 - Added search-engine launch metadata and documentation.
 - Confirmed sitemap/robots production URL strategy for the current Workers URL.
 - Removed unsupported public generator-style claims from homepage badges.
@@ -128,7 +128,7 @@ Next: Google Search Console/Bing verification and sitemap submission, then EP-04
 ## EP-048 Advertisement Activation Framework
 
 - Base: committed EP-047 repository ZIP.
-- Live URL checked directly: `https://citejury.citejury.workers.dev`.
+- Live URL checked directly: `https://citejury.work-on.workers.dev`.
 - Added a fail-closed Google AdSense activation framework.
 - Added `ads.txt.template`, ad activation metadata, and activation documentation.
 - Updated privacy copy for future advertising readiness while keeping real ad scripts inactive.
@@ -143,7 +143,7 @@ Next: get AdSense account/site approval and then use the documented config-only 
 ## EP-049 Final Unattended Operation Release
 
 - Base: committed EP-048 repository ZIP.
-- Live URL checked directly: `https://citejury.citejury.workers.dev`.
+- Live URL checked directly: `https://citejury.work-on.workers.dev`.
 - Added final unattended-operation metadata and runbooks.
 - Updated release metadata, roadmap, README, GIT instructions, and project context.
 - Added browser-only EP-049 final-operation validation page.

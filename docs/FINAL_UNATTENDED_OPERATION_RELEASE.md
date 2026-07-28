@@ -4,9 +4,9 @@ EP-049 records CiteJury's final unattended-operation handoff after the live Clou
 
 ## Current live site
 
-- Production URL: `https://citejury.citejury.workers.dev`
-- Sitemap: `https://citejury.citejury.workers.dev/sitemap.xml`
-- Robots: `https://citejury.citejury.workers.dev/robots.txt`
+- Production URL: `https://citejury.work-on.workers.dev`
+- Sitemap: `https://citejury.work-on.workers.dev/sitemap.xml`
+- Robots: `https://citejury.work-on.workers.dev/robots.txt`
 - Current host: Cloudflare Workers Static Assets
 - Repository: private GitHub repository remains the source of truth
 
@@ -57,14 +57,14 @@ Manual launch tasks:
 
 - Add the property in Google Search Console.
 - Verify ownership using the provided method from Google.
-- Submit `https://citejury.citejury.workers.dev/sitemap.xml`.
+- Submit `https://citejury.work-on.workers.dev/sitemap.xml`.
 - Repeat equivalent setup in Bing Webmaster Tools if desired.
 
 ## When Govind returns after months or years
 
 Use this minimal check:
 
-1. Open `https://citejury.citejury.workers.dev`.
+1. Open `https://citejury.work-on.workers.dev`.
 2. Generate one Indian citation and one OSCOLA citation.
 3. Open `sitemap.xml` and `robots.txt`.
 4. Check Cloudflare deployment status.

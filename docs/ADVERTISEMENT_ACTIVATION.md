@@ -4,7 +4,7 @@ EP-048 prepares CiteJury for responsible advertising without turning on real adv
 
 ## Current state
 
-- Live production URL: `https://citejury.citejury.workers.dev`
+- Live production URL: `https://citejury.work-on.workers.dev`
 - Candidate provider: Google AdSense
 - Real ad serving: **inactive**
 - Analytics: **inactive**

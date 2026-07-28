@@ -4,9 +4,9 @@
 
 Proceed manually after EP-049 is live:
 
-1. Add `https://citejury.citejury.workers.dev` as a URL-prefix property in Google Search Console.
+1. Add `https://citejury.work-on.workers.dev` as a URL-prefix property in Google Search Console.
 2. Use a Google-provided verification method.
-3. Submit `https://citejury.citejury.workers.dev/sitemap.xml`.
+3. Submit `https://citejury.work-on.workers.dev/sitemap.xml`.
 4. Inspect the homepage URL.
 5. Repeat in Bing Webmaster Tools if desired.
 

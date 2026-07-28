@@ -2,7 +2,7 @@
 
 **Privacy-first legal citation tools with an India-first workflow.**
 
-[![Live Website](https://img.shields.io/badge/Live%20Website-Open%20CiteJury-2457E6?style=for-the-badge)](https://citejury.citejury.workers.dev/)
+[![Live Website](https://img.shields.io/badge/Live%20Website-Open%20CiteJury-2457E6?style=for-the-badge)](https://citejury.work-on.workers.dev/)
 
 ![CiteJury homepage](assets/images/citejury-homepage.png)
 
@@ -14,7 +14,7 @@ The site runs entirely in the browser. No account is required, and citation inpu
 
 ## Live website
 
-**https://citejury.citejury.workers.dev/**
+**https://citejury.work-on.workers.dev/**
 
 ## Core tools
 

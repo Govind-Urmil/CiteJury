@@ -3,7 +3,7 @@
 Production base URL for the initial public launch:
 
 ```text
-https://citejury.citejury.workers.dev
+https://citejury.work-on.workers.dev
 ```
 
 This is a temporary Cloudflare Workers Static Assets URL. It is suitable for initial public validation and early indexing, but it can later be replaced by a custom domain without changing CiteJury's citation-engine code.
@@ -20,7 +20,7 @@ This is a temporary Cloudflare Workers Static Assets URL. It is suitable for ini
 
 ## Custom-domain migration later
 
-When a custom domain is purchased, replace `https://citejury.citejury.workers.dev` with the custom domain in:
+When a custom domain is purchased, replace `https://citejury.work-on.workers.dev` with the custom domain in:
 
 - `sitemap.xml`
 - public page canonical URLs

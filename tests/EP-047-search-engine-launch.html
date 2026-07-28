@@ -8,7 +8,7 @@
   const expect=(name,ok)=>checks.push({name,ok:Boolean(ok)});
   const text=async(u)=>(await fetch(u)).text();
   const json=async(u)=>(await fetch(u)).json();
-  const base='https://citejury.citejury.workers.dev';
+  const base='https://citejury.work-on.workers.dev';
   const home=await text('../index.html');
   const robots=await text('../robots.txt');
   const sitemap=await text('../sitemap.xml');

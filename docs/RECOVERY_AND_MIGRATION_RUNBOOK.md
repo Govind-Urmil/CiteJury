@@ -14,7 +14,7 @@ If a deployment breaks the live site:
 2. Go to CiteJury deployments.
 3. Select the last known-good deployment.
 4. Use Cloudflare rollback/redeploy controls.
-5. Confirm `https://citejury.citejury.workers.dev` loads again.
+5. Confirm `https://citejury.work-on.workers.dev` loads again.
 6. Fix the repository with a new EP before pushing again.
 
 ## Repository recovery

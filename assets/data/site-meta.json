@@ -12,7 +12,7 @@
   "github_pages_initial_launch": true,
   "manifest_loaded_on_http_only": true,
   "custom_domain_required_now": false,
-  "productionBaseUrl": "https://citejury.citejury.workers.dev",
+  "productionBaseUrl": "https://citejury.work-on.workers.dev",
   "cloudflareWorkersStaticAssets": true,
   "previewUrlsExplicitlyDisabled": true,
   "customDomainRequiredNow": false,
@@ -20,7 +20,7 @@
   "futureS3Migration": "upload the same static files to an S3-compatible static host and update only hosting metadata/docs/URLs, not citation engine code",
   "productionAuditStatus": "live-production-audited",
   "searchEngineLaunchReady": true,
-  "sitemapUrl": "https://citejury.citejury.workers.dev/sitemap.xml",
+  "sitemapUrl": "https://citejury.work-on.workers.dev/sitemap.xml",
   "ads_active": false,
   "analytics_active": false
 }

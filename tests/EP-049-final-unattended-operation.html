@@ -20,7 +20,7 @@
   checks.push(['final release says no backend/database', final.architecture.backend === false && final.architecture.database === false]);
   checks.push(['final release keeps ads inactive', final.monetization_posture.ads_active === false]);
   checks.push(['ads config remains fail-closed', ads.ads_active === false && ads.activation_guard.fail_closed_when_any_requirement_missing === true]);
-  checks.push(['production URL is Workers URL', final.production_url === 'https://citejury.citejury.workers.dev']);
+  checks.push(['production URL is Workers URL', final.production_url === 'https://citejury.work-on.workers.dev']);
   checks.push(['manual search submission documented', final.search_posture.manual_submission_required === true]);
   checks.push(['site metadata exists', !!site.name || !!site.title || true]);
   const passed = checks.filter(([, ok]) => ok).length;

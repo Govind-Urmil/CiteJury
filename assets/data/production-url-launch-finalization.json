@@ -1,7 +1,7 @@
 {
   "version": "EP-045",
   "title": "Production URL and live launch finalization",
-  "productionBaseUrl": "https://citejury.citejury.workers.dev",
+  "productionBaseUrl": "https://citejury.work-on.workers.dev",
   "temporaryProductionUrl": true,
   "customDomainPlannedLater": true,
   "previewUrls": false,

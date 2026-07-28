@@ -144,7 +144,7 @@ Next recommended work: live production audit after deployment, search-console/in
 
 ## EP-046 Live Production Audit and Verified Fixes
 
-- Audited the live Cloudflare deployment at `https://citejury.citejury.workers.dev`.
+- Audited the live Cloudflare deployment at `https://citejury.work-on.workers.dev`.
 - Fixed verified user-facing cleanup issue: inactive ad placeholders are no longer visible on guide pages.
 - Added live audit metadata and documentation.
 - Added browser-only EP-046 validation.
@@ -155,7 +155,7 @@ Next: EP-047 — Search Engine Launch.
 
 ## EP-047 Search Engine Launch
 
-- Prepared CiteJury for initial Google/Bing discovery on `https://citejury.citejury.workers.dev`.
+- Prepared CiteJury for initial Google/Bing discovery on `https://citejury.work-on.workers.dev`.
 - Added search-engine launch metadata and documentation.
 - Tightened deployed asset/indexing hygiene for internal docs/tests/templates.
 - Kept ads and analytics inactive.
@@ -165,7 +165,7 @@ Next: complete webmaster verification and sitemap submission, then prepare ad ac
 ## EP-048 Advertisement Activation Framework
 
 - Base: committed EP-047 repository ZIP.
-- Live URL checked directly: `https://citejury.citejury.workers.dev`.
+- Live URL checked directly: `https://citejury.work-on.workers.dev`.
 - Added a fail-closed Google AdSense activation framework.
 - Added `ads.txt.template`, ad activation metadata, and activation documentation.
 - Updated privacy copy for future advertising readiness while keeping real ad scripts inactive.
@@ -179,7 +179,7 @@ Next: get AdSense account/site approval and then use the documented config-only 
 
 ## EP-049 Final Unattended Operation Release
 
-EP-049 finalizes the live Cloudflare Workers Static Assets handoff for `https://citejury.citejury.workers.dev`. The site remains static/browser-only, host-portable, and designed for long unattended operation. Ads and analytics remain inactive. Search-engine and ad activation tasks are now manual account-level steps documented in the repository.
+EP-049 finalizes the live Cloudflare Workers Static Assets handoff for `https://citejury.work-on.workers.dev`. The site remains static/browser-only, host-portable, and designed for long unattended operation. Ads and analytics remain inactive. Search-engine and ad activation tasks are now manual account-level steps documented in the repository.
 
 
 ## EP-050 — Completed

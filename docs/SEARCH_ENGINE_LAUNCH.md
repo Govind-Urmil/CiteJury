@@ -1,12 +1,12 @@
 # EP-047 Search Engine Launch
 
-Production URL: `https://citejury.citejury.workers.dev`
+Production URL: `https://citejury.work-on.workers.dev`
 
 EP-047 prepares CiteJury for initial search-engine discovery on the temporary Cloudflare Workers URL while preserving the static/browser-only architecture.
 
 ## What changed
 
-- Confirmed the production sitemap target: `https://citejury.citejury.workers.dev/sitemap.xml`.
+- Confirmed the production sitemap target: `https://citejury.work-on.workers.dev/sitemap.xml`.
 - Confirmed `robots.txt` allows public crawling and exposes the absolute sitemap URL.
 - Added search-engine launch metadata in `assets/data/search-engine-launch.json`.
 - Removed unsupported public generator-style claims from the homepage style badges. Bluebook remains a guide topic, not a claimed generator output.
@@ -17,7 +17,7 @@ EP-047 prepares CiteJury for initial search-engine discovery on the temporary Cl
 ## Google Search Console steps
 
 1. Open Google Search Console.
-2. Add a URL-prefix property for `https://citejury.citejury.workers.dev`.
+2. Add a URL-prefix property for `https://citejury.work-on.workers.dev`.
 3. Choose an HTML file or HTML meta-tag verification method.
 4. Send the exact verification file/tag to ChatGPT before committing it. Do not guess the token.
 5. After verification succeeds, submit `sitemap.xml` in the Sitemaps report.
@@ -27,7 +27,7 @@ EP-047 prepares CiteJury for initial search-engine discovery on the temporary Cl
 1. Open Bing Webmaster Tools.
 2. Add the same site URL.
 3. Use Google Search Console import if available, or verify manually.
-4. Submit `https://citejury.citejury.workers.dev/sitemap.xml`.
+4. Submit `https://citejury.work-on.workers.dev/sitemap.xml`.
 
 ## Custom domain migration later
 

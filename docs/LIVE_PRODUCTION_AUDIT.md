@@ -2,7 +2,7 @@
 
 ## Production URL audited
 
-`https://citejury.citejury.workers.dev`
+`https://citejury.work-on.workers.dev`
 
 ## Live checks performed
 

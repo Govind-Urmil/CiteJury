@@ -2,7 +2,7 @@
   "ep": "EP-049",
   "title": "Final unattended operation release",
   "status": "complete",
-  "production_url": "https://citejury.citejury.workers.dev",
+  "production_url": "https://citejury.work-on.workers.dev",
   "live_ep048_verified": "homepage reachable; ad framework remained inactive during live check",
   "architecture": {
     "static_browser_first": true,
@@ -32,8 +32,8 @@
     "fail_closed_default": true
   },
   "search_posture": {
-    "sitemap": "https://citejury.citejury.workers.dev/sitemap.xml",
-    "robots": "https://citejury.citejury.workers.dev/robots.txt",
+    "sitemap": "https://citejury.work-on.workers.dev/sitemap.xml",
+    "robots": "https://citejury.work-on.workers.dev/robots.txt",
     "search_engine_launch_prepared": true,
     "manual_submission_required": true
   },

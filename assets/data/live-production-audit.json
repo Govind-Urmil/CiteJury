@@ -1,7 +1,7 @@
 {
   "version": "EP-046",
   "title": "Live production audit and verified fixes",
-  "productionBaseUrl": "https://citejury.citejury.workers.dev",
+  "productionBaseUrl": "https://citejury.work-on.workers.dev",
   "liveChecks": {
     "homepageReachable": true,
     "httpsWorking": true,

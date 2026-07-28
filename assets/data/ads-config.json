@@ -26,7 +26,7 @@
     "requires_consent_review": true,
     "requires_ads_txt_review": true,
     "requires_live_domain_review": true,
-    "current_live_domain": "https://citejury.citejury.workers.dev"
+    "current_live_domain": "https://citejury.work-on.workers.dev"
   },
   "slots": [
     {
